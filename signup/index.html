@@ -1,1 +1,416 @@
-blah
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta name="color-scheme" content="dark" />
+  <title>Neime - Sign Up</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=Hanken+Grotesk:wght@400;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-surface-variant": "#e4beb1",
+            "on-primary-fixed": "#370e00",
+            "on-background": "#e4e1e6",
+            "on-secondary-fixed": "#002021",
+            "surface-container-lowest": "#0e0e11",
+            "secondary-fixed": "#63f7ff",
+            "outline-variant": "#5b4137",
+            "primary-container": "#ff5c00",
+            "tertiary-container": "#a27aff",
+            "on-secondary-fixed-variant": "#004f53",
+            "secondary": "#e6feff",
+            "inverse-surface": "#e4e1e6",
+            "surface-dim": "#131316",
+            "on-tertiary-fixed-variant": "#5700c9",
+            "surface-container-highest": "#353438",
+            "primary-fixed-dim": "#ffb59a",
+            "on-secondary-container": "#006c71",
+            "surface-container-low": "#1b1b1e",
+            "on-error": "#690005",
+            "on-tertiary-fixed": "#23005b",
+            "tertiary-fixed-dim": "#d1bcff",
+            "tertiary": "#d1bcff",
+            "error": "#ffb4ab",
+            "on-error-container": "#ffdad6",
+            "surface-container": "#1f1f22",
+            "secondary-container": "#00f4fe",
+            "on-secondary": "#003739",
+            "on-primary": "#5a1b00",
+            "outline": "#ab897d",
+            "surface-variant": "#353438",
+            "on-primary-container": "#521800",
+            "primary-fixed": "#ffdbce",
+            "on-tertiary": "#3c0090",
+            "on-primary-fixed-variant": "#802a00",
+            "tertiary-fixed": "#e9ddff",
+            "inverse-primary": "#a73a00",
+            "surface-container-high": "#2a2a2d",
+            "secondary-fixed-dim": "#00dce5",
+            "surface": "#131316",
+            "on-surface": "#e4e1e6",
+            "error-container": "#93000a",
+            "surface-tint": "#ffb59a",
+            "on-tertiary-container": "#360083",
+            "surface-bright": "#39393c",
+            "primary": "#ffb59a",
+            "inverse-on-surface": "#303033",
+            "background": "#131316"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "container-padding-desktop": "40px",
+            "section-gap": "48px",
+            "container-padding-mobile": "16px",
+            "gutter": "24px",
+            "unit": "8px"
+          },
+          "fontFamily": {
+            "price-display": [
+              "Hanken Grotesk"
+            ],
+            "headline-lg-mobile": [
+              "Plus Jakarta Sans"
+            ],
+            "headline-md": [
+              "Plus Jakarta Sans"
+            ],
+            "body-md": [
+              "Hanken Grotesk"
+            ],
+            "body-lg": [
+              "Hanken Grotesk"
+            ],
+            "headline-lg": [
+              "Plus Jakarta Sans"
+            ],
+            "label-sm": [
+              "JetBrains Mono"
+            ],
+            "display-xl": [
+              "Plus Jakarta Sans"
+            ]
+          },
+          "fontSize": {
+            "price-display": [
+              "20px",
+              {
+                "lineHeight": "24px",
+                "fontWeight": "700"
+              }
+            ],
+            "headline-lg-mobile": [
+              "28px",
+              {
+                "lineHeight": "36px",
+                "fontWeight": "700"
+              }
+            ],
+            "headline-md": [
+              "24px",
+              {
+                "lineHeight": "32px",
+                "fontWeight": "600"
+              }
+            ],
+            "body-md": [
+              "16px",
+              {
+                "lineHeight": "24px",
+                "fontWeight": "400"
+              }
+            ],
+            "body-lg": [
+              "18px",
+              {
+                "lineHeight": "28px",
+                "fontWeight": "400"
+              }
+            ],
+            "headline-lg": [
+              "32px",
+              {
+                "lineHeight": "40px",
+                "fontWeight": "700"
+              }
+            ],
+            "label-sm": [
+              "12px",
+              {
+                "lineHeight": "16px",
+                "letterSpacing": "0.05em",
+                "fontWeight": "500"
+              }
+            ],
+            "display-xl": [
+              "48px",
+              {
+                "lineHeight": "56px",
+                "letterSpacing": "-0.02em",
+                "fontWeight": "800"
+              }
+            ]
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    
+    [data-weight="fill"] {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    
+    /* Subtle Adire pattern for background */
+    .bg-pattern {
+      background-image: radial-gradient(rgba(255, 181, 154, 0.03) 2px, transparent 2px), radial-gradient(rgba(255, 181, 154, 0.03) 2px, transparent 2px);
+      background-size: 32px 32px;
+      background-position: 0 0, 16px 16px;
+    }
+    
+    /* Input focus glow */
+    .input-glow:focus {
+      box-shadow: 0 0 12px rgba(0, 244, 254, 0.2);
+      border-color: #00f4fe;
+    }
+    
+    /* Primary button glow */
+    .btn-glow {
+      box-shadow: 0 0 16px rgba(255, 92, 0, 0.3);
+    }
+    
+    .btn-glow:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col antialiased bg-pattern relative overflow-x-hidden" style="background-color:#131316;">
+  <!-- Decorative background elements -->
+  <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-primary-container/10 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-20 -left-40 w-80 h-80 bg-tertiary-container/10 rounded-full blur-[100px]"></div>
+  </div>
+  <!-- Main Content Area -->
+  <main class="flex-grow flex items-center justify-center p-container-padding-mobile md:p-container-padding-desktop w-full max-w-[1440px] mx-auto z-10">
+    <div class="w-full max-w-md bg-surface-container-low/80 backdrop-blur-2xl rounded-xl border border-white/5 shadow-2xl p-8 relative overflow-hidden">
+      <!-- Inner subtle glow -->
+      <div class="absolute inset-0 border border-white/5 rounded-xl pointer-events-none mix-blend-overlay"></div>
+      <!-- Header / Logo -->
+      <div class="text-center mb-8">
+        <div class="inline-block mb-4 relative">
+          <div class="absolute inset-0 bg-primary-container/20 rounded-full blur-xl pointer-events-none"></div>
+          <img alt="Neime Logo" class="w-24 h-24 object-cover rounded-full border-2 border-primary/20 relative z-10 shadow-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqa6YM2rkLkUFO82I4t5pzGdh8nrq2uDPC8Wcuz_BvVnkmIYw78YXT7N--6LkIlq0eBapYyfyJFxNQABKE9Y3sT172oyDnIbJFuuC_Wt1s9klIMvkorIBqrwJsEypF5Ct5l72wavDOiTAtG2kTirr5HZlfn1pRLbK32UDQWMP0zASm-SVXb4EW-n2KfMJ4BovQjj7VrJitZabFq_AKfExt5xP6cdaBS5RTmHr3eFNXbr841or7NMicGs5D5ucoiFY0SQ" />
+        </div>
+        <h1 class="font-display-xl text-display-xl text-primary tracking-tight mb-2">Neime</h1>
+        <p class="font-body-md text-body-md text-on-surface-variant">Join the vibrant pulse of Nigerian music.</p>
+      </div>
+      <!-- Role Toggle -->
+      <div class="flex bg-surface-container rounded-lg p-1 mb-8 relative border border-white/5 shadow-inner">
+        <!-- Active indicator background -->
+        <div class="absolute top-1 left-1 bottom-1 w-[calc(50%-4px)] bg-surface-bright rounded-md shadow transition-transform duration-300 ease-in-out border border-white/10" id="toggle-indicator"></div>
+        <button class="flex-1 py-2 px-4 rounded-md font-label-sm text-label-sm relative z-10 text-on-surface transition-colors" id="btn-user" onclick="setRole('user')" type="button">
+          LISTENER
+        </button>
+        <button class="flex-1 py-2 px-4 rounded-md font-label-sm text-label-sm relative z-10 text-on-surface-variant transition-colors" id="btn-artist" onclick="setRole('artist')" type="button">
+          ARTIST
+        </button>
+      </div>
+      
+      <!-- Status banner (errors / success) -->
+      <div class="hidden mb-4 rounded-lg px-4 py-3 font-body-md text-body-md" id="status-banner" role="alert"></div>
+      
+      <!-- Sign Up Form -->
+      <form class="space-y-4" id="signup-form">
+        <!-- Listener: single full name field -->
+        <div class="space-y-1" id="user-fields">
+          <label class="font-label-sm text-label-sm text-on-surface-variant block ml-1" for="name">Full Name</label>
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">person</span>
+            <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-3 pl-10 pr-4 text-on-surface font-body-md placeholder:text-on-surface-variant/50 focus:outline-none input-glow transition-all" id="name" name="name" placeholder="Adebayo Davis" type="text" />
+          </div>
+        </div>
+        
+        <!-- Artist: first + last name fields -->
+        <div class="hidden space-y-4" id="artist-name-fields">
+          <div class="space-y-1">
+            <label class="font-label-sm text-label-sm text-on-surface-variant block ml-1" for="first-name">First Name</label>
+            <div class="relative">
+              <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">person</span>
+              <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-3 pl-10 pr-4 text-on-surface font-body-md placeholder:text-on-surface-variant/50 focus:outline-none input-glow transition-all" id="first-name" name="first-name" placeholder="Adebayo" type="text" />
+            </div>
+          </div>
+          <div class="space-y-1">
+            <label class="font-label-sm text-label-sm text-on-surface-variant block ml-1" for="last-name">Last Name</label>
+            <div class="relative">
+              <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">person</span>
+              <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-3 pl-10 pr-4 text-on-surface font-body-md placeholder:text-on-surface-variant/50 focus:outline-none input-glow transition-all" id="last-name" name="last-name" placeholder="Davis" type="text" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="space-y-1">
+          <label class="font-label-sm text-label-sm text-on-surface-variant block ml-1" for="email">Email Address</label>
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">mail</span>
+            <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-3 pl-10 pr-4 text-on-surface font-body-md placeholder:text-on-surface-variant/50 focus:outline-none input-glow transition-all" id="email" name="email" placeholder="adebayo@example.com" required="" type="email" />
+          </div>
+        </div>
+        <div class="space-y-1">
+          <label class="font-label-sm text-label-sm text-on-surface-variant block ml-1" for="password">Password</label>
+          <div class="relative">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">lock</span>
+            <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-3 pl-10 pr-4 text-on-surface font-body-md placeholder:text-on-surface-variant/50 focus:outline-none input-glow transition-all" id="password" minlength="6" name="password" placeholder="••••••••" required="" type="password" />
+          </div>
+        </div>
+        <div class="hidden space-y-4 pt-2" id="artist-fields">
+          <div class="space-y-1">
+            <label class="font-label-sm text-label-sm text-on-surface-variant block ml-1" for="artist-name">Artist / Stage Name</label>
+            <div class="relative">
+              <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">mic</span>
+              <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-3 pl-10 pr-4 text-on-surface font-body-md placeholder:text-on-surface-variant/50 focus:outline-none input-glow transition-all" id="artist-name" name="artist-name" placeholder="e.g. Burna Boy" type="text" />
+            </div>
+          </div>
+        </div>
+        <div class="pt-4">
+          <button class="w-full bg-primary-container text-on-primary-container font-headline-md text-headline-md py-3 rounded-full btn-glow hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2" id="submit-btn" type="submit">
+            <span id="submit-label">Create Account</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+        </div>
+        <div class="text-center pt-4">
+          <p class="font-body-md text-body-md text-on-surface-variant">
+            Already have an account?
+            <a class="text-secondary-fixed hover:text-secondary transition-colors font-bold" href="../login">Log in</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </main>
+  
+  <script src="../js/config.js"></script>
+  <script>
+    let currentRole = 'user';
+    
+    function setRole(role) {
+      currentRole = role;
+      const indicator = document.getElementById('toggle-indicator');
+      const btnUser = document.getElementById('btn-user');
+      const btnArtist = document.getElementById('btn-artist');
+      const artistFields = document.getElementById('artist-fields');
+      const artistNameFields = document.getElementById('artist-name-fields');
+      const userFields = document.getElementById('user-fields');
+      const nameInput = document.getElementById('name');
+      const firstNameInput = document.getElementById('first-name');
+      const lastNameInput = document.getElementById('last-name');
+      
+      if (role === 'artist') {
+        indicator.style.transform = 'translateX(100%)';
+        btnArtist.classList.replace('text-on-surface-variant', 'text-on-surface');
+        btnArtist.classList.add('text-primary');
+        btnUser.classList.replace('text-on-surface', 'text-on-surface-variant');
+        btnUser.classList.remove('text-primary');
+        
+        // Show artist stage-name field + first/last name fields
+        artistFields.classList.remove('hidden');
+        artistNameFields.classList.remove('hidden');
+        // Hide listener's single full-name field
+        userFields.classList.add('hidden');
+        
+        // Swap which fields are required
+        nameInput.required = false;
+        firstNameInput.required = true;
+        lastNameInput.required = true;
+      } else {
+        indicator.style.transform = 'translateX(0)';
+        btnUser.classList.replace('text-on-surface-variant', 'text-on-surface');
+        btnArtist.classList.replace('text-on-surface', 'text-on-surface-variant');
+        btnArtist.classList.remove('text-primary');
+        
+        // Hide artist fields, show listener full-name field
+        artistFields.classList.add('hidden');
+        artistNameFields.classList.add('hidden');
+        userFields.classList.remove('hidden');
+        
+        nameInput.required = true;
+        firstNameInput.required = false;
+        lastNameInput.required = false;
+      }
+    }
+    
+    function showStatus(message, isError) {
+      const banner = document.getElementById('status-banner');
+      banner.textContent = message;
+      banner.classList.remove('hidden', 'bg-error-container', 'text-on-error-container', 'bg-secondary-container/20', 'text-secondary');
+      if (isError) {
+        banner.classList.add('bg-error-container', 'text-on-error-container');
+      } else {
+        banner.classList.add('bg-secondary-container/20', 'text-secondary');
+      }
+    }
+    
+    document.getElementById('signup-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const submitBtn = document.getElementById('submit-btn');
+      const submitLabel = document.getElementById('submit-label');
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      
+      let metadata = { role: currentRole };
+      
+      if (currentRole === 'artist') {
+        const firstName = document.getElementById('first-name').value.trim();
+        const lastName = document.getElementById('last-name').value.trim();
+        const artistName = document.getElementById('artist-name').value.trim();
+        metadata.first_name = firstName;
+        metadata.last_name = lastName;
+        metadata.full_name = `${firstName} ${lastName}`.trim();
+        metadata.artist_name = artistName;
+      } else {
+        metadata.full_name = document.getElementById('name').value.trim();
+      }
+      
+      submitBtn.disabled = true;
+      submitLabel.textContent = 'Creating account…';
+      
+      const { data, error } = await window.sb.auth.signUp({
+        email,
+        password,
+        options: {
+          data: metadata,
+          emailRedirectTo: window.location.origin + '../login'
+        }
+      });
+      
+      submitBtn.disabled = false;
+      submitLabel.textContent = 'Create Account';
+      
+      if (error) {
+        showStatus(error.message, true);
+        return;
+      }
+      
+      showStatus('Account created! Check your email to confirm, then log in.', false);
+      document.getElementById('signup-form').reset();
+    });
+  </script>
+</body>
+
+</html>
