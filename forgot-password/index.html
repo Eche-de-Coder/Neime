@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta name="color-scheme" content="dark" />
+  <title>Neime - Forgot Password</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-surface-variant": "#e4beb1",
+            "on-primary-fixed": "#370e00",
+            "on-background": "#e4e1e6",
+            "on-secondary-fixed": "#002021",
+            "surface-container-lowest": "#0e0e11",
+            "secondary-fixed": "#63f7ff",
+            "outline-variant": "#5b4137",
+            "primary-container": "#ff5c00",
+            "tertiary-container": "#a27aff",
+            "on-secondary-fixed-variant": "#004f53",
+            "secondary": "#e6feff",
+            "inverse-surface": "#e4e1e6",
+            "surface-dim": "#131316",
+            "on-tertiary-fixed-variant": "#5700c9",
+            "surface-container-highest": "#353438",
+            "primary-fixed-dim": "#ffb59a",
+            "on-secondary-container": "#006c71",
+            "surface-container-low": "#1b1b1e",
+            "on-error": "#690005",
+            "on-tertiary-fixed": "#23005b",
+            "tertiary-fixed-dim": "#d1bcff",
+            "tertiary": "#d1bcff",
+            "error": "#ffb4ab",
+            "on-error-container": "#ffdad6",
+            "surface-container": "#1f1f22",
+            "secondary-container": "#00f4fe",
+            "on-secondary": "#003739",
+            "on-primary": "#5a1b00",
+            "outline": "#ab897d",
+            "surface-variant": "#353438",
+            "on-primary-container": "#521800",
+            "primary-fixed": "#ffdbce",
+            "on-tertiary": "#3c0090",
+            "on-primary-fixed-variant": "#802a00",
+            "tertiary-fixed": "#e9ddff",
+            "inverse-primary": "#a73a00",
+            "surface-container-high": "#2a2a2d",
+            "secondary-fixed-dim": "#00dce5",
+            "surface": "#131316",
+            "on-surface": "#e4e1e6",
+            "error-container": "#93000a",
+            "surface-tint": "#ffb59a",
+            "on-tertiary-container": "#360083",
+            "surface-bright": "#39393c",
+            "primary": "#ffb59a",
+            "inverse-on-surface": "#303033",
+            "background": "#131316"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "container-padding-desktop": "40px",
+            "section-gap": "48px",
+            "container-padding-mobile": "16px",
+            "gutter": "24px",
+            "unit": "8px",
+            "safe": "env(safe-area-inset-bottom)"
+          },
+          "fontFamily": {
+            "price-display": ["Hanken Grotesk"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-md": ["Hanken Grotesk"],
+            "body-lg": ["Hanken Grotesk"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "label-sm": ["JetBrains Mono"],
+            "display-xl": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "price-display": ["20px", { "lineHeight": "24px", "fontWeight": "700" }],
+            "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "display-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html,
+    body {
+      background-color: #131316;
+    }
+    
+    body {
+      color: theme('colors.on-background');
+    }
+    
+    .input-glow:focus-within {
+      box-shadow: 0 0 0 1px theme('colors.secondary-container');
+      border-color: theme('colors.secondary-container');
+    }
+    
+    .btn-glow:hover,
+    .btn-glow:focus {
+      box-shadow: 0 0 16px rgba(255, 92, 0, 0.3);
+    }
+    
+    .btn-glow:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    
+    .adire-pattern {
+      background-image: radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+    
+    /* Step panels: only the active one is shown */
+    .step-panel {
+      display: none;
+    }
+    
+    .step-panel.active {
+      display: block;
+    }
+    
+    /* OTP digit boxes */
+    .otp-input {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 700;
+    }
+    
+    /* Step indicator */
+    .step-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      border: 1px solid theme('colors.outline-variant');
+      color: theme('colors.on-surface-variant');
+      transition: all 0.25s ease;
+      flex-shrink: 0;
+    }
+    
+    .step-circle.done {
+      background: theme('colors.primary-container');
+      border-color: theme('colors.primary-container');
+      color: theme('colors.on-primary-container');
+    }
+    
+    .step-circle.current {
+      border-color: theme('colors.primary-container');
+      color: theme('colors.primary');
+    }
+    
+    .step-line {
+      flex: 1;
+      height: 1px;
+      background: theme('colors.outline-variant');
+      margin: 0 8px;
+      transition: background 0.25s ease;
+    }
+    
+    .step-line.done {
+      background: theme('colors.primary-container');
+    }
+  </style>
+</head>
+
+<body class="bg-background min-h-screen flex flex-col items-center justify-center relative overflow-hidden adire-pattern">
+  <!-- Background Gradient Orbs -->
+  <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+    <div class="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-[100px]"></div>
+    <div class="absolute bottom-[10%] -right-[10%] w-[40%] h-[40%] rounded-full bg-tertiary-container/10 blur-[120px]"></div>
+  </div>
+  
+  <!-- Main Content Canvas -->
+  <main class="w-full max-w-md px-container-padding-mobile md:px-0 z-10">
+    
+    <!-- Step Indicator -->
+    <div class="flex items-center mb-6 px-2">
+      <div class="step-circle current" id="circle-1">1</div>
+      <div class="step-line" id="line-1"></div>
+      <div class="step-circle" id="circle-2">2</div>
+      <div class="step-line" id="line-2"></div>
+      <div class="step-circle" id="circle-3">3</div>
+    </div>
+    
+    <!-- Glassmorphism Card -->
+    <div class="bg-surface-dim/80 backdrop-blur-2xl rounded-xl p-8 border border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.4)] relative">
+      <div class="absolute inset-0 rounded-xl border border-white/10 pointer-events-none"></div>
+      
+      <!-- Status banner -->
+      <div class="hidden mb-6 rounded-lg px-4 py-3 font-body-md text-body-md relative z-10" id="status-banner" role="alert"></div>
+      
+      <!-- STEP 1: Email -->
+      <div class="step-panel active relative z-10" id="step-1">
+        <div class="text-center mb-8">
+          <h1 class="font-display-xl text-display-xl text-primary mb-4 tracking-tight">Neime</h1>
+          <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">Recover Password</h2>
+          <p class="font-body-md text-body-md text-on-surface-variant">Enter your email and we'll send you a 6-digit code.</p>
+        </div>
+        <form class="space-y-6" id="email-form">
+          <div class="space-y-2">
+            <label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block" for="email">Email Address</label>
+            <div class="relative flex items-center bg-surface-container-low border border-white/10 rounded-lg transition-all duration-200 input-glow overflow-hidden">
+              <span class="material-symbols-outlined text-on-surface-variant ml-4 absolute left-0">mail</span>
+              <input class="w-full bg-transparent border-none text-on-surface font-body-md text-body-md py-3 pl-12 pr-4 focus:ring-0 placeholder:text-surface-variant" id="email" placeholder="you@example.com" required type="email" />
+            </div>
+          </div>
+          <button class="w-full py-4 rounded-full bg-primary-container text-white font-headline-md text-headline-md transition-all duration-200 btn-glow active:scale-95 flex items-center justify-center gap-2" id="send-otp-btn" type="submit">
+            <span id="send-otp-label">Send Code</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+        </form>
+      </div>
+      
+      <!-- STEP 2: OTP -->
+      <div class="step-panel relative z-10" id="step-2">
+        <div class="text-center mb-8">
+          <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">Enter Code</h2>
+          <p class="font-body-md text-body-md text-on-surface-variant">We sent a 6-digit code to <span class="text-on-surface font-bold" id="sent-to-email"></span></p>
+        </div>
+        <form class="space-y-6" id="otp-form">
+          <div class="flex gap-2 justify-between" id="otp-boxes">
+            <input class="otp-input bg-surface-container-low border border-white/10 rounded-lg text-on-surface focus:outline-none input-glow" inputmode="numeric" maxlength="1" type="text" />
+            <input class="otp-input bg-surface-container-low border border-white/10 rounded-lg text-on-surface focus:outline-none input-glow" inputmode="numeric" maxlength="1" type="text" />
+            <input class="otp-input bg-surface-container-low border border-white/10 rounded-lg text-on-surface focus:outline-none input-glow" inputmode="numeric" maxlength="1" type="text" />
+            <input class="otp-input bg-surface-container-low border border-white/10 rounded-lg text-on-surface focus:outline-none input-glow" inputmode="numeric" maxlength="1" type="text" />
+            <input class="otp-input bg-surface-container-low border border-white/10 rounded-lg text-on-surface focus:outline-none input-glow" inputmode="numeric" maxlength="1" type="text" />
+            <input class="otp-input bg-surface-container-low border border-white/10 rounded-lg text-on-surface focus:outline-none input-glow" inputmode="numeric" maxlength="1" type="text" />
+          </div>
+          <button class="w-full py-4 rounded-full bg-primary-container text-white font-headline-md text-headline-md transition-all duration-200 btn-glow active:scale-95 flex items-center justify-center gap-2" id="verify-otp-btn" type="submit">
+            <span id="verify-otp-label">Verify Code</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+          <div class="flex items-center justify-between text-body-md font-body-md">
+            <button class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" id="back-to-email" type="button">
+              <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+              Change email
+            </button>
+            <button class="text-secondary-fixed hover:text-secondary transition-colors font-bold disabled:opacity-40 disabled:cursor-not-allowed" id="resend-btn" type="button">
+              Resend code
+            </button>
+          </div>
+        </form>
+      </div>
+      
+      <!-- STEP 3: New password -->
+      <div class="step-panel relative z-10" id="step-3">
+        <div class="text-center mb-8">
+          <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">Set a New Password</h2>
+          <p class="font-body-md text-body-md text-on-surface-variant">Choose a new password for your account.</p>
+        </div>
+        <form class="space-y-6" id="password-form">
+          <div class="space-y-2">
+            <label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block" for="new-password">New Password</label>
+            <div class="relative flex items-center bg-surface-container-low border border-white/10 rounded-lg input-glow overflow-hidden">
+              <span class="material-symbols-outlined text-on-surface-variant ml-4 absolute left-0">lock</span>
+              <input class="w-full bg-transparent border-none text-on-surface font-body-md text-body-md py-3 pl-12 pr-4 focus:ring-0 placeholder:text-surface-variant" id="new-password" minlength="6" placeholder="••••••••" required type="password" />
+            </div>
+          </div>
+          <div class="space-y-2">
+            <label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block" for="confirm-password">Confirm Password</label>
+            <div class="relative flex items-center bg-surface-container-low border border-white/10 rounded-lg input-glow overflow-hidden">
+              <span class="material-symbols-outlined text-on-surface-variant ml-4 absolute left-0">lock</span>
+              <input class="w-full bg-transparent border-none text-on-surface font-body-md text-body-md py-3 pl-12 pr-4 focus:ring-0 placeholder:text-surface-variant" id="confirm-password" minlength="6" placeholder="••••••••" required type="password" />
+            </div>
+          </div>
+          <button class="w-full py-4 rounded-full bg-primary-container text-white font-headline-md text-headline-md transition-all duration-200 btn-glow active:scale-95 flex items-center justify-center gap-2" id="update-password-btn" type="submit">
+            <span id="update-password-label">Update Password</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+        </form>
+      </div>
+      
+      <div class="mt-8 text-center relative z-10">
+        <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center gap-1" href="../login">
+          <span class="material-symbols-outlined text-[16px]">arrow_back</span>
+          Return to Login
+        </a>
+      </div>
+    </div>
+  </main>
+  
+  <script src="../js/config.js"></script>
+  <script>
+    let userEmail = '';
+    
+    function showStatus(message, isError) {
+      const banner = document.getElementById('status-banner');
+      banner.textContent = message;
+      banner.classList.remove('hidden', 'bg-error-container', 'text-on-error-container', 'bg-secondary-container/20', 'text-secondary');
+      banner.classList.add(isError ? 'bg-error-container' : 'bg-secondary-container/20', isError ? 'text-on-error-container' : 'text-secondary');
+    }
+    
+    function clearStatus() {
+      document.getElementById('status-banner').classList.add('hidden');
+    }
+    
+    function goToStep(step) {
+      clearStatus();
+      document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('step-' + step).classList.add('active');
+      
+      for (let i = 1; i <= 3; i++) {
+        const circle = document.getElementById('circle-' + i);
+        circle.classList.remove('done', 'current');
+        if (i < step) circle.classList.add('done');
+        if (i === step) circle.classList.add('current');
+      }
+      for (let i = 1; i <= 2; i++) {
+        const line = document.getElementById('line-' + i);
+        line.classList.toggle('done', i < step);
+      }
+      
+      if (step === 2) {
+        document.getElementById('otp-boxes').querySelector('input').focus();
+      }
+    }
+    
+    // ── OTP box auto-advance ──
+    const otpInputs = Array.from(document.querySelectorAll('#otp-boxes input'));
+    otpInputs.forEach((input, idx) => {
+      input.addEventListener('input', () => {
+        input.value = input.value.replace(/[^0-9]/g, '').slice(0, 1);
+        if (input.value && idx < otpInputs.length - 1) otpInputs[idx + 1].focus();
+      });
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !input.value && idx > 0) otpInputs[idx - 1].focus();
+      });
+      input.addEventListener('paste', (e) => {
+        e.preventDefault();
+        const digits = (e.clipboardData.getData('text') || '').replace(/[^0-9]/g, '').split('');
+        otpInputs.forEach((box, i) => { box.value = digits[i] || ''; });
+        (otpInputs[Math.min(digits.length, otpInputs.length) - 1] || otpInputs[0]).focus();
+      });
+    });
+    
+    function getOtpValue() {
+      return otpInputs.map(i => i.value).join('');
+    }
+    
+    // ── STEP 1 → send OTP ──
+    document.getElementById('email-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('send-otp-btn');
+      const label = document.getElementById('send-otp-label');
+      userEmail = document.getElementById('email').value.trim();
+      
+      btn.disabled = true;
+      label.textContent = 'Sending…';
+      
+      const { error } = await window.sb.auth.resetPasswordForEmail(userEmail);
+      
+      btn.disabled = false;
+      label.textContent = 'Send Code';
+      
+      if (error) {
+        showStatus(error.message, true);
+        return;
+      }
+      
+      document.getElementById('sent-to-email').textContent = userEmail;
+      goToStep(2);
+    });
+    
+    // ── STEP 2 → verify OTP ──
+    document.getElementById('otp-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('verify-otp-btn');
+      const label = document.getElementById('verify-otp-label');
+      const token = getOtpValue();
+      
+      if (token.length !== 6) {
+        showStatus('Enter all 6 digits.', true);
+        return;
+      }
+      
+      btn.disabled = true;
+      label.textContent = 'Verifying…';
+      
+      const { error } = await window.sb.auth.verifyOtp({
+        email: userEmail,
+        token,
+        type: 'recovery'
+      });
+      
+      btn.disabled = false;
+      label.textContent = 'Verify Code';
+      
+      if (error) {
+        showStatus(error.message, true);
+        return;
+      }
+      
+      goToStep(3);
+    });
+    
+    document.getElementById('back-to-email').addEventListener('click', () => goToStep(1));
+    
+    document.getElementById('resend-btn').addEventListener('click', async () => {
+      const resendBtn = document.getElementById('resend-btn');
+      resendBtn.disabled = true;
+      const { error } = await window.sb.auth.resetPasswordForEmail(userEmail);
+      if (error) {
+        showStatus(error.message, true);
+      } else {
+        showStatus('New code sent.', false);
+      }
+      setTimeout(() => { resendBtn.disabled = false; }, 15000);
+    });
+    
+    // ── STEP 3 → set new password ──
+    document.getElementById('password-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('update-password-btn');
+      const label = document.getElementById('update-password-label');
+      const password = document.getElementById('new-password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+      
+      if (password !== confirmPassword) {
+        showStatus("Passwords don't match.", true);
+        return;
+      }
+      
+      btn.disabled = true;
+      label.textContent = 'Updating…';
+      
+      const { error } = await window.sb.auth.updateUser({ password });
+      
+      btn.disabled = false;
+      label.textContent = 'Update Password';
+      
+      if (error) {
+        showStatus(error.message, true);
+        return;
+      }
+      
+      showStatus('Password updated! Redirecting to login…', false);
+      setTimeout(() => { window.location.href = '../login'; }, 1200);
+    });
+  </script>
+</body>
+
+</html>
