@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Neime - Rhythmic Energy</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Hanken+Grotesk:wght@400;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    
+    /* Hide scrollbar for horizontal scrolling areas but keep functionality */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    
+    /* Extra bottom padding to account for fixed bottom nav + potential player */
+    .pb-player-safe {
+      padding-bottom: 120px;
+    }
+  </style>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-surface-variant": "#e4beb1",
+            "on-primary-fixed": "#370e00",
+            "on-background": "#e4e1e6",
+            "on-secondary-fixed": "#002021",
+            "surface-container-lowest": "#0e0e11",
+            "secondary-fixed": "#63f7ff",
+            "outline-variant": "#5b4137",
+            "primary-container": "#ff5c00",
+            "tertiary-container": "#a27aff",
+            "on-secondary-fixed-variant": "#004f53",
+            "secondary": "#e6feff",
+            "inverse-surface": "#e4e1e6",
+            "surface-dim": "#131316",
+            "on-tertiary-fixed-variant": "#5700c9",
+            "surface-container-highest": "#353438",
+            "primary-fixed-dim": "#ffb59a",
+            "on-secondary-container": "#006c71",
+            "surface-container-low": "#1b1b1e",
+            "on-error": "#690005",
+            "on-tertiary-fixed": "#23005b",
+            "tertiary-fixed-dim": "#d1bcff",
+            "tertiary": "#d1bcff",
+            "error": "#ffb4ab",
+            "on-error-container": "#ffdad6",
+            "surface-container": "#1f1f22",
+            "secondary-container": "#00f4fe",
+            "on-secondary": "#003739",
+            "on-primary": "#5a1b00",
+            "outline": "#ab897d",
+            "surface-variant": "#353438",
+            "on-primary-container": "#521800",
+            "primary-fixed": "#ffdbce",
+            "on-tertiary": "#3c0090",
+            "on-primary-fixed-variant": "#802a00",
+            "tertiary-fixed": "#e9ddff",
+            "inverse-primary": "#a73a00",
+            "surface-container-high": "#2a2a2d",
+            "secondary-fixed-dim": "#00dce5",
+            "surface": "#131316",
+            "on-surface": "#e4e1e6",
+            "error-container": "#93000a",
+            "surface-tint": "#ffb59a",
+            "on-tertiary-container": "#360083",
+            "surface-bright": "#39393c",
+            "primary": "#ffb59a",
+            "inverse-on-surface": "#303033",
+            "background": "#131316"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "container-padding-desktop": "40px",
+            "section-gap": "48px",
+            "container-padding-mobile": "16px",
+            "gutter": "24px",
+            "unit": "8px"
+          },
+          "fontFamily": {
+            "price-display": [
+              "Hanken Grotesk"
+            ],
+            "headline-lg-mobile": [
+              "Plus Jakarta Sans"
+            ],
+            "headline-md": [
+              "Plus Jakarta Sans"
+            ],
+            "body-md": [
+              "Hanken Grotesk"
+            ],
+            "body-lg": [
+              "Hanken Grotesk"
+            ],
+            "headline-lg": [
+              "Plus Jakarta Sans"
+            ],
+            "label-sm": [
+              "JetBrains Mono"
+            ],
+            "display-xl": [
+              "Plus Jakarta Sans"
+            ]
+          },
+          "fontSize": {
+            "price-display": [
+              "20px",
+              {
+                "lineHeight": "24px",
+                "fontWeight": "700"
+              }
+            ],
+            "headline-lg-mobile": [
+              "28px",
+              {
+                "lineHeight": "36px",
+                "fontWeight": "700"
+              }
+            ],
+            "headline-md": [
+              "24px",
+              {
+                "lineHeight": "32px",
+                "fontWeight": "600"
+              }
+            ],
+            "body-md": [
+              "16px",
+              {
+                "lineHeight": "24px",
+                "fontWeight": "400"
+              }
+            ],
+            "body-lg": [
+              "18px",
+              {
+                "lineHeight": "28px",
+                "fontWeight": "400"
+              }
+            ],
+            "headline-lg": [
+              "32px",
+              {
+                "lineHeight": "40px",
+                "fontWeight": "700"
+              }
+            ],
+            "label-sm": [
+              "12px",
+              {
+                "lineHeight": "16px",
+                "letterSpacing": "0.05em",
+                "fontWeight": "500"
+              }
+            ],
+            "display-xl": [
+              "48px",
+              {
+                "lineHeight": "56px",
+                "letterSpacing": "-0.02em",
+                "fontWeight": "800"
+              }
+            ]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+
+<body class="bg-background text-on-background font-body-md text-body-md antialiased selection:bg-primary-container selection:text-white">
+  
+  <!----------
+      MODALS
+  ----------->
+  <!-- buy modal -->
+  <div class="hidden fixed inset-0 z-[70] flex items-center justify-center p-4" id="buy-modal">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="buy-modal-backdrop"></div>
+    <div class="relative w-full max-w-sm bg-surface-container-low border border-white/10 rounded-xl p-6 shadow-2xl text-center">
+      <img class="w-24 h-24 rounded-lg object-cover mx-auto mb-4" id="buy-modal-cover" src="" />
+      <h3 class="font-headline-md text-headline-md text-on-surface mb-1" id="buy-modal-title">Song Title</h3>
+      <p class="font-body-md text-body-md text-on-surface-variant mb-6" id="buy-modal-artist">Artist</p>
+      <p class="font-price-display text-price-display text-primary mb-6" id="buy-modal-price">₦0</p>
+      <button class="w-full bg-primary-container text-white font-headline-md text-headline-md !text-[16px] py-3 rounded-full hover:opacity-90 active:scale-95 transition-all mb-3" id="buy-modal-pay-btn" type="button">
+        Pay with Paystack
+      </button>
+      <button class="w-full text-on-surface-variant font-body-md text-body-md py-2" id="buy-modal-cancel-btn" type="button">
+        Cancel
+      </button>
+    </div>
+  </div>
+  <!-- Mini player bar -->
+  <div class="hidden fixed bottom-20 md:bottom-0 left-0 w-full z-40 bg-surface-container-high/95 backdrop-blur-xl border-t border-white/10 px-4 py-2 flex items-center gap-3 cursor-pointer" id="mini-player">
+    <img class="w-10 h-10 rounded object-cover" id="mini-player-cover" src="" />
+    <div class="flex-1 min-w-0">
+      <p class="font-body-md text-body-md text-on-surface truncate" id="mini-player-title">Title</p>
+      <p class="font-label-sm text-label-sm text-on-surface-variant truncate" id="mini-player-artist">Artist</p>
+    </div>
+    <button class="w-9 h-9 flex items-center justify-center text-on-surface" id="mini-player-toggle" type="button">
+      <span class="material-symbols-outlined" id="mini-player-icon" style="font-variation-settings: 'FILL' 1;">pause</span>
+    </button>
+  </div>
+
+  <!-- Full screen player -->
+  <div class="hidden fixed inset-0 z-[80] flex flex-col bg-gradient-to-b from-surface-container-high to-background" id="player-modal">
+    <div class="flex items-center justify-between px-6 pt-6">
+      <button class="text-on-surface" id="player-modal-close" type="button">
+        <span class="material-symbols-outlined text-3xl">expand_more</span>
+      </button>
+      <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Playing Now</p>
+      <span class="w-8"></span>
+    </div>
+    <div class="flex-1 flex flex-col items-center justify-center px-8 gap-8">
+      <img class="w-full max-w-xs aspect-square rounded-xl object-cover shadow-2xl" id="player-cover" src="" />
+      <div class="text-center w-full">
+        <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-1" id="player-title">Song Title</h2>
+        <p class="font-body-lg text-body-lg text-on-surface-variant" id="player-artist">Artist</p>
+      </div>
+      <div class="w-full">
+        <input class="w-full accent-primary-container" id="player-seek" max="100" min="0" type="range" value="0" />
+        <div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant mt-1">
+          <span id="player-current-time">0:00</span>
+          <span id="player-duration">0:00</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-8">
+        <button class="text-on-surface-variant" id="player-prev-btn" type="button">
+          <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">skip_previous</span>
+        </button>
+        <button class="w-16 h-16 rounded-full bg-white text-black flex items-center justify-center" id="player-toggle-btn" type="button">
+          <span class="material-symbols-outlined text-4xl" id="player-toggle-icon" style="font-variation-settings: 'FILL' 1;">pause</span>
+        </button>
+        <button class="text-on-surface-variant" id="player-next-btn" type="button">
+          <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">skip_next</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <audio id="audio-player"></audio>
+  
+  <!-- TopNavBar -->
+  <!--<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-sm flex justify-between items-center px-4 py-3 h-[72px]">
+    <div class="font-display-xl text-headline-md font-extrabold text-primary tracking-tight">Neime</div>
+    <div class="flex items-center gap-4">
+      <button class="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 flex items-center justify-center p-2 rounded-full">
+        <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+      </button>
+      <button class="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 flex items-center justify-center p-2 rounded-full">
+        <span class="material-symbols-outlined" data-icon="payments">payments</span>
+      </button>
+      <button class="w-10 h-10 rounded-full overflow-hidden border border-outline/30 hover:opacity-80 transition-opacity active:scale-95">
+        <img alt="Artist or User Profile" class="w-full h-full object-cover" data-alt="A striking portrait of a Nigerian music artist illuminated by vibrant neon stage lights against a deep black background, embodying dynamic rhythmic energy and premium digital aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQnZAoRayjrHyXPkAFa6FOrrij-LsTyrjwcTL7oFyvYGon3-Z1XVSDuWL9H2WCrMZcLf6W_P-68nTtCoTd9gJP-qVgE4chSMAwSkvOcycjV7oTqNIAubg2NcJKYJl7CFuN3uSUUV3lOVI6APPHKP3VHmycCOAxxwVtGENtTsq5JDs0yTcPAZadwSLwdKVlqLTWSxaSyznSsMSnFCz781BOpVqPJb-oG2eoDOSaN55bdnUj3sUZXZP6" />
+      </button>
+    </div>
+  </header>-->
+  <!-- Main Content Canvas -->
+  <main class="pt-[88px] pb-player-safe px-container-padding-mobile md:px-container-padding-desktop max-w-7xl mx-auto flex flex-col gap-section-gap">
+    <!-- Vibe Bar -->
+    <section class="w-full -mx-container-padding-mobile px-container-padding-mobile md:mx-0 md:px-0">
+      <div class="flex gap-3 overflow-x-auto hide-scrollbar pb-2">
+        <button class="px-6 py-2 rounded-full bg-primary-container text-white font-label-sm text-label-sm whitespace-nowrap active:scale-95 transition-transform drop-shadow-[0_0_8px_rgba(255,92,0,0.4)]">All Vibes</button>
+        <button class="px-6 py-2 rounded-full bg-surface-container-low border border-white/5 text-on-background font-label-sm text-label-sm whitespace-nowrap active:scale-95 transition-transform hover:bg-surface-container">Afrobeat</button>
+        <button class="px-6 py-2 rounded-full bg-surface-container-low border border-white/5 text-on-background font-label-sm text-label-sm whitespace-nowrap active:scale-95 transition-transform hover:bg-surface-container">Amapiano</button>
+        <button class="px-6 py-2 rounded-full bg-surface-container-low border border-white/5 text-on-background font-label-sm text-label-sm whitespace-nowrap active:scale-95 transition-transform hover:bg-surface-container">Highlife</button>
+        <button class="px-6 py-2 rounded-full bg-surface-container-low border border-white/5 text-on-background font-label-sm text-label-sm whitespace-nowrap active:scale-95 transition-transform hover:bg-surface-container">Cruisin'</button>
+        <button class="px-6 py-2 rounded-full bg-surface-container-low border border-white/5 text-on-background font-label-sm text-label-sm whitespace-nowrap active:scale-95 transition-transform hover:bg-surface-container">Late Night</button>
+      </div>
+    </section>
+    <!-- Featured Hero -->
+    <section class="relative w-full h-[400px] rounded-xl overflow-hidden group">
+      <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="An electrifying concert scene in Lagos, featuring a silhouette of an afrobeats artist performing on a highly polished, futuristic stage bathed in high-voltage orange and teal laser lights, deep shadows creating a sense of scale." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBV4avm4cISf0wqV-PMLWfUBkAuPN5xsX39EfEiNUIBA16IBWrTWAM6-qljG_ghGr7r3w9JBIGkUQpFzkjd1jKWiBQhqban8wU39cBxZXu3vKtt9YoCj-6ctm7v_ZqYVdEKS7G-38lKUv9aQjCK7fLc5beCtMwXr5ps3Qn3yOvsE9oBRzSqwtpSt-2sz6lG4MmmSBezsWMxQpphBOtAnXmSVRmj0b4evlCkSlWNrp8f00LVAhD52gcs')"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 p-6 flex flex-col justify-end w-full">
+        <span class="text-secondary-fixed uppercase font-label-sm text-label-sm mb-2 tracking-widest flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-secondary-fixed animate-pulse"></span> New Release Spotlight
+        </span>
+        <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-1">Rhythms of the Night</h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant mb-6">Burna Boy ft. Tems</p>
+        <div class="flex items-center gap-4">
+          <button class="w-14 h-14 rounded-full bg-primary-container text-white flex items-center justify-center drop-shadow-[0_0_16px_rgba(255,92,0,0.6)] hover:scale-105 active:scale-95 transition-all">
+            <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+          </button>
+          <button class="h-14 px-6 rounded-full bg-black border border-primary-container text-primary font-price-display text-price-display flex items-center gap-2 hover:bg-surface-container-lowest active:scale-95 transition-all">
+            ₦100 <span class="font-label-sm text-label-sm uppercase text-on-surface-variant ml-1">Buy Track</span>
+          </button>
+        </div>
+      </div>
+    </section>
+    <!-- Trending -->
+    <section>
+      <div class="flex justify-between items-end mb-4">
+        <h2 class="font-headline-md text-headline-md text-white">Trending in Nigeria</h2>
+        <a class="text-primary font-label-sm text-label-sm hover:underline" href="#">View All</a>
+      </div>
+      <div class="flex gap-4 overflow-x-auto hide-scrollbar -mx-container-padding-mobile px-container-padding-mobile md:mx-0 md:px-0 pb-4" id="trending-songs">
+        <!-- filled by JS -->
+      </div>
+    </section>
+  </main>
+  <!-- BottomNavBar -->
+  <nav class="md:hidden flex justify-around items-center h-20 w-full px-2 bg-surface-dim/90 backdrop-blur-2xl fixed bottom-0 w-full z-50 pb-safe bg-surface-container-highest/50 border-t border-white/5 shadow-[0_-4px_24px_rgba(0,0,0,0.4)]">
+    <a class="flex flex-col items-center justify-center text-primary-container font-bold drop-shadow-[0_0_8px_rgba(255,92,0,0.3)] active:scale-90 duration-200" href="#">
+      <span class="material-symbols-outlined" data-icon="home" data-weight="fill">home</span>
+      <span class="font-label-sm text-label-sm mt-1">Home</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../search">
+      <span class="material-symbols-outlined" data-icon="search">search</span>
+      <span class="font-label-sm text-label-sm mt-1">Search</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../library">
+      <span class="material-symbols-outlined" data-icon="library_music">library_music</span>
+      <span class="font-label-sm text-label-sm mt-1">My Music</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../account">
+      <span class="material-symbols-outlined" data-icon="person">person</span>
+      <span class="font-label-sm text-label-sm mt-1">Account</span>
+    </a>
+  </nav>
+  
+  
+  <!-- Templates -->
+  <template id="song-card-template">
+    <div class="min-w-[160px] max-w-[160px] flex flex-col gap-3 group cursor-pointer" data-song-id="">
+      <div class="relative w-full aspect-square rounded-lg overflow-hidden bg-surface-container">
+        <img alt="Album Cover" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 song-cover" src="" />
+        <button class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity song-play-btn" type="button">
+          <span class="material-symbols-outlined text-white text-4xl" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+        </button>
+      </div>
+      <div>
+        <h3 class="font-body-md text-body-md text-white truncate font-bold song-title">Title</h3>
+        <p class="font-body-md text-body-md text-on-surface-variant text-sm truncate song-artist">Artist</p>
+        <div class="mt-2 inline-flex items-center px-2 py-0.5 rounded-full bg-secondary/10 border border-secondary/20">
+          <span class="font-label-sm text-label-sm text-secondary-fixed song-price">₦0</span>
+        </div>
+      </div>
+    </div>
+  </template>
+  
+  <script src="../js/config.js"></script>
+  <script src="../js/player.js"></script>
+  <script>
+    let currentUser = null;
+    let playQueue = [];
+    let currentSongIndex = -1;
+    let currentSong = null;
+    let songBeingBought = null;
+    
+    (async function initHome() {
+      const { data: { session } } = await window.sb.auth.getSession();
+      if (!session) { window.location.href = 'login.html'; return; }
+      currentUser = session.user;
+      loadSongs();
+    })();
+    
+    async function loadSongs() {
+      const { data: songs, error } = await window.sb
+        .from('songs')
+        .select('*')
+        .order('created_at', { ascending: false });
+      
+      if (error) { console.warn(error.message); return; }
+      playQueue = songs || [];
+      renderSongs(playQueue);
+    }
+    
+    function renderSongs(songs) {
+      const container = document.getElementById('trending-songs');
+      const template = document.getElementById('song-card-template');
+      container.innerHTML = '';
+      
+      songs.forEach(song => {
+        const node = template.content.cloneNode(true);
+        node.querySelector('[data-song-id]').dataset.songId = song.id;
+        node.querySelector('.song-cover').src = song.cover_url || '';
+        node.querySelector('.song-title').textContent = song.title;
+        node.querySelector('.song-artist').textContent = song.feature ? `${song.artist_name} ft. ${song.feature}` : song.artist_name;
+        node.querySelector('.song-price').textContent = `₦${song.price}`;
+        node.querySelector('.song-play-btn').addEventListener('click', (e) => {
+          e.stopPropagation();
+          handlePlayClick(song);
+        });
+        container.appendChild(node);
+      });
+    }
+    
+    // ── Purchase gate ──
+    async function hasPurchased(songId) {
+      const { data } = await window.sb
+        .from('purchases')
+        .select('id')
+        .eq('buyer_id', currentUser.id)
+        .eq('song_id', songId)
+        .maybeSingle();
+      return !!data;
+    }
+    
+    async function handlePlayClick(song) {
+      const owned = await hasPurchased(song.id);
+      owned ? playSong(song) : openBuyModal(song);
+    }
+    
+    // ── Buy modal + Paystack ──
+    const buyModal = document.getElementById('buy-modal');
+    
+    function openBuyModal(song) {
+      songBeingBought = song;
+      document.getElementById('buy-modal-cover').src = song.cover_url || '';
+      document.getElementById('buy-modal-title').textContent = song.title;
+      document.getElementById('buy-modal-artist').textContent = song.artist_name;
+      document.getElementById('buy-modal-price').textContent = `₦${song.price}`;
+      buyModal.classList.remove('hidden');
+    }
+    document.getElementById('buy-modal-cancel-btn').addEventListener('click', () => buyModal.classList.add('hidden'));
+    document.getElementById('buy-modal-backdrop').addEventListener('click', () => buyModal.classList.add('hidden'));
+    
+    document.getElementById('buy-modal-pay-btn').addEventListener('click', () => {
+      const song = songBeingBought;
+      const handler = PaystackPop.setup({
+        key: window.PAYSTACK_PUBLIC_KEY,
+        email: currentUser.email,
+        amount: Math.round(song.price * 100), // kobo
+        currency: 'NGN',
+        ref: `neime_${song.id}_${Date.now()}`,
+        callback: (response) => verifyAndUnlock(response.reference, song),
+        onClose: () => {}
+      });
+      handler.openIframe();
+    });
+    
+    async function verifyAndUnlock(reference, song) {
+      const { data, error } = await window.sb.functions.invoke('verify-paystack', {
+        body: { reference, song_id: song.id, buyer_id: currentUser.id }
+      });
+      
+      if (error || !data?.success) {
+        alert('Payment verification failed: ' + (error?.message || data?.error || 'Unknown error'));
+        return;
+      }
+      
+      buyModal.classList.add('hidden');
+      playSong(song);
+    }
+    
+    // ── Player ──
+    const audio = document.getElementById('audio-player');
+    const playerModal = document.getElementById('player-modal');
+    const miniPlayer = document.getElementById('mini-player');
+    
+    async function playSong(song) {
+      currentSong = song;
+      currentSongIndex = playQueue.findIndex(s => s.id === song.id);
+      
+      // "songs" bucket is private — mint a short-lived signed URL
+      const { data, error } = await window.sb.storage.from('songs').createSignedUrl(song.audio_path, 3600);
+      if (error) { alert('Could not load audio: ' + error.message); return; }
+      
+      audio.src = data.signedUrl;
+      audio.play();
+      
+      document.getElementById('player-cover').src = song.cover_url || '';
+      document.getElementById('player-title').textContent = song.title;
+      document.getElementById('player-artist').textContent = song.artist_name;
+      document.getElementById('mini-player-cover').src = song.cover_url || '';
+      document.getElementById('mini-player-title').textContent = song.title;
+      document.getElementById('mini-player-artist').textContent = song.artist_name;
+      
+      miniPlayer.classList.remove('hidden');
+      playerModal.classList.remove('hidden');
+      setPlayIcon(true);
+    }
+    
+    function setPlayIcon(isPlaying) {
+      document.getElementById('player-toggle-icon').textContent = isPlaying ? 'pause' : 'play_arrow';
+      document.getElementById('mini-player-icon').textContent = isPlaying ? 'pause' : 'play_arrow';
+    }
+    
+    document.getElementById('player-toggle-btn').addEventListener('click', () => {
+      audio.paused ? (audio.play(), setPlayIcon(true)) : (audio.pause(), setPlayIcon(false));
+    });
+    document.getElementById('mini-player-toggle').addEventListener('click', (e) => {
+      e.stopPropagation();
+      audio.paused ? (audio.play(), setPlayIcon(true)) : (audio.pause(), setPlayIcon(false));
+    });
+    
+    document.getElementById('player-modal-close').addEventListener('click', () => playerModal.classList.add('hidden'));
+    miniPlayer.addEventListener('click', () => playerModal.classList.remove('hidden'));
+    
+    document.getElementById('player-next-btn').addEventListener('click', () => skip(1));
+    document.getElementById('player-prev-btn').addEventListener('click', () => skip(-1));
+    
+    function skip(direction) {
+      const nextIndex = currentSongIndex + direction;
+      if (nextIndex >= 0 && nextIndex < playQueue.length) handlePlayClick(playQueue[nextIndex]);
+    }
+    
+    function formatTime(seconds) {
+      if (!isFinite(seconds)) return '0:00';
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
+    }
+    
+    audio.addEventListener('timeupdate', () => {
+      document.getElementById('player-current-time').textContent = formatTime(audio.currentTime);
+      document.getElementById('player-seek').value = (audio.currentTime / audio.duration) * 100 || 0;
+    });
+    audio.addEventListener('loadedmetadata', () => {
+      document.getElementById('player-duration').textContent = formatTime(audio.duration);
+    });
+    document.getElementById('player-seek').addEventListener('input', (e) => {
+      audio.currentTime = (e.target.value / 100) * audio.duration;
+    });
+    audio.addEventListener('ended', () => skip(1));
+  </script>
+</body>
+
+</html>
