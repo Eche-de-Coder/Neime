@@ -1,5 +1,5 @@
 {
   "rewrites": [
-    { "source": "/:code([a-z]{5})", "destination": "/share.html?code=:code" }
+    { "source": "/:code([a-z]{5})/", "destination": "/share.html?code=:code" }
   ]
 }
