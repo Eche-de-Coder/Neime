@@ -86,10 +86,10 @@
       if (!code) { showNotFound(); return; }**/
     (async function init() {
   const code = new URLSearchParams(window.location.search).get('code');
-  document.getElementById('loading-state').innerHTML =
-    `<p style="color:white">DEBUG code = ${JSON.stringify(code)}</p>`;
-  return; // remove this line once you've checked the value
   if (!code) { showNotFound(); return; }
+
+  const { data, error } = await window.sb.from('songs').select('*').eq('share_code', code).maybeSingle();
+  if (error || !data) { showNotFound(); return; }
       
       
       song = data;
