@@ -1,6 +1,6 @@
 {
   "trailingSlash": false,
   "redirects": [
-    { "source": "/:code([a-z]{5})", "destination": "/share.html?code=:code" }
+    { "source": "/:code([A-Za-z]{4})", "destination": "/share.html?code=:code" }
   ]
 }
