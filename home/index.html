@@ -423,7 +423,8 @@
     async function handlePlayClick(song) {
       if (!currentUser) {
         openBuyModal(song);
-      return;
+        return;
+      }
         
       const owned = await hasPurchased(song.id);
       owned ? playSong(song) : openBuyModal(song);
