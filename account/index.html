@@ -71,9 +71,9 @@
       const role = session.user.user_metadata?.role;
       
       if (role === 'artist') {
-        window.location.replace('artist.html');
+        window.location.replace('account/artist.html');
       } else if (role === 'user') {
-        window.location.replace('user.html');
+        window.location.replace('account/user.html');
       } else {
         const { data: artistRow } = await window.sb
           .from('artists')
