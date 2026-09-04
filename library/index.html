@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>My Music - Neime</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=Hanken+Grotesk:wght@400;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-surface-variant": "#e4beb1",
+            "on-primary-fixed": "#370e00",
+            "on-background": "#e4e1e6",
+            "on-secondary-fixed": "#002021",
+            "surface-container-lowest": "#0e0e11",
+            "secondary-fixed": "#63f7ff",
+            "outline-variant": "#5b4137",
+            "primary-container": "#ff5c00",
+            "tertiary-container": "#a27aff",
+            "on-secondary-fixed-variant": "#004f53",
+            "secondary": "#e6feff",
+            "inverse-surface": "#e4e1e6",
+            "surface-dim": "#131316",
+            "on-tertiary-fixed-variant": "#5700c9",
+            "surface-container-highest": "#353438",
+            "primary-fixed-dim": "#ffb59a",
+            "on-secondary-container": "#006c71",
+            "surface-container-low": "#1b1b1e",
+            "on-error": "#690005",
+            "on-tertiary-fixed": "#23005b",
+            "tertiary-fixed-dim": "#d1bcff",
+            "tertiary": "#d1bcff",
+            "error": "#ffb4ab",
+            "on-error-container": "#ffdad6",
+            "surface-container": "#1f1f22",
+            "secondary-container": "#00f4fe",
+            "on-secondary": "#003739",
+            "on-primary": "#5a1b00",
+            "outline": "#ab897d",
+            "surface-variant": "#353438",
+            "on-primary-container": "#521800",
+            "primary-fixed": "#ffdbce",
+            "on-tertiary": "#3c0090",
+            "on-primary-fixed-variant": "#802a00",
+            "tertiary-fixed": "#e9ddff",
+            "inverse-primary": "#a73a00",
+            "surface-container-high": "#2a2a2d",
+            "secondary-fixed-dim": "#00dce5",
+            "surface": "#131316",
+            "on-surface": "#e4e1e6",
+            "error-container": "#93000a",
+            "surface-tint": "#ffb59a",
+            "on-tertiary-container": "#360083",
+            "surface-bright": "#39393c",
+            "primary": "#ffb59a",
+            "inverse-on-surface": "#303033",
+            "background": "#131316"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "container-padding-desktop": "40px",
+            "section-gap": "48px",
+            "container-padding-mobile": "16px",
+            "gutter": "24px",
+            "unit": "8px"
+          },
+          "fontFamily": {
+            "price-display": ["Hanken Grotesk"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-md": ["Hanken Grotesk"],
+            "body-lg": ["Hanken Grotesk"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "label-sm": ["JetBrains Mono"],
+            "display-xl": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "price-display": ["20px", { "lineHeight": "24px", "fontWeight": "700" }],
+            "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "display-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .backdrop-blur-xl {
+      backdrop-filter: blur(24px);
+    }
+    
+    .pb-safe {
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-background font-body-md min-h-screen pb-[100px] md:pb-0 pt-[10px]">
+  <!-- TopNavBar (Web) -->
+  <!--<nav class="hidden md:flex justify-between items-center px-4 py-3 w-full bg-surface/80 backdrop-blur-xl fixed top-0 w-full z-50 border-b border-white/10 shadow-sm">
+    <div class="font-display-xl text-headline-md font-extrabold text-primary tracking-tight">Neime</div>
+    <div class="flex gap-4 items-center">
+      <button class="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 transition-transform"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+      <button class="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 transition-transform"><span class="material-symbols-outlined" data-icon="payments">payments</span></button>
+      <div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden">
+        <img alt="Artist or User Profile" class="w-full h-full object-cover" data-alt="A small circular profile picture of an African music artist or listener with vibrant neon rim lighting against a dark studio background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFYyvKMwE_P0Jr8VRgVIPK3QiSoo40xBdJ33mhdcwP-sXJhn6PZrmicpmUBGcqMjWqghLJZ1hckphc1-sWSQGdMy9qH4NWbRbd-8ztnV041Nif2KhPaLLPsBC6q8fPtXsYPoxMcNZI1ahmZ_PXhlgkWe-FLT6X-cIF1oaDvX9z89vjkj2VxPnT5_-FjYBJAOL1HTUfhetT-l6HPRj48TeU7zDahn9k9wgSRQ_NNLsme1G19_owXqf5" />
+      </div>
+    </div>
+  </nav>-->
+  <!-- Top Navigation (Mobile equivalent of App Bar title) -->
+  <!--<header class="md:hidden flex justify-between items-center px-4 py-3 bg-surface/80 backdrop-blur-xl fixed top-0 w-full z-50 border-b border-white/10">
+    <div class="font-display-xl text-headline-md font-extrabold text-primary tracking-tight">Neime</div>
+  </header>-->
+  <main class="max-w-7xl mx-auto px-container-padding-mobile md:px-container-padding-desktop mt-section-gap">
+    <header class="mb-section-gap">
+      <h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg mb-2">My Library</h1>
+      <p class="font-body-lg text-body-lg text-on-surface-variant">Your collected tracks and playlists.</p>
+    </header>
+    <!-- Tabs -->
+    <div class="flex gap-6 mb-8 border-b border-white/10 pb-2 overflow-x-auto no-scrollbar">
+      <button class="text-primary font-headline-md text-body-md font-bold whitespace-nowrap">Purchased</button>
+      <button class="text-on-surface-variant font-headline-md text-body-md hover:text-primary transition-colors whitespace-nowrap">Liked</button>
+      <button class="text-on-surface-variant font-headline-md text-body-md hover:text-primary transition-colors whitespace-nowrap">Playlists</button>
+    </div>
+    <!-- Purchased Content -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="library-list"></div>
+    <p class="hidden font-body-lg text-body-lg text-on-surface-variant text-center py-12 col-span-full" id="library-empty-state">
+      Nothing purchased yet.
+    </p>
+  </main>
+  <!-- BottomNavBar (Mobile) -->
+  <nav class="md:hidden flex justify-around items-center h-20 w-full px-2 bg-surface-dim/90 backdrop-blur-2xl fixed bottom-0 w-full z-50 pb-safe bg-surface-container-highest/50 border-t border-white/5 shadow-[0_-4px_24px_rgba(0,0,0,0.4)]">
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+      <span class="material-symbols-outlined" data-icon="home">home</span>
+      <span class="font-label-sm text-label-sm mt-1">Home</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+      <span class="material-symbols-outlined" data-icon="search">search</span>
+      <span class="font-label-sm text-label-sm mt-1">Search</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-primary-container font-bold drop-shadow-[0_0_8px_rgba(255,92,0,0.3)] active:scale-90 duration-200" href="#">
+      <span class="material-symbols-outlined" data-icon="library_music" data-weight="fill">library_music</span>
+      <span class="font-label-sm text-label-sm mt-1">My Music</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+      <span class="material-symbols-outlined" data-icon="person">person</span>
+      <span class="font-label-sm text-label-sm mt-1">Account</span>
+    </a>
+  </nav>
+  
+  <!-- Templates -->
+  <template id="library-card-template">
+    <div class="bg-[#1A1A1E] rounded-xl p-4 flex gap-4 items-center hover:bg-surface-container-high transition-colors group cursor-pointer border border-white/5 shadow-sm lib-card">
+      <div class="w-20 h-20 rounded-lg overflow-hidden shrink-0 relative">
+        <img alt="Album Cover" class="w-full h-full object-cover lib-cover" src="" />
+        <div class="absolute inset-0 bg-black/40 hidden group-hover:flex items-center justify-center">
+          <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+        </div>
+      </div>
+      <div class="flex-grow min-w-0">
+        <h3 class="font-headline-md text-body-lg font-bold truncate lib-title">Title</h3>
+        <p class="font-body-md text-body-md text-on-surface-variant truncate lib-artist">Artist</p>
+        <div class="mt-2 flex items-center gap-2">
+          <span class="bg-secondary/20 text-secondary px-2 py-1 rounded-full font-label-sm text-label-sm inline-flex items-center gap-1 border border-secondary/30 lib-amount">
+            Purchased ₦0
+          </span>
+        </div>
+      </div>
+    </div>
+  </template>
+  
+  <script src="../js/config.js"></script>
+  <script src="../js/player.js"></script>
+  <script>
+    (async function loadLibrary() {
+      const { data: { session } } = await window.sb.auth.getSession();
+      if (!session) { window.location.href = 'login.html'; return; }
+      
+      const { data: purchases, error } = await window.sb
+        .from('purchases')
+        .select('id, amount, created_at, songs(id, title, artist_name, cover_url, audio_path)')
+        .eq('buyer_id', session.user.id)
+        .order('created_at', { ascending: false });
+      
+      if (error) { console.warn(error.message); return; }
+      renderLibrary(purchases || []);
+    })();
+    
+    function renderLibrary(purchases) {
+      const list = document.getElementById('library-list');
+      const empty = document.getElementById('library-empty-state');
+      const template = document.getElementById('library-card-template');
+      
+      list.innerHTML = '';
+      empty.classList.toggle('hidden', purchases.length > 0);
+      
+      purchases.forEach(p => {
+        const song = p.songs;
+        if (!song) return;
+        const node = template.content.cloneNode(true);
+        node.querySelector('.lib-cover').src = song.cover_url || '';
+        node.querySelector('.lib-title').textContent = song.title;
+        node.querySelector('.lib-artist').textContent = song.artist_name;
+        node.querySelector('.lib-amount').textContent = `Purchased ₦${p.amount}`;
+        node.querySelector('.lib-card').addEventListener('click', () => window.playSong(song));
+        list.appendChild(node);
+      });
+    }
+  </script>
+</body>
+
+</html>
