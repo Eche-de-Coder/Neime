@@ -374,7 +374,7 @@
     (async function initHome() {
       const { data: { session } } = await window.sb.auth.getSession();
       //if (!session) { window.location.href = 'login.html'; return; }
-      currentUser = session.user;
+      currentUser = session.user || null;
       loadSongs();
     })();
     
@@ -421,6 +421,10 @@
     }
     
     async function handlePlayClick(song) {
+      if (!currentUser) {
+        openBuyModal(song);
+      return;
+        
       const owned = await hasPurchased(song.id);
       owned ? playSong(song) : openBuyModal(song);
     }
@@ -440,6 +444,11 @@
     document.getElementById('buy-modal-backdrop').addEventListener('click', () => buyModal.classList.add('hidden'));
     
     document.getElementById('buy-modal-pay-btn').addEventListener('click', () => {
+      if (!currentUser) {
+        window.location.href = `login.html?redirect=${encodeURIComponent(window.location.href)}`;
+      return;
+      }
+      
       const song = songBeingBought;
       const handler = PaystackPop.setup({
         key: window.PAYSTACK_PUBLIC_KEY,
