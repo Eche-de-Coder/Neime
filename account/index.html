@@ -64,11 +64,10 @@
       const { data: { session }, error } = await window.sb.auth.getSession();
       
       if (error || !session) {
-        window.location.replace('login.html');
+        document.querySelector(h1).classlist.add('hidden');
         return;
       }
       
-      // Role was stored in user_metadata at signup (signup.html)
       const role = session.user.user_metadata?.role;
       
       if (role === 'artist') {
@@ -76,8 +75,6 @@
       } else if (role === 'user') {
         window.location.replace('user.html');
       } else {
-        // Fallback: role missing from metadata for some reason —
-        // check which table has a matching row instead.
         const { data: artistRow } = await window.sb
           .from('artists')
           .select('id')
