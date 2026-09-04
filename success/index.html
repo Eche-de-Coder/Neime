@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Account Created Successfully - Neime</title>
+  <!-- Google Fonts: Plus Jakarta Sans, Hanken Grotesk, JetBrains Mono -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap" rel="stylesheet" />
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS with custom theme config -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary": "#5a1b00",
+            "primary-fixed": "#ffdbce",
+            "inverse-primary": "#a73a00",
+            "on-background": "#e4e1e6",
+            "on-primary-fixed": "#370e00",
+            "secondary-fixed": "#63f7ff",
+            "error-container": "#93000a",
+            "on-secondary-container": "#006c71",
+            "tertiary-fixed": "#e9ddff",
+            "surface-container-high": "#2a2a2d",
+            "on-error": "#690005",
+            "background": "#131316",
+            "surface-bright": "#39393c",
+            "tertiary-fixed-dim": "#d1bcff",
+            "surface-dim": "#131316",
+            "inverse-surface": "#e4e1e6",
+            "on-error-container": "#ffdad6",
+            "surface-container": "#1f1f22",
+            "secondary": "#e6feff",
+            "on-tertiary-fixed": "#23005b",
+            "primary-container": "#ff5c00",
+            "on-primary-container": "#521800",
+            "surface-container-highest": "#353438",
+            "surface-container-low": "#1b1b1e",
+            "primary-fixed-dim": "#ffb59a",
+            "surface-tint": "#ffb59a",
+            "primary": "#ffb59a",
+            "tertiary": "#d1bcff",
+            "error": "#ffb4ab",
+            "tertiary-container": "#a27aff",
+            "outline": "#ab897d",
+            "on-secondary-fixed-variant": "#004f53",
+            "on-primary-fixed-variant": "#802a00",
+            "outline-variant": "#5b4137",
+            "secondary-fixed-dim": "#00dce5",
+            "surface": "#131316",
+            "inverse-on-surface": "#303033",
+            "on-secondary-fixed": "#002021",
+            "secondary-container": "#00f4fe",
+            "on-secondary": "#003739",
+            "on-surface": "#e4e1e6",
+            "on-tertiary-fixed-variant": "#5700c9",
+            "surface-variant": "#353438",
+            "on-tertiary": "#3c0090",
+            "on-tertiary-container": "#360083",
+            "on-surface-variant": "#e4beb1",
+            "surface-container-lowest": "#0e0e11"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "unit": "8px",
+            "gutter": "24px",
+            "section-gap": "48px",
+            "container-padding-mobile": "16px",
+            "container-padding-desktop": "40px"
+          },
+          "fontFamily": {
+            "body-md": [
+              "Hanken Grotesk"
+            ],
+            "headline-lg-mobile": [
+              "Plus Jakarta Sans"
+            ],
+            "headline-lg": [
+              "Plus Jakarta Sans"
+            ],
+            "label-sm": [
+              "JetBrains Mono"
+            ],
+            "body-lg": [
+              "Hanken Grotesk"
+            ],
+            "display-xl": [
+              "Plus Jakarta Sans"
+            ],
+            "price-display": [
+              "Hanken Grotesk"
+            ],
+            "headline-md": [
+              "Plus Jakarta Sans"
+            ]
+          },
+          "fontSize": {
+            "body-md": [
+              "16px",
+              {
+                "lineHeight": "24px",
+                "fontWeight": "400"
+              }
+            ],
+            "headline-lg-mobile": [
+              "28px",
+              {
+                "lineHeight": "36px",
+                "fontWeight": "700"
+              }
+            ],
+            "headline-lg": [
+              "32px",
+              {
+                "lineHeight": "40px",
+                "fontWeight": "700"
+              }
+            ],
+            "label-sm": [
+              "12px",
+              {
+                "lineHeight": "16px",
+                "letterSpacing": "0.05em",
+                "fontWeight": "500"
+              }
+            ],
+            "body-lg": [
+              "18px",
+              {
+                "lineHeight": "28px",
+                "fontWeight": "400"
+              }
+            ],
+            "display-xl": [
+              "48px",
+              {
+                "lineHeight": "56px",
+                "letterSpacing": "-0.02em",
+                "fontWeight": "800"
+              }
+            ],
+            "price-display": [
+              "20px",
+              {
+                "lineHeight": "24px",
+                "fontWeight": "700"
+              }
+            ],
+            "headline-md": [
+              "24px",
+              {
+                "lineHeight": "32px",
+                "fontWeight": "600"
+              }
+            ]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    
+    @keyframes pulse-ring {
+      0% {
+        transform: scale(0.92);
+        opacity: 0.35;
+      }
+      
+      50% {
+        transform: scale(1.04);
+        opacity: 0.65;
+      }
+      
+      100% {
+        transform: scale(0.92);
+        opacity: 0.35;
+      }
+    }
+    
+    .animate-pulse-halo {
+      animation: pulse-ring 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-background min-h-screen flex flex-col justify-between selection:bg-primary-container selection:text-white relative overflow-x-hidden font-body-md text-body-md">
+  <!-- Main Centered Content Canvas -->
+  <main class="relative z-10 flex-1 flex items-center justify-center px-4 sm:px-6 pt-28 pb-12 w-full max-w-xl mx-auto">
+    <!-- Centered Card Container (Glassmorphic dark card inspired by design system & reference) -->
+    <div class="w-full bg-surface-container/90 backdrop-blur-2xl rounded-2xl p-6 sm:p-10 border border-white/10 shadow-[0_24px_50px_rgba(0,0,0,0.6)] flex flex-col items-center text-center relative overflow-hidden">
+
+      <!-- Concentric Rings / Success Graphic Anchor (inspired by reference layout) -->
+      <div class="relative w-36 h-36 sm:w-40 sm:h-40 flex items-center justify-center my-3 sm:my-5">
+        <!-- Outer Halo Ring 1 -->
+        <div class="absolute inset-0 rounded-full border border-primary-container/20 bg-primary-container/[0.04] animate-pulse-halo"></div>
+        <!-- Concentric Ring 2 -->
+        <div class="absolute inset-3 rounded-full border border-primary-container/40 bg-primary-container/[0.08] shadow-[0_0_30px_rgba(255,92,0,0.15)]"></div>
+        <!-- Inner Core Circular Badge -->
+        <div class="relative z-10 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-primary-container flex items-center justify-center shadow-[0_0_24px_rgba(255,92,0,0.5)] transform transition-transform hover:scale-105 duration-300">
+          <span class="material-symbols-outlined text-white text-4xl sm:text-5xl font-bold" style="font-variation-settings: 'FILL' 1, 'wght' 700;">check</span>
+        </div>
+      </div>
+      <!-- Main Headline -->
+      <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface font-extrabold tracking-tight mt-3">
+        Account Created Successfully!
+      </h1>
+      <!-- Body Copy -->
+      <p class="font-body-md text-body-md text-on-surface-variant max-w-md mt-3 leading-relaxed">
+        Welcome to Neime. Login to your account to start discovering, Streaming, and supporting your favourite local artists.
+      </p>
+      <!-- Primary Action Button: Go to Login -->
+      <a class="w-full group relative flex items-center justify-center gap-3 py-4 px-6 rounded-xl bg-primary-container text-white font-headline-md text-body-lg font-bold shadow-[0_4px_24px_rgba(255,92,0,0.4)] hover:shadow-[0_8px_32px_rgba(255,92,0,0.6)] hover:brightness-110 active:scale-[0.98] transition-all duration-200" href="../login">
+        <span>Go to Login</span>
+        <span class="material-symbols-outlined text-white group-hover:translate-x-1 transition-transform duration-200" style="font-variation-settings: 'wght' 600;">arrow_forward</span>
+      </a>
+      <!-- Quick Support / Secondary link -->
+      <div class="mt-5 text-center">
+        <span class="font-label-sm text-label-sm text-outline">Need assistance with your setup? </span>
+        <a class="font-label-sm text-label-sm text-primary hover:underline transition-all" href="https://wa.me/2348022839391">Contact Support</a>
+      </div>
+    </div>
+  </main>
+  <!-- Minimal Footer with subtle copyright text -->
+  <footer class="relative z-10 w-full py-6 text-center">
+    <p class="font-label-sm text-label-sm text-outline tracking-wider">
+      © 2025 Neime Music Ltd. All rights reserved.
+    </p>
+  </footer>
+</body>
+
+</html>
