@@ -6,11 +6,13 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title>Search - Neime</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://js.paystack.co/v1/inline.js"></script>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
-    <script id="tailwind-config">
+  <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
       theme: {
@@ -164,6 +166,7 @@
       </div>
     </div>
   </header>
+  
   <!-- Main Content Canvas -->
   <main class="flex-1 w-full max-w-7xl mx-auto px-container-padding-mobile md:px-container-padding-desktop pt-8 md:pt-28 flex flex-col gap-section-gap">
     <!-- Search Header & Input -->
@@ -173,113 +176,31 @@
         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
           <span class="material-symbols-outlined text-on-surface-variant group-focus-within:text-secondary-container transition-colors">search</span>
         </div>
-        <input class="w-full bg-[#1A1A1E] text-on-surface font-body-md text-body-md rounded-xl py-4 pl-12 pr-4 border border-white/10 outline-none transition-all duration-300 input-glow placeholder:text-on-surface-variant/50" placeholder="Artists, songs, genres, or moods..." type="text" />
+        <input class="w-full bg-[#1A1A1E] text-on-surface font-body-md text-body-md rounded-xl py-4 pl-12 pr-4 border border-white/10 outline-none transition-all duration-300 input-glow placeholder:text-on-surface-variant/50" id="search-input" placeholder="Artists, songs, genres, or moods..." type="text" />
       </div>
     </section>
-    <!-- Recent Searches & Trending (Asymmetric Layout) -->
-    <section class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
-      <!-- Recent (Takes 1 col) -->
-      <div class="flex flex-col gap-4">
-        <h2 class="font-headline-md text-headline-md text-on-background text-lg">Recent Searches</h2>
-        <div class="flex flex-col gap-2">
-          <button class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container-high transition-colors text-left group">
-            <div class="flex items-center gap-3">
-              <span class="material-symbols-outlined text-on-surface-variant text-sm">history</span>
-              <span class="font-body-md text-body-md text-on-background group-hover:text-primary transition-colors">Afrobeats 2024</span>
-            </div>
-            <span class="material-symbols-outlined text-on-surface-variant text-sm opacity-0 group-hover:opacity-100 transition-opacity">close</span>
-          </button>
-          <button class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container-high transition-colors text-left group">
-            <div class="flex items-center gap-3">
-              <span class="material-symbols-outlined text-on-surface-variant text-sm">history</span>
-              <span class="font-body-md text-body-md text-on-background group-hover:text-primary transition-colors">Burna Boy Live</span>
-            </div>
-            <span class="material-symbols-outlined text-on-surface-variant text-sm opacity-0 group-hover:opacity-100 transition-opacity">close</span>
-          </button>
-          <button class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container-high transition-colors text-left group">
-            <div class="flex items-center gap-3">
-              <span class="material-symbols-outlined text-on-surface-variant text-sm">history</span>
-              <span class="font-body-md text-body-md text-on-background group-hover:text-primary transition-colors">Lagos Nights Playlist</span>
-            </div>
-            <span class="material-symbols-outlined text-on-surface-variant text-sm opacity-0 group-hover:opacity-100 transition-opacity">close</span>
-          </button>
-        </div>
+    <!-- Search Results -->
+    <section class="flex flex-col gap-8">
+      <div id="idle-state" class="text-center py-16">
+        <span class="material-symbols-outlined text-5xl text-on-surface-variant/40 mb-3">search</span>
+        <p class="font-body-md text-body-md text-on-surface-variant">Search for a song or artist to get started.</p>
       </div>
-      <!-- Trending Tags (Takes 2 cols) -->
-      <div class="lg:col-span-2 flex flex-col gap-4">
-        <div class="flex items-center gap-2">
-          <span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
-          <h2 class="font-headline-md text-headline-md text-on-background text-lg">Trending Now</h2>
-        </div>
-        <div class="flex flex-wrap gap-3">
-          <a class="px-4 py-2 rounded-full border border-primary-container/30 bg-primary-container/10 text-primary-container font-label-sm text-label-sm hover:bg-primary-container hover:text-on-primary-container transition-all hover:shadow-[0_0_15px_rgba(255,92,0,0.3)]" href="#">
-            #Amapiano
-          </a>
-          <a class="px-4 py-2 rounded-full border border-white/10 bg-surface-container-high text-on-background font-label-sm text-label-sm hover:border-secondary-container hover:text-secondary-container transition-all" href="#">
-            #NewRelease
-          </a>
-          <a class="px-4 py-2 rounded-full border border-white/10 bg-surface-container-high text-on-background font-label-sm text-label-sm hover:border-secondary-container hover:text-secondary-container transition-all" href="#">
-            #O2Arena
-          </a>
-          <a class="px-4 py-2 rounded-full border border-white/10 bg-surface-container-high text-on-background font-label-sm text-label-sm hover:border-secondary-container hover:text-secondary-container transition-all" href="#">
-            #AlteCruise
-          </a>
-          <a class="px-4 py-2 rounded-full border border-white/10 bg-surface-container-high text-on-background font-label-sm text-label-sm hover:border-secondary-container hover:text-secondary-container transition-all" href="#">
-            #StreetHop
-          </a>
-        </div>
+      
+      <div class="hidden text-center py-16" id="no-results-state">
+        <p class="font-body-md text-body-md text-on-surface-variant">No results found.</p>
+      </div>
+      
+      <div class="hidden flex-col gap-4" id="songs-results-section">
+        <h2 class="font-headline-md text-headline-md text-on-background text-lg">Songs</h2>
+        <div class="flex flex-col gap-2" id="songs-results-list"></div>
+      </div>
+      
+      <div class="hidden flex-col gap-4" id="artists-results-section">
+        <h2 class="font-headline-md text-headline-md text-on-background text-lg">Artists</h2>
+        <div class="flex flex-col gap-2" id="artists-results-list"></div>
       </div>
     </section>
-    <!-- Browse Categories (Bento Grid Style) -->
-    <section class="flex flex-col gap-6">
-      <h2 class="font-headline-md text-headline-md text-on-background">Browse All</h2>
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        <!-- Category Card 1 (Large) -->
-        <a class="col-span-2 row-span-2 rounded-xl overflow-hidden relative group aspect-square md:aspect-auto" href="#">
-          <div class="absolute inset-0 bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-700" data-alt="Vibrant abstract pattern inspired by traditional Nigerian Adire textiles, using intense primary colors like sunset orange and deep indigo, with a slight digital glitch effect. High contrast, modern aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCYgSRMvpiHiZJsXUIlzMjdEvdejjb4AxP9PfnENWPXCK9TSEA2RLGqfY4qDKjXVNCd6qNz-wWzxKkh8E7llhYaWKAmNPzwJJSoqVKh03TdJLgC9bBHGfoIcsTQLSw5XBoj_NEQUAoI0yOobQxkoY0mVx3tT5KLr_l_iE8FjLKjMgJJVieYUBHqanKqnjl9dKtPh-7_EwUMq8MltvgHh0jqJY7hUYm5qHDGBlF6vpi62cWpCZt0qVGa')"></div>
-          <div class="absolute inset-0 bg-gradient-to-t from-[#0F0F12] to-transparent/20"></div>
-          <div class="absolute bottom-0 left-0 p-4 w-full">
-            <h3 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white font-bold drop-shadow-md">Afrobeats</h3>
-            <p class="font-body-md text-body-md text-white/80 mt-1">The heartbeat of the culture</p>
-          </div>
-        </a>
-        <!-- Category Card 2 -->
-        <a class="rounded-xl overflow-hidden relative group aspect-square" href="#">
-          <div class="absolute inset-0 bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-700" data-alt="A moody, low-light shot of a DJ turntable setup in a dark club environment. Illuminated only by electric teal and purple neon lights. Focus on the vinyl record spinning." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAluFZO5Qm_24bIQiFoF7bNd1w7oQuswlAHCIc_rNeOzrxZ0xYrB-N6EZwrJp9USJu6kU0Es3Hd3MMBE0j7U3ILjLkTcXEuDoQ0iTHcz7VdbHTCBntQj36c1peB45AIfnO5ZqwY784O0RH_DEsJZhOTsEVWGh6c_JKNQ4J7HcP-wWgp-GzgiTYOEKW_LyaqzLTu6_jHncBnOk_VWcCcZ1IqmbOm7L2iK7DQRafKDjSQu0qztgEaZv92')"></div>
-          <div class="absolute inset-0 bg-gradient-to-t from-[#0F0F12] to-transparent/20"></div>
-          <div class="absolute bottom-0 left-0 p-3">
-            <h3 class="font-headline-md text-headline-md text-white font-bold text-lg">Amapiano</h3>
-          </div>
-        </a>
-        <!-- Category Card 3 -->
-        <a class="rounded-xl overflow-hidden relative group aspect-square" href="#">
-          <div class="absolute inset-0 bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-700" data-alt="Minimalist digital art featuring smooth, flowing 3D liquid metal shapes reflecting sunset orange and deep red hues. High end, luxurious feel against a dark background." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDmZB32srLmx6NCdAcE_kx_OSRkq-lJc8UW2G5aIsCRzt-W_IDno-szzyf4wYYzVgtzKsO4rBPwVwS1cJnzPg5nr8ydgb19GWNqaq42Rv5PFfxtdFQgxNOwHE_EnGRxd8GQ5zKE455U3mJFuy8xtGLwQGvvoPKZ9HgJsCq_5YDW5gLo2rgcOBsK2gOQDcFwO_Wc3wFe0e32AFxvs3dKn0EKy1vkv_LHtmVVVDf323dkdb-JBgI_n9Hn')"></div>
-          <div class="absolute inset-0 bg-gradient-to-t from-[#0F0F12] to-transparent/20"></div>
-          <div class="absolute bottom-0 left-0 p-3">
-            <h3 class="font-headline-md text-headline-md text-white font-bold text-lg">Alte</h3>
-          </div>
-        </a>
-        <!-- Category Card 4 -->
-        <a class="rounded-xl overflow-hidden relative group aspect-square" href="#">
-          <div class="absolute inset-0 bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-700" data-alt="A crowd at a concert silhouetted against an intensely bright, glowing yellow and orange stage light. High energy, dynamic, slightly blurred to show motion." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAaQVDJL_-UV3SgswP0fWTBuKTsnHcBe0DqKHaCvhYQUlEOu2JtU_DJ8hBgtv-NmIucJfX8WpzfU_44x1-eO8wCs6NP-4FjUwfxtu12TxROaD1IzhhLI-aTW5Z5WlrC0qbA35CwRuqG8OdGBlbejy84c-6kuOqKxGIv2n1rAieahikMOqW9EPk-WG47NTerA3WaIV1v9IF_1y00s010UBlRu3EEJt0vyJ8BGFbObeOJXhY_RDgvehlb')"></div>
-          <div class="absolute inset-0 bg-gradient-to-t from-[#0F0F12] to-transparent/20"></div>
-          <div class="absolute bottom-0 left-0 p-3">
-            <h3 class="font-headline-md text-headline-md text-white font-bold text-lg">Live Shows</h3>
-          </div>
-        </a>
-        <!-- Category Card 5 -->
-        <a class="col-span-2 md:col-span-1 rounded-xl overflow-hidden relative group aspect-[2/1] md:aspect-square" href="#">
-          <div class="absolute inset-0 bg-surface-container-high w-full h-full flex items-center justify-center p-4">
-            <!-- Abstract pattern via CSS -->
-            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0); background-size: 16px 16px;"></div>
-            <div class="relative z-10 text-center">
-              <span class="material-symbols-outlined text-secondary-container mb-2 text-3xl">mood</span>
-              <h3 class="font-headline-md text-headline-md text-white font-bold text-lg">Moods</h3>
-            </div>
-          </div>
-        </a>
-      </div>
-    </section>
+    
   </main>
   
   <nav class="md:hidden bg-surface-dim/90 backdrop-blur-2xl fixed bottom-0 w-full z-50 pb-safe bg-surface-container-highest/50 border-t border-white/5 shadow-[0_-4px_24px_rgba(0,0,0,0.4)] flex justify-around items-center h-20 px-2">
@@ -300,6 +221,209 @@
       <span class="font-label-sm text-label-sm mt-1">Account</span>
     </a>
   </nav>
+  
+  <!-- templates -->
+  <template id="search-song-template">
+    <div class="flex items-center gap-4 p-3 rounded-lg hover:bg-surface-container-high transition-colors group cursor-pointer border border-transparent hover:border-white/5 search-song-card">
+      <div class="w-14 h-14 rounded-lg bg-surface-container-highest overflow-hidden shrink-0 relative">
+        <img alt="Cover" class="w-full h-full object-cover ss-cover" src="" />
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <span class="material-symbols-outlined text-white text-[20px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+        </div>
+      </div>
+      <div class="flex-1 min-w-0">
+        <h4 class="font-body-lg text-body-lg text-on-surface truncate ss-title">Title</h4>
+        <p class="font-body-md text-body-md text-on-surface-variant truncate ss-artist">Artist</p>
+      </div>
+      <div class="bg-primary/10 text-primary-fixed-dim px-2 py-1 rounded-full font-label-sm text-label-sm border border-primary/20 shrink-0 ss-price">₦0</div>
+    </div>
+  </template>
+  
+  <template id="search-artist-template">
+    <div class="flex items-center gap-4 p-3 rounded-lg hover:bg-surface-container-high transition-colors cursor-pointer border border-transparent hover:border-white/5 search-artist-card">
+      <div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0">
+        <span class="material-symbols-outlined text-on-surface-variant">mic</span>
+      </div>
+      <div class="flex-1 min-w-0">
+        <h4 class="font-body-lg text-body-lg text-on-surface truncate sa-name">Artist</h4>
+        <p class="font-label-sm text-label-sm text-on-surface-variant sa-count">0 tracks</p>
+      </div>
+    </div>
+  </template>
+  
+  <div class="hidden fixed inset-0 z-[70] flex items-center justify-center p-4" id="buy-modal">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="buy-modal-backdrop"></div>
+    <div class="relative w-full max-w-sm bg-surface-container-low border border-white/10 rounded-xl p-6 shadow-2xl text-center">
+      <img class="w-24 h-24 rounded-lg object-cover mx-auto mb-4" id="buy-modal-cover" src="" />
+      <h3 class="font-headline-md text-headline-md text-on-surface mb-1" id="buy-modal-title">Song Title</h3>
+      <p class="font-body-md text-body-md text-on-surface-variant mb-6" id="buy-modal-artist">Artist</p>
+      <p class="font-price-display text-price-display text-primary mb-6" id="buy-modal-price">₦0</p>
+      <button class="w-full bg-primary-container text-white font-headline-md text-headline-md !text-[16px] py-3 rounded-full hover:opacity-90 active:scale-95 transition-all mb-3" id="buy-modal-pay-btn" type="button">
+        Pay with Paystack
+      </button>
+      <button class="w-full text-on-surface-variant font-body-md text-body-md py-2" id="buy-modal-cancel-btn" type="button">
+        Cancel
+      </button>
+    </div>
+  </div>
+  <script src="../js/config.js"></script>
+  <script src="../js/player.js"></script>
+  <script>
+    let currentUser = null;
+    let songBeingBought = null;
+    let searchDebounce;
+    
+    (async function initSearch() {
+      const { data: { session } } = await window.sb.auth.getSession();
+      if (!session) { window.location.href = 'login.html'; return; }
+      currentUser = session.user;
+    })();
+    
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('input', () => {
+      clearTimeout(searchDebounce);
+      const q = searchInput.value.trim();
+      
+      if (!q) {
+        showState('idle');
+        return;
+      }
+      searchDebounce = setTimeout(() => runSearch(q), 300);
+    });
+    
+    function showState(state) {
+      document.getElementById('idle-state').classList.toggle('hidden', state !== 'idle');
+      document.getElementById('no-results-state').classList.toggle('hidden', state !== 'empty');
+      document.getElementById('songs-results-section').classList.toggle('hidden', true);
+      document.getElementById('artists-results-section').classList.toggle('hidden', true);
+    }
+    
+    async function runSearch(query) {
+      // Match song titles OR artist names in one query
+      const { data: songs, error } = await window.sb
+        .from('songs')
+        .select('*')
+        .or(`title.ilike.%${query}%,artist_name.ilike.%${query}%`)
+        .order('created_at', { ascending: false })
+        .limit(30);
+      
+      if (error) { console.warn(error.message); return; }
+      
+      if (!songs || songs.length === 0) {
+        showState('empty');
+        return;
+      }
+      
+      renderSongResults(songs, query);
+      renderArtistResults(songs, query);
+      
+      document.getElementById('idle-state').classList.add('hidden');
+      document.getElementById('no-results-state').classList.add('hidden');
+    }
+    
+    function renderSongResults(songs, query) {
+      const matches = songs.filter(s => s.title.toLowerCase().includes(query.toLowerCase()));
+      const section = document.getElementById('songs-results-section');
+      const list = document.getElementById('songs-results-list');
+      const template = document.getElementById('search-song-template');
+      
+      section.classList.toggle('hidden', matches.length === 0);
+      list.innerHTML = '';
+      
+      matches.forEach(song => {
+        const node = template.content.cloneNode(true);
+        node.querySelector('.ss-cover').src = song.cover_url || '';
+        node.querySelector('.ss-title').textContent = song.title;
+        node.querySelector('.ss-artist').textContent = song.feature ? `${song.artist_name} ft. ${song.feature}` : song.artist_name;
+        node.querySelector('.ss-price').textContent = `₦${song.price}`;
+        node.querySelector('.search-song-card').addEventListener('click', () => handlePlayClick(song));
+        list.appendChild(node);
+      });
+    }
+    
+    function renderArtistResults(songs, query) {
+      const artistMap = new Map();
+      songs
+        .filter(s => s.artist_name.toLowerCase().includes(query.toLowerCase()))
+        .forEach(s => {
+          if (!artistMap.has(s.artist_name)) artistMap.set(s.artist_name, 0);
+          artistMap.set(s.artist_name, artistMap.get(s.artist_name) + 1);
+        });
+      
+      const section = document.getElementById('artists-results-section');
+      const list = document.getElementById('artists-results-list');
+      const template = document.getElementById('search-artist-template');
+      
+      section.classList.toggle('hidden', artistMap.size === 0);
+      list.innerHTML = '';
+      
+      artistMap.forEach((count, name) => {
+        const node = template.content.cloneNode(true);
+        node.querySelector('.sa-name').textContent = name;
+        node.querySelector('.sa-count').textContent = `${count} track${count > 1 ? 's' : ''}`;
+        node.querySelector('.search-artist-card').addEventListener('click', () => {
+          searchInput.value = name;
+          runSearch(name);
+        });
+        list.appendChild(node);
+      });
+    }
+    
+    // ── Purchase gate (same logic as home.html) ──
+    async function hasPurchased(songId) {
+      const { data } = await window.sb
+        .from('purchases')
+        .select('id')
+        .eq('buyer_id', currentUser.id)
+        .eq('song_id', songId)
+        .maybeSingle();
+      return !!data;
+    }
+    
+    async function handlePlayClick(song) {
+      const owned = await hasPurchased(song.id);
+      owned ? window.playSong(song) : openBuyModal(song);
+    }
+    
+    const buyModal = document.getElementById('buy-modal');
+    
+    function openBuyModal(song) {
+      songBeingBought = song;
+      document.getElementById('buy-modal-cover').src = song.cover_url || '';
+      document.getElementById('buy-modal-title').textContent = song.title;
+      document.getElementById('buy-modal-artist').textContent = song.artist_name;
+      document.getElementById('buy-modal-price').textContent = `₦${song.price}`;
+      buyModal.classList.remove('hidden');
+    }
+    document.getElementById('buy-modal-cancel-btn').addEventListener('click', () => buyModal.classList.add('hidden'));
+    document.getElementById('buy-modal-backdrop').addEventListener('click', () => buyModal.classList.add('hidden'));
+    
+    document.getElementById('buy-modal-pay-btn').addEventListener('click', () => {
+      const song = songBeingBought;
+      const handler = PaystackPop.setup({
+        key: window.PAYSTACK_PUBLIC_KEY,
+        email: currentUser.email,
+        amount: Math.round(song.price * 100),
+        currency: 'NGN',
+        ref: `neime_${song.id}_${Date.now()}`,
+        callback: (response) => verifyAndUnlock(response.reference, song),
+        onClose: () => {}
+      });
+      handler.openIframe();
+    });
+    
+    async function verifyAndUnlock(reference, song) {
+      const { data, error } = await window.sb.functions.invoke('verify-paystack', {
+        body: { reference, song_id: song.id, buyer_id: currentUser.id }
+      });
+      if (error || !data?.success) {
+        alert('Payment verification failed: ' + (error?.message || data?.error || 'Unknown error'));
+        return;
+      }
+      buyModal.classList.add('hidden');
+      window.playSong(song);
+    }
+  </script>
 </body>
 
 </html>
