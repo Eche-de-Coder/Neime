@@ -225,6 +225,37 @@
     </div>
   </div>
   
+  <!-- withdraw history modal -->
+  <div class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4" id="withdrawal-history-modal">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="withdrawal-history-backdrop"></div>
+    <div class="relative w-full max-w-md bg-surface-container-low border border-white/10 rounded-xl p-6 shadow-2xl max-h-[85vh] overflow-y-auto">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="font-headline-md text-headline-md text-on-surface">Withdrawal History</h3>
+        <button class="text-on-surface-variant hover:text-on-surface transition-colors" id="withdrawal-history-close" type="button">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <p class="font-label-sm text-label-sm text-on-surface-variant mb-6">Total Withdrawn: <strong class="text-primary" id="stat-total-withdrawn">₦0</strong></p>
+      <div class="flex flex-col gap-3.5" id="withdrawal-history-modal-list"></div>
+      <p class="hidden font-body-md text-body-md text-on-surface-variant text-center py-8" id="withdrawal-history-empty">No withdrawals yet.</p>
+    </div>
+  </div>
+  
+  <!-- sales history modal -->
+  <div class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4" id="sales-history-modal">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="sales-history-backdrop"></div>
+    <div class="relative w-full max-w-md bg-surface-container-low border border-white/10 rounded-xl p-6 shadow-2xl max-h-[85vh] overflow-y-auto">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="font-headline-md text-headline-md text-on-surface">Sales History</h3>
+        <button class="text-on-surface-variant hover:text-on-surface transition-colors" id="sales-history-close" type="button">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="flex flex-col gap-3.5" id="sales-history-modal-list"></div>
+      <p class="hidden font-body-md text-body-md text-on-surface-variant text-center py-8" id="sales-history-empty">No sales yet.</p>
+    </div>
+  </div>
+  
   <!-- Upload Music Modal -->
   <div class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4" id="upload-modal">
     <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="upload-modal-backdrop"></div>
@@ -373,16 +404,18 @@
         <div class="flex flex-col justify-between h-full relative z-10 gap-8">
           <div class="flex justify-between items-start">
             <div class="flex flex-col gap-1"><span class="font-label-sm text-label-sm text-on-surface-variant/80 tracking-wide">Current balance</span>
-              <h2 class="font-display-xl text-display-xl font-extrabold text-primary tracking-tight mt-1">₦4,250,000</h2>
+              <h2 class="font-display-xl text-display-xl text-primary mt-2 skeleton" id="wallet-balance">₦0</h2>
             </div>
             <div class="w-14 h-14 rounded-2xl bg-primary-container/15 border border-primary-container/30 flex items-center justify-center text-primary shadow-[0_0_15px_rgba(255,92,0,0.25)] flex-shrink-0"><span class="material-symbols-outlined text-[28px]">account_balance_wallet</span></div>
           </div>
           <div class="grid grid-cols-3 border-t border-white/10 pt-6 gap-2">
-            <div class="flex flex-col pr-4"><span class="font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant/70 mb-1">TOTAL EARNED</span><span class="font-headline text-headline font-bold text-on-background">₦4,250,000</span></div>
-            <div class="flex flex-col px-4 border-l border-white/10"><span class="font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant/70 mb-1">TOTAL STREAMS</span><span class="font-headline text-headline font-bold text-on-background">1,240</span></div>
-            <div class="flex flex-col pl-4 border-l border-white/10"><span class="font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant/70 mb-1">THIS MONTH</span><span class="font-headline text-headline font-bold text-primary">₦680,000</span></div>
+            <div class="flex flex-col pr-4"><span class="font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant/70 mb-1">TOTAL EARNED</span><span class="font-headline text-headline font-bold text-on-background" id="stat-total-earned">₦0</span></div>
+            <div class="flex flex-col px-4 border-l border-white/10"><span class="font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant/70 mb-1">TOTAL STREAMS</span><span class="font-headline text-headline font-bold text-on-background" id="stat-total-streams-hero"></span></div>
+            <div class="flex flex-col pl-4 border-l border-white/10"><span class="font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant/70 mb-1">THIS MONTH</span><span class="font-headline text-headline font-bold text-primary" id="stat-this-month">₦0</span></div>
           </div>
         </div>
+      </div>
+      <div id="withdrawals-hitory" class="flex flex-col">
       </div>
       <!-- Stats Stack -->
       <div class="md:col-span-4 flex flex-col gap-gutter">
@@ -392,13 +425,13 @@
           </div>
           <div class="flex flex-col gap-2.5">
             <button class="open-withdraw-btn w-full flex items-center justify-center gap-2 bg-primary text-on-primary font-headline-md text-[15px] font-bold py-3 px-4 rounded-full hover:opacity-90 active:scale-95 transition-all shadow-[0_0_15px_rgba(255,181,154,0.3)]"><span class="material-symbols-outlined text-[20px]">payments</span> Withdraw</button>
-            <button class="w-full flex items-center justify-center gap-2 bg-surface border border-white/10 text-on-surface-variant hover:text-on-background font-body-md text-[14px] py-2.5 px-4 rounded-full hover:bg-surface-container-high active:scale-95 transition-all"><span class="material-symbols-outlined text-[18px]">history</span> History</button>
+            <button id="open-withdrawal-history-btn" class="w-full flex items-center justify-center gap-2 bg-surface border border-white/10 text-on-surface-variant hover:text-on-background font-body-md text-[14px] py-2.5 px-4 rounded-full hover:bg-surface-container-high active:scale-95 transition-all"><span class="material-symbols-outlined text-[18px]">history</span> History</button>
           </div>
         </div>
         <div class="bg-surface-container-low rounded-xl p-5 border border-white/5 flex items-center justify-between hover:border-white/10 transition-colors">
           <div class="flex flex-col">
             <span class="font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant mb-0.5">TOTAL STREAMS</span>
-            <span class="font-headline-md text-headline-md font-bold text-on-background">1.2M
+            <span class="font-headline-md text-headline-md font-bold text-on-background" id="stat-total-streams-stack">
               <span class="font-body-md text-[13px] text-on-surface-variant font-normal">plays</span>
             </span>
           </div>
@@ -410,6 +443,23 @@
         </div>
       </div>
     </section>
+    
+    
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-gutter w-full">
+      <div class="glass-panel rounded-xl p-6 flex flex-col justify-between hover:border-white/20 transition-all shadow-sm">
+        <div class="flex items-center justify-between pb-4 border-b border-white/10">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[20px]">trending_up</span></div>
+            <div>
+              <h3 class="font-headline-md text-[18px] font-bold text-on-background m-0">Sales History</h3>
+              <span class="font-label-sm text-[11px] text-on-surface-variant/70">30 Days: <strong class="text-primary font-medium" id="stat-earning-30d">₦0</strong> • <span id="stat-sales-30d">0</span> Sales</span>
+            </div>
+          </div><button id="sales-view-all-btn" class="font-label-sm text-label-sm text-primary hover:text-on-background flex items-center gap-1 transition-colors">View All <span class="material-symbols-outlined text-[16px]">chevron_right</span></button>
+        </div>
+        <div class="flex flex-col gap-3.5 py-4" id="sales-history-list"></div>
+      </div>
+    </section>
+    
     
     <!-- Manage Catalog -->
     <section class="w-full">
@@ -460,8 +510,9 @@
     </section>
   </main>
   
+  
   <nav class="md:hidden bg-surface-dim/90 backdrop-blur-2xl fixed bottom-0 w-full z-50 pb-safe bg-surface-container-highest/50 border-t border-white/5 shadow-[0_-4px_24px_rgba(0,0,0,0.4)] flex justify-around items-center h-20 px-2">
-    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../homepage">
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="#">
       <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">home</span>
       <span class="font-label-sm text-label-sm mt-1">Home</span>
     </a>
@@ -473,7 +524,7 @@
       <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">library_music</span>
       <span class="font-label-sm text-label-sm mt-1">My Music</span>
     </a>
-    <a class="flex flex-col items-center justify-center text-primary-container font-bold drop-shadow-[0_0_8px_rgba(255,92,0,0.3)] hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+    <a class="flex flex-col items-center justify-center text-primary-container font-bold drop-shadow-[0_0_8px_rgba(255,92,0,0.3)] hover:text-primary transition-colors active:scale-90 duration-200" href="../account">
       <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
       <span class="font-label-sm text-label-sm mt-1">Account</span>
     </a>
@@ -489,6 +540,9 @@
             <p class="font-label-sm text-label-sm text-on-surface-variant song-feat"></p>
           </div>
           <div>
+            <button class="text-on-surface-variant hover:text-primary transition-colors p-2 song-share-btn" type="button">
+              <span class="material-symbols-outlined text-[20px]">share</span>
+            </button>
             <button class="text-on-surface-variant hover:text-primary transition-colors p-2 song-edit-btn" type="button">
               <span class="material-symbols-outlined text-[20px]">edit</span>
             </button>
@@ -511,12 +565,48 @@
     </div>
   </template>
   
+  <template id="withdrawal-history-row-template">
+    <div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low/60 border border-white/5 hover:border-white/10 transition-colors">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+          <span class="material-symbols-outlined text-[18px] wh-icon">account_balance</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-headline-md text-[14px] font-bold text-on-background wh-bank">Bank</span>
+          <span class="font-label-sm text-[11px] text-on-surface-variant/70 wh-date">Date</span>
+        </div>
+      </div>
+      <div class="flex flex-col items-end gap-1">
+        <span class="font-price-display text-[15px] font-bold text-on-background wh-amount">₦0</span>
+        <span class="font-label-sm text-[10px] px-2 py-0.5 rounded-full font-medium tracking-wide uppercase border wh-status">pending</span>
+      </div>
+    </div>
+  </template>
+  
+  <template id="sales-history-row-template">
+    <div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low/60 border border-white/5 hover:border-white/10 transition-colors">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+          <span class="material-symbols-outlined text-[18px]">music_note</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-headline-md text-[14px] font-bold text-on-background sh-title">Title</span>
+          <span class="font-label-sm text-[11px] text-on-surface-variant/70 sh-meta">Buyer</span>
+        </div>
+      </div>
+      <div class="flex flex-col items-end gap-1">
+        <span class="font-price-display text-[15px] font-bold text-primary sh-earned">₦0</span>
+        <span class="font-label-sm text-[11px] text-on-surface-variant/70 line-through sh-original">₦0</span>
+      </div>
+    </div>
+  </template>
+  
   <script src="../js/config.js"></script>
   <script src="../js/player.js"></script>
   <script>
-    
     let currentArtistId = null;
     let allSongs = [];
+    let currentWalletBalance = 0;
     
     function formatJoinDate(isoString) {
       const date = new Date(isoString);
@@ -551,6 +641,9 @@
       
       prefillDetailsForm(artist);
       loadSongs();
+      loadWallet();
+      loadEarningsStats();
+      loadSalesHistory(user.id);
       
       const displayName = artist?.artist_name || [artist?.first_name, artist?.last_name].filter(Boolean).join(' ') ||
         user.user_metadata?.artist_name ||
@@ -576,9 +669,6 @@
     
     
     
-    // ── Prefill + save Artist Details ──
-    // Call this from inside your existing loadArtist() function, right after
-    // you fetch `artist` from the `artists` table — reuse that same row.
     function prefillDetailsForm(artist) {
       document.getElementById('edit-first-name').value = artist?.first_name || '';
       document.getElementById('edit-last-name').value = artist?.last_name || '';
@@ -732,11 +822,17 @@
         node.querySelector('.song-date').textContent = new Date(song.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
         node.querySelector('.song-price').textContent = `₦${song.price}`;
         
+        node.querySelector('.song-share-btn').addEventListener('click', () => copyShareLink(song));
         node.querySelector('.song-edit-btn').addEventListener('click', () => openEditModal(song));
         node.querySelector('.song-delete-btn').addEventListener('click', () => deleteSong(song));
         
         list.appendChild(node);
       });
+      updateStreamStats()
+    }
+    
+    function copyShareLink(song) {
+      navigator.clipboard.writeText(`https://neime.com.ng/${song.share_code}`);
     }
     
     // Search filter (client-side, over the already-loaded list)
@@ -867,10 +963,7 @@
     }
     
     function openWithdrawModal() {
-      // Reuses the same figure shown in your Revenue card.
-      // Swap this for a real wallet-balance query once you have a ledger
-      // (e.g. sum of purchase earnings minus completed withdrawals).
-      document.getElementById('withdraw-balance').textContent = '₦4,250,000.00';
+      document.getElementById('withdraw-balance').textContent = `₦${currentWalletBalance.toLocaleString()}.00`;
       document.getElementById('withdraw-form').reset();
       withdrawAccountNameInput.value = '';
       withdrawAccountVerifiedIcon.classList.add('hidden');
@@ -934,13 +1027,17 @@
         showWithdrawStatus('Minimum withdrawal is ₦1,000.', true);
         return;
       }
+      if (amount > currentWalletBalance) {
+        showWithdrawStatus('Amount exceeds your available balance.', true);
+        return;
+      }
       
       const bankOption = withdrawBankSelect.options[withdrawBankSelect.selectedIndex];
       
       btn.disabled = true;
       label.textContent = 'Sending…';
       
-      const { error } = await window.sb.from('withdrawals').insert({
+      /**const { error } = await window.sb.from('withdrawals').insert({
         artist_id: session.user.id,
         amount,
         bank_name: bankOption.textContent,
@@ -961,8 +1058,207 @@
       setTimeout(() => {
         withdrawModal.classList.add('hidden');
         label.textContent = 'Request Withdrawal';
+      }, 1500);**/
+      const { error } = await window.sb.rpc('request_withdrawal', {
+        p_amount: amount,
+        p_bank_name: bankOption.textContent,
+        p_bank_code: bankOption.value,
+        p_account_number: withdrawAccountNumberInput.value.trim(),
+        p_account_name: withdrawAccountNameInput.value
+      });
+      
+      btn.disabled = false;
+      
+      if (error) {
+        label.textContent = 'Request Withdrawal';
+        showWithdrawStatus(error.message, true);
+        return;
+      }
+      
+      currentWalletBalance -= amount;
+      document.getElementById('wallet-balance').textContent = `₦${currentWalletBalance.toLocaleString()}`;
+      
+      label.innerHTML = '<span class="material-symbols-outlined text-[18px]">check_circle</span> Sent!';
+      setTimeout(() => {
+        withdrawModal.classList.add('hidden');
+        label.textContent = 'Request Withdrawal';
+        loadWithdrawalHistory(currentArtistId);
       }, 1500);
     });
+    
+    
+    
+    
+    async function loadWallet() {
+      const { data: { session } } = await window.sb.auth.getSession();
+      if (!session) return;
+      
+      const { data: wallet, error } = await window.sb
+        .from('wallets')
+        .select('balance, total_earned')
+        .eq('artist_id', session.user.id)
+        .single();
+      
+      if (error) { console.warn(error.message); return; }
+      
+      currentWalletBalance = Number(wallet.balance);
+      
+      const balanceEl = document.getElementById('wallet-balance');
+      balanceEl.textContent = `₦${Number(wallet.balance).toLocaleString()}`;
+      balanceEl.classList.remove('skeleton');
+      
+      loadWithdrawalHistory(session.user.id);
+    }
+    
+    
+    
+    async function loadWithdrawalHistory(artistId) {
+      const { data: withdrawals } = await window.sb
+        .from('withdrawals')
+        .select('*')
+        .eq('artist_id', artistId)
+        .order('created_at', { ascending: false });
+      
+      const totalWithdrawn = (withdrawals || [])
+        .filter(w => w.status === 'completed')
+        .reduce((sum, w) => sum + Number(w.amount), 0);
+      document.getElementById('stat-total-withdrawn').textContent = `₦${totalWithdrawn.toLocaleString()}`;
+      
+      renderWithdrawalRows(withdrawals || [], document.getElementById('withdrawal-history-modal-list'));
+      document.getElementById('withdrawal-history-empty').classList.toggle('hidden', (withdrawals || []).length > 0);
+    }
+    
+    function renderWithdrawalRows(withdrawals, container) {
+      const template = document.getElementById('withdrawal-history-row-template');
+      container.innerHTML = '';
+      const statusStyles = {
+        pending: { icon: 'schedule', badge: 'bg-primary-container/20 text-primary-fixed border-primary-container/40' },
+        completed: { icon: 'account_balance', badge: 'bg-secondary-container/15 text-secondary-container border-secondary-container/30' },
+        rejected: { icon: 'cancel', badge: 'bg-error-container text-on-error-container border-error' }
+      };
+      withdrawals.forEach(w => {
+        const node = template.content.cloneNode(true);
+        const masked = w.account_number ? `•••${w.account_number.slice(-4)}` : '';
+        node.querySelector('.wh-bank').textContent = `${w.bank_name || 'Bank'} (${masked})`;
+        node.querySelector('.wh-date').textContent = formatDateTime(w.created_at);
+        node.querySelector('.wh-amount').textContent = `₦${Number(w.amount).toLocaleString()}`;
+        const statusEl = node.querySelector('.wh-status');
+        statusEl.textContent = w.status;
+        const style = statusStyles[w.status] || statusStyles.pending;
+        node.querySelector('.wh-icon').textContent = style.icon;
+        statusEl.className += ' ' + style.badge;
+        container.appendChild(node);
+      });
+    }
+    
+    document.getElementById('open-withdrawal-history-btn').addEventListener('click', () => {
+      document.getElementById('withdrawal-history-modal').classList.remove('hidden');
+    });
+    document.getElementById('withdrawal-history-close').addEventListener('click', () => {
+      document.getElementById('withdrawal-history-modal').classList.add('hidden');
+    });
+    document.getElementById('withdrawal-history-backdrop').addEventListener('click', () => {
+      document.getElementById('withdrawal-history-modal').classList.add('hidden');
+    });
+    
+    
+    async function loadSalesHistory(artistId) {
+      const { data: purchases, error } = await window.sb
+        .from('purchases')
+        .select('id, amount, artist_earnings, created_at, songs!inner(title, feature, artist_id)')
+        .eq('songs.artist_id', artistId)
+        .order('created_at', { ascending: false })
+        .limit(3);
+      if (error) { console.warn(error.message); return; }
+      renderSalesRows(purchases || [], document.getElementById('sales-history-list'));
+      const startOfWindow = new Date();
+      startOfWindow.setDate(startOfWindow.getDate() - 30);
+      
+      const { data: recentPurchases } = await window.sb
+        .from('purchases')
+        .select('artist_earnings, songs!inner(artist_id)')
+        .eq('songs.artist_id', artistId)
+        .gte('created_at', startOfWindow.toISOString());
+      const total30d = (recentPurchases || []).reduce((sum, p) => sum + Number(p.artist_earnings || 0), 0);
+      document.getElementById('stat-earning-30d').textContent = `₦${total30d.toLocaleString()}`;
+      document.getElementById('stat-sales-30d').textContent = (recentPurchases || []).length.toLocaleString();
+    }
+    
+    function renderSalesRows(purchases, container) {
+      const template = document.getElementById('sales-history-row-template');
+      container.innerHTML = '';
+      purchases.forEach(p => {
+        const node = template.content.cloneNode(true);
+        const song = p.songs;
+        node.querySelector('.sh-title').textContent = song.feature ? `${song.title} feat. ${song.feature}` : song.title;
+        node.querySelector('.sh-meta').textContent = formatDateTime(p.created_at);
+        node.querySelector('.sh-earned').textContent = `₦${Number(p.artist_earnings).toLocaleString()}`;
+        node.querySelector('.sh-original').textContent = `₦${Number(p.amount).toLocaleString()}`;
+        container.appendChild(node);
+      });
+    }
+    
+    async function openSalesHistoryModal() {
+      const { data: { session } } = await window.sb.auth.getSession();
+      if (!session) return;
+      const { data: purchases, error } = await window.sb
+        .from('purchases')
+        .select('id, amount, artist_earnings, created_at, songs!inner(title, feature, artist_id)')
+        .eq('songs.artist_id', session.user.id)
+        .order('created_at', { ascending: false });
+      if (error) { console.warn(error.message); return; }
+      renderSalesRows(purchases || [], document.getElementById('sales-history-modal-list'));
+      document.getElementById('sales-history-empty').classList.toggle('hidden', (purchases || []).length > 0);
+      document.getElementById('sales-history-modal').classList.remove('hidden');
+    }
+    
+    document.getElementById('sales-view-all-btn').addEventListener('click', openSalesHistoryModal);
+    document.getElementById('sales-history-close').addEventListener('click', () => {
+      document.getElementById('sales-history-modal').classList.add('hidden');
+    });
+    document.getElementById('sales-history-backdrop').addEventListener('click', () => {
+      document.getElementById('sales-history-modal').classList.add('hidden');
+    });
+    
+    function formatDateTime(isoString) {
+      const date = new Date(isoString);
+      const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      const timeStr = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+      return `${dateStr} • ${timeStr}`;
+    }
+    
+    
+    
+    
+    
+    async function loadEarningsStats() {
+      const { data: { session } } = await window.sb.auth.getSession();
+      if (!session) return;
+      
+      const { data: wallet } = await window.sb.from('wallets').select('total_earned').eq('artist_id', session.user.id).single();
+      document.getElementById('stat-total-earned').textContent = `₦${Number(wallet?.total_earned || 0).toLocaleString()}`;
+      
+      const startOfMonth = new Date();
+      startOfMonth.setDate(1);
+      startOfMonth.setHours(0, 0, 0, 0);
+      
+      const { data: monthPurchases } = await window.sb
+        .from('purchases')
+        .select('artist_earnings, songs!inner(artist_id)')
+        .eq('songs.artist_id', session.user.id)
+        .gte('created_at', startOfMonth.toISOString());
+      
+      const thisMonth = (monthPurchases || []).reduce((sum, p) => sum + Number(p.artist_earnings || 0), 0);
+      document.getElementById('stat-this-month').textContent = `₦${thisMonth.toLocaleString()}`;
+    }
+    
+    function updateStreamStats() {
+      const totalStreams = allSongs.reduce((sum, s) => sum + (s.play_count || 0), 0);
+      document.getElementById('stat-total-streams-hero').textContent = totalStreams.toLocaleString();
+      document.getElementById('stat-total-streams-stack').textContent = totalStreams >= 1000 ?
+        `${(totalStreams / 1000).toFixed(1)}K` :
+        totalStreams.toLocaleString();
+    }
   </script>
 </body>
 
