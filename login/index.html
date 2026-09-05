@@ -215,7 +215,7 @@
       const role = data.user?.user_metadata?.role;
       showStatus('Signed in! Redirecting…', false);
       setTimeout(() => {
-        window.location.href = role === 'artist' ? '../account/artist.html' : '../home';
+        window.location.href = role === 'artist' ? '../account/artist.html' : '../homepage';
       }, 600);
     });
     
@@ -224,7 +224,7 @@
       if (data.session) {
         // Optional: auto-redirect returning users. Comment out if you want
         // to let signed-in users land on the login page intentionally.
-        // window.location.href = 'home.html';
+        // window.location.href = '../homepage';
       }
     });
   </script>
