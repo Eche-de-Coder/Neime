@@ -137,8 +137,8 @@
     <!-- Tabs -->
     <div class="flex gap-6 mb-8 border-b border-white/10 pb-2 overflow-x-auto no-scrollbar">
       <button class="text-primary font-headline-md text-body-md font-bold whitespace-nowrap">Purchased</button>
-      <button class="text-on-surface-variant font-headline-md text-body-md hover:text-primary transition-colors whitespace-nowrap">Liked</button>
-      <button class="text-on-surface-variant font-headline-md text-body-md hover:text-primary transition-colors whitespace-nowrap">Playlists</button>
+      <!--<button class="text-on-surface-variant font-headline-md text-body-md hover:text-primary transition-colors whitespace-nowrap">Liked</button>
+      <button class="text-on-surface-variant font-headline-md text-body-md hover:text-primary transition-colors whitespace-nowrap">Playlists</button>-->
     </div>
     <!-- Purchased Content -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="library-list"></div>
@@ -148,11 +148,11 @@
   </main>
   <!-- BottomNavBar (Mobile) -->
   <nav class="md:hidden flex justify-around items-center h-20 w-full px-2 bg-surface-dim/90 backdrop-blur-2xl fixed bottom-0 w-full z-50 pb-safe bg-surface-container-highest/50 border-t border-white/5 shadow-[0_-4px_24px_rgba(0,0,0,0.4)]">
-    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../home">
       <span class="material-symbols-outlined" data-icon="home">home</span>
       <span class="font-label-sm text-label-sm mt-1">Home</span>
     </a>
-    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../search">
       <span class="material-symbols-outlined" data-icon="search">search</span>
       <span class="font-label-sm text-label-sm mt-1">Search</span>
     </a>
@@ -160,7 +160,7 @@
       <span class="material-symbols-outlined" data-icon="library_music" data-weight="fill">library_music</span>
       <span class="font-label-sm text-label-sm mt-1">My Music</span>
     </a>
-    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../account">
       <span class="material-symbols-outlined" data-icon="person">person</span>
       <span class="font-label-sm text-label-sm mt-1">Account</span>
     </a>
