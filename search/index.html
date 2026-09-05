@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Search - Neime</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-surface-variant": "#e4beb1",
+            "on-primary-fixed": "#370e00",
+            "on-background": "#e4e1e6",
+            "on-secondary-fixed": "#002021",
+            "surface-container-lowest": "#0e0e11",
+            "secondary-fixed": "#63f7ff",
+            "outline-variant": "#5b4137",
+            "primary-container": "#ff5c00",
+            "tertiary-container": "#a27aff",
+            "on-secondary-fixed-variant": "#004f53",
+            "secondary": "#e6feff",
+            "inverse-surface": "#e4e1e6",
+            "surface-dim": "#131316",
+            "on-tertiary-fixed-variant": "#5700c9",
+            "surface-container-highest": "#353438",
+            "primary-fixed-dim": "#ffb59a",
+            "on-secondary-container": "#006c71",
+            "surface-container-low": "#1b1b1e",
+            "on-error": "#690005",
+            "on-tertiary-fixed": "#23005b",
+            "tertiary-fixed-dim": "#d1bcff",
+            "tertiary": "#d1bcff",
+            "error": "#ffb4ab",
+            "on-error-container": "#ffdad6",
+            "surface-container": "#1f1f22",
+            "secondary-container": "#00f4fe",
+            "on-secondary": "#003739",
+            "on-primary": "#5a1b00",
+            "outline": "#ab897d",
+            "surface-variant": "#353438",
+            "on-primary-container": "#521800",
+            "primary-fixed": "#ffdbce",
+            "on-tertiary": "#3c0090",
+            "on-primary-fixed-variant": "#802a00",
+            "tertiary-fixed": "#e9ddff",
+            "inverse-primary": "#a73a00",
+            "surface-container-high": "#2a2a2d",
+            "secondary-fixed-dim": "#00dce5",
+            "surface": "#131316",
+            "on-surface": "#e4e1e6",
+            "error-container": "#93000a",
+            "surface-tint": "#ffb59a",
+            "on-tertiary-container": "#360083",
+            "surface-bright": "#39393c",
+            "primary": "#ffb59a",
+            "inverse-on-surface": "#303033",
+            "background": "#131316"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "container-padding-desktop": "40px",
+            "section-gap": "48px",
+            "container-padding-mobile": "16px",
+            "gutter": "24px",
+            "unit": "8px"
+          },
+          "fontFamily": {
+            "price-display": ["Hanken Grotesk"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-md": ["Hanken Grotesk"],
+            "body-lg": ["Hanken Grotesk"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "label-sm": ["JetBrains Mono"],
+            "display-xl": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "price-display": ["20px", { "lineHeight": "24px", "fontWeight": "700" }],
+            "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "display-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      color: theme('colors.on-background');
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Custom scrollbar for horizontal lists */
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    
+    .glass-card {
+      background: rgba(26, 26, 30, 0.6);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .input-glow:focus-within {
+      border-color: theme('colors.secondary-container');
+      box-shadow: 0 0 0 1px theme('colors.secondary-container'), 0 0 15px rgba(0, 244, 254, 0.3);
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-background min-h-screen pb-[120px] md:pb-[100px] flex flex-col relative overflow-x-hidden">
+  <!-- Top Navigation (Web Only) -->
+  <header class="hidden md:flex justify-between items-center px-4 py-3 w-full bg-surface/80 backdrop-blur-xl fixed top-0 w-full z-50 border-b border-white/10 shadow-sm">
+    <div class="font-display-xl text-headline-md font-extrabold text-primary tracking-tight">
+      Neime
+    </div>
+    <div class="flex gap-6 items-center">
+      <!-- Active State (Search) is handled differently on desktop nav usually, but following JSON structure as best as possible for Top Nav -->
+      <a class="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 transition-transform flex items-center gap-2" href="#">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">home</span>
+        <span class="font-headline-md text-headline-md text-sm">Home</span>
+      </a>
+      <a class="text-primary hover:opacity-80 transition-opacity active:scale-95 transition-transform flex items-center gap-2" href="#">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">search</span>
+        <span class="font-headline-md text-headline-md text-sm">Search</span>
+      </a>
+      <a class="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 transition-transform flex items-center gap-2" href="#">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">library_music</span>
+        <span class="font-headline-md text-headline-md text-sm">My Music</span>
+      </a>
+      <div class="flex items-center gap-4 ml-4 pl-4 border-l border-white/10">
+        <button class="text-on-surface-variant hover:text-primary transition-colors">
+          <span class="material-symbols-outlined">notifications</span>
+        </button>
+        <button class="text-on-surface-variant hover:text-primary transition-colors">
+          <span class="material-symbols-outlined">payments</span>
+        </button>
+        <div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high border border-white/10">
+          <img alt="Artist or User Profile" class="w-full h-full object-cover" data-alt="A close up portrait of an African musician bathed in moody stage lighting. Deep shadows and vibrant neon orange and teal highlights. Shot with a shallow depth of field. High quality, photorealistic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNq1H3DrjiKee0GhM1vbrXQ7jogQ7_iO7SuEFbL3YRyPhyZQ92BohesRapql2XkedB9bBCrNt4tMO5Qhps_TwjgQaAY3I2hsSZkO9YE_axPBDzbCEWjQqKjawQdeRqc5gs7FNTva-D6tH6JHmu3ZJGUJE5rcsbo9K_ExXJHmMutN1kwYvT701W02s0mlsnyf2CT97-DgSYD6Ar8palTL94AghztBfQufQWUa472OpCWGGLpGmf428c" />
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- Main Content Canvas -->
+  <main class="flex-1 w-full max-w-7xl mx-auto px-container-padding-mobile md:px-container-padding-desktop pt-8 md:pt-28 flex flex-col gap-section-gap">
+    <!-- Search Header & Input -->
+    <section class="flex flex-col gap-6">
+      <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background">Explore</h1>
+      <div class="relative w-full group">
+        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+          <span class="material-symbols-outlined text-on-surface-variant group-focus-within:text-secondary-container transition-colors">search</span>
+        </div>
+        <input class="w-full bg-[#1A1A1E] text-on-surface font-body-md text-body-md rounded-xl py-4 pl-12 pr-4 border border-white/10 outline-none transition-all duration-300 input-glow placeholder:text-on-surface-variant/50" placeholder="Artists, songs, genres, or moods..." type="text" />
+      </div>
+    </section>
+    <!-- Recent Searches & Trending (Asymmetric Layout) -->
+    <section class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+      <!-- Recent (Takes 1 col) -->
+      <div class="flex flex-col gap-4">
+        <h2 class="font-headline-md text-headline-md text-on-background text-lg">Recent Searches</h2>
+        <div class="flex flex-col gap-2">
+          <button class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container-high transition-colors text-left group">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-on-surface-variant text-sm">history</span>
+              <span class="font-body-md text-body-md text-on-background group-hover:text-primary transition-colors">Afrobeats 2024</span>
+            </div>
+            <span class="material-symbols-outlined text-on-surface-variant text-sm opacity-0 group-hover:opacity-100 transition-opacity">close</span>
+          </button>
+          <button class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container-high transition-colors text-left group">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-on-surface-variant text-sm">history</span>
+              <span class="font-body-md text-body-md text-on-background group-hover:text-primary transition-colors">Burna Boy Live</span>
+            </div>
+            <span class="material-symbols-outlined text-on-surface-variant text-sm opacity-0 group-hover:opacity-100 transition-opacity">close</span>
+          </button>
+          <button class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container-high transition-colors text-left group">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-on-surface-variant text-sm">history</span>
+              <span class="font-body-md text-body-md text-on-background group-hover:text-primary transition-colors">Lagos Nights Playlist</span>
+            </div>
+            <span class="material-symbols-outlined text-on-surface-variant text-sm opacity-0 group-hover:opacity-100 transition-opacity">close</span>
+          </button>
+        </div>
+      </div>
+      <!-- Trending Tags (Takes 2 cols) -->
+      <div class="lg:col-span-2 flex flex-col gap-4">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+          <h2 class="font-headline-md text-headline-md text-on-background text-lg">Trending Now</h2>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a class="px-4 py-2 rounded-full border border-primary-container/30 bg-primary-container/10 text-primary-container font-label-sm text-label-sm hover:bg-primary-container hover:text-on-primary-container transition-all hover:shadow-[0_0_15px_rgba(255,92,0,0.3)]" href="#">
+            #Amapiano
+          </a>
+          <a class="px-4 py-2 rounded-full border border-white/10 bg-surface-container-high text-on-background font-label-sm text-label-sm hover:border-secondary-container hover:text-secondary-container transition-all" href="#">
+            #NewRelease
+          </a>
+          <a class="px-4 py-2 rounded-full border border-white/10 bg-surface-container-high text-on-background font-label-sm text-label-sm hover:border-secondary-container hover:text-secondary-container transition-all" href="#">
+            #O2Arena
+          </a>
+          <a class="px-4 py-2 rounded-full border border-white/10 bg-surface-container-high text-on-background font-label-sm text-label-sm hover:border-secondary-container hover:text-secondary-container transition-all" href="#">
+            #AlteCruise
+          </a>
+          <a class="px-4 py-2 rounded-full border border-white/10 bg-surface-container-high text-on-background font-label-sm text-label-sm hover:border-secondary-container hover:text-secondary-container transition-all" href="#">
+            #StreetHop
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- Browse Categories (Bento Grid Style) -->
+    <section class="flex flex-col gap-6">
+      <h2 class="font-headline-md text-headline-md text-on-background">Browse All</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <!-- Category Card 1 (Large) -->
+        <a class="col-span-2 row-span-2 rounded-xl overflow-hidden relative group aspect-square md:aspect-auto" href="#">
+          <div class="absolute inset-0 bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-700" data-alt="Vibrant abstract pattern inspired by traditional Nigerian Adire textiles, using intense primary colors like sunset orange and deep indigo, with a slight digital glitch effect. High contrast, modern aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCYgSRMvpiHiZJsXUIlzMjdEvdejjb4AxP9PfnENWPXCK9TSEA2RLGqfY4qDKjXVNCd6qNz-wWzxKkh8E7llhYaWKAmNPzwJJSoqVKh03TdJLgC9bBHGfoIcsTQLSw5XBoj_NEQUAoI0yOobQxkoY0mVx3tT5KLr_l_iE8FjLKjMgJJVieYUBHqanKqnjl9dKtPh-7_EwUMq8MltvgHh0jqJY7hUYm5qHDGBlF6vpi62cWpCZt0qVGa')"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0F0F12] to-transparent/20"></div>
+          <div class="absolute bottom-0 left-0 p-4 w-full">
+            <h3 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white font-bold drop-shadow-md">Afrobeats</h3>
+            <p class="font-body-md text-body-md text-white/80 mt-1">The heartbeat of the culture</p>
+          </div>
+        </a>
+        <!-- Category Card 2 -->
+        <a class="rounded-xl overflow-hidden relative group aspect-square" href="#">
+          <div class="absolute inset-0 bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-700" data-alt="A moody, low-light shot of a DJ turntable setup in a dark club environment. Illuminated only by electric teal and purple neon lights. Focus on the vinyl record spinning." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAluFZO5Qm_24bIQiFoF7bNd1w7oQuswlAHCIc_rNeOzrxZ0xYrB-N6EZwrJp9USJu6kU0Es3Hd3MMBE0j7U3ILjLkTcXEuDoQ0iTHcz7VdbHTCBntQj36c1peB45AIfnO5ZqwY784O0RH_DEsJZhOTsEVWGh6c_JKNQ4J7HcP-wWgp-GzgiTYOEKW_LyaqzLTu6_jHncBnOk_VWcCcZ1IqmbOm7L2iK7DQRafKDjSQu0qztgEaZv92')"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0F0F12] to-transparent/20"></div>
+          <div class="absolute bottom-0 left-0 p-3">
+            <h3 class="font-headline-md text-headline-md text-white font-bold text-lg">Amapiano</h3>
+          </div>
+        </a>
+        <!-- Category Card 3 -->
+        <a class="rounded-xl overflow-hidden relative group aspect-square" href="#">
+          <div class="absolute inset-0 bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-700" data-alt="Minimalist digital art featuring smooth, flowing 3D liquid metal shapes reflecting sunset orange and deep red hues. High end, luxurious feel against a dark background." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDmZB32srLmx6NCdAcE_kx_OSRkq-lJc8UW2G5aIsCRzt-W_IDno-szzyf4wYYzVgtzKsO4rBPwVwS1cJnzPg5nr8ydgb19GWNqaq42Rv5PFfxtdFQgxNOwHE_EnGRxd8GQ5zKE455U3mJFuy8xtGLwQGvvoPKZ9HgJsCq_5YDW5gLo2rgcOBsK2gOQDcFwO_Wc3wFe0e32AFxvs3dKn0EKy1vkv_LHtmVVVDf323dkdb-JBgI_n9Hn')"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0F0F12] to-transparent/20"></div>
+          <div class="absolute bottom-0 left-0 p-3">
+            <h3 class="font-headline-md text-headline-md text-white font-bold text-lg">Alte</h3>
+          </div>
+        </a>
+        <!-- Category Card 4 -->
+        <a class="rounded-xl overflow-hidden relative group aspect-square" href="#">
+          <div class="absolute inset-0 bg-cover bg-center w-full h-full group-hover:scale-105 transition-transform duration-700" data-alt="A crowd at a concert silhouetted against an intensely bright, glowing yellow and orange stage light. High energy, dynamic, slightly blurred to show motion." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAaQVDJL_-UV3SgswP0fWTBuKTsnHcBe0DqKHaCvhYQUlEOu2JtU_DJ8hBgtv-NmIucJfX8WpzfU_44x1-eO8wCs6NP-4FjUwfxtu12TxROaD1IzhhLI-aTW5Z5WlrC0qbA35CwRuqG8OdGBlbejy84c-6kuOqKxGIv2n1rAieahikMOqW9EPk-WG47NTerA3WaIV1v9IF_1y00s010UBlRu3EEJt0vyJ8BGFbObeOJXhY_RDgvehlb')"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0F0F12] to-transparent/20"></div>
+          <div class="absolute bottom-0 left-0 p-3">
+            <h3 class="font-headline-md text-headline-md text-white font-bold text-lg">Live Shows</h3>
+          </div>
+        </a>
+        <!-- Category Card 5 -->
+        <a class="col-span-2 md:col-span-1 rounded-xl overflow-hidden relative group aspect-[2/1] md:aspect-square" href="#">
+          <div class="absolute inset-0 bg-surface-container-high w-full h-full flex items-center justify-center p-4">
+            <!-- Abstract pattern via CSS -->
+            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0); background-size: 16px 16px;"></div>
+            <div class="relative z-10 text-center">
+              <span class="material-symbols-outlined text-secondary-container mb-2 text-3xl">mood</span>
+              <h3 class="font-headline-md text-headline-md text-white font-bold text-lg">Moods</h3>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+  
+  <nav class="md:hidden bg-surface-dim/90 backdrop-blur-2xl fixed bottom-0 w-full z-50 pb-safe bg-surface-container-highest/50 border-t border-white/5 shadow-[0_-4px_24px_rgba(0,0,0,0.4)] flex justify-around items-center h-20 px-2">
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../homepage">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">home</span>
+      <span class="font-label-sm text-label-sm mt-1">Home</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-primary-container font-bold drop-shadow-[0_0_8px_rgba(255,92,0,0.3)] hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">search</span>
+      <span class="font-label-sm text-label-sm mt-1">Search</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../library">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">library_music</span>
+      <span class="font-label-sm text-label-sm mt-1">My Music</span>
+    </a>
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../account">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">person</span>
+      <span class="font-label-sm text-label-sm mt-1">Account</span>
+    </a>
+  </nav>
+</body>
+
+</html>
