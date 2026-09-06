@@ -495,7 +495,7 @@
       
       document.getElementById('player-cover').src = song.cover_url || '';
       document.getElementById('player-title').textContent = song.title;
-      document.getElementById('player-artist').textContent = song.artist_name;
+      document.getElementById('player-artist').textContent = song.feature ? `${song.artist_name} ft. ${song.feature}` : song.artist_name;
       document.getElementById('mini-player-cover').src = song.cover_url || '';
       document.getElementById('mini-player-title').textContent = song.title;
       document.getElementById('mini-player-artist').textContent = song.artist_name;
