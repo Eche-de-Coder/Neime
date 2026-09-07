@@ -91,10 +91,10 @@
     
     document.getElementById('np-cover').src = song.cover_url || '';
     document.getElementById('np-title').textContent = song.title;
-    document.getElementById('np-artist').textContent = song.artist_name;
+    document.getElementById('np-artist').textContent = song.feature ? `${song.artist_name} ft. ${song.feature}` : song.artist_name;
     document.getElementById('np-mini-cover').src = song.cover_url || '';
     document.getElementById('np-mini-title').textContent = song.title;
-    document.getElementById('np-mini-artist').textContent = song.artist_name;
+    document.getElementById('np-mini-artist').textContent = song.feature ? `${song.artist_name} ft. ${song.feature}` : song.artist_name;
     
     document.getElementById('np-mini-player').classList.remove('hidden');
     document.getElementById('np-player-modal').classList.remove('hidden');
