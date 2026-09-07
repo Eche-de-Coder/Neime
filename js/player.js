@@ -102,3 +102,27 @@
     setPlayIcon(true);
   };
 })();
+
+let streamTimer = null;
+let streamSeconds = 0;
+let streamCounted = false;
+
+function startStreamTimer(songId) {
+  clearStreamTimer();
+  streamSeconds = 0;
+  streamCounted = false;
+  streamTimer = setInterval(() => {
+    const a = audioEl();
+    if (a.paused) return;
+    streamSeconds += 1;
+    if (streamSeconds >= 30 && !streamCounted) {
+      streamCounted = true;
+      window.sb.rpc('increment_play_count', { p_song_id: songId });
+    }
+  }, 1000);
+}
+
+function clearStreamTimer() {
+  if (streamTimer) clearInterval(streamTimer);
+  streamTimer = null;
+}
