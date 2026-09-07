@@ -88,6 +88,7 @@
     const a = audioEl();
     a.src = data.signedUrl;
     a.play();
+    startStreamTimer(song.id);
     
     document.getElementById('np-cover').src = song.cover_url || '';
     document.getElementById('np-title').textContent = song.title;
