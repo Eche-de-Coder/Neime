@@ -342,32 +342,31 @@
     }
     
     function renderArtistResults(songs, query) {
-      const artistMap = new Map();
-      songs
-        .filter(s => s.artist_name.toLowerCase().includes(query.toLowerCase()))
-        .forEach(s => {
-          if (!artistMap.has(s.artist_name)) artistMap.set(s.artist_name, 0);
-          artistMap.set(s.artist_name, artistMap.get(s.artist_name) + 1);
-        });
-      
-      const section = document.getElementById('artists-results-section');
-      const list = document.getElementById('artists-results-list');
-      const template = document.getElementById('search-artist-template');
-      
-      section.classList.toggle('hidden', artistMap.size === 0);
-      list.innerHTML = '';
-      
-      artistMap.forEach((count, name) => {
-        const node = template.content.cloneNode(true);
-        node.querySelector('.sa-name').textContent = name;
-        node.querySelector('.sa-count').textContent = `${count} track${count > 1 ? 's' : ''}`;
-        node.querySelector('.search-artist-card').addEventListener('click', () => {
-          searchInput.value = name;
-          runSearch(name);
-        });
-        list.appendChild(node);
-      });
-    }
+  const artistMap = new Map();
+  songs
+    .filter(s => s.artist_name.toLowerCase().includes(query.toLowerCase()))
+    .forEach(s => {
+      if (!artistMap.has(s.artist_id)) artistMap.set(s.artist_id, { name: s.artist_name, count: 0 });
+      artistMap.get(s.artist_id).count++;
+    });
+
+  const section = document.getElementById('artists-results-section');
+  const list = document.getElementById('artists-results-list');
+  const template = document.getElementById('search-artist-template');
+
+  section.classList.toggle('hidden', artistMap.size === 0);
+  list.innerHTML = '';
+
+  artistMap.forEach((info, artistId) => {
+    const node = template.content.cloneNode(true);
+    node.querySelector('.sa-name').textContent = info.name;
+    node.querySelector('.sa-count').textContent = `${info.count} track${info.count > 1 ? 's' : ''}`;
+    node.querySelector('.search-artist-card').addEventListener('click', () => {
+      window.location.href = `artist-info.html?artist=${artistId}`;
+    });
+    list.appendChild(node);
+  });
+}
     
     // ── Purchase gate (same logic as home.html) ──
     async function hasPurchased(songId) {
