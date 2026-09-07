@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Artist Profile | Neime</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS with plugins -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-variant": "#353438",
+            "on-primary-fixed-variant": "#802a00",
+            "tertiary": "#d1bcff",
+            "primary-fixed-dim": "#ffb59a",
+            "on-error": "#690005",
+            "error-container": "#93000a",
+            "inverse-surface": "#e4e1e6",
+            "surface-container-high": "#2a2a2d",
+            "secondary-fixed-dim": "#00dce5",
+            "inverse-on-surface": "#303033",
+            "on-primary-fixed": "#370e00",
+            "error": "#ffb4ab",
+            "secondary": "#e6feff",
+            "outline-variant": "#5b4137",
+            "on-primary-container": "#521800",
+            "on-tertiary-container": "#360083",
+            "tertiary-fixed": "#e9ddff",
+            "background": "#131316",
+            "on-secondary-fixed": "#002021",
+            "on-tertiary-fixed-variant": "#5700c9",
+            "on-secondary-container": "#006c71",
+            "primary-container": "#ff5c00",
+            "on-error-container": "#ffdad6",
+            "on-secondary-fixed-variant": "#004f53",
+            "surface-tint": "#ffb59a",
+            "primary-fixed": "#ffdbce",
+            "on-tertiary-fixed": "#23005b",
+            "surface-container": "#1f1f22",
+            "on-surface-variant": "#e4beb1",
+            "on-surface": "#e4e1e6",
+            "surface-container-low": "#1b1b1e",
+            "surface-dim": "#131316",
+            "secondary-container": "#00f4fe",
+            "tertiary-fixed-dim": "#d1bcff",
+            "on-background": "#e4e1e6",
+            "primary": "#ffb59a",
+            "surface-container-lowest": "#0e0e11",
+            "surface": "#131316",
+            "surface-container-highest": "#353438",
+            "surface-bright": "#39393c",
+            "on-secondary": "#003739",
+            "on-tertiary": "#3c0090",
+            "tertiary-container": "#a27aff",
+            "outline": "#ab897d",
+            "secondary-fixed": "#63f7ff",
+            "on-primary": "#5a1b00",
+            "inverse-primary": "#a73a00"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "24px",
+            "container-padding-desktop": "40px",
+            "section-gap": "48px",
+            "container-padding-mobile": "16px",
+            "unit": "8px"
+          },
+          "fontFamily": {
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Hanken Grotesk"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "price-display": ["Hanken Grotesk"],
+            "label-sm": ["JetBrains Mono"],
+            "display-xl": ["Plus Jakarta Sans"],
+            "body-md": ["Hanken Grotesk"],
+            "headline-lg": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+            "price-display": ["20px", { "lineHeight": "24px", "fontWeight": "700" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "display-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }]
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #131316;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #2a2a2d;
+      border-radius: 9999px;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #353438;
+    }
+  </style>
+</head>
+
+<body class="bg-surface-container-lowest text-on-surface font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen pb-32">
+  <!-- MAIN ARTIST PROFILE CANVAS -->
+  <main class="w-full pt-16">
+    <!-- 1. HERO HEADER BANNER -->
+    <div class="relative w-full min-h-[460px] md:min-h-[520px] flex items-end overflow-hidden">
+      <!-- Hero Background Image with Atmospheric Multi-Layer Gradient Overlays -->
+      <div class="absolute inset-0 bg-cover bg-center md:bg-top scale-105 transform filter brightness-90" data-alt="A dramatic cinematic wide portrait of an acclaimed Nigerian male Afrobeats musician standing on an atmospheric stage in Lagos, immersed in warm amber spotlight and subtle cool cyan smoke haze with intense charismatic expression, styled in luxury tailored streetwear with textured fabric details." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAj5sXS0ZIIf32vTl1fpgJ6SoG0rgvK3iO54dx7iXhoyQpmLb40y9Gj478RFj9nX1DS6BW-ZtSpErExzvDLSSUKn7qlk0_rRdAXbP2R_ktAg0myl6__aXJO8QIZ5ej_9N2pUzbXaiGBjf1MTiQvNvG5aCW-_PRcmvhEA3JyRdwt8YOm81v-XHakHKwUs4cCCdQIpIH1y5MwTNprI3V3WhajY_Ki3zP5g9j8EraYZ_rD6SpnUKJMYgBV')">
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/80 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-surface-container-lowest/90 via-transparent to-transparent"></div>
+      <!-- Subtle Nigerian Textile Pattern Glow Accent in Background -->
+      <div class="absolute top-1/4 right-10 w-96 h-96 rounded-full bg-primary-container/10 blur-3xl pointer-events-none"></div>
+      <!-- Hero Artist Content -->
+      <div class="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 pb-8 pt-28 flex flex-col justify-end">
+        <div class="flex items-center gap-2 mb-3"><span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container/80 backdrop-blur-md border border-white/10 text-xs font-label-sm font-semibold tracking-wider text-secondary-container"><span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>VERIFIED ARTIST</span><span class="text-xs font-label-sm text-on-surface-variant">Lagos, Nigeria</span></div>
+        <h1 class="font-display-xl text-4xl sm:text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-none drop-shadow-lg mb-4" id="artist-display-name">Loading...</h1>
+        <div class="flex items-center gap-4 text-on-surface-variant font-body-md text-sm md:text-base mb-6">
+          <div class="flex items-center gap-1.5"><strong class="text-white font-semibold" id="stat-monthly-listeners">0</strong> monthly listeners</div><span class="opacity-30">•</span>
+          <div><span id="stat-followers">0</span> followers</div>
+        </div>
+        <div class="flex items-center gap-4 pt-2">
+          <button aria-label="Play Top Track" class="w-14 h-14 rounded-full bg-primary-container hover:bg-orange-500 text-on-primary-container flex items-center justify-center shadow-[0_0_24px_rgba(255,92,0,0.55)] hover:scale-105 active:scale-95 transition-all duration-200"><span class="material-symbols-outlined text-3xl ml-1 text-surface-container-lowest" style="font-variation-settings: 'FILL' 1;">play_arrow</span></button>
+          <button id="follow-btn" class="px-6 py-2.5 rounded-full border border-white/20 bg-surface-container-low/60 hover:bg-surface-container-high text-white font-headline-md font-semibold text-sm tracking-wide backdrop-blur-md hover:border-primary transition-all active:scale-95">Follow</button>
+          <button class="px-5 py-2.5 rounded-full bg-surface-container-lowest border border-primary-container text-primary font-price-display text-sm tracking-wider hover:bg-primary-container/10 flex items-center gap-1.5 shadow-[0_0_14px_rgba(255,92,0,0.2)] transition-all"><span class="font-bold">₦</span><span class="font-headline-md text-xs uppercase tracking-wider text-white">Support</span></button>
+          <button aria-label="More options" class="w-10 h-10 rounded-full text-on-surface-variant hover:text-white transition-colors flex items-center justify-center hover:bg-surface-container-high ml-2" title="More options"><span class="material-symbols-outlined text-2xl">more_horiz</span></button>
+        </div>
+      </div>
+    </div>
+    <!-- MAIN TWO-COLUMN BODY LAYOUT -->
+    <div class="max-w-7xl mx-auto px-4 md:px-8 mt-10 grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div class="lg:col-span-8 flex flex-col gap-10">
+        <section class="bg-surface-container-low/40 rounded-2xl p-4 md:p-6 border border-white/5 backdrop-blur-md">
+          <div class="flex items-center justify-between mb-5">
+            <div class="flex items-center gap-2">
+              <h2 class="font-headline-lg text-2xl font-bold text-white tracking-tight">Popular Tracks</h2>
+            </div><span class="font-label-sm text-xs text-on-surface-variant uppercase tracking-wider">Monthly Streams</span>
+          </div>
+          <div class="flex flex-col space-y-1" id="popular-tracks-list"></div>
+        </section>
+        <section class="flex flex-col gap-5">
+          <div class="flex items-center justify-between">
+            <h2 class="font-headline-lg text-2xl font-bold text-white tracking-tight">Discography</h2><span class="text-xs font-label-sm text-on-surface-variant uppercase tracking-wider">Latest Releases</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div class="group bg-surface-container-low/60 hover:bg-surface-container border border-white/5 rounded-xl p-3.5 transition-all duration-200 hover:-translate-y-1 shadow-lg">
+              <div class="relative aspect-square rounded-lg overflow-hidden mb-3 bg-surface-container-high"><img alt="Golden Horizons Album" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn75psoGHVeZVrfRk4Raza6KA7CrlXk_qquVKOp3dTG8AQf5M1dvw8-aZaZ-Bk-3VzHJalEXHkaxdL9le7bjSmqVtRSMIrDCbBOMXvtZyQK3i53rLL2Vn5QPwcFLrjkqpL0uMG1FYwTB2QK-0WyJibeK1l7DSIpAL7iLT2J2323lWRf02I94ktCReXSkzFMKKBW3s9MK5iD-4WVzF6Dzfd-rChDVrJQb5agmggq7YimAcbKotBILTE" /></div>
+              <h3 class="font-headline-md text-sm font-bold text-white truncate group-hover:text-primary">Golden Horizons</h3>
+              <p class="font-body-md text-xs text-on-surface-variant mt-0.5">2024 • Album</p>
+            </div>
+            <div class="group bg-surface-container-low/60 hover:bg-surface-container border border-white/5 rounded-xl p-3.5 transition-all duration-200 hover:-translate-y-1 shadow-lg">
+              <div class="relative aspect-square rounded-lg overflow-hidden mb-3 bg-surface-container-high"><img alt="Midnight Tales EP" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6oi0iqa65_WnC4xnPOiPoIhKhFA9Pv--2NIkQ21S97h5yNtN_ArTajCJF6ouT-zTJlaVldCkdyXyyV-901x2ynIs9Dz58g8tVCyQcENi1DpIDwdaCHAyjmDaU0tR__Wfr5jBxUB_37sYG3AGqzc8wez2jhp6IgSHtTCsnyBDsu6jFEtYi-ift0jmOxbxaad5zVAMPv49ovHhnJLiA_9TNPMSFr2Lb-x8HU8XWmmT-JCxJYNVFveVa" /></div>
+              <h3 class="font-headline-md text-sm font-bold text-white truncate group-hover:text-primary">Midnight Tales</h3>
+              <p class="font-body-md text-xs text-on-surface-variant mt-0.5">2023 • EP</p>
+            </div>
+            <div class="group bg-surface-container-low/60 hover:bg-surface-container border border-white/5 rounded-xl p-3.5 transition-all duration-200 hover:-translate-y-1 shadow-lg">
+              <div class="relative aspect-square rounded-lg overflow-hidden mb-3 bg-surface-container-high"><img alt="Afro Rhythm Single" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYLdDPcFqnXBES_abq_61owfAib3KqLnhApVDCgDcvGzmmPgStzk8cD-oxzvInFdVDWmpzXUmucp54aLEUrs5p1Qqk_kVRZCF40hzYBmlZyujLj_z0DKeVAzujBlLzLEBWFl6rHZHWWouY_4ZnlxYvAFDFvHpfnPbyAffoF2zy6i5nKfZUylsDeSE3S_xKwrd2C_6LNKrZvmeltU-YOc6lwvkQy32y-4N7KuqfcI87XJcMPMFqFBjp" /></div>
+              <h3 class="font-headline-md text-sm font-bold text-white truncate group-hover:text-primary">Afro Rhythm</h3>
+              <p class="font-body-md text-xs text-on-surface-variant mt-0.5">2023 • Single</p>
+            </div>
+            <div class="group bg-surface-container-low/60 hover:bg-surface-container border border-white/5 rounded-xl p-3.5 transition-all duration-200 hover:-translate-y-1 shadow-lg">
+              <div class="relative aspect-square rounded-lg overflow-hidden mb-3 bg-surface-container-high"><img alt="Roots &amp; Rhythm Album" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNJ2sH-Xhi3rTVzXPIPAsDuhwwb2gSNjJ2zzl61zVFxRwY5zX4Uji1d_7TslECQpjl-gLlMhMJ3gunAvoN5UXMRvplRTznf4HtOqB2m2WtmoeZAgkBlhkJa0V3_OQDQeHAX1txopp1QO8BkymRmtwwqfF90dYtUHu0RYadnoKeuD6BXqAejADEUIX4GT4J-scz-XNMqqy4-YsIwvEEYGoeAxlbyXoOoIj4FPr92okeWwdRMWy0wu4Z" /></div>
+              <h3 class="font-headline-md text-sm font-bold text-white truncate group-hover:text-primary">Roots &amp; Rhythm</h3>
+              <p class="font-body-md text-xs text-on-surface-variant mt-0.5">2022 • Album</p>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="lg:col-span-4 flex flex-col gap-6">
+        <div class="bg-surface-container-low rounded-2xl p-6 border border-white/5 relative overflow-hidden">
+          <div class="h-44 w-full rounded-xl bg-cover bg-center mb-4 relative overflow-hidden border border-white/10" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDTmpcj3ng0r4JCkRmzVx_MhTGD5l0k_JMvN_4mVk9aLCApcpjdmEtyvZaFUnABJzdHyhGGLeotij1ZEUnEw4b-poU5g2NPGgOQNj60LoU67YPPKNqLXLhXl3E0M1Vj2KoOoRrDQ1_bIaqDK-0wFKIaKupSwW7HzA9tpDNV2e3lQJ2eBhgjp6wtHMoYvRXVvWVcekXT6MDz4w7VFzmarQ_x1WH4d8Ts9cYqLiy2woYPbG-lU39n7ide')">
+            <div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent"></div>
+            <div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full flex items-center gap-1 text-xs font-label-sm text-secondary-container"><span class="material-symbols-outlined text-sm">emoji_events</span><span>#14 in Nigeria</span></div>
+          </div>
+          <h3 class="font-headline-md text-lg font-bold text-white" id="artist-about-name">About</h3>
+          <p class="font-body-md text-sm text-on-surface-variant mt-2 leading-relaxed" id="artist-bio">This artist hasn't added a bio yet.</p>
+          <div class="flex items-center gap-3 mt-5 pt-4 border-t border-white/5"><a aria-label="Instagram" class="w-9 h-9 rounded-full bg-surface-container-high hover:bg-primary-container hover:text-white text-on-surface-variant flex items-center justify-center transition-colors" href="#"><span class="material-symbols-outlined text-lg">photo_camera</span></a><a aria-label="Twitter" class="w-9 h-9 rounded-full bg-surface-container-high hover:bg-primary-container hover:text-white text-on-surface-variant flex items-center justify-center transition-colors" href="#"><span class="material-symbols-outlined text-lg">tag</span></a><a aria-label="YouTube" class="w-9 h-9 rounded-full bg-surface-container-high hover:bg-primary-container hover:text-white text-on-surface-variant flex items-center justify-center transition-colors" href="#"><span class="material-symbols-outlined text-lg">smart_display</span></a><a aria-label="Official Website" class="w-9 h-9 rounded-full bg-surface-container-high hover:bg-primary-container hover:text-white text-on-surface-variant flex items-center justify-center transition-colors" href="#"><span class="material-symbols-outlined text-lg">language</span></a></div>
+        </div>
+      </div>
+    </div>
+    <!-- 6. FANS ALSO LIKE / SIMILAR ARTISTS SECTION -->
+    <section class="max-w-7xl mx-auto px-4 md:px-8 mt-14 mb-8">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <h2 class="font-headline-lg text-2xl font-bold text-white tracking-tight">Fans Also Like</h2>
+          <p class="font-body-md text-xs text-on-surface-variant mt-0.5">Artists pushing the new frontier of African sound</p>
+        </div>
+        <button class="text-xs font-headline-md font-bold text-on-surface-variant hover:text-primary uppercase tracking-wider transition-colors">
+          See All
+        </button>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
+        <!-- Artist 1 -->
+        <a class="group flex flex-col items-center text-center p-3 rounded-2xl hover:bg-surface-container-low transition-colors" href="#">
+          <div class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden mb-3 border-2 border-transparent group-hover:border-primary-container transition-all shadow-md">
+            <img alt="Artist Kolawole" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Charismatic portrait of a rising young African singer with dreadlocks wearing vibrant patterned silk clothing in dramatic teal stage light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbj1BXMGty1pg_J12RY26oFpXfSdNRmKmcz87B5GyqV8gojYM85fLGTk_daLGNEKedaXFNbS8XpApyLSdb7evI-j0uvMejWCWMu5_3IUfHLXOa2qkr2_PZLKGds_wkKRnJz5MyKKkc1jcHuAyLEpi4Z8oAiW-v83ANp86slO1XrRyWI5-VrASHmsSzZXVOK6ik93vMOmAImZHtLJtzxVKmZCaE-QZJ8RlVK1DwY5fRlQgcw0FyfIAE" />
+          </div>
+          <h3 class="font-headline-md text-sm font-bold text-white group-hover:text-primary truncate w-full">Kolawole</h3>
+          <span class="text-xs text-on-surface-variant font-body-md mt-0.5">Afro-Fusion</span>
+          <span class="mt-2 text-[11px] font-label-sm px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant border border-white/5">Artist</span>
+        </a>
+        <!-- Artist 2 -->
+        <a class="group flex flex-col items-center text-center p-3 rounded-2xl hover:bg-surface-container-low transition-colors" href="#">
+          <div class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden mb-3 border-2 border-transparent group-hover:border-primary-container transition-all shadow-md">
+            <img alt="Artist Zariyah" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="High fashion portrait of a female Nigerian alternative RnB and Soul vocalist with braided hair illuminated by soft magenta and orange ambient glow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwYn9Zcweb7nOPu0uYCbsBGqMQC-8XG6-bSxziWGj67JXJmm_UZ4wuGwU12ndSu_s_BZohxy2gyu7zjgou3jlbqhC-RTn2YW3KheWmSYAaSgt3gn61z79AQMcYsTVahqk5S8LtTuujC3q4WjdpEv_ghVQicT8ih0USzCQKUECfHGbyI4BZN3CPEhk_vbxXM5sEMspyfHthywzF2FPk6Gs4XHHle95d_S0mlRxRKs40EBe8qXP_8f5Q" />
+          </div>
+          <h3 class="font-headline-md text-sm font-bold text-white group-hover:text-primary truncate w-full">Zariyah</h3>
+          <span class="text-xs text-on-surface-variant font-body-md mt-0.5">Alté / Soul</span>
+          <span class="mt-2 text-[11px] font-label-sm px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant border border-white/5">Artist</span>
+        </a>
+        <!-- Artist 3 -->
+        <a class="group flex flex-col items-center text-center p-3 rounded-2xl hover:bg-surface-container-low transition-colors" href="#">
+          <div class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden mb-3 border-2 border-transparent group-hover:border-primary-container transition-all shadow-md">
+            <img alt="Artist Femi Nova" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Striking portrait of a male Afrobeats producer and artist wearing sunglasses and silver jewelry against a low-lit studio setup." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCB3XhpVzrBSituFFQgyyJGaGUegklB0mEQyQ-f3LIYVZjRmI0EHsp361Zo6O8vm7pWcOKpbAjy6caJ6vAf5poIDIQ4n4XLxHSgvfCzh3kprxkqnqA-V7cgCudlwVayoa66DNk_FQeWSKP0uVxRpNjYH9fe2iSQlB619N8VoTW-PPzHyB3Jp2ONqcS9DNITMJt4eFdK2BoGS5RZzC_nKnAmle7G2GKldsYnp4jT86hyTHiiiymxYOQU" />
+          </div>
+          <h3 class="font-headline-md text-sm font-bold text-white group-hover:text-primary truncate w-full">Femi Nova</h3>
+          <span class="text-xs text-on-surface-variant font-body-md mt-0.5">Amapiano Pulse</span>
+          <span class="mt-2 text-[11px] font-label-sm px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant border border-white/5">Artist</span>
+        </a>
+        <!-- Artist 4 -->
+        <a class="group flex flex-col items-center text-center p-3 rounded-2xl hover:bg-surface-container-low transition-colors" href="#">
+          <div class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden mb-3 border-2 border-transparent group-hover:border-primary-container transition-all shadow-md">
+            <img alt="Artist Biyi Tribe" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Artistic monochrome and orange tinted portrait of a West African hip-hop artist with expressive hands and streetwear hoodie." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB11Mxwf7LuZHuy5XrV4Gw8T3LiqTZgn5W5SXkKofwfNf3Hn4t4jWriM7G0OwG5rzz7J1__a5nKUmY0XYEcPvKD7EzUOS5QltUf3SL9cjxKdcfdFz6_tnO7ZEXE7rIXOmhwycDXMMf7S9XaiREA7pkKuzmDhuXnvgpcZtMx-Oc_1UeT5hj7uIG3wK1ep85aetHnY4-M64RTizRmPV8AQyJCXAQhaPz3Pir4FTiwSKaVJARpFEvUWoZb" />
+          </div>
+          <h3 class="font-headline-md text-sm font-bold text-white group-hover:text-primary truncate w-full">Biyi Tribe</h3>
+          <span class="text-xs text-on-surface-variant font-body-md mt-0.5">Afro-Rap</span>
+          <span class="mt-2 text-[11px] font-label-sm px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant border border-white/5">Artist</span>
+        </a>
+        <!-- Artist 5 -->
+        <a class="group flex flex-col items-center text-center p-3 rounded-2xl hover:bg-surface-container-low transition-colors" href="#">
+          <div class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden mb-3 border-2 border-transparent group-hover:border-primary-container transition-all shadow-md">
+            <img alt="Artist Tiwa Solar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Portrait of a female African electronic music DJ with futuristic hair styling under vibrant cyan stage lighting in a nightclub." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYJNWpsGE6HanFaGwNDbSaeh3rw3fChBCyH6Uh0pqVaCmY2GeXTWRerznTgzG4K_BkzuRre4j5CEOccZTZbgpZRdToDQXHBs85ggktqijWm2UCdYbVypkQhkcq0VAPrCbQqROBvapt5ckdFnWuPsK2dKoIA4gbz5qJ3SPbFZ9ENl6Kj-dWhEb1pdU7wxKliCpGeGF3tPZiXYIDclImdfCT338c4nbOXfnyI_Gejj_DUy7uknEdoey7" />
+          </div>
+          <h3 class="font-headline-md text-sm font-bold text-white group-hover:text-primary truncate w-full">Tiwa Solar</h3>
+          <span class="text-xs text-on-surface-variant font-body-md mt-0.5">Afro-House</span>
+          <span class="mt-2 text-[11px] font-label-sm px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant border border-white/5">Artist</span>
+        </a>
+      </div>
+    </section>
+    
+    <!-- Templates -->
+    
+    <template id="artist-track-template">
+      <div class="group flex items-center justify-between p-2.5 md:px-3 rounded-xl hover:bg-surface-container-high/60 transition-colors cursor-pointer track-row">
+        <div class="flex items-center gap-3.5 min-w-0 flex-1">
+          <span class="w-5 text-center text-sm font-label-sm text-on-surface-variant/70 group-hover:text-primary font-bold track-rank">1</span>
+          <div class="relative w-11 h-11 rounded-lg overflow-hidden flex-shrink-0">
+            <img alt="Cover" class="w-full h-full object-cover track-cover" src="" />
+            <div class="absolute inset-0 bg-black/40 items-center justify-center hidden group-hover:flex text-primary">
+              <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+            </div>
+          </div>
+          <div class="truncate pr-2">
+            <div class="font-headline-md text-base font-semibold text-white truncate group-hover:text-primary transition-colors track-title">Title</div>
+            <div class="font-body-md text-xs text-on-surface-variant truncate track-artist">Artist</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 md:gap-6 flex-shrink-0">
+          <span class="px-2.5 py-1 rounded-full bg-surface-container border border-white/10 text-on-surface-variant text-xs font-label-sm track-price">₦0</span>
+          <div class="hidden sm:block font-label-sm text-xs text-on-surface-variant w-20 text-right track-streams">0</div>
+        </div>
+      </div>
+    </template>
+  </main>
+  
+  <script src="../js/config.js"></script>
+  <script src="../js/player.js"></script>
+  <script>
+    
+    let profileArtistId = null;
+    let currentUser = null;
+    let songBeingBought = null;
+    
+    (async function initArtistInfo() {
+      const { data: { session } } = await window.sb.auth.getSession();
+      if (!session) { window.location.href = 'login.html'; return; }
+      currentUser = session.user;
+      
+      profileArtistId = new URLSearchParams(window.location.search).get('artist');
+      if (!profileArtistId) { document.body.innerHTML = '<p class="text-white p-8">No artist specified.</p>'; return; }
+      
+      await loadArtistProfile();
+      await loadPopularTracks();
+      await loadFollowState();
+    })();
+    
+    async function loadArtistProfile() {
+      const { data: artist, error } = await window.sb
+        .from('artists')
+        .select('artist_name, first_name, last_name, bio')
+        .eq('id', profileArtistId)
+        .single();
+      
+      if (error || !artist) { console.warn(error?.message); return; }
+      
+      const displayName = artist.artist_name || [artist.first_name, artist.last_name].filter(Boolean).join(' ');
+      document.getElementById('artist-display-name').textContent = displayName;
+      document.getElementById('artist-about-name').textContent = `About ${displayName}`;
+      document.getElementById('artist-bio').textContent = artist.bio || "This artist hasn't added a bio yet.";
+      
+      const { data: counts } = await window.sb.rpc('get_follow_counts', { p_artist_id: profileArtistId });
+      document.getElementById('stat-followers').textContent = (counts?.[0]?.followers || 0).toLocaleString();
+    }
+    
+    async function loadPopularTracks() {
+      const { data: songs, error } = await window.sb
+        .from('songs')
+        .select('*')
+        .eq('artist_id', profileArtistId)
+        .order('play_count', { ascending: false })
+        .limit(10);
+      
+      if (error) { console.warn(error.message); return; }
+      
+      const totalStreams = (songs || []).reduce((sum, s) => sum + (s.play_count || 0), 0);
+      document.getElementById('stat-monthly-listeners').textContent = totalStreams.toLocaleString();
+      
+      const list = document.getElementById('popular-tracks-list');
+      const template = document.getElementById('artist-track-template');
+      list.innerHTML = '';
+      
+      (songs || []).forEach((song, i) => {
+        const node = template.content.cloneNode(true);
+        node.querySelector('.track-rank').textContent = i + 1;
+        node.querySelector('.track-cover').src = song.cover_url || '';
+        node.querySelector('.track-title').textContent = song.feature ? `${song.title} (feat. ${song.feature})` : song.title;
+        node.querySelector('.track-artist').textContent = song.artist_name;
+        node.querySelector('.track-price').textContent = `₦${song.price}`;
+        node.querySelector('.track-streams').textContent = (song.play_count || 0).toLocaleString();
+        node.querySelector('.track-row').addEventListener('click', () => handlePlayClick(song));
+        list.appendChild(node);
+      });
+    }
+    
+    async function loadFollowState() {
+      const followBtn = document.getElementById('follow-btn');
+      
+      if (currentUser.id === profileArtistId) {
+        followBtn.classList.add('hidden'); // can't follow yourself
+        return;
+      }
+      
+      const { data: existing } = await window.sb
+        .from('follows')
+        .select('follower_id')
+        .eq('follower_id', currentUser.id)
+        .eq('artist_id', profileArtistId)
+        .maybeSingle();
+      
+      setFollowButtonState(!!existing);
+      
+      followBtn.addEventListener('click', async () => {
+        const isFollowing = followBtn.dataset.following === 'true';
+        followBtn.disabled = true;
+        
+        if (isFollowing) {
+          await window.sb.from('follows').delete().eq('follower_id', currentUser.id).eq('artist_id', profileArtistId);
+        } else {
+          await window.sb.from('follows').insert({ follower_id: currentUser.id, artist_id: profileArtistId });
+        }
+        
+        followBtn.disabled = false;
+        setFollowButtonState(!isFollowing);
+        
+        const { data: counts } = await window.sb.rpc('get_follow_counts', { p_artist_id: profileArtistId });
+        document.getElementById('stat-followers').textContent = (counts?.[0]?.followers || 0).toLocaleString();
+      });
+    }
+    
+    function setFollowButtonState(isFollowing) {
+      const btn = document.getElementById('follow-btn');
+      btn.dataset.following = isFollowing;
+      btn.textContent = isFollowing ? 'Following' : 'Follow';
+      btn.classList.toggle('bg-primary-container', isFollowing);
+      btn.classList.toggle('text-white', isFollowing);
+    }
+    
+    // ── Purchase gate (same pattern as home.html / search.html) ──
+    async function hasPurchased(songId) {
+      const { data } = await window.sb.from('purchases').select('id').eq('buyer_id', currentUser.id).eq('song_id', songId).maybeSingle();
+      return !!data;
+    }
+    async function handlePlayClick(song) {
+      const owned = await hasPurchased(song.id);
+      owned ? window.playSong(song) : alert(`Buy "${song.title}" for ₦${song.price} to play it — hook this into your shared buy-modal component.`);
+    }
+  </script>
+</body>
+
+</html>
