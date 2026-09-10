@@ -98,6 +98,10 @@
       document.getElementById('song-cover').src = song.cover_url || '';
       document.getElementById('song-title').textContent = song.title;
       document.getElementById('song-artist').textContent = song.feature ? `${song.artist_name} ft. ${song.feature}` : song.artist_name;
+      document.getElementById('song-artist').style.cursor = 'pointer';
+      document.getElementById('song-artist').addEventListener('click', () => {
+        window.location.href = `artist-info.html?artist=${song.artist_id}`;
+      });
       document.getElementById('song-price').textContent = `₦${song.price}`;
 
       const { data: { session } } = await window.sb.auth.getSession();
