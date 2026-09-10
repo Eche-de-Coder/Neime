@@ -338,7 +338,6 @@
       
       const user = session.user;
       
-      // Guard: if an artist somehow lands here, send them to their own page
       if (user.user_metadata?.role === 'artist') {
         window.location.replace('artist.html');
         return;
@@ -377,7 +376,7 @@
       
       const { data: purchases, error } = await window.sb
         .from('purchases')
-        .select('id, amount, created_at, songs(id, title, artist_name, cover_url, audio_path)')
+        .select('id, amount, created_at, songs(id, artist_id, title, artist_name, cover_url, audio_path)')
         .eq('buyer_id', session.user.id)
         .order('created_at', { ascending: false })
         .limit(5);
@@ -401,6 +400,11 @@
         node.querySelector('.purchase-cover').src = song.cover_url || '';
         node.querySelector('.purchase-title').textContent = song.title;
         node.querySelector('.purchase-artist').textContent = song.artist_name;
+        node.querySelector('.purchase-artist').style.cursor = 'pointer';
+        node.querySelector('.purchase-artist').addEventListener('click', (e) => {
+          e.stopPropagation();
+          window.location.href = `artist-info.html?artist=${song.artist_id}`;
+        });
         node.querySelector('.purchase-amount').textContent = `₦ ${p.amount}`;
         node.querySelector('.purchase-date').textContent = new Date(p.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
         node.querySelector('.purchase-card').addEventListener('click', () => window.playSong(song));
