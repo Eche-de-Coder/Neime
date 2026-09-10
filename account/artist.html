@@ -437,7 +437,7 @@
           </div>
           <div class="flex flex-col text-right border-l border-white/10 pl-5">
             <span class="font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant mb-0.5">CATALOG SIZE</span>
-            <span class="font-headline-md text-headline-md font-bold text-on-background" id="catalog-size">24</span>
+            <span class="font-headline-md text-headline-md font-bold text-on-background" id="catalog-size">0</span>
             <span class="font-body-md text-[13px] text-on-surface-variant font-normal">tracks</span>
           </div>
         </div>
@@ -500,6 +500,10 @@
         <div class="space-y-1 sm:col-span-2">
           <label class="font-label-sm text-label-sm text-on-surface-variant block" for="edit-artist-name">Artist / Stage Name</label>
           <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="edit-artist-name" type="text" />
+        </div>
+        <div class="space-y-1 sm:col-span-2">
+          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="edit-bio">Bio</label>
+          <textarea class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="edit-bio" rows="3"></textarea>
         </div>
         <div class="sm:col-span-2">
           <button class="bg-primary text-on-primary font-headline-md text-headline-md !text-[16px] px-6 py-3 rounded-full hover:opacity-90 active:scale-95 transition-all disabled:opacity-60" id="save-details-btn" type="submit">
@@ -635,7 +639,7 @@
       
       const { data: artist, error } = await window.sb
         .from('artists')
-        .select('first_name, last_name, artist_name, created_at')
+        .select('first_name, last_name, artist_name, bio,created_at')
         .eq('id', user.id)
         .single();
       
@@ -674,6 +678,7 @@
       document.getElementById('edit-last-name').value = artist?.last_name || '';
       document.getElementById('edit-artist-name').value = artist?.artist_name || '';
       document.getElementById('song-artist').value = artist?.artist_name || '';
+      document.getElementById('edit-bio').value = artist?.bio || '';
     }
     
     document.getElementById('details-form').addEventListener('submit', async (e) => {
@@ -691,7 +696,8 @@
       const { error } = await window.sb.from('artists').update({
         first_name: document.getElementById('edit-first-name').value.trim(),
         last_name: document.getElementById('edit-last-name').value.trim(),
-        artist_name: document.getElementById('edit-artist-name').value.trim()
+        artist_name: document.getElementById('edit-artist-name').value.trim(),
+        bio: document.getElementById('edit-bio').value.trim()
       }).eq('id', session.user.id);
       
       btn.disabled = false;
