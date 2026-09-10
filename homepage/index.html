@@ -400,6 +400,10 @@
         node.querySelector('.song-cover').src = song.cover_url || '';
         node.querySelector('.song-title').textContent = song.title;
         node.querySelector('.song-artist').textContent = song.feature ? `${song.artist_name} ft. ${song.feature}` : song.artist_name;
+        node.querySelector('.song-artist').addEventListener('click', (e) => {
+          e.stopPropagation();
+          window.location.href = `artist-info.html?artist=${song.artist_id}`;
+        });
         node.querySelector('.song-price').textContent = `₦${song.price}`;
         node.querySelector('.song-play-btn').addEventListener('click', (e) => {
           e.stopPropagation();
