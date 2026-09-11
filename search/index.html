@@ -362,7 +362,7 @@
     node.querySelector('.sa-name').textContent = info.name;
     node.querySelector('.sa-count').textContent = `${info.count} track${info.count > 1 ? 's' : ''}`;
     node.querySelector('.search-artist-card').addEventListener('click', () => {
-      window.location.href = `artist-info.html?artist=${artistId}`;
+      window.location.href = `../artist-info.html?artist=${artistId}`;
     });
     list.appendChild(node);
   });
