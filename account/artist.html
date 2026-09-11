@@ -357,7 +357,7 @@
         Log Out
       </button>
       <div class="w-10 h-10 rounded-full border-2 border-primary-container/30 overflow-hidden cursor-pointer hover:border-primary transition-colors">
-        <img class="w-full h-full object-cover" data-alt="A detailed, cinematic headshot of a modern African music producer wearing stylish dark sunglasses. The portrait is illuminated by vibrant neon sunset orange and deep teal rim lighting against a pitch-black background, embodying a dynamic, culturally rich, and future-forward aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8qVDvwPS7LIDa487jczrUoXwJ7N40KUeqzW4J2WKKl0DvWUPRi88I-prM2eW8xawsYPFLBxpckE9aQZcz7zR325Q_ZRHkhIKYThs7bnSV4g2ZTp3jmG2mAGsEpbgkqzpcwn7E25YYgQgkea9Mz2Niw4vt3HeDK0I9nbgoUVaVLla4f3DQ4IdL-OWA98YoqWb8Ubug9UY5Pz40zVjw9Sjt_7gYXF2Lm7lND2j-tZNvvr5c0DgYN7S-" />
+        <img class="w-full h-full object-cover" data-alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8qVDvwPS7LIDa487jczrUoXwJ7N40KUeqzW4J2WKKl0DvWUPRi88I-prM2eW8xawsYPFLBxpckE9aQZcz7zR325Q_ZRHkhIKYThs7bnSV4g2ZTp3jmG2mAGsEpbgkqzpcwn7E25YYgQgkea9Mz2Niw4vt3HeDK0I9nbgoUVaVLla4f3DQ4IdL-OWA98YoqWb8Ubug9UY5Pz40zVjw9Sjt_7gYXF2Lm7lND2j-tZNvvr5c0DgYN7S-" />
       </div>
     </div>
   </nav>
@@ -366,11 +366,26 @@
     <!-- Header Section -->
     <header class="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between w-full">
       <div class="flex items-center gap-6">
-        <div class="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-surface-container-high overflow-hidden shadow-[0_0_30px_rgba(255,92,0,0.15)] relative group">
-          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A close-up, high-fidelity portrait of a dynamic Afrobeat artist in a dimly lit studio environment. Vibrant electric teal and sunset orange lights cast dramatic shadows across their face, reflecting the sleek, glassmorphism-inspired dark mode interface of a premium music platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwZPZNTO-RZYn0ahU6hmI0n06hvv_zq2oyTWBrdR8yk87wfX_-9R_tvuhTBZBoEwoePD1VydQyA9Nrk2x0M0dBhaRP8IzhnLTZEU0_Oi0uYse1Y5L6u-x7FtCWgXpUILm1eVOuXn5_KWQ50OGOEPfH1J4qnIq4ec_-tqaYwsSWysehtPw0QVq_7gNJdFWUVK45B4rBnkwZC7z5ibtS6xdMuZQb5WrbBYRpjk__vr3TyOhZwI-q0sBS" />
-          <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+        <!--<div class="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-surface-container-high shadow-[0_0_30px_rgba(255,92,0,0.15)] relative group">
+          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" id="artist-avatar-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwZPZNTO-RZYn0ahU6hmI0n06hvv_zq2oyTWBrdR8yk87wfX_-9R_tvuhTBZBoEwoePD1VydQyA9Nrk2x0M0dBhaRP8IzhnLTZEU0_Oi0uYse1Y5L6u-x7FtCWgXpUILm1eVOuXn5_KWQ50OGOEPfH1J4qnIq4ec_-tqaYwsSWysehtPw0QVq_7gNJdFWUVK45B4rBnkwZC7z5ibtS6xdMuZQb5WrbBYRpjk__vr3TyOhZwI-q0sBS" />
+          <label class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer" for="avatar-upload-input">
             <span class="material-symbols-outlined text-white text-headline-lg">edit</span>
+          </label>
+          <input accept="image/*" class="hidden" id="avatar-upload-input" type="file" />
+          <button aria-label="Edite picture" class="absolute top-0 right-0 w-8 h-8 md:w-9 md:h-9 bg-primary-container text-on-primary-container border-2 border-surface rounded-full flex items-center justify-center shadow-md cursor-pointer hover:opacity-90 active:scale-95 transition-all z-50" title="Edit profile picture" type="button">
+            <span class="material-symbols-outlined text-[16px] md:text-[18px] text-white">edit</span>
+          </button>
+        </div>-->
+        <div class="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-surface-container-high shadow-[0_0_30px_rgba(255,92,0,0.15)] relative group">
+          <div class="w-full h-full rounded-full overflow-hidden">
+            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" id="artist-avatar-img" src="" />
           </div>
+          <input accept="image/*" class="hidden" id="avatar-upload-input" type="file" />
+          <label class="absolute -bottom-2 -right-2 w-9 h-9 md:w-10 md:h-10 bg-primary-container border-2 border-surface rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:opacity-90 active:scale-95 transition-all z-50" for="avatar-upload-input">
+            <span class="material-symbols-outlined text-[17px] md:text-[19px] text-white">
+              edit
+            </span>
+          </label>
         </div>
         <div class="flex flex-col gap-2">
           <div class="flex items-center gap-3">
@@ -382,6 +397,11 @@
             <span class="material-symbols-outlined text-[16px]">mail</span>
             <span class="skeleton" id="artist-email">loading@example.com</span>
           </p>
+          <div class="flex items-center gap-4 mt-1 font-body-md text-[14px]">
+            <span class="flex items-center gap-1.5 text-on-surface-variant"><strong class="font-bold text-on-background" id="artist-followers">-</strong> Followers</span>
+            <span class="text-on-surface-variant/40">•</span>
+            <span class="flex items-center gap-1.5 text-on-surface-variant"><strong class="font-bold text-on-background" id="artist-following">-</strong> Following</span>
+          </div>
         </div>
       </div>
       <div class="flex flex-row gap-3 w-full md:w-auto">
@@ -509,6 +529,9 @@
           <button class="bg-primary text-on-primary font-headline-md text-headline-md !text-[16px] px-6 py-3 rounded-full hover:opacity-90 active:scale-95 transition-all disabled:opacity-60" id="save-details-btn" type="submit">
             <span id="save-details-label">Save Changes</span>
           </button>
+          <a class="bg-primary text-on-primary font-headline-md text-headline-md !text-[16px] px-6 py-4 rounded-full hover:opacity-90 active:scale-95 transition-all disabled:opacity-60" id="view-public-profile-btn">
+            <span>View profile</span>
+          </a>
         </div>
       </form>
     </section>
@@ -626,7 +649,7 @@
       const { data: { session } } = await window.sb.auth.getSession();
       
       if (!session) {
-        window.location.replace('../login');
+        window.location.replace('non.html');
         return;
       }
       
@@ -639,7 +662,7 @@
       
       const { data: artist, error } = await window.sb
         .from('artists')
-        .select('first_name, last_name, artist_name, bio,created_at')
+        .select('id, first_name, last_name, artist_name, bio, avatar_url, created_at')
         .eq('id', user.id)
         .single();
       
@@ -654,10 +677,18 @@
         'Your Stage Name';
       
       const joinedSource = artist?.created_at || user.created_at;
+      document.getElementById('view-public-profile-btn').href = `artist-info.html?artist=${user.id}`;
       
       clearSkeleton(document.getElementById('artist-name'), displayName);
       clearSkeleton(document.getElementById('artist-meta'), `Joined ${formatJoinDate(joinedSource)}`);
       clearSkeleton(document.getElementById('artist-email'), user.email);
+      if (artist?.avatar_url) {
+        document.getElementById('artist-avatar-img').src = artist.avatar_url;
+      }
+      
+      const { data: counts } = await window.sb.rpc('get_follow_counts', { p_artist_id: user.id });
+      document.getElementById('artist-followers').textContent = (counts?.[0]?.followers || 0).toLocaleString();
+      document.getElementById('artist-following').textContent = (counts?.[0]?.following || 0).toLocaleString();
       
       if (error) {
         console.warn('Could not load artist profile row:', error.message);
@@ -713,6 +744,39 @@
         document.getElementById('song-artist').value = document.getElementById('edit-artist-name').value.trim();
       }
     });
+    
+    
+    document.getElementById('avatar-upload-input').addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      const { data: { session } } = await window.sb.auth.getSession();
+      if (!session) return;
+      const userId = session.user.id;
+      
+      const avatarImg = document.getElementById('artist-avatar-img');
+      const previousSrc = avatarImg.src;
+      avatarImg.style.opacity = '0.5';
+      
+      try {
+        const path = `${userId}/${Date.now()}-${file.name}`;
+        const { error: uploadErr } = await window.sb.storage.from('avatars').upload(path, file, { upsert: true });
+        if (uploadErr) throw uploadErr;
+        
+        const { data: urlData } = window.sb.storage.from('avatars').getPublicUrl(path);
+        
+        const { error: updateErr } = await window.sb.from('artists').update({ avatar_url: urlData.publicUrl }).eq('id', userId);
+        if (updateErr) throw updateErr;
+        
+        avatarImg.src = urlData.publicUrl;
+      } catch (err) {
+        alert('Could not update photo: ' + err.message);
+        avatarImg.src = previousSrc;
+      } finally {
+        avatarImg.style.opacity = '1';
+      }
+    });
+    
     
     // ── Upload Music modal ──
     const uploadModal = document.getElementById('upload-modal');
