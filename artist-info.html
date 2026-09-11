@@ -202,7 +202,7 @@
       </div>
       <div class="lg:col-span-4 flex flex-col gap-6">
         <div class="bg-surface-container-low rounded-2xl p-6 border border-white/5 relative overflow-hidden">
-          <div class="h-44 w-full rounded-xl bg-cover bg-center mb-4 relative overflow-hidden border border-white/10" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDTmpcj3ng0r4JCkRmzVx_MhTGD5l0k_JMvN_4mVk9aLCApcpjdmEtyvZaFUnABJzdHyhGGLeotij1ZEUnEw4b-poU5g2NPGgOQNj60LoU67YPPKNqLXLhXl3E0M1Vj2KoOoRrDQ1_bIaqDK-0wFKIaKupSwW7HzA9tpDNV2e3lQJ2eBhgjp6wtHMoYvRXVvWVcekXT6MDz4w7VFzmarQ_x1WH4d8Ts9cYqLiy2woYPbG-lU39n7ide')">
+          <div class="h-44 w-full rounded-xl bg-cover bg-center mb-4 relative overflow-hidden border border-white/10" id="artist-about-img" style="background-image: url('')">
             <div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent"></div>
             <div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full flex items-center gap-1 text-xs font-label-sm text-secondary-container"><span class="material-symbols-outlined text-sm">emoji_events</span><span>#14 in Nigeria</span></div>
           </div>
@@ -314,6 +314,7 @@
       const displayName = artist.artist_name || [artist.first_name, artist.last_name].filter(Boolean).join(' ');
       document.getElementById('artist-display-name').textContent = displayName;
       document.getElementById('artist-about-name').textContent = `About ${displayName}`;
+      document.getElementById('artist-about-img').style.backgroundImage = `url("${artist.avatar_url}")`;
       if (artist?.avatar_url) {
         document.getElementById('artist-avatar-img').src = artist.avatar_url;
       }
