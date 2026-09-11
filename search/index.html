@@ -337,6 +337,11 @@
         node.querySelector('.ss-artist').textContent = song.feature ? `${song.artist_name} ft. ${song.feature}` : song.artist_name;
         node.querySelector('.ss-price').textContent = `₦${song.price}`;
         node.querySelector('.search-song-card').addEventListener('click', () => handlePlayClick(song));
+        node.querySelector('.ss-artist').style.cursor = 'pointer';
+        node.querySelector('.ss-artist').addEventListener('click', (e) => {
+          e.stopPropagation();
+          window.location.href = `../artist-info.html?artist=${song.artist_id}`;
+        });
         list.appendChild(node);
       });
     }
