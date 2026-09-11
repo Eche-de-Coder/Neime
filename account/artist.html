@@ -677,7 +677,7 @@
         'Your Stage Name';
       
       const joinedSource = artist?.created_at || user.created_at;
-      document.getElementById('view-public-profile-btn').href = `artist-info.html?artist=${user.id}`;
+      document.getElementById('view-public-profile-btn').href = `../artist-info.html?artist=${user.id}`;
       
       clearSkeleton(document.getElementById('artist-name'), displayName);
       clearSkeleton(document.getElementById('artist-meta'), `Joined ${formatJoinDate(joinedSource)}`);
