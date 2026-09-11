@@ -196,9 +196,7 @@
       <!-- Profile Summary Card (Spans 4 columns) -->
       <div class="col-span-1 md:col-span-4 glass-panel rounded-xl p-6 flex flex-col gap-6">
         <div class="flex items-center gap-4">
-          <!--<div class="w-20 h-20 rounded-full overflow-hidden border-2 border-primary/50 glow-active">
-            <img alt="User Profile" class="w-full h-full object-cover" data-alt="A futuristic, moody profile portrait of a Nigerian music fan bathed in neon orange and cyan rim lighting, set against a dark studio background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMBGJC-3Gs1ehzFXaSwy63EK2EIQ1gHMr3kwFTe9TLK1tLGSwp-YnpgBUUu4pDWzstucfuhXgPE7SqM8krUYS2_dT9gz7ad_ZS8N-COquEks8L2wT4hld7fSzRWx8bQEbw7q1zszw035G0rA1Ac7F734o_QyRCclz53AK82p7V0JmKKNOsF1gNlyCqiCLGdaYQ7FLoLf3h8CoYLy06w19i5PElxzqIseRUMvDeOTMv6OeQ5pTAxhjb" />
-          </div>-->
+          
           <div>
             <h2 class="font-headline-md text-headline-md text-on-surface skeleton" id="user-name">Loading name</h2>
             <p class="font-label-sm text-label-sm text-on-surface-variant opacity-80 skeleton" id="user-meta">Loading membership</p>
@@ -208,11 +206,15 @@
           <span class="material-symbols-outlined text-[16px]">mail</span>
           <span class="skeleton" id="user-email">loading@example.com</span>
         </p>
-        <div class="mt-auto">
-          <button class="w-full bg-surface-container-high hover:bg-surface-variant text-on-surface font-body-md text-body-md py-3 rounded-full transition-colors border border-white/10 flex items-center justify-center gap-2">
+        <div class="mt-auto flex items-center justify-center gap-2">
+          <a href="../forgot-password" class="w-full bg-surface-container-high hover:bg-surface-variant text-on-surface font-body-md text-body-md py-3 rounded-full transition-colors border border-white/10 flex items-center justify-center gap-2">
             <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">lock_reset</span>
             Change Password
-          </button>
+          </a>
+          <a class="w-full bg-surface-container-high hover:bg-surface-variant text-on-surface font-body-md text-body-md py-3 rounded-full transition-colors border border-white/10 flex items-center justify-center gap-2" id="logout-btn-mobile">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">logout</span>
+            Logout
+          </a>
         </div>
       </div>
       <!-- Main Content Area (Spans 8 columns) -->
@@ -232,8 +234,8 @@
           </p>
         </div>
         <!-- Account Settings Grid -->
-        <!--<div class="grid grid-cols-1 sm:grid-cols-2 gap-gutter">
-          
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-gutter">
+          <!-- Notification Settings -->
           <div class="glass-panel rounded-xl p-5 hover:bg-surface-container-low transition-colors cursor-pointer group">
             <div class="flex items-start justify-between mb-4">
               <div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface group-hover:text-primary transition-colors">
@@ -244,40 +246,13 @@
             <h4 class="font-headline-md text-body-lg font-semibold text-on-surface mb-1">Notifications</h4>
             <p class="font-body-md text-[14px] text-on-surface-variant">Manage email and push alerts for new releases.</p>
           </div>
-          
-          <div class="glass-panel rounded-xl p-5 hover:bg-surface-container-low transition-colors cursor-pointer group">
-            <div class="flex items-start justify-between mb-4">
-              <div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface group-hover:text-primary transition-colors">
-                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">credit_card</span>
-              </div>
-              <span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
-            </div>
-            <h4 class="font-headline-md text-body-lg font-semibold text-on-surface mb-1">Payment Methods</h4>
-            <p class="font-body-md text-[14px] text-on-surface-variant">Update your cards and billing information.</p>
-          </div>
-          
-          <div class="glass-panel rounded-xl p-5 hover:bg-surface-container-low transition-colors cursor-pointer group sm:col-span-2">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-4">
-                <div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface group-hover:text-primary transition-colors shrink-0">
-                  <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">tune</span>
-                </div>
-                <div>
-                  <h4 class="font-headline-md text-body-lg font-semibold text-on-surface mb-0">App Preferences</h4>
-                  <p class="font-body-md text-[14px] text-on-surface-variant">Audio quality, offline storage, and display.</p>
-                </div>
-              </div>
-              <span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
-            </div>
-          </div>
-        </div>-->
-        
+        </div>
       </div>
     </div>
   </main>
   
   <nav class="md:hidden bg-surface-dim/90 backdrop-blur-2xl fixed bottom-0 w-full z-50 bg-surface-container-highest/50 border-t border-white/5 shadow-[0_-4px_24px_rgba(0,0,0,0.4)] flex justify-around items-center h-20 px-2">
-    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../homepage">
+    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../home">
       <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">home</span>
       <span class="font-label-sm text-label-sm mt-1">Home</span>
     </a>
@@ -289,7 +264,7 @@
       <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">library_music</span>
       <span class="font-label-sm text-label-sm mt-1">My Music</span>
     </a>
-    <a class="flex flex-col items-center justify-center text-primary-container font-bold drop-shadow-[0_0_8px_rgba(255,92,0,0.3)] hover:text-primary transition-colors active:scale-90 duration-200" href="#">
+    <a class="flex flex-col items-center justify-center text-primary-container font-bold drop-shadow-[0_0_8px_rgba(255,92,0,0.3)] hover:text-primary transition-colors active:scale-90 duration-200" href="../account">
       <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
       <span class="font-label-sm text-label-sm mt-1">Account</span>
     </a>
@@ -332,12 +307,13 @@
       const { data: { session } } = await window.sb.auth.getSession();
       
       if (!session) {
-        window.location.replace('login.html');
+        window.location.replace('non.html');
         return;
       }
       
       const user = session.user;
       
+      // Guard: if an artist somehow lands here, send them to their own page
       if (user.user_metadata?.role === 'artist') {
         window.location.replace('artist.html');
         return;
@@ -364,7 +340,7 @@
     
     async function logout() {
       await window.sb.auth.signOut();
-      window.location.href = 'login.html';
+      window.location.href = '../login';
     }
     document.getElementById('logout-btn-desktop').addEventListener('click', logout);
     document.getElementById('logout-btn-mobile').addEventListener('click', logout);
