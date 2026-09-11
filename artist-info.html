@@ -419,7 +419,7 @@
         link.href = `artist-info.html?artist=${a.id}`;
         list.appendChild(node);
         const avatar = node.querySelector('.similar-artist-avatar');
-        avatar.src = "${a.avatar_url}"
+        avatar.src = a.avatar_url;
       });
     }
     
