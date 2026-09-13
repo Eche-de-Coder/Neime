@@ -241,8 +241,9 @@
   
   <template id="search-artist-template">
     <div class="flex items-center gap-4 p-3 rounded-lg hover:bg-surface-container-high transition-colors cursor-pointer border border-transparent hover:border-white/5 search-artist-card">
-      <div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0">
-        <span class="material-symbols-outlined text-on-surface-variant">mic</span>
+      <div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center shrink-0 relative overflow-hidden">
+        <span class="material-symbols-outlined text-on-surface-variant sa-icon">person</span>
+        <img alt="Artist" class="w-full h-full hidden object-cover absolute inset-0 sa-avatar" src="" />
       </div>
       <div class="flex-1 min-w-0">
         <h4 class="font-body-lg text-body-lg text-on-surface truncate sa-name">Artist</h4>
@@ -302,7 +303,7 @@
       // Match song titles OR artist names in one query
       const { data: songs, error } = await window.sb
         .from('songs')
-        .select('*')
+        .select('*, artists(avatar_url)')
         .or(`title.ilike.%${query}%,artist_name.ilike.%${query}%`)
         .order('created_at', { ascending: false })
         .limit(30);
@@ -346,32 +347,89 @@
       });
     }
     
+    /**
     function renderArtistResults(songs, query) {
-  const artistMap = new Map();
-  songs
-    .filter(s => s.artist_name.toLowerCase().includes(query.toLowerCase()))
-    .forEach(s => {
-      if (!artistMap.has(s.artist_id)) artistMap.set(s.artist_id, { name: s.artist_name, count: 0 });
-      artistMap.get(s.artist_id).count++;
-    });
-
-  const section = document.getElementById('artists-results-section');
-  const list = document.getElementById('artists-results-list');
-  const template = document.getElementById('search-artist-template');
-
-  section.classList.toggle('hidden', artistMap.size === 0);
-  list.innerHTML = '';
-
-  artistMap.forEach((info, artistId) => {
-    const node = template.content.cloneNode(true);
-    node.querySelector('.sa-name').textContent = info.name;
-    node.querySelector('.sa-count').textContent = `${info.count} track${info.count > 1 ? 's' : ''}`;
-    node.querySelector('.search-artist-card').addEventListener('click', () => {
-      window.location.href = `../artist-info.html?artist=${artistId}`;
-    });
-    list.appendChild(node);
-  });
-}
+      const artistMap = new Map();
+      songs
+        .filter(s => s.artist_name.toLowerCase().includes(query.toLowerCase()))
+        .forEach(s => {
+          if (!artistMap.has(s.artist_id)) artistMap.set(s.artist_id, { name: s.artist_name, count: 0 });
+          artistMap.get(s.artist_id).count++;
+        });
+      
+      const section = document.getElementById('artists-results-section');
+      const list = document.getElementById('artists-results-list');
+      const template = document.getElementById('search-artist-template');
+      
+      section.classList.toggle('hidden', artistMap.size === 0);
+      list.innerHTML = '';
+      
+      artistMap.forEach(async (info, artistId) => {
+        const node = template.content.cloneNode(true);
+        node.querySelector('.sa-name').textContent = info.name;
+        node.querySelector('.sa-count').textContent = `${info.count} track${info.count > 1 ? 's' : ''}`;
+        node.querySelector('.search-artist-card').addEventListener('click', () => {
+          window.location.href = `../artist-info.html?artist=${artistId}`;
+        });
+        list.appendChild(node);
+        
+        const { data: artist } = await window.sb.from('artists').select('avatar_url').eq('id', artistId).maybeSingle();
+        if (artist?.avatar_url) {
+          const img = card.querySelector('.sa-avatar');
+          const icon = card.querySelector('.sa-icon');
+          img.src = artist.avatar_url;
+          img.classList.remove('hidden');
+          icon.classList.add('hidden');
+        }
+      });
+    }**/
+    
+    function renderArtistResults(songs, query) {
+      const artistMap = new Map();
+      songs
+        .filter(s => s.artist_name.toLowerCase().includes(query.toLowerCase()))
+        .forEach(s => {
+          if (!artistMap.has(s.artist_id)) {
+            artistMap.set(s.artist_id, { name: s.artist_name, count: 0 });
+          }
+          artistMap.get(s.artist_id).count += 1;
+        });
+      
+      const section = document.getElementById('artists-results-section');
+      const list = document.getElementById('artists-results-list');
+      const template = document.getElementById('search-artist-template');
+      
+      section.classList.toggle('hidden', artistMap.size === 0);
+      list.innerHTML = '';
+      
+      artistMap.forEach(async ({ name, count }, artistId) => {
+        const node = template.content.cloneNode(true);
+        const card = node.querySelector('.search-artist-card'); // ← declared here
+        
+        node.querySelector('.sa-name').textContent = name;
+        node.querySelector('.sa-count').textContent = `${count} track${count > 1 ? 's' : ''}`;
+        
+        card.addEventListener('click', () => {
+          window.location.href = `artist-info.html?artist=${artistId}`;
+        });
+        
+        list.appendChild(node);
+        
+        const { data: artist } = await window.sb
+          .from('artists')
+          .select('avatar_url')
+          .eq('id', artistId)
+          .maybeSingle();
+        
+        if (artist?.avatar_url) {
+          const img = card.querySelector('.sa-avatar');
+          const icon = card.querySelector('.sa-icon');
+          img.src = artist.avatar_url;
+          img.classList.remove('hidden');
+          icon.classList.add('hidden');
+        }
+      });
+    }
     
     // ── Purchase gate (same logic as home.html) ──
     async function hasPurchased(songId) {
