@@ -431,7 +431,7 @@
       }
         
       const owned = await hasPurchased(song.id);
-      owned ? playSong(song) : openBuyModal(song);
+      owned ? window.playSong(song) : openBuyModal(song);
     }
     
     // ── Buy modal + Paystack ──
@@ -482,7 +482,7 @@
     }
     
     // ── Player ──
-    const audio = document.getElementById('audio-player');
+    /**const audio = document.getElementById('audio-player');
     const playerModal = document.getElementById('player-modal');
     const miniPlayer = document.getElementById('mini-player');
     
@@ -550,7 +550,7 @@
     document.getElementById('player-seek').addEventListener('input', (e) => {
       audio.currentTime = (e.target.value / 100) * audio.duration;
     });
-    audio.addEventListener('ended', () => skip(1));
+    audio.addEventListener('ended', () => skip(1));**/
   </script>
 </body>
 
