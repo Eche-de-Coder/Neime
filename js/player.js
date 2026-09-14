@@ -23,7 +23,7 @@
         <img class="w-full max-w-xs aspect-square rounded-xl object-cover shadow-2xl" id="np-cover" src="" />
         <div class="text-center w-full">
           <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-1" id="np-title">Song Title</h2>
-          <p class="font-body-lg text-body-lg text-on-surface-variant" id="np-artist">Artist</p>
+          <p class="font-body-lg text-body-lg text-on-surface-variant" id="np-artist">Artist </p>
         </div>
         <div class="w-full">
           <input class="w-full accent-primary-container" id="np-seek" max="100" min="0" type="range" value="0" />
@@ -101,28 +101,33 @@
     document.getElementById('np-player-modal').classList.remove('hidden');
     setPlayIcon(true);
   };
+  
+  
+  let streamTimer = null;
+  let streamSeconds = 0;
+  let streamCounted = false;
+  
+  function startStreamTimer(songId) {
+    clearStreamTimer();
+    streamSeconds = 0;
+    streamCounted = false;
+    streamTimer = setInterval(() => {
+      const a = audioEl();
+      if (a.paused) return;
+      streamSeconds += 1;
+      if (streamSeconds >= 30 && !streamCounted) {
+        streamCounted = true;
+        //window.sb.rpc('increment_play_count', { p_song_id: songId });
+        window.sb.rpc('increment_play_count', { p_song_id: songId }).then(({ error }) => {
+          if (error) console.error('Stream count failed:', error.message);
+        });
+      }
+    }, 1000);
+  }
+  
+  function clearStreamTimer() {
+    if (streamTimer) clearInterval(streamTimer);
+    streamTimer = null;
+  }
+  
 })();
-
-let streamTimer = null;
-let streamSeconds = 0;
-let streamCounted = false;
-
-function startStreamTimer(songId) {
-  clearStreamTimer();
-  streamSeconds = 0;
-  streamCounted = false;
-  streamTimer = setInterval(() => {
-    const a = audioEl();
-    if (a.paused) return;
-    streamSeconds += 1;
-    if (streamSeconds >= 30 && !streamCounted) {
-      streamCounted = true;
-      window.sb.rpc('increment_play_count', { p_song_id: songId });
-    }
-  }, 1000);
-}
-
-function clearStreamTimer() {
-  if (streamTimer) clearInterval(streamTimer);
-  streamTimer = null;
-}
