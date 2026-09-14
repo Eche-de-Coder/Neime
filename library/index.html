@@ -196,7 +196,7 @@
       
       const { data: purchases, error } = await window.sb
         .from('purchases')
-        .select('id, amount, created_at, songs(id, title, artist_name, cover_url, audio_path)')
+        .select('id, amount, created_at, songs(id, title, artist_name, artist_id, cover_url, audio_path)')
         .eq('buyer_id', session.user.id)
         .order('created_at', { ascending: false });
       
