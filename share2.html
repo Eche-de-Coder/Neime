@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta name="color-scheme" content="dark" />
+  <title>Neime — Unlock Track</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-tint": "#ffb59a",
+            "surface": "#131316",
+            "surface-container-lowest": "#0e0e11",
+            "primary-fixed": "#ffdbce",
+            "on-tertiary": "#3c0090",
+            "surface-variant": "#353438",
+            "outline": "#ab897d",
+            "on-error": "#690005",
+            "primary-fixed-dim": "#ffb59a",
+            "inverse-on-surface": "#303033",
+            "secondary-fixed-dim": "#00dce5",
+            "on-primary": "#5a1b00",
+            "on-secondary-fixed-variant": "#004f53",
+            "on-error-container": "#ffdad6",
+            "primary": "#ffb59a",
+            "surface-container-highest": "#353438",
+            "tertiary-fixed": "#e9ddff",
+            "on-secondary-container": "#006c71",
+            "on-secondary": "#003739",
+            "on-primary-container": "#521800",
+            "on-primary-fixed-variant": "#802a00",
+            "on-secondary-fixed": "#002021",
+            "secondary": "#e6feff",
+            "error": "#ffb4ab",
+            "inverse-surface": "#e4e1e6",
+            "inverse-primary": "#a73a00",
+            "surface-container": "#1f1f22",
+            "tertiary": "#d1bcff",
+            "secondary-fixed": "#63f7ff",
+            "primary-container": "#ff5c00",
+            "tertiary-fixed-dim": "#d1bcff",
+            "surface-container-low": "#1b1b1e",
+            "on-tertiary-fixed-variant": "#5700c9",
+            "on-background": "#e4e1e6",
+            "tertiary-container": "#a27aff",
+            "outline-variant": "#5b4137",
+            "background": "#131316",
+            "surface-container-high": "#2a2a2d",
+            "surface-dim": "#131316",
+            "error-container": "#93000a",
+            "on-surface": "#e4e1e6",
+            "secondary-container": "#00f4fe",
+            "on-tertiary-fixed": "#23005b",
+            "on-surface-variant": "#e4beb1",
+            "on-tertiary-container": "#360083",
+            "surface-bright": "#39393c",
+            "on-primary-fixed": "#370e00"
+          },
+          "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+          "fontFamily": {
+            "label-sm": ["JetBrains Mono"],
+            "display-xl": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "price-display": ["Hanken Grotesk"],
+            "body-lg": ["Hanken Grotesk"],
+            "body-md": ["Hanken Grotesk"],
+            "headline-lg": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "display-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+            "price-display": ["20px", { "lineHeight": "24px", "fontWeight": "700" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html,
+    body {
+      background-color: #131316;
+    }
+    
+    @keyframes bar-pulse {
+
+      0%,
+      100% {
+        transform: scaleY(0.4);
+      }
+      
+      50% {
+        transform: scaleY(1);
+      }
+    }
+    
+    .bar-playing {
+      animation: bar-pulse 0.9s ease-in-out infinite;
+    }
+    
+    .bar-playing:nth-child(2n) {
+      animation-delay: 0.15s;
+    }
+    
+    .bar-playing:nth-child(3n) {
+      animation-delay: 0.3s;
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased selection:bg-primary-container selection:text-white min-h-screen flex flex-col items-center justify-center relative overflow-x-hidden p-0 sm:p-4">
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[520px] h-[520px] bg-primary-container/15 rounded-full blur-[140px]"></div>
+    <div class="absolute bottom-10 -right-24 w-[380px] h-[380px] bg-secondary-container/10 rounded-full blur-[120px]"></div>
+    <div class="absolute top-1/2 -left-28 w-[320px] h-[320px] bg-tertiary-container/10 rounded-full blur-[110px]"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] [background-size:24px_24px] opacity-40"></div>
+  </div>
+  
+  <main class="w-full max-w-md bg-surface-container-lowest sm:rounded-3xl sm:border sm:border-white/10 shadow-[0_24px_80px_rgba(0,0,0,0.8)] relative z-10 flex flex-col min-h-screen sm:min-h-[844px] overflow-hidden justify-center">
+    
+    <div class="flex-1 flex flex-col items-center justify-center px-6 text-center" id="loading-state">
+      <p class="font-body-md text-body-md text-on-surface-variant">Loading track…</p>
+    </div>
+    
+    <div class="hidden flex-1 flex-col items-center justify-center px-6 text-center" id="not-found-state">
+      <p class="font-body-md text-body-md text-on-surface-variant">This link doesn't match any track.</p>
+      <a class="text-primary font-body-md text-body-md mt-4 inline-block" href="/">Go to Neime</a>
+    </div>
+    
+    <div class="hidden flex-1 flex flex-col items-center justify-center px-6 py-4 z-10 w-full" id="song-state">
+      <div class="w-80 h-80 sm:w-64 sm:h-64 my-2 relative group">
+        <div class="absolute -inset-1 bg-primary-container/20 rounded-2xl blur-xl opacity-60"></div>
+        <img alt="Cover art" class="relative w-full h-full object-cover rounded-2xl shadow-2xl border border-white/10" id="song-cover" src="" />
+      </div>
+      
+      <div class="text-center mt-5 w-full">
+        <h1 class="font-headline-md text-headline-md font-bold text-white tracking-tight" id="song-title">Title</h1>
+        <div class="flex items-center justify-center gap-1.5 text-on-surface-variant mt-1.5">
+          <span class="font-body-md text-on-surface font-medium cursor-pointer hover:text-primary transition-colors" id="song-artist">Artist</span>
+          <span class="hidden inline-flex items-center text-secondary-container ml-0.5" id="verified-badge" title="Verified">
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+          </span>
+        </div>
+      </div>
+      
+      <div class="w-full max-w-xs mt-6 px-4 py-3 rounded-2xl bg-surface-container-high/60 border border-white/5 backdrop-blur-md flex items-center gap-3">
+        <button aria-label="Preview 30s track sample" class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white shrink-0 shadow-sm active:scale-95 transition-transform hover:brightness-110" id="preview-btn" type="button">
+          <span class="material-symbols-outlined text-lg leading-none" id="preview-icon" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+        </button>
+        <div class="flex-1 flex items-center gap-1 h-5" id="waveform-bars">
+          <span class="w-1 h-2 bg-surface-variant rounded-full"></span>
+          <span class="w-1 h-4 bg-surface-variant rounded-full"></span>
+          <span class="w-1 h-3 bg-surface-variant rounded-full"></span>
+          <span class="w-1 h-5 bg-surface-variant rounded-full"></span>
+          <span class="w-1 h-5 bg-surface-variant rounded-full"></span>
+          <span class="w-1 h-2.5 bg-surface-variant rounded-full"></span>
+          <span class="w-1 h-3.5 bg-surface-variant rounded-full"></span>
+          <span class="w-1 h-4 bg-surface-variant rounded-full"></span>
+          <span class="w-1 h-2.5 bg-surface-variant rounded-full"></span>
+          <span class="w-1 h-3.5 bg-surface-variant rounded-full"></span>
+          <span class="w-1 h-4 bg-surface-variant rounded-full"></span>
+          <span class="w-1 h-2 bg-surface-variant rounded-full"></span>
+          <span class="w-1 h-4 bg-surface-variant rounded-full"></span>
+          <span class="w-1 h-3 bg-surface-variant rounded-full"></span>
+        </div>
+        <div class="flex items-center gap-1 font-label-sm text-label-sm text-outline shrink-0 font-medium">
+          <span id="preview-time">0:00</span><span>/</span><span id="preview-total">0:30</span>
+        </div>
+      </div>
+      
+      <div class="hidden w-full max-w-xs mt-4 rounded-lg px-4 py-3 font-body-md text-body-md text-center" id="status-banner" role="alert"></div>
+    </div>
+    
+    <div class="hidden px-6 pt-2 pb-8 w-full bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest to-transparent z-20 flex-col gap-3" id="action-area">
+      <button class="w-full py-3.5 px-6 rounded-full bg-primary-container text-white font-headline-md text-base font-bold flex items-center justify-center gap-2 shadow-[0_10px_30px_rgba(255,92,0,0.35)] hover:brightness-105 active:scale-[0.98] transition-all duration-200" id="action-btn" type="button">
+        <span id="action-label">Unlock Track — ₦0</span>
+      </button>
+      <div class="flex items-center justify-between text-label-sm font-label-sm px-2 pt-1 text-outline">
+        <p class="text-outline/70" id="support-note">Supporting the artist directly.</p>
+        <div class="flex items-center gap-3">
+          <button aria-label="Save track" class="hover:text-primary transition-colors flex items-center gap-1 active:scale-95" id="save-btn" type="button">
+            <span class="material-symbols-outlined text-sm" id="save-icon">bookmark_add</span><span id="save-label">Save</span>
+          </button>
+          <span class="text-white/10">•</span>
+          <button aria-label="Gift track" class="opacity-50 flex items-center gap-1 cursor-not-allowed" id="gift-btn" type="button">
+            <span class="material-symbols-outlined text-sm">redeem</span><span>Gift</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <script src="../js/config.js"></script>
+  <script src="../js/player.js"></script>
+  <script>
+    const ARTIST_SHARE_PERCENT = 90; // keep in sync with the PLATFORM_CUT_PERCENT secret
+    
+    let song = null;
+    let currentUser = null;
+    let owned = false;
+    
+    const previewAudio = new Audio();
+    let previewPlaying = false;
+    
+    function showStatus(message, isError) {
+      const b = document.getElementById('status-banner');
+      b.textContent = message;
+      b.classList.remove('hidden', 'bg-error-container', 'text-on-error-container', 'bg-secondary-container/20', 'text-secondary');
+      b.classList.add(isError ? 'bg-error-container' : 'bg-secondary-container/20', isError ? 'text-on-error-container' : 'text-secondary');
+    }
+    
+    function showNotFound() {
+      document.getElementById('loading-state').classList.add('hidden');
+      document.getElementById('not-found-state').classList.remove('hidden');
+      document.getElementById('not-found-state').classList.add('flex');
+    }
+    
+    function formatTime(s) {
+      if (!isFinite(s)) return '0:00';
+      return `${Math.floor(s / 60)}:${Math.floor(s % 60).toString().padStart(2, '0')}`;
+    }
+    
+    (async function init() {
+      const code = new URLSearchParams(window.location.search).get('code');
+      if (!code) { showNotFound(); return; }
+      
+      const { data, error } = await window.sb.from('songs').select('*, artists(is_verified)').eq('share_code', code).maybeSingle();
+      if (error || !data) { showNotFound(); return; }
+      
+      song = data;
+      document.getElementById('song-cover').src = song.cover_url || '';
+      document.getElementById('song-title').textContent = song.title;
+      document.getElementById('song-artist').textContent = song.feature ? `${song.artist_name} ft. ${song.feature}` : song.artist_name;
+      document.getElementById('song-artist').addEventListener('click', () => {
+        window.location.href = `artist-info.html?artist=${song.artist_id}`;
+      });
+      if (song.artists?.is_verified) document.getElementById('verified-badge').classList.remove('hidden');
+      
+      document.getElementById('support-note').textContent = `${ARTIST_SHARE_PERCENT}% goes directly to ${song.artist_name}`;
+      
+      if (song.preview_url) {
+        previewAudio.src = song.preview_url;
+      } else {
+        document.getElementById('preview-btn').disabled = true;
+        document.getElementById('preview-btn').classList.add('opacity-40');
+      }
+      
+      const { data: { session } } = await window.sb.auth.getSession();
+      currentUser = session?.user || null;
+      
+      document.getElementById('loading-state').classList.add('hidden');
+      document.getElementById('song-state').classList.remove('hidden');
+      document.getElementById('song-state').classList.add('flex');
+      document.getElementById('action-area').classList.remove('hidden');
+      document.getElementById('action-area').classList.add('flex');
+      
+      if (currentUser) {
+        const { data: purchase } = await window.sb.from('purchases').select('id').eq('buyer_id', currentUser.id).eq('song_id', song.id).maybeSingle();
+        owned = !!purchase;
+        
+        const { data: savedRow } = await window.sb.from('saved_tracks').select('song_id').eq('listener_id', currentUser.id).eq('song_id', song.id).maybeSingle();
+        setSaveState(!!savedRow);
+      }
+      
+      updateActionButton();
+    })();
+    
+    function updateActionButton() {
+      document.getElementById('action-label').textContent = owned ? 'Play Track' : `Unlock Track — ₦${song.price}`;
+    }
+    
+    // ── Preview playback ──
+    document.getElementById('preview-btn').addEventListener('click', () => {
+      if (!song.preview_url) return;
+      previewPlaying ? previewAudio.pause() : previewAudio.play();
+    });
+    previewAudio.addEventListener('play', () => {
+      previewPlaying = true;
+      document.getElementById('preview-icon').textContent = 'pause';
+      document.querySelectorAll('#waveform-bars span').forEach(bar => bar.classList.add('bar-playing', 'bg-primary-container'));
+      document.querySelectorAll('#waveform-bars span').forEach(bar => bar.classList.remove('bg-surface-variant'));
+    });
+    previewAudio.addEventListener('pause', () => {
+      previewPlaying = false;
+      document.getElementById('preview-icon').textContent = 'play_arrow';
+      document.querySelectorAll('#waveform-bars span').forEach(bar => bar.classList.remove('bar-playing', 'bg-primary-container'));
+      document.querySelectorAll('#waveform-bars span').forEach(bar => bar.classList.add('bg-surface-variant'));
+    });
+    previewAudio.addEventListener('timeupdate', () => {
+      document.getElementById('preview-time').textContent = formatTime(previewAudio.currentTime);
+    });
+    previewAudio.addEventListener('loadedmetadata', () => {
+      document.getElementById('preview-total').textContent = formatTime(previewAudio.duration);
+    });
+    previewAudio.addEventListener('ended', () => {
+      previewAudio.currentTime = 0;
+    });
+    
+    // ── Save (bookmark) ──
+    function setSaveState(isSaved) {
+      const icon = document.getElementById('save-icon');
+      const label = document.getElementById('save-label');
+      icon.textContent = isSaved ? 'bookmark' : 'bookmark_add';
+      icon.dataset.saved = isSaved;
+      label.textContent = isSaved ? 'Saved' : 'Save';
+    }
+    
+    document.getElementById('save-btn').addEventListener('click', async () => {
+      if (!currentUser) {
+        window.location.href = `login.html?redirect=${encodeURIComponent(window.location.href)}`;
+        return;
+      }
+      const isSaved = document.getElementById('save-icon').dataset.saved === 'true';
+      if (isSaved) {
+        await window.sb.from('saved_tracks').delete().eq('listener_id', currentUser.id).eq('song_id', song.id);
+      } else {
+        await window.sb.from('saved_tracks').insert({ listener_id: currentUser.id, song_id: song.id });
+      }
+      setSaveState(!isSaved);
+    });
+    
+    document.getElementById('gift-btn').addEventListener('click', () => {
+      alert('Gifting tracks is coming soon!');
+    });
+    
+    // ── Buy / Play ──
+    document.getElementById('action-btn').addEventListener('click', async () => {
+      if (!currentUser) {
+        window.location.href = `login.html?redirect=${encodeURIComponent(window.location.href)}`;
+        return;
+      }
+      if (owned) { window.playSong(song); return; }
+      
+      const handler = PaystackPop.setup({
+        key: window.PAYSTACK_PUBLIC_KEY,
+        email: currentUser.email,
+        amount: Math.round(song.price * 100),
+        currency: 'NGN',
+        ref: `neime_${song.id}_${Date.now()}`,
+        callback: (response) => verifyAndUnlock(response.reference),
+        onClose: () => {}
+      });
+      handler.openIframe();
+    });
+    
+    async function verifyAndUnlock(reference) {
+      const { data, error } = await window.sb.functions.invoke('verify-paystack', {
+        body: { reference, song_id: song.id, buyer_id: currentUser.id }
+      });
+      if (error || !data?.success) {
+        showStatus('Payment verification failed.', true);
+        return;
+      }
+      owned = true;
+      updateActionButton();
+      window.playSong(song);
+    }
+  </script>
+</body>
+
+</html>
