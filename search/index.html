@@ -276,7 +276,7 @@
     
     (async function initSearch() {
       const { data: { session } } = await window.sb.auth.getSession();
-      if (!session) { window.location.href = 'login.html'; return; }
+      if (!session) { window.location.href = '../account/non.html'; return; }
       currentUser = session.user;
     })();
     
