@@ -140,9 +140,6 @@
       <div class="flex items-center justify-between text-label-sm font-label-sm px-2 pt-1 text-outline">
         <p class="text-outline/70" id="support-note">Supporting the artist directly.</p>
         <div class="flex items-center gap-3">
-          <button aria-label="Save track" class="hover:text-primary transition-colors flex items-center gap-1 active:scale-95" id="save-btn" type="button">
-            <span class="material-symbols-outlined text-sm" id="save-icon">bookmark_add</span><span id="save-label">Save</span>
-          </button>
           <span class="text-white/10">•</span>
           <button aria-label="Gift track" class="opacity-50 flex items-center gap-1 cursor-not-allowed" id="gift-btn" type="button">
             <span class="material-symbols-outlined text-sm">redeem</span><span>Gift</span>
@@ -258,29 +255,7 @@
       previewAudio.currentTime = 0;
     });
 
-    // ── Save (bookmark) ──
-    function setSaveState(isSaved) {
-      const icon = document.getElementById('save-icon');
-      const label = document.getElementById('save-label');
-      icon.textContent = isSaved ? 'bookmark' : 'bookmark_add';
-      icon.dataset.saved = isSaved;
-      label.textContent = isSaved ? 'Saved' : 'Save';
-    }
-
-    document.getElementById('save-btn').addEventListener('click', async () => {
-      if (!currentUser) {
-        window.location.href = `../login?redirect=${encodeURIComponent(window.location.href)}`;
-        return;
-      }
-      const isSaved = document.getElementById('save-icon').dataset.saved === 'true';
-      if (isSaved) {
-        await window.sb.from('saved_tracks').delete().eq('listener_id', currentUser.id).eq('song_id', song.id);
-      } else {
-        await window.sb.from('saved_tracks').insert({ listener_id: currentUser.id, song_id: song.id });
-      }
-      setSaveState(!isSaved);
-    });
-
+    // ── Gifting ──
     document.getElementById('gift-btn').addEventListener('click', () => {
       alert('Gifting tracks is coming soon!');
     });
