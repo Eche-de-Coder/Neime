@@ -827,6 +827,19 @@
         const { error: songErr } = await window.sb.storage.from('songs').upload(audioPath, songFile);
         if (songErr) throw songErr;
         
+        // 2.5 Create preview 
+        let previewUrl = null;
+        try {
+          const previewBlob = await generatePreviewClip(songFile, 30);
+          const previewPath = `${userId}/${Date.now()}-preview.wav`;
+          const { error: previewErr } = await window.sb.storage.from('previews').upload(previewPath, previewBlob);
+          if (!previewErr) {
+            previewUrl = window.sb.storage.from('previews').getPublicUrl(previewPath).data.publicUrl;
+          }
+        } catch (previewGenErr) {
+          console.warn('Preview generation failed, uploading without one:', previewGenErr);
+        }
+        
         // 3. Insert the song row
         const { error: insertErr } = await window.sb.from('songs').insert({
           artist_id: userId,
@@ -835,7 +848,8 @@
           feature: feature || null,
           price,
           cover_url: coverUrlData.publicUrl,
-          audio_path: audioPath
+          audio_path: audioPath,
+          preview_url: previewUrl
         });
         if (insertErr) throw insertErr;
         
@@ -851,6 +865,72 @@
         label.textContent = 'Upload Song';
       }
     });
+    
+    
+    generatePreviewClip = async function(file, seconds = 30) {
+      const arrayBuffer = await file.arrayBuffer();
+      const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+      const decoded = await audioCtx.decodeAudioData(arrayBuffer);
+      
+      const frameCount = Math.min(decoded.length, seconds * decoded.sampleRate);
+      const previewBuffer = audioCtx.createBuffer(decoded.numberOfChannels, frameCount, decoded.sampleRate);
+      
+      for (let ch = 0; ch < decoded.numberOfChannels; ch++) {
+        previewBuffer.copyToChannel(decoded.getChannelData(ch).slice(0, frameCount), ch);
+      }
+      
+      audioCtx.close();
+      return audioBufferToWav(previewBuffer);
+    };
+    
+    function audioBufferToWav(buffer) {
+      const numChannels = buffer.numberOfChannels;
+      const sampleRate = buffer.sampleRate;
+      const bytesPerSample = 2;
+      const blockAlign = numChannels * bytesPerSample;
+      const result = numChannels === 2 ?
+        interleave(buffer.getChannelData(0), buffer.getChannelData(1)) :
+        buffer.getChannelData(0);
+      const dataLength = result.length * bytesPerSample;
+      const arrayBuffer = new ArrayBuffer(44 + dataLength);
+      const view = new DataView(arrayBuffer);
+      
+      writeString(view, 0, 'RIFF');
+      view.setUint32(4, 36 + dataLength, true);
+      writeString(view, 8, 'WAVE');
+      writeString(view, 12, 'fmt ');
+      view.setUint32(16, 16, true);
+      view.setUint16(20, 1, true);
+      view.setUint16(22, numChannels, true);
+      view.setUint32(24, sampleRate, true);
+      view.setUint32(28, sampleRate * blockAlign, true);
+      view.setUint16(32, blockAlign, true);
+      view.setUint16(34, 16, true);
+      writeString(view, 36, 'data');
+      view.setUint32(40, dataLength, true);
+      
+      let offset = 44;
+      for (let i = 0; i < result.length; i++, offset += 2) {
+        const s = Math.max(-1, Math.min(1, result[i]));
+        view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7fff, true);
+      }
+      
+      return new Blob([arrayBuffer], { type: 'audio/wav' });
+    }
+    
+    function interleave(left, right) {
+      const result = new Float32Array(left.length + right.length);
+      let idx = 0;
+      for (let i = 0; i < left.length; i++) {
+        result[idx++] = left[i];
+        result[idx++] = right[i];
+      }
+      return result;
+    }
+    
+    function writeString(view, offset, str) {
+      for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i));
+    }
     
     
     // let currentArtistId = null;
