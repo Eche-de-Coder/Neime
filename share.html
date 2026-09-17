@@ -265,7 +265,7 @@
 
     document.getElementById('save-btn').addEventListener('click', async () => {
       if (!currentUser) {
-        window.location.href = `login.html?redirect=${encodeURIComponent(window.location.href)}`;
+        window.location.href = `../login?redirect=${encodeURIComponent(window.location.href)}`;
         return;
       }
       const isSaved = document.getElementById('save-icon').dataset.saved === 'true';
@@ -284,7 +284,7 @@
     // ── Buy / Play ──
     document.getElementById('action-btn').addEventListener('click', async () => {
       if (!currentUser) {
-        window.location.href = `login.html?redirect=${encodeURIComponent(window.location.href)}`;
+        window.location.href = `../account/non.html?redirect=${encodeURIComponent(window.location.href)}`;
         return;
       }
       if (owned) { window.playSong(song); return; }
