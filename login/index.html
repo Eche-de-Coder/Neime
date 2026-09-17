@@ -162,7 +162,10 @@
             <label class="font-label-sm text-label-sm text-on-surface uppercase" for="password">Password</label>
             <div class="relative">
               <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">lock</span>
-              <input class="w-full bg-surface-container-low border border-surface-variant rounded-xl py-3.5 pl-12 pr-4 font-body-lg text-body-lg text-on-background placeholder:text-on-surface-variant/50 focus:border-secondary-container focus:ring-1 focus:ring-secondary-container focus:outline-none transition-colors" id="password" name="password" placeholder="••••••••" required="" type="password" />
+              <input class="w-full bg-surface-container-low border border-surface-variant rounded-xl py-3.5 pl-12 pr-12 font-body-lg text-body-lg text-on-background placeholder:text-on-surface-variant/50 focus:border-secondary-container focus:ring-1 focus:ring-secondary-container focus:outline-none transition-colors" id="password" name="password" placeholder="••••••••" required="" type="password" />
+              <button type="button" id="toggle-password" class="absolute right-4 bottom-0 -translate-y-1/2 text-on-surface-variant hover:text-on-surface transition-colors" aria-label="Show password">
+                <span class="material-symbols-outlined" id="toggle-password-icon" style="font-variation-settings: 'FILL' 0;">visibility</span>
+              </button>
             </div>
             <div class="flex justify-end mt-1">
               <a class="font-body-md text-body-md text-primary hover:text-primary-container transition-colors" href="../forgot-password">Forgot Password?</a>
@@ -226,6 +229,17 @@
         // to let signed-in users land on the login page intentionally.
         // window.location.href = '../homepage';
       }
+    });
+
+    const passwordInput = document.getElementById('password');
+    const toggleBtn = document.getElementById('toggle-password');
+    const toggleIcon = document.getElementById('toggle-password-icon');
+    
+    toggleBtn.addEventListener('click', () => {
+      const isPassword = passwordInput.type === 'password';
+      passwordInput.type = isPassword ? 'text' : 'password';
+      toggleIcon.textContent = isPassword ? 'visibility_off' : 'visibility';
+      toggleBtn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
     });
   </script>
 </body>
