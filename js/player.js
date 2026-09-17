@@ -260,8 +260,13 @@
   }
   
   window.playSong = async function(song, songQueue) {
-    const { data, error } = await window.sb.storage.from('songs').createSignedUrl(song.audio_path, 3600);
-    if (error) { alert('Could not load audio: ' + error.message); return; }
+    const { data, error } = await window.sb.functions.invoke('get-stream-url', {
+      body: { song_id: song.id }
+    });
+    if (error || !data?.url) {
+      alert('Could not load audio: ' + (error?.message || data?.error || 'Unknown error'));
+      return;
+    }
     
     currentSong = song;
     queue = songQueue && songQueue.length ? songQueue : [song];
@@ -269,9 +274,9 @@
     if (queueIndex === -1) queueIndex = 0;
     
     const a = audioEl();
-    a.src = data.signedUrl;
+    a.src = data.url;
     a.play();
-    startStreamTimer(song.id);
+    startStreamTimer(song.id, data.sessionId);
     
     const displayArtist = song.feature ? `${song.artist_name} ft. ${song.feature}` : song.artist_name;
     
@@ -296,7 +301,7 @@
   let streamSeconds = 0;
   let streamCounted = false;
   
-  function startStreamTimer(songId) {
+  function startStreamTimer(songId, sessionId) {
     clearStreamTimer();
     streamSeconds = 0;
     streamCounted = false;
@@ -306,7 +311,7 @@
       streamSeconds += 1;
       if (streamSeconds >= 30 && !streamCounted) {
         streamCounted = true;
-        window.sb.rpc('increment_play_count', { p_song_id: songId }).then(({ error }) => {
+        window.sb.rpc('confirm_stream', { p_session_id: sessionId }).then(({ error }) => {
           if (error) console.error('Stream count failed:', error.message);
         });
       }
