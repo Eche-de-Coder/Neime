@@ -241,7 +241,7 @@
     }
 
     // ── Preview playback ──
-    document.getElementByClass('preview-btn').addEventListener('click', () => {
+    document.querySelectorAll('.preview-btn').addEventListener('click', () => {
       if (!song.preview_url) return;
       previewPlaying ? previewAudio.pause() : previewAudio.play();
     });
