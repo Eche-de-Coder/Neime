@@ -233,6 +233,13 @@
             No purchases yet — head to the home page to discover music.
           </p>
         </div>
+        <div class="glass-panel rounded-xl p-6">
+          <h3 class="font-headline-md text-headline-md text-on-surface mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">album</span> My Albums
+          </h3>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4" id="account-collections-list"></div>
+          <p class="hidden font-body-md text-body-md text-on-surface-variant text-center py-6" id="account-collections-empty">No purchased albums yet.</p>
+        </div>
         <!-- Account Settings Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-gutter">
           <!-- Notification Settings -->
@@ -293,6 +300,7 @@
   
   <script src="../js/config.js"></script>
   <script src="../js/player.js"></script>
+  <script src="../js/collections.js"></script>
   <script>
     function formatJoinDate(isoString) {
       const date = new Date(isoString);
@@ -337,6 +345,9 @@
         console.warn('Could not load listener profile row:', error.message);
       }
       loadPurchases();
+      
+      const cols = await window.Collections.renderInto('account-collections-list', { purchasedOnly: true });
+      document.getElementById('account-collections-empty').classList.toggle('hidden', cols.length > 0);
     })();
     
     async function logout() {
