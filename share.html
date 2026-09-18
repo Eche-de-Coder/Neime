@@ -241,9 +241,11 @@
     }
 
     // ── Preview playback ──
-    document.querySelectorAll('.preview-btn').addEventListener('click', () => {
-      if (!song.preview_url) return;
-      previewPlaying ? previewAudio.pause() : previewAudio.play();
+    document.querySelectorAll('.preview-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (!song.preview_url) return;
+        previewPlaying ? previewAudio.pause() : previewAudio.play();
+      });
     });
     previewAudio.addEventListener('play', () => {
       previewPlaying = true;
