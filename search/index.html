@@ -199,6 +199,11 @@
         <h2 class="font-headline-md text-headline-md text-on-background text-lg">Artists</h2>
         <div class="flex flex-col gap-2" id="artists-results-list"></div>
       </div>
+      
+      <div class="hidden flex-col gap-4" id="collections-results-section">
+        <h2 class="font-headline-md text-headline-md text-on-background text-lg">Albums &amp; EPs</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="collections-results-list"></div>
+      </div>
     </section>
     
   </main>
@@ -267,8 +272,10 @@
       </button>
     </div>
   </div>
+  
   <script src="../js/config.js"></script>
   <script src="../js/player.js"></script>
+  <script src="../js/collections.js"></script>
   <script>
     let currentUser = null;
     let songBeingBought = null;
@@ -314,6 +321,9 @@
         showState('empty');
         return;
       }
+      
+      const collections = await window.Collections.renderInto('collections-results-list', { searchQuery: query });
+      document.getElementById('collections-results-section').classList.toggle('hidden', collections.length === 0);
       
       renderSongResults(songs, query);
       renderArtistResults(songs, query);
