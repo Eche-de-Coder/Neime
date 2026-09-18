@@ -145,6 +145,12 @@
     <p class="hidden font-body-lg text-body-lg text-on-surface-variant text-center py-12 col-span-full" id="library-empty-state">
       Nothing purchased yet.
     </p>
+    
+    <div class="mt-10">
+      <h2 class="font-headline-md text-headline-md text-lg mb-4">Albums &amp; EPs</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4" id="library-collections-list"></div>
+      <p class="hidden font-body-lg text-body-lg text-on-surface-variant text-center py-8" id="library-collections-empty">No purchased albums yet.</p>
+    </div>
   </main>
   <!-- BottomNavBar (Mobile) -->
   <nav class="md:hidden flex justify-around items-center h-20 w-full px-2 bg-surface-dim/90 backdrop-blur-2xl fixed bottom-0 w-full z-50 pb-safe bg-surface-container-highest/50 border-t border-white/5 shadow-[0_-4px_24px_rgba(0,0,0,0.4)]">
@@ -189,6 +195,7 @@
   
   <script src="../js/config.js"></script>
   <script src="../js/player.js"></script>
+  <script src="../js/collections.js"></script>
   <script>
     (async function loadLibrary() {
       const { data: { session } } = await window.sb.auth.getSession();
@@ -208,6 +215,8 @@
       const list = document.getElementById('library-list');
       const empty = document.getElementById('library-empty-state');
       const template = document.getElementById('library-card-template');
+      const cols = window.Collections.renderInto('library-collections-list', { purchasedOnly: true });
+      document.getElementById('library-collections-empty').classList.toggle('hidden', cols.length > 0);
       
       list.innerHTML = '';
       empty.classList.toggle('hidden', purchases.length > 0);
