@@ -46,21 +46,22 @@
     document.getElementById('col-modal').classList.add('hidden');
   }
   
-  function cardHTML(col) {
+  function cardHTML(col, { horizontal } = {}) {
     const count = col.songs?.[0]?.count || 0;
     const limit = col.type === 'album' ? 20 : 10;
+    const sizeClasses = horizontal ? 'min-w-[160px] max-w-[160px] shrink-0' : 'w-full';
     return `
-      <div class="glass-panel rounded-xl p-3 flex flex-col gap-2 cursor-pointer group hover:bg-surface-container-high/40 transition-colors" data-collection-id="${col.id}">
-        <div class="relative aspect-square rounded-lg overflow-hidden bg-surface-container-high">
-          <img alt="${col.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="${col.cover_url || ''}" />
-          <span class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-black/60 text-[10px] font-label-sm uppercase tracking-wider text-white">${col.type}</span>
-        </div>
-        <div class="min-w-0">
-          <h4 class="font-body-lg text-body-lg text-on-surface truncate">${col.title}</h4>
-          <p class="font-label-sm text-label-sm text-on-surface-variant">${count}/${limit} tracks</p>
-        </div>
+    <div class="glass-panel rounded-xl p-3 flex flex-col gap-2 cursor-pointer group hover:bg-surface-container-high/40 transition-colors ${sizeClasses}" data-collection-id="${col.id}">
+      <div class="relative aspect-square rounded-lg overflow-hidden bg-surface-container-high">
+        <img alt="${col.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="${col.cover_url || ''}" />
+        <span class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-black/60 text-[10px] font-label-sm uppercase tracking-wider text-white">${col.type}</span>
       </div>
-    `;
+      <div class="min-w-0">
+        <h4 class="font-body-lg text-body-lg text-on-surface truncate">${col.title}</h4>
+        <p class="font-label-sm text-label-sm text-on-surface-variant">${count}/${limit} tracks</p>
+      </div>
+    </div>
+  `;
   }
   
   async function fetchCollections({ artistId, searchQuery, purchasedOnly } = {}) {
