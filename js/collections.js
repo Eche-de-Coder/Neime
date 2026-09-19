@@ -89,7 +89,7 @@
     if (!container) return [];
     
     const collections = await fetchCollections(options);
-    container.innerHTML = collections.map(cardHTML).join('');
+    container.innerHTML = collections.map(col => cardHTML(col, { horizontal: options.horizontal })).join('');
     
     container.querySelectorAll('[data-collection-id]').forEach(card => {
       card.addEventListener('click', () => openModal(card.dataset.collectionId));
