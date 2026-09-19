@@ -385,7 +385,7 @@
       //if (!session) { window.location.href = 'login.html'; return; }
       currentUser = session?.user || null;
       loadSongs();
-      window.Collections.renderInto('home-collections-list', {});
+      window.Collections.renderInto('home-collections-list', { horizontal: true });
     })();
     
     async function loadSongs() {
