@@ -464,12 +464,12 @@
       });
     }
     
-    // ── Purchase gate (same pattern as home.html / search.html) ──
+    // ── Purchase gate  ──
     async function hasPurchased(songId) {
       const { data } = await window.sb.from('purchases').select('id').eq('buyer_id', currentUser.id).eq('song_id', songId).maybeSingle();
       return !!data;
     }
-    let songBeingBought = null;
+    //let songBeingBought = null;
     
     async function handlePlayClick(song) {
       const owned = await hasPurchased(song.id);
