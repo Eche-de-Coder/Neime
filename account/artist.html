@@ -1104,7 +1104,8 @@
           price,
           cover_url: coverUrlData.publicUrl,
           audio_path: audioPath,
-          preview_url: previewUrl
+          preview_url: previewUrl,
+          collection_id: collectionId
         });
         if (insertErr) throw insertErr;
         
@@ -1119,6 +1120,8 @@
         btn.disabled = false;
         label.textContent = 'Upload Song';
       }
+      loadCollections();
+      loadSongs();
     });
     
     
@@ -1349,6 +1352,7 @@
         editModal.classList.add('hidden');
         banner.classList.add('hidden');
         loadSongs();
+        loadCollections();
       } catch (err) {
         banner.textContent = err.message;
         banner.classList.remove('hidden');
@@ -1370,6 +1374,7 @@
       // Best-effort cleanup of the audio file in storage
       await window.sb.storage.from('songs').remove([song.audio_path]);
       
+      loadCollections();
       loadSongs();
     }
     
