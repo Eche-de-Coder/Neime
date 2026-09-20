@@ -479,7 +479,9 @@
     });
     
     async function verifyAndUnlock(reference, song) {
-      const { data, error } = await window.sb.functions.invoke('verify-paystack', {});
+      const { data, error } = await window.sb.functions.invoke('verify-paystack', {
+        body: { reference, song_id: song.id, buyer_id: currentUser.id }
+      });
       
       if (error || !data?.success) {
         alert('Payment verification failed: ' + (error?.message || data?.error || 'Unknown error'));
@@ -487,7 +489,7 @@
       }
       
       buyModal.classList.add('hidden');
-      playSong(song);
+      window.playSong(song);
     }
   </script>
 </body>
