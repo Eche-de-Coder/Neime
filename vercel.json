@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    { "source": "/:code([a-z]{4})", "destination": "/api/track?code=:code" }
+    { "source": "/:code([a-zA-Z]{4})", "destination": "/api/track?code=:code" }
   ],
   "headers": [
     {
