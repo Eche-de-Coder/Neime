@@ -1,15 +1,16 @@
+// api/track.js
 export default async function handler(req, res) {
   const { code } = req.query;
 
   if (!code) {
-    res.status(400).send('Missing share code');
+    res.status(400).send('Missing track code');
     return;
   }
 
   const SUPABASE_URL = process.env.SUPABASE_URL;
   const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 
-  const query = `${SUPABASE_URL}/rest/v1/songs?share_code=eq.${code}&select=title,artist_name,feature,cover_url`;
+  const query = `${SUPABASE_URL}/rest/v1/songs?share_code=eq.${code}&select=title,artist_name,feature,price,cover_url`;
 
   const sbRes = await fetch(query, {
     headers: {
@@ -28,10 +29,10 @@ export default async function handler(req, res) {
 
   const artistLine = song.feature ? `${song.artist_name} ft. ${song.feature}` : song.artist_name;
   const title = `${song.title} — ${artistLine} | Neime`;
-  const description = `Listen to ${song.title} by ${artistLine} on Neime.`;
-  const image = song.cover_url || 'https://neime.com.ng/default-cover.png';
+  const description = `Listen to "${song.title}" by ${artistLine} on Neime. ₦${Number(song.price).toLocaleString()}.`;
+  const image = song.cover_url || `https://${req.headers.host}/images/default-cover.png`;
   const pageUrl = `https://${req.headers.host}/${code}`;
-  const redirectTarget = `/share.html?code=${code}`;
+  const redirectUrl = `/share/?code=${code}`;
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -40,6 +41,7 @@ export default async function handler(req, res) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>${escHtml(title)}</title>
 
+  <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
   <meta property="og:type" content="music.song" />
   <meta property="og:title" content="${escHtml(title)}" />
   <meta property="og:description" content="${escHtml(description)}" />
@@ -47,16 +49,18 @@ export default async function handler(req, res) {
   <meta property="og:url" content="${escHtml(pageUrl)}" />
   <meta property="og:site_name" content="Neime" />
 
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="${escHtml(title)}" />
   <meta name="twitter:description" content="${escHtml(description)}" />
   <meta name="twitter:image" content="${escHtml(image)}" />
 
-  <meta http-equiv="refresh" content="0; url=${redirectTarget}" />
-  <script>window.location.replace('${redirectTarget}');</script>
+  <!-- Redirect real visitors (not crawlers) to the actual interactive page -->
+  <meta http-equiv="refresh" content="0; url=${redirectUrl}" />
+  <script>window.location.replace('${redirectUrl}');</script>
 </head>
 <body>
-  <p>Redirecting to <a href="${redirectTarget}">${escHtml(title)}</a>…</p>
+  <p>Redirecting to <a href="${redirectUrl}">${escHtml(song.title)}</a>…</p>
 </body>
 </html>`;
 
