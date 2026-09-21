@@ -401,7 +401,7 @@
 
     document.getElementById('hero-play-btn').addEventListener('click', () => {
       const heroSong = playQueue.find(s => s.id === '895772e0-cad8-478c-8be5-7c072b1d0685');
-      if (heroSong) window.Purchase.handlePlayClick(heroSong);
+      if (heroSong) handlePlayClick(heroSong);
     });
     
     function renderSongs(songs) {
