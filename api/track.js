@@ -32,7 +32,7 @@ export default async function handler(req, res) {
   const description = `Listen to "${song.title}" by ${artistLine} on Neime. ₦${Number(song.price).toLocaleString()}.`;
   const image = song.cover_url || `https://${req.headers.host}/images/default-cover.png`;
   const pageUrl = `https://${req.headers.host}/${code}`;
-  const redirectUrl = `/share/?code=${code}`;
+  const redirectUrl = `../share.html?code=${code}`;
 
   const html = `<!DOCTYPE html>
 <html lang="en">
