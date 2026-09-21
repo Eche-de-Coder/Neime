@@ -304,7 +304,7 @@
         <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-1">Moneybag</h1>
         <p class="font-body-lg text-body-lg text-on-surface-variant mb-6"><a href="https://www.neime.com.ng/artist-info.html?artist=3eee3229-e591-4267-913d-18af5ae5c281">Comingsoon</a> ft. Double gg</p>
         <div class="flex items-center gap-4">
-          <button class="w-14 h-14 rounded-full bg-primary-container text-white flex items-center justify-center drop-shadow-[0_0_16px_rgba(255,92,0,0.6)] hover:scale-105 active:scale-95 transition-all">
+          <button id="hero-play-btn" class="w-14 h-14 rounded-full bg-primary-container text-white flex items-center justify-center drop-shadow-[0_0_16px_rgba(255,92,0,0.6)] hover:scale-105 active:scale-95 transition-all">
             <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
           </button>
           <button class="h-14 px-6 rounded-full bg-black border border-primary-container text-primary font-price-display text-price-display flex items-center gap-2 hover:bg-surface-container-lowest active:scale-95 transition-all">
@@ -398,6 +398,11 @@
       playQueue = songs || [];
       renderSongs(playQueue);
     }
+
+    document.getElementById('hero-play-btn').addEventListener('click', () => {
+      const heroSong = playQueue.find(s => s.id === '895772e0-cad8-478c-8be5-7c072b1d0685');
+      if (heroSong) window.Purchase.handlePlayClick(heroSong);
+    });
     
     function renderSongs(songs) {
       const container = document.getElementById('trending-songs');
