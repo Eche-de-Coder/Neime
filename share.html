@@ -231,7 +231,7 @@
     }
 
     // ── Preview playback ──
-    document.querySelectorAll('.preview-btn').forEach(btn => {
+    /**document.querySelectorAll('.preview-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         if (song.preview_url) {
           previewAudio.src = song.preview_url;
@@ -242,7 +242,31 @@
           });
         }
       });
+    });**/
+
+    document.querySelectorAll('.preview-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (!song?.preview_url) {
+          document.querySelectorAll('.preview-btn').forEach(b => {
+            b.disabled = true;
+            b.classList.add('opacity-40');
+          });
+          return;
+        }
+        if (previewAudio.src !== song.preview_url) {
+          previewAudio.src = song.preview_url;
+        }
+    
+        if (previewPlaying) {
+          previewAudio.pause();
+        } else {
+          previewAudio.play().catch(err => {
+            console.error('Failed to play preview:', err);
+          });
+        }
+      });
     });
+    
     previewAudio.addEventListener('play', () => {
       previewPlaying = true;
       document.getElementById('preview-icon').textContent = 'pause';
