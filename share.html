@@ -219,10 +219,7 @@
     let currentUser = null;
     let owned = false;
     
-    //const previewAudio = new Audio();
-    const previewAudio = document.createElement('audio');
-    previewAudio.crossOrigin = 'anonymous';
-    previewAudio.preload = 'auto';
+    const previewAudio = new Audio();
     let previewPlaying = false;
     
     function showStatus(message, isError) {
