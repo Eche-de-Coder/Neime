@@ -189,6 +189,7 @@
       if (error || !data) { showNotFound(); return; }
 
       song = data;
+      setupPreview();
       document.getElementById('song-cover').src = song.cover_url || '';
       document.getElementById('song-title').textContent = song.title;
       document.getElementById('song-artist').textContent = song.feature ? `${song.artist_name} ft. ${song.feature}` : song.artist_name;
@@ -230,6 +231,19 @@
       document.getElementById('action-label').textContent = owned ? 'Play Track' : `Unlock Track — ₦${song.price}`;
     }
 
+
+    function setupPreview() {
+  if (!song?.preview_url) {
+    document.querySelectorAll('.preview-btn').forEach(btn => {
+      btn.disabled = true;
+      btn.classList.add('opacity-40');
+    });
+    return;
+  }
+  previewAudio.src = song.preview_url;
+  previewAudio.load(); // important
+    }
+
     // ── Preview playback ──
     /**document.querySelectorAll('.preview-btn').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -245,29 +259,26 @@
     });**/
 
     document.querySelectorAll('.preview-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        if (!song?.preview_url) {
-          document.querySelectorAll('.preview-btn').forEach(b => {
-            b.disabled = true;
-            b.classList.add('opacity-40');
-          });
-          return;
+  btn.addEventListener('click', async () => {
+    if (!song?.preview_url) return;
+
+    try {
+      if (previewPlaying) {
+        previewAudio.pause();
+      } else {
+        // Reset to beginning if it has ended
+        if (previewAudio.ended) {
+          previewAudio.currentTime = 0;
         }
-        if (previewAudio.src !== song.preview_url) {
-          previewAudio.src = song.preview_url;
-        }
+        await previewAudio.play();
+      }
+    } catch (err) {
+      console.error('Preview play error:', err);
+    }
+  });
+});
     
-        if (previewPlaying) {
-          previewAudio.pause();
-        } else {
-          previewAudio.play().catch(err => {
-            console.error('Failed to play preview:', err);
-          });
-        }
-      });
-    });
-    
-    previewAudio.addEventListener('play', () => {
+    /**previewAudio.addEventListener('play', () => {
       previewPlaying = true;
       document.getElementById('preview-icon').textContent = 'pause';
       document.querySelectorAll('#waveform-bars span').forEach(bar => bar.classList.add('bar-playing', 'bg-primary-container'));
@@ -287,7 +298,44 @@
     });
     previewAudio.addEventListener('ended', () => {
       previewAudio.currentTime = 0;
-    });
+    });**/
+
+    // Visual feedback
+previewAudio.addEventListener('play', () => {
+  previewPlaying = true;
+  document.getElementById('preview-icon').textContent = 'pause';
+  document.querySelectorAll('#waveform-bars span').forEach(bar => {
+    bar.classList.add('bar-playing', 'bg-primary-container');
+    bar.classList.remove('bg-surface-variant');
+  });
+});
+
+previewAudio.addEventListener('pause', () => {
+  previewPlaying = false;
+  document.getElementById('preview-icon').textContent = 'play_arrow';
+  document.querySelectorAll('#waveform-bars span').forEach(bar => {
+    bar.classList.remove('bar-playing', 'bg-primary-container');
+    bar.classList.add('bg-surface-variant');
+  });
+});
+
+previewAudio.addEventListener('timeupdate', () => {
+  document.getElementById('preview-time').textContent = formatTime(previewAudio.currentTime);
+});
+
+previewAudio.addEventListener('loadedmetadata', () => {
+  document.getElementById('preview-total').textContent = formatTime(previewAudio.duration || 30);
+});
+
+previewAudio.addEventListener('ended', () => {
+  previewAudio.currentTime = 0;
+  previewPlaying = false;
+  document.getElementById('preview-icon').textContent = 'play_arrow';
+  document.querySelectorAll('#waveform-bars span').forEach(bar => {
+    bar.classList.remove('bar-playing', 'bg-primary-container');
+    bar.classList.add('bg-surface-variant');
+  });
+});
 
     // ── Gifting ──
     document.getElementById('gift-btn').addEventListener('click', () => {
