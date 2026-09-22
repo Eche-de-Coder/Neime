@@ -7,7 +7,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <meta name="color-scheme" content="dark" />
   
-
+  
   
   <link href="https://fonts.googleapis.com" rel="preconnect" />
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
@@ -22,28 +22,64 @@
       theme: {
         extend: {
           "colors": {
-            "surface-tint": "#ffb59a", "surface": "#131316", "surface-container-lowest": "#0e0e11",
-            "primary-fixed": "#ffdbce", "on-tertiary": "#3c0090", "surface-variant": "#353438",
-            "outline": "#ab897d", "on-error": "#690005", "primary-fixed-dim": "#ffb59a",
-            "inverse-on-surface": "#303033", "secondary-fixed-dim": "#00dce5", "on-primary": "#5a1b00",
-            "on-secondary-fixed-variant": "#004f53", "on-error-container": "#ffdad6", "primary": "#ffb59a",
-            "surface-container-highest": "#353438", "tertiary-fixed": "#e9ddff", "on-secondary-container": "#006c71",
-            "on-secondary": "#003739", "on-primary-container": "#521800", "on-primary-fixed-variant": "#802a00",
-            "on-secondary-fixed": "#002021", "secondary": "#e6feff", "error": "#ffb4ab",
-            "inverse-surface": "#e4e1e6", "inverse-primary": "#a73a00", "surface-container": "#1f1f22",
-            "tertiary": "#d1bcff", "secondary-fixed": "#63f7ff", "primary-container": "#ff5c00",
-            "tertiary-fixed-dim": "#d1bcff", "surface-container-low": "#1b1b1e", "on-tertiary-fixed-variant": "#5700c9",
-            "on-background": "#e4e1e6", "tertiary-container": "#a27aff", "outline-variant": "#5b4137",
-            "background": "#131316", "surface-container-high": "#2a2a2d", "surface-dim": "#131316",
-            "error-container": "#93000a", "on-surface": "#e4e1e6", "secondary-container": "#00f4fe",
-            "on-tertiary-fixed": "#23005b", "on-surface-variant": "#e4beb1", "on-tertiary-container": "#360083",
-            "surface-bright": "#39393c", "on-primary-fixed": "#370e00"
+            "surface-tint": "#ffb59a",
+            "surface": "#131316",
+            "surface-container-lowest": "#0e0e11",
+            "primary-fixed": "#ffdbce",
+            "on-tertiary": "#3c0090",
+            "surface-variant": "#353438",
+            "outline": "#ab897d",
+            "on-error": "#690005",
+            "primary-fixed-dim": "#ffb59a",
+            "inverse-on-surface": "#303033",
+            "secondary-fixed-dim": "#00dce5",
+            "on-primary": "#5a1b00",
+            "on-secondary-fixed-variant": "#004f53",
+            "on-error-container": "#ffdad6",
+            "primary": "#ffb59a",
+            "surface-container-highest": "#353438",
+            "tertiary-fixed": "#e9ddff",
+            "on-secondary-container": "#006c71",
+            "on-secondary": "#003739",
+            "on-primary-container": "#521800",
+            "on-primary-fixed-variant": "#802a00",
+            "on-secondary-fixed": "#002021",
+            "secondary": "#e6feff",
+            "error": "#ffb4ab",
+            "inverse-surface": "#e4e1e6",
+            "inverse-primary": "#a73a00",
+            "surface-container": "#1f1f22",
+            "tertiary": "#d1bcff",
+            "secondary-fixed": "#63f7ff",
+            "primary-container": "#ff5c00",
+            "tertiary-fixed-dim": "#d1bcff",
+            "surface-container-low": "#1b1b1e",
+            "on-tertiary-fixed-variant": "#5700c9",
+            "on-background": "#e4e1e6",
+            "tertiary-container": "#a27aff",
+            "outline-variant": "#5b4137",
+            "background": "#131316",
+            "surface-container-high": "#2a2a2d",
+            "surface-dim": "#131316",
+            "error-container": "#93000a",
+            "on-surface": "#e4e1e6",
+            "secondary-container": "#00f4fe",
+            "on-tertiary-fixed": "#23005b",
+            "on-surface-variant": "#e4beb1",
+            "on-tertiary-container": "#360083",
+            "surface-bright": "#39393c",
+            "on-primary-fixed": "#370e00"
           },
           "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
           "fontFamily": {
-            "label-sm": ["JetBrains Mono"], "display-xl": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"],
-            "headline-lg-mobile": ["Plus Jakarta Sans"], "price-display": ["Hanken Grotesk"], "body-lg": ["Hanken Grotesk"],
-            "body-md": ["Hanken Grotesk"], "headline-lg": ["Plus Jakarta Sans"]
+            "label-sm": ["JetBrains Mono"],
+            "display-xl": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "price-display": ["Hanken Grotesk"],
+            "body-lg": ["Hanken Grotesk"],
+            "body-md": ["Hanken Grotesk"],
+            "headline-lg": ["Plus Jakarta Sans"]
           },
           "fontSize": {
             "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
@@ -60,11 +96,34 @@
     }
   </script>
   <style>
-    html, body { background-color: #131316; }
-    @keyframes bar-pulse { 0%, 100% { transform: scaleY(0.4); } 50% { transform: scaleY(1); } }
-    .bar-playing { animation: bar-pulse 0.9s ease-in-out infinite; }
-    .bar-playing:nth-child(2n) { animation-delay: 0.15s; }
-    .bar-playing:nth-child(3n) { animation-delay: 0.3s; }
+    html,
+    body {
+      background-color: #131316;
+    }
+    
+    @keyframes bar-pulse {
+
+      0%,
+      100% {
+        transform: scaleY(0.4);
+      }
+      
+      50% {
+        transform: scaleY(1);
+      }
+    }
+    
+    .bar-playing {
+      animation: bar-pulse 0.9s ease-in-out infinite;
+    }
+    
+    .bar-playing:nth-child(2n) {
+      animation-delay: 0.15s;
+    }
+    
+    .bar-playing:nth-child(3n) {
+      animation-delay: 0.3s;
+    }
   </style>
 </head>
 
@@ -75,18 +134,18 @@
     <div class="absolute top-1/2 -left-28 w-[320px] h-[320px] bg-tertiary-container/10 rounded-full blur-[110px]"></div>
     <div class="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] [background-size:24px_24px] opacity-40"></div>
   </div>
-
+  
   <main class="w-full max-w-md bg-surface-container-lowest sm:rounded-3xl sm:border sm:border-white/10 shadow-[0_24px_80px_rgba(0,0,0,0.8)] relative z-10 flex flex-col min-h-screen sm:min-h-[844px] overflow-hidden justify-center">
-
+    
     <div class="flex-1 flex flex-col items-center justify-center px-6 text-center" id="loading-state">
       <p class="font-body-md text-body-md text-on-surface-variant">Loading track…</p>
     </div>
-
+    
     <div class="hidden flex-1 flex-col items-center justify-center px-6 text-center" id="not-found-state">
       <p class="font-body-md text-body-md text-on-surface-variant">This link doesn't match any track.</p>
       <a class="text-primary font-body-md text-body-md mt-4 inline-block" href="/">Go to Neime</a>
     </div>
-
+    
     <div class="hidden flex-1 flex flex-col items-center justify-center px-6 py-4 z-10 w-full" id="song-state">
       <div class="w-80 h-80 sm:w-64 sm:h-64 my-2 relative group">
         <div class="absolute -inset-1 bg-primary-container/20 rounded-2xl blur-xl opacity-60 pointer-events-none"></div>
@@ -96,7 +155,7 @@
           <span class="font-label-sm text-label-sm text-on-surface tracking-wider">Preview</span>
         </button>
       </div>
-
+      
       <div class="text-center mt-5 w-full">
         <h1 class="font-headline-md text-headline-md font-bold text-white tracking-tight" id="song-title">Title</h1>
         <div class="flex items-center justify-center gap-1.5 text-on-surface-variant mt-1.5">
@@ -106,7 +165,7 @@
           </span>
         </div>
       </div>
-
+      
       <div class="w-full max-w-xs mt-6 px-4 py-3 rounded-2xl bg-surface-container-high/60 border border-white/5 backdrop-blur-md flex items-center gap-3">
         <button aria-label="Preview 30s track sample" class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white shrink-0 shadow-sm active:scale-95 transition-transform hover:brightness-110 preview-btn" type="button">
           <span class="material-symbols-outlined text-lg leading-none" id="preview-icon" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
@@ -131,10 +190,10 @@
           <span id="preview-time">0:00</span><span>/</span><span id="preview-total">0:30</span>
         </div>
       </div>
-
+      
       <div class="hidden w-full max-w-xs mt-4 rounded-lg px-4 py-3 font-body-md text-body-md text-center" id="status-banner" role="alert"></div>
     </div>
-
+    
     <div class="hidden px-6 pt-2 pb-8 w-full bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest to-transparent z-20 flex-col gap-3" id="action-area">
       <button class="w-full py-3.5 px-6 rounded-full bg-primary-container text-white font-headline-md text-base font-bold flex items-center justify-center gap-2 shadow-[0_10px_30px_rgba(255,92,0,0.35)] hover:brightness-105 active:scale-[0.98] transition-all duration-200" id="action-btn" type="button">
         <span id="action-label">Unlock Track — ₦0</span>
@@ -150,44 +209,44 @@
       </div>
     </div>
   </main>
-
+  
   <script src="../js/config.js"></script>
   <script src="../js/player.js"></script>
   <script>
     const ARTIST_SHARE_PERCENT = 90; // keep in sync with the PLATFORM_CUT_PERCENT secret
-
+    
     let song = null;
     let currentUser = null;
     let owned = false;
-
+    
     const previewAudio = new Audio();
     let previewPlaying = false;
-
+    
     function showStatus(message, isError) {
       const b = document.getElementById('status-banner');
       b.textContent = message;
       b.classList.remove('hidden', 'bg-error-container', 'text-on-error-container', 'bg-secondary-container/20', 'text-secondary');
       b.classList.add(isError ? 'bg-error-container' : 'bg-secondary-container/20', isError ? 'text-on-error-container' : 'text-secondary');
     }
-
+    
     function showNotFound() {
       document.getElementById('loading-state').classList.add('hidden');
       document.getElementById('not-found-state').classList.remove('hidden');
       document.getElementById('not-found-state').classList.add('flex');
     }
-
+    
     function formatTime(s) {
       if (!isFinite(s)) return '0:00';
       return `${Math.floor(s / 60)}:${Math.floor(s % 60).toString().padStart(2, '0')}`;
     }
-
+    
     (async function init() {
       const code = new URLSearchParams(window.location.search).get('code');
       if (!code) { showNotFound(); return; }
-
+      
       const { data, error } = await window.sb.from('songs').select('*, artists(is_verified)').eq('share_code', code).maybeSingle();
       if (error || !data) { showNotFound(); return; }
-
+      
       song = data;
       setupPreview();
       document.getElementById('song-cover').src = song.cover_url || '';
@@ -197,53 +256,53 @@
         window.location.href = `artist-info.html?artist=${song.artist_id}`;
       });
       if (song.artists?.is_verified) document.getElementById('verified-badge').classList.remove('hidden');
-
+      
       document.getElementById('support-note').textContent = `${ARTIST_SHARE_PERCENT}% goes directly to ${song.artist_name}`;
-
+      
       /**if (song.preview_url) {
         previewAudio.src = song.preview_url;
       } else {
         document.getElementById('preview-btn').disabled = true;
         document.getElementById('preview-btn').classList.add('opacity-40');
       }**/
-
+      
       const { data: { session } } = await window.sb.auth.getSession();
       currentUser = session?.user || null;
-
+      
       document.getElementById('loading-state').classList.add('hidden');
       document.getElementById('song-state').classList.remove('hidden');
       document.getElementById('song-state').classList.add('flex');
       document.getElementById('action-area').classList.remove('hidden');
       document.getElementById('action-area').classList.add('flex');
-
+      
       if (currentUser) {
         const { data: purchase } = await window.sb.from('purchases').select('id').eq('buyer_id', currentUser.id).eq('song_id', song.id).maybeSingle();
         owned = !!purchase;
-
+        
         const { data: savedRow } = await window.sb.from('saved_tracks').select('song_id').eq('listener_id', currentUser.id).eq('song_id', song.id).maybeSingle();
-        setSaveState(!!savedRow);
+        //setSaveState(!!savedRow);
       }
-
+      
       updateActionButton();
     })();
-
+    
     function updateActionButton() {
       document.getElementById('action-label').textContent = owned ? 'Play Track' : `Unlock Track — ₦${song.price}`;
     }
-
-
+    
+    
     function setupPreview() {
-  if (!song?.preview_url) {
-    document.querySelectorAll('.preview-btn').forEach(btn => {
-      btn.disabled = true;
-      btn.classList.add('opacity-40');
-    });
-    return;
-  }
-  previewAudio.src = song.preview_url;
-  previewAudio.load(); // important
+      if (!song?.preview_url) {
+        document.querySelectorAll('.preview-btn').forEach(btn => {
+          btn.disabled = true;
+          btn.classList.add('opacity-40');
+        });
+        return;
+      }
+      previewAudio.src = song.preview_url;
+      previewAudio.load(); // important
     }
-
+    
     // ── Preview playback ──
     /**document.querySelectorAll('.preview-btn').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -257,91 +316,70 @@
         }
       });
     });**/
-
-    document.querySelectorAll('.preview-btn').forEach(btn => {
-  btn.addEventListener('click', async () => {
-    if (!song?.preview_url) return;
-
-    try {
-      if (previewPlaying) {
-        previewAudio.pause();
-      } else {
-        // Reset to beginning if it has ended
-        if (previewAudio.ended) {
-          previewAudio.currentTime = 0;
-        }
-        await previewAudio.play();
-      }
-    } catch (err) {
-      console.error('Preview play error:', err);
-    }
-  });
-});
     
-    /**previewAudio.addEventListener('play', () => {
+    document.querySelectorAll('.preview-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!song?.preview_url) return;
+        
+        try {
+          if (previewPlaying) {
+            previewAudio.pause();
+          } else {
+            // Reset to beginning if it has ended
+            if (previewAudio.ended) {
+              previewAudio.currentTime = 0;
+            }
+            await previewAudio.play();
+          }
+        } catch (err) {
+          console.error('Preview play error:', err);
+        }
+      });
+    });
+    
+    
+    // Visual feedback
+    previewAudio.addEventListener('play', () => {
       previewPlaying = true;
       document.getElementById('preview-icon').textContent = 'pause';
-      document.querySelectorAll('#waveform-bars span').forEach(bar => bar.classList.add('bar-playing', 'bg-primary-container'));
-      document.querySelectorAll('#waveform-bars span').forEach(bar => bar.classList.remove('bg-surface-variant'));
+      document.querySelectorAll('#waveform-bars span').forEach(bar => {
+        bar.classList.add('bar-playing', 'bg-primary-container');
+        bar.classList.remove('bg-surface-variant');
+      });
     });
+    
     previewAudio.addEventListener('pause', () => {
       previewPlaying = false;
       document.getElementById('preview-icon').textContent = 'play_arrow';
-      document.querySelectorAll('#waveform-bars span').forEach(bar => bar.classList.remove('bar-playing', 'bg-primary-container'));
-      document.querySelectorAll('#waveform-bars span').forEach(bar => bar.classList.add('bg-surface-variant'));
+      document.querySelectorAll('#waveform-bars span').forEach(bar => {
+        bar.classList.remove('bar-playing', 'bg-primary-container');
+        bar.classList.add('bg-surface-variant');
+      });
     });
+    
     previewAudio.addEventListener('timeupdate', () => {
       document.getElementById('preview-time').textContent = formatTime(previewAudio.currentTime);
     });
+    
     previewAudio.addEventListener('loadedmetadata', () => {
-      document.getElementById('preview-total').textContent = formatTime(previewAudio.duration);
+      document.getElementById('preview-total').textContent = formatTime(previewAudio.duration || 30);
     });
+    
     previewAudio.addEventListener('ended', () => {
       previewAudio.currentTime = 0;
-    });**/
-
-    // Visual feedback
-previewAudio.addEventListener('play', () => {
-  previewPlaying = true;
-  document.getElementById('preview-icon').textContent = 'pause';
-  document.querySelectorAll('#waveform-bars span').forEach(bar => {
-    bar.classList.add('bar-playing', 'bg-primary-container');
-    bar.classList.remove('bg-surface-variant');
-  });
-});
-
-previewAudio.addEventListener('pause', () => {
-  previewPlaying = false;
-  document.getElementById('preview-icon').textContent = 'play_arrow';
-  document.querySelectorAll('#waveform-bars span').forEach(bar => {
-    bar.classList.remove('bar-playing', 'bg-primary-container');
-    bar.classList.add('bg-surface-variant');
-  });
-});
-
-previewAudio.addEventListener('timeupdate', () => {
-  document.getElementById('preview-time').textContent = formatTime(previewAudio.currentTime);
-});
-
-previewAudio.addEventListener('loadedmetadata', () => {
-  document.getElementById('preview-total').textContent = formatTime(previewAudio.duration || 30);
-});
-
-previewAudio.addEventListener('ended', () => {
-  previewAudio.currentTime = 0;
-  previewPlaying = false;
-  document.getElementById('preview-icon').textContent = 'play_arrow';
-  document.querySelectorAll('#waveform-bars span').forEach(bar => {
-    bar.classList.remove('bar-playing', 'bg-primary-container');
-    bar.classList.add('bg-surface-variant');
-  });
-});
-
+      previewPlaying = false;
+      document.getElementById('preview-icon').textContent = 'play_arrow';
+      document.querySelectorAll('#waveform-bars span').forEach(bar => {
+        bar.classList.remove('bar-playing', 'bg-primary-container');
+        bar.classList.add('bg-surface-variant');
+      });
+    });
+    
     // ── Gifting ──
     document.getElementById('gift-btn').addEventListener('click', () => {
       alert('Gifting tracks is coming soon!');
     });
-
+    
     // ── Buy / Play ──
     document.getElementById('action-btn').addEventListener('click', async () => {
       if (!currentUser) {
@@ -349,7 +387,7 @@ previewAudio.addEventListener('ended', () => {
         return;
       }
       if (owned) { window.playSong(song); return; }
-
+      
       const handler = PaystackPop.setup({
         key: window.PAYSTACK_PUBLIC_KEY,
         email: currentUser.email,
@@ -361,7 +399,7 @@ previewAudio.addEventListener('ended', () => {
       });
       handler.openIframe();
     });
-
+    
     async function verifyAndUnlock(reference) {
       const { data, error } = await window.sb.functions.invoke('verify-paystack', {
         body: { reference, song_id: song.id, buyer_id: currentUser.id }
