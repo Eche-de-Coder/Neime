@@ -140,6 +140,12 @@
   
   function setupControls() {
     const a = audioEl();
+
+    a.addEventListener('error', () => {
+      const err = a.error;
+      const reasons = { 1: 'Aborted', 2: 'Network error', 3: 'Decode error', 4: 'Source not supported' };
+      console.error('Audio error:', reasons[err?.code] || 'Unknown', '| src:', a.src);
+    });
     
     document.getElementById('np-toggle').addEventListener('click', () => {
       a.paused ? (a.play(), setPlayIcon(true)) : (a.pause(), setPlayIcon(false));
@@ -289,6 +295,7 @@
     
     const a = audioEl();
     a.src = data.url;
+    console.log('Stream URL:', data.url);
     //a.play();
     a.play().catch(err => console.error('play() rejected:', err.name, err.message));
     startStreamTimer(song.id, data.sessionId);
@@ -483,10 +490,4 @@
 
   window.addEventListener('pagehide', saveState);
   document.addEventListener('DOMContentLoaded', restoreState);
-
-  audioEl().addEventListener('error', () => {
-    const err = audioEl().error;
-    const reasons = { 1: 'Aborted', 2: 'Network error', 3: 'Decode error', 4: 'Source not supported' };
-    console.error('Audio error:', reasons[err?.code] || 'Unknown', '| src:', audioEl().src);
-  });
 })();
