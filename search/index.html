@@ -257,24 +257,9 @@
     </div>
   </template>
   
-  <div class="hidden fixed inset-0 z-[70] flex items-center justify-center p-4" id="buy-modal">
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="buy-modal-backdrop"></div>
-    <div class="relative w-full max-w-sm bg-surface-container-low border border-white/10 rounded-xl p-6 shadow-2xl text-center">
-      <img class="w-24 h-24 rounded-lg object-cover mx-auto mb-4" id="buy-modal-cover" src="" />
-      <h3 class="font-headline-md text-headline-md text-on-surface mb-1" id="buy-modal-title">Song Title</h3>
-      <p class="font-body-md text-body-md text-on-surface-variant mb-6" id="buy-modal-artist">Artist</p>
-      <p class="font-price-display text-price-display text-primary mb-6" id="buy-modal-price">₦0</p>
-      <button class="w-full bg-primary-container text-white font-headline-md text-headline-md !text-[16px] py-3 rounded-full hover:opacity-90 active:scale-95 transition-all mb-3" id="buy-modal-pay-btn" type="button">
-        Pay with Paystack
-      </button>
-      <button class="w-full text-on-surface-variant font-body-md text-body-md py-2" id="buy-modal-cancel-btn" type="button">
-        Cancel
-      </button>
-    </div>
-  </div>
-  
   <script src="../js/config.js"></script>
   <script src="../js/player.js"></script>
+  <script src="../js/purchase.js"></script>
   <script src="../js/collections.js"></script>
   <script>
     let currentUser = null;
@@ -347,7 +332,9 @@
         node.querySelector('.ss-title').textContent = song.title;
         node.querySelector('.ss-artist').textContent = song.feature ? `${song.artist_name} ft. ${song.feature}` : song.artist_name;
         node.querySelector('.ss-price').textContent = `₦${song.price}`;
-        node.querySelector('.search-song-card').addEventListener('click', () => handlePlayClick(song));
+        node.querySelector('.search-song-card').addEventListener('click', () => 
+          window.Purchase.handlePlayClick(song)
+        );
         node.querySelector('.ss-artist').style.cursor = 'pointer';
         node.querySelector('.ss-artist').addEventListener('click', (e) => {
           e.stopPropagation();
@@ -439,61 +426,6 @@
           icon.classList.add('hidden');
         }
       });
-    }
-    
-    // ── Purchase gate (same logic as home.html) ──
-    async function hasPurchased(songId) {
-      const { data } = await window.sb
-        .from('purchases')
-        .select('id')
-        .eq('buyer_id', currentUser.id)
-        .eq('song_id', songId)
-        .maybeSingle();
-      return !!data;
-    }
-    
-    async function handlePlayClick(song) {
-      const owned = await hasPurchased(song.id);
-      owned ? window.playSong(song) : openBuyModal(song);
-    }
-    
-    const buyModal = document.getElementById('buy-modal');
-    
-    function openBuyModal(song) {
-      songBeingBought = song;
-      document.getElementById('buy-modal-cover').src = song.cover_url || '';
-      document.getElementById('buy-modal-title').textContent = song.title;
-      document.getElementById('buy-modal-artist').textContent = song.artist_name;
-      document.getElementById('buy-modal-price').textContent = `₦${song.price}`;
-      buyModal.classList.remove('hidden');
-    }
-    document.getElementById('buy-modal-cancel-btn').addEventListener('click', () => buyModal.classList.add('hidden'));
-    document.getElementById('buy-modal-backdrop').addEventListener('click', () => buyModal.classList.add('hidden'));
-    
-    document.getElementById('buy-modal-pay-btn').addEventListener('click', () => {
-      const song = songBeingBought;
-      const handler = PaystackPop.setup({
-        key: window.PAYSTACK_PUBLIC_KEY,
-        email: currentUser.email,
-        amount: Math.round(song.price * 100),
-        currency: 'NGN',
-        ref: `neime_${song.id}_${Date.now()}`,
-        callback: (response) => verifyAndUnlock(response.reference, song),
-        onClose: () => {}
-      });
-      handler.openIframe();
-    });
-    
-    async function verifyAndUnlock(reference, song) {
-      const { data, error } = await window.sb.functions.invoke('verify-paystack', {
-        body: { reference, song_id: song.id, buyer_id: currentUser.id }
-      });
-      if (error || !data?.success) {
-        alert('Payment verification failed: ' + (error?.message || data?.error || 'Unknown error'));
-        return;
-      }
-      buyModal.classList.add('hidden');
-      window.playSong(song);
     }
   </script>
 </body>
