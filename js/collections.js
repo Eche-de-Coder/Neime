@@ -98,7 +98,7 @@
     return collections;
   }
   
-  async function openModal(collectionId) {
+  /**async function openModal(collectionId) {
     const { data: collection } = await window.sb.from('collections').select('*').eq('id', collectionId).single();
     if (!collection) return;
     
@@ -119,7 +119,34 @@
     
     renderSongList();
     updateBuyButton();
+    document.getElementById('col-modal').classList.remove('hidden');
+  }**/
+  
+  async function openModal(collectionId) {
+    const { data: collection } = await window.sb.from('collections').select('*').eq('id', collectionId).single();
+    if (!collection) return;
     
+    const { data: songs } = await window.sb.from('songs').select('*').eq('collection_id', collectionId).order('created_at', { ascending: true });
+    activeCollection = collection;
+    activeCollectionSongs = songs || [];
+    
+    document.getElementById('col-modal-cover').src = collection.cover_url || '';
+    document.getElementById('col-modal-title').textContent = collection.title;
+    document.getElementById('col-modal-type').textContent = collection.type;
+    
+    const { data: { session } } = await window.sb.auth.getSession();
+    const isOwnerViewing = session && collection.artist_id === session.user.id;
+    
+    activeOwnedIds = new Set();
+    if (isOwnerViewing) {
+      activeOwnedIds = new Set(activeCollectionSongs.map(s => s.id));
+    } else if (session) {
+      const { data: owned } = await window.sb.from('purchases').select('song_id').eq('buyer_id', session.user.id).in('song_id', activeCollectionSongs.map(s => s.id));
+      activeOwnedIds = new Set((owned || []).map(o => o.song_id));
+    }
+    
+    renderSongList();
+    updateBuyButton();
     document.getElementById('col-modal').classList.remove('hidden');
   }
   
@@ -141,9 +168,7 @@
     list.querySelectorAll('.col-song-row').forEach(row => {
       row.addEventListener('click', () => {
         const song = activeCollectionSongs.find(s => s.id === row.dataset.songId);
-        if (activeOwnedIds.has(song.id)) {
-          window.playSong(song, activeCollectionSongs);
-        }
+        activeOwnedIds.has(song.id) ? window.playSong(song, activeCollectionSongs) : window.Purchase.openBuyModal(song);
       });
     });
   }
