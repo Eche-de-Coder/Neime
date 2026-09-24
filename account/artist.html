@@ -261,13 +261,14 @@
     <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="collection-modal-backdrop"></div>
     <div class="relative w-full max-w-md bg-surface-container-low border border-white/10 rounded-xl p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
       <div class="flex items-center justify-between mb-6">
-        <h3 class="font-headline-md text-headline-md text-on-surface">New Album / EP</h3>
+        <h3 id="collection-modal-heading" class="font-headline-md text-headline-md text-on-surface">New Album / EP</h3>
         <button class="text-on-surface-variant hover:text-on-surface transition-colors" id="collection-modal-close" type="button">
           <span class="material-symbols-outlined">close</span>
         </button>
       </div>
       <div class="hidden mb-4 rounded-lg px-4 py-3 font-body-md text-body-md" id="collection-status-banner" role="alert"></div>
       <form class="space-y-4" id="collection-form">
+        <input id="collection-id" type="hidden" />
         <div class="space-y-1">
           <label class="font-label-sm text-label-sm text-on-surface-variant block" for="collection-title">Title</label>
           <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="collection-title" required type="text" />
@@ -281,13 +282,40 @@
         </div>
         <div class="space-y-1">
           <label class="font-label-sm text-label-sm text-on-surface-variant block" for="collection-cover">Cover Image</label>
-          <input accept="image/*" class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:bg-primary-container file:text-on-primary-container file:text-[13px]" id="collection-cover" required type="file" />
+          <img class="hidden mb-2 w-20 h-20 rounded-lg object-cover border border-white/10" id="collection-current-cover" />
+          <input accept="image/*" class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:bg-primary-container file:text-on-primary-container file:text-[13px]" id="collection-cover" type="file" />
           <img class="hidden mt-2 w-24 h-24 rounded-lg object-cover border border-white/10" id="collection-cover-preview" />
         </div>
         <button class="w-full bg-primary-container text-on-primary-container font-headline-md text-headline-md !text-[16px] py-3 rounded-full hover:opacity-90 active:scale-95 transition-all disabled:opacity-60" id="collection-save-btn" type="submit">
           <span id="collection-save-label">Create</span>
         </button>
       </form>
+    </div>
+  </div>
+  
+  <!-- Manage collection modal -->
+  <div class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4" id="manage-collection-modal">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="manage-collection-backdrop"></div>
+    <div class="relative w-full max-w-md bg-surface-container-low border border-white/10 rounded-xl p-6 shadow-2xl max-h-[85vh] overflow-y-auto">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3 min-w-0">
+          <img class="w-14 h-14 rounded-lg object-cover shrink-0" id="manage-collection-cover" src="" />
+          <div class="min-w-0">
+            <h3 class="font-headline-md text-headline-md text-on-surface truncate" id="manage-collection-title">Title</h3>
+            <p class="font-label-sm text-label-sm text-on-surface-variant uppercase" id="manage-collection-type">Album</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-1 shrink-0">
+          <button class="text-on-surface-variant hover:text-primary transition-colors p-2" id="manage-collection-edit-btn" type="button">
+            <span class="material-symbols-outlined text-[20px]">edit</span>
+          </button>
+          <button class="text-on-surface-variant hover:text-on-surface transition-colors p-2" id="manage-collection-close" type="button">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+      </div>
+      <div class="flex flex-col gap-1" id="manage-collection-song-list"></div>
+      <p class="hidden font-body-md text-body-md text-on-surface-variant text-center py-6" id="manage-collection-empty">No tracks in this collection yet.</p>
     </div>
   </div>
   
@@ -638,7 +666,12 @@
   <template id="song-card-template">
     <div class="glass-panel rounded-xl p-5 flex flex-col gap-4" data-song-id="">
       <div class="flex gap-4">
-        <img alt="Cover art" class="w-16 h-16 rounded-lg object-cover shrink-0 border border-white/10 song-cover" src="" />
+        <div class="relative w-16 h-16 shrink-0">
+          <img alt="Cover art" class="w-16 h-16 rounded-lg object-cover border border-white/10 song-cover" src="" />
+          <button class="absolute inset-0 flex items-center justify-center bg-black/40 rounded-lg opacity-0 hover:opacity-100 transition-opacity song-play-btn" type="button">
+            <span class="material-symbols-outlined text-white text-[22px]">play_arrow</span>
+          </button>
+        </div>
         <div class="flex justify-between w-full">
           <div class="flex-1 min-w-0">
             <h4 class="font-body-lg text-body-lg text-on-surface truncate song-title">Title</h4>
@@ -707,7 +740,7 @@
   </template>
   
   <template id="collection-card-template">
-    <div class="glass-panel rounded-xl p-3 flex flex-col gap-2">
+    <div class="glass-panel rounded-xl p-3 flex flex-col gap-2 collection-card">
       <div class="relative aspect-square rounded-lg overflow-hidden bg-surface-container-high">
         <img alt="Collection cover" class="w-full h-full object-cover collection-cover" src="" />
         <span class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-black/60 text-[10px] font-label-sm uppercase tracking-wider text-white collection-type-badge">Album</span>
@@ -724,8 +757,24 @@
     </div>
   </template>
   
+  <template id="manage-collection-song-row-template">
+    <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-container-high/50 transition-colors">
+      <button class="manage-song-play-btn text-primary" type="button">
+        <span class="material-symbols-outlined text-[24px]">play_circle</span>
+      </button>
+      <div class="flex-1 min-w-0">
+        <p class="font-body-md text-body-md text-on-surface truncate manage-song-title">Title</p>
+      </div>
+      <span class="font-label-sm text-label-sm text-on-surface-variant manage-song-price">₦0</span>
+      <button class="manage-song-remove-btn text-on-surface-variant hover:text-error transition-colors p-1" title="Remove from album" type="button">
+        <span class="material-symbols-outlined text-[18px]">playlist_remove</span>
+      </button>
+    </div>
+  </template>
+  
   <script src="../js/config.js"></script>
   <script src="../js/player.js"></script>
+  <script src="../js/purchase.js"></script>
   <script>
     let currentArtistId = null;
     let allSongs = [];
@@ -875,6 +924,9 @@
     });
     
     
+    
+    
+    
     // Collections Logic
     let allCollections = [];
     
@@ -916,6 +968,33 @@
       });
     }
     
+    function renderCollections(collections) {
+      const list = document.getElementById('collections-list');
+      const empty = document.getElementById('collections-empty-state');
+      const template = document.getElementById('collection-card-template');
+      list.innerHTML = '';
+      empty.classList.toggle('hidden', collections.length > 0);
+      
+      collections.forEach(col => {
+        const node = template.content.cloneNode(true);
+        const count = col.songs?.[0]?.count || 0;
+        const limit = col.type === 'album' ? 20 : 10;
+        const card = node.querySelector('.collection-card');
+        node.querySelector('.collection-cover').src = col.cover_url || '';
+        node.querySelector('.collection-type-badge').textContent = col.type;
+        node.querySelector('.collection-title').textContent = col.title;
+        node.querySelector('.collection-count').textContent = `${count}/${limit} tracks`;
+        node.querySelector('.collection-delete-btn').addEventListener('click', (e) => {
+          e.stopPropagation();
+          deleteCollection(col);
+        });
+        card.classList.add('cursor-pointer');
+        card.addEventListener('click', () => openManageCollectionModal(col.id));
+        list.appendChild(node);
+      });
+    }
+    
+    
     function populateCollectionSelects(collections) {
       [document.getElementById('song-collection'), document.getElementById('edit-song-collection')].forEach(select => {
         const currentValue = select.value;
@@ -934,7 +1013,7 @@
       });
     }
     
-    document.getElementById('new-collection-btn').addEventListener('click', () => {
+    /**document.getElementById('new-collection-btn').addEventListener('click', () => {
       document.getElementById('collection-form').reset();
       document.getElementById('collection-cover-preview').classList.add('hidden');
       document.getElementById('collection-status-banner').classList.add('hidden');
@@ -991,7 +1070,117 @@
         btn.disabled = false;
         label.textContent = 'Create';
       }
+    });**/
+    
+    
+    function openCollectionModal(existingCollection) {
+      document.getElementById('collection-form').reset();
+      document.getElementById('collection-cover-preview').classList.add('hidden');
+      document.getElementById('collection-status-banner').classList.add('hidden');
+      document.getElementById('collection-modal-close').addEventListener('click', () => document.getElementById('collection-modal').classList.add('hidden'));
+      document.getElementById('collection-modal-backdrop').addEventListener('click', () => document.getElementById('collection-modal').classList.add('hidden'));
+      
+      if (existingCollection) {
+        document.getElementById('collection-modal-heading').textContent = 'Edit Album / EP';
+        document.getElementById('collection-id').value = existingCollection.id;
+        document.getElementById('collection-title').value = existingCollection.title;
+        document.getElementById('collection-type').value = existingCollection.type;
+        document.getElementById('collection-current-cover').src = existingCollection.cover_url || '';
+        document.getElementById('collection-current-cover').classList.remove('hidden');
+        document.getElementById('collection-save-label').textContent = 'Save Changes';
+      } else {
+        document.getElementById('collection-modal-heading').textContent = 'New Album / EP';
+        document.getElementById('collection-id').value = '';
+        document.getElementById('collection-current-cover').classList.add('hidden');
+        document.getElementById('collection-save-label').textContent = 'Create';
+      }
+      document.getElementById('collection-modal').classList.remove('hidden');
+    }
+    document.getElementById('new-collection-btn').addEventListener('click', () => openCollectionModal(null));
+    document.getElementById('collection-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('collection-save-btn');
+      const label = document.getElementById('collection-save-label');
+      const banner = document.getElementById('collection-status-banner');
+      
+      const { data: { session } } = await window.sb.auth.getSession();
+      if (!session) return;
+      const existingId = document.getElementById('collection-id').value || null;
+      const title = document.getElementById('collection-title').value.trim();
+      const type = document.getElementById('collection-type').value;
+      const coverFile = document.getElementById('collection-cover').files[0];
+      
+      btn.disabled = true;
+      label.textContent = existingId ? 'Saving…' : 'Creating…';
+      
+      try {
+        let coverUrl = null;
+        if (coverFile) {
+          const coverPath = `${session.user.id}/${Date.now()}-${coverFile.name}`;
+          const { error: coverErr } = await window.sb.storage.from('covers').upload(coverPath, coverFile);
+          if (coverErr) throw coverErr;
+          coverUrl = window.sb.storage.from('covers').getPublicUrl(coverPath).data.publicUrl;
+        }
+        if (existingId) {
+          const updates = { title, type };
+          if (coverUrl) updates.cover_url = coverUrl;
+          const { error } = await window.sb.from('collections').update(updates).eq('id', existingId);
+          if (error) throw error;
+        } else {
+          const { error } = await window.sb.from('collections').insert({ artist_id: session.user.id, title, type, cover_url: coverUrl });
+          if (error) throw error;
+        }
+        
+        document.getElementById('collection-modal').classList.add('hidden');
+        document.getElementById('manage-collection-modal').classList.add('hidden');
+        loadCollections();
+      } catch (err) {
+        banner.textContent = err.message;
+        banner.classList.remove('hidden');
+        banner.classList.add('bg-error-container', 'text-on-error-container');
+      } finally {
+        btn.disabled = false;
+        label.textContent = existingId ? 'Save Changes' : 'Create';
+      }
     });
+    
+    
+    async function openManageCollectionModal(collectionId) {
+      const { data: collection } = await window.sb.from('collections').select('*').eq('id', collectionId).single();
+      if (!collection) return;
+      document.getElementById('manage-collection-cover').src = collection.cover_url || '';
+      document.getElementById('manage-collection-title').textContent = collection.title;
+      document.getElementById('manage-collection-type').textContent = collection.type;
+      const { data: songs } = await window.sb.from('songs').select('*').eq('collection_id', collectionId).order('created_at', { ascending: true });
+      renderManageCollectionSongs(songs || [], collection);
+      document.getElementById('manage-collection-edit-btn').onclick = () => openCollectionModal(collection);
+      document.getElementById('manage-collection-modal').classList.remove('hidden');
+    }
+    
+    function renderManageCollectionSongs(songs, collection) {
+      const list = document.getElementById('manage-collection-song-list');
+      const empty = document.getElementById('manage-collection-empty');
+      const template = document.getElementById('manage-collection-song-row-template');
+      list.innerHTML = '';
+      empty.classList.toggle('hidden', songs.length > 0);
+      
+      songs.forEach(song => {
+        const node = template.content.cloneNode(true);
+        node.querySelector('.manage-song-title').textContent = song.title;
+        node.querySelector('.manage-song-price').textContent = `₦${song.price}`;
+        node.querySelector('.manage-song-play-btn').addEventListener('click', () => window.Purchase.handlePlayClick(song));
+        node.querySelector('.manage-song-remove-btn').addEventListener('click', async () => {
+          if (!confirm(`Remove "${song.title}" from "${collection.title}"?`)) return;
+          const { error } = await window.sb.from('songs').update({ collection_id: null }).eq('id', song.id);
+          if (error) { alert(error.message); return; }
+          openManageCollectionModal(collection.id);
+          loadCollections();
+        });
+        list.appendChild(node);
+      });
+    }
+    document.getElementById('manage-collection-close').addEventListener('click', () => document.getElementById('manage-collection-modal').classList.add('hidden'));
+    document.getElementById('manage-collection-backdrop').addEventListener('click', () => document.getElementById('manage-collection-modal').classList.add('hidden'));
     
     async function deleteCollection(col) {
       if (!confirm(`Delete "${col.title}"? Its songs will become singles, not deleted.`)) return;
@@ -1000,6 +1189,8 @@
       loadCollections();
       loadSongs();
     }
+    
+    
     
     
     
@@ -1231,6 +1422,7 @@
         node.querySelector('.song-price').textContent = `₦${song.price}`;
         
         node.querySelector('.song-share-btn').addEventListener('click', () => copyShareLink(song));
+        node.querySelector('.song-play-btn').addEventListener('click', () => window.Purchase.handlePlayClick(song));
         node.querySelector('.song-edit-btn').addEventListener('click', () => openEditModal(song));
         node.querySelector('.song-delete-btn').addEventListener('click', () => deleteSong(song));
         
