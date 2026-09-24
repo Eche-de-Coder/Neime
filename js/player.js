@@ -182,12 +182,6 @@
     
     document.getElementById('np-follow-btn').addEventListener('click', toggleFollow);
   }
-
-  audioEl().addEventListener('error', () => {
-  const err = audioEl().error;
-  const reasons = { 1: 'Aborted', 2: 'Network error', 3: 'Decode error', 4: 'Source not supported' };
-  console.error('Audio error:', reasons[err?.code] || 'Unknown', '| src:', audioEl().src);
-});
   
   function skip(direction) {
     if (!queue.length) return;
@@ -319,9 +313,9 @@
     loadArtistCard(song);
   };
   
-  let streamTimer = null;
+  /**let streamTimer = null;
   let streamSeconds = 0;
-  let streamCounted = false;
+  let streamCounted = false;**/
   
   /**function startStreamTimer(songId) {
     clearStreamTimer();
@@ -340,7 +334,7 @@
     }, 1000);
   }**/
   
-  function startStreamTimer(songId, sessionId) {
+  /**function startStreamTimer(songId, sessionId) {
     clearStreamTimer();
     streamSeconds = 0;
     streamCounted = false;
@@ -409,5 +403,90 @@
   }
   
   window.addEventListener('pagehide', saveState);
+  document.addEventListener('DOMContentLoaded', restoreState);**/
+
+
+
+
+
+
+ let streamTimer = null;
+  let streamSeconds = 0;
+  let streamCounted = false;
+
+  function startStreamTimer(songId, sessionId) {
+    clearStreamTimer();
+    streamSeconds = 0;
+    streamCounted = false;
+    streamTimer = setInterval(() => {
+      const a = audioEl();
+      if (a.paused) return;
+      streamSeconds += 1;
+      if (streamSeconds >= 30 && !streamCounted) {
+        streamCounted = true;
+        window.sb.rpc('confirm_stream', { p_session_id: sessionId }).then(({ error }) => {
+          if (error) console.error('Stream count failed:', error.message);
+        });
+      }
+    }, 1000);
+  }
+
+  function clearStreamTimer() {
+    if (streamTimer) clearInterval(streamTimer);
+    streamTimer = null;
+  }
+
+  const STORAGE_KEY = 'neime_playback_state';
+
+  function saveState() {
+    if (!currentSong) return;
+    const a = audioEl();
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        song: currentSong,
+        queue,
+        queueIndex,
+        currentTime: a.currentTime
+      }));
+    } catch (_) {}
+  }
+
+  async function restoreState() {
+    let saved;
+    try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch (_) { return; }
+    if (!saved?.song) return;
+
+    const { data, error } = await window.sb.functions.invoke('get-stream-url', { body: { song_id: saved.song.id } });
+    if (error || !data?.url) return;
+
+    currentSong = saved.song;
+    queue = saved.queue || [saved.song];
+    queueIndex = saved.queueIndex || 0;
+
+    const a = audioEl();
+    a.src = data.url;
+    a.currentTime = saved.currentTime || 0;
+
+    const displayArtist = currentSong.feature ? `${currentSong.artist_name} ft. ${currentSong.feature}` : currentSong.artist_name;
+    document.getElementById('np-cover').src = currentSong.cover_url || '';
+    document.getElementById('np-bg-cover').src = currentSong.cover_url || '';
+    document.getElementById('np-title').textContent = currentSong.title;
+    document.getElementById('np-artist').textContent = displayArtist;
+    document.getElementById('np-mini-cover').src = currentSong.cover_url || '';
+    document.getElementById('np-mini-title').textContent = currentSong.title;
+    document.getElementById('np-mini-artist').textContent = displayArtist;
+
+    document.getElementById('np-mini-player').classList.remove('hidden');
+    setPlayIcon(false);
+    loadArtistCard(currentSong);
+  }
+
+  window.addEventListener('pagehide', saveState);
   document.addEventListener('DOMContentLoaded', restoreState);
+
+  audioEl().addEventListener('error', () => {
+    const err = audioEl().error;
+    const reasons = { 1: 'Aborted', 2: 'Network error', 3: 'Decode error', 4: 'Source not supported' };
+    console.error('Audio error:', reasons[err?.code] || 'Unknown', '| src:', audioEl().src);
+  });
 })();
