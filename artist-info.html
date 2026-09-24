@@ -7,7 +7,6 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title>Artist Profile | Neime</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="https://js.paystack.co/v1/inline.js"></script>
   <link href="https://fonts.googleapis.com" rel="preconnect" />
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet" />
@@ -136,8 +135,7 @@
 </head>
 
 <body class="bg-surface-container-lowest text-on-surface font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen pb-32">
-  <!-- Modals -->
-  <!-- buy modal -->
+  
   <div class="hidden fixed inset-0 z-[70] flex items-center justify-center p-4" id="buy-modal">
     <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="buy-modal-backdrop"></div>
     <div class="relative w-full max-w-sm bg-surface-container-low border border-white/10 rounded-xl p-6 shadow-2xl text-center">
@@ -314,6 +312,7 @@
   
   <script src="../js/config.js"></script>
   <script src="../js/player.js"></script>
+  <script src="../js/purchase.js"></script>
   <script src="../js/collections.js"></script>
   <script>
     let profileArtistId = null;
@@ -384,7 +383,9 @@
         node.querySelector('.track-artist').textContent = song.artist_name;
         node.querySelector('.track-price').textContent = `₦${song.price}`;
         node.querySelector('.track-streams').textContent = (song.play_count || 0).toLocaleString();
-        node.querySelector('.track-row').addEventListener('click', () => handlePlayClick(song));
+        node.querySelector('.track-row').addEventListener('click', () => 
+          window.Purchase.handlePlayClick(song)
+        );
         list.appendChild(node);
       });
     }
@@ -462,57 +463,6 @@
         
         list.appendChild(node);
       });
-    }
-    
-    // ── Purchase gate  ──
-    async function hasPurchased(songId) {
-      const { data } = await window.sb.from('purchases').select('id').eq('buyer_id', currentUser.id).eq('song_id', songId).maybeSingle();
-      return !!data;
-    }
-    //let songBeingBought = null;
-    
-    async function handlePlayClick(song) {
-      const owned = await hasPurchased(song.id);
-      owned ? window.playSong(song) : openBuyModal(song);
-    }
-    
-    const buyModal = document.getElementById('buy-modal');
-    
-    function openBuyModal(song) {
-      songBeingBought = song;
-      document.getElementById('buy-modal-cover').src = song.cover_url || '';
-      document.getElementById('buy-modal-title').textContent = song.title;
-      document.getElementById('buy-modal-artist').textContent = song.artist_name;
-      document.getElementById('buy-modal-price').textContent = `₦${song.price}`;
-      buyModal.classList.remove('hidden');
-    }
-    document.getElementById('buy-modal-cancel-btn').addEventListener('click', () => buyModal.classList.add('hidden'));
-    document.getElementById('buy-modal-backdrop').addEventListener('click', () => buyModal.classList.add('hidden'));
-    
-    document.getElementById('buy-modal-pay-btn').addEventListener('click', () => {
-      const song = songBeingBought;
-      const handler = PaystackPop.setup({
-        key: window.PAYSTACK_PUBLIC_KEY,
-        email: currentUser.email,
-        amount: Math.round(song.price * 100),
-        currency: 'NGN',
-        ref: `neime_${song.id}_${Date.now()}`,
-        callback: (response) => verifyAndUnlock(response.reference, song),
-        onClose: () => {}
-      });
-      handler.openIframe();
-    });
-    
-    async function verifyAndUnlock(reference, song) {
-      const { data, error } = await window.sb.functions.invoke('verify-paystack', {
-        body: { reference, song_id: song.id, buyer_id: currentUser.id }
-      });
-      if (error || !data?.success) {
-        alert('Payment verification failed: ' + (error?.message || data?.error || 'Unknown error'));
-        return;
-      }
-      buyModal.classList.add('hidden');
-      window.playSong(song);
     }
   </script>
 </body>
