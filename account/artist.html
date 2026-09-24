@@ -1270,7 +1270,9 @@
         
         // 2. Upload song file → private "songs" bucket
         const audioPath = `${userId}/${Date.now()}-${songFile.name}`;
-        const { error: songErr } = await window.sb.storage.from('songs').upload(audioPath, songFile);
+        const { error: songErr } = await window.sb.storage.from('songs').upload(audioPath, songFile, {
+          contentType: songFile.type || 'audio/mpeg'
+        });
         if (songErr) throw songErr;
         
         // 2.5 Create preview 
@@ -1512,7 +1514,9 @@
         
         if (newSongFile) {
           const audioPath = `${song.artist_id}/${Date.now()}-${newSongFile.name}`;
-          const { error: songErr } = await window.sb.storage.from('songs').upload(audioPath, newSongFile);
+          const { error: songErr } = await window.sb.storage.from('songs').upload(audioPath, newSongFile, {
+            contentType: songFile.type || 'audio/mpeg'
+          });
           if (songErr) throw songErr;
           updates.audio_path = audioPath;
           
