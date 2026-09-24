@@ -259,6 +259,20 @@
     setFollowButtonState(!isFollowing);
   }
   
+  /**window.playSong = async function(song, songQueue) {
+    const { data, error } = await window.sb.storage.from('songs').createSignedUrl(song.audio_path, 3600);
+    if (error) { alert('Could not load audio: ' + error.message); return; }
+    
+    currentSong = song;
+    queue = songQueue && songQueue.length ? songQueue : [song];
+    queueIndex = queue.findIndex(s => s.id === song.id);
+    if (queueIndex === -1) queueIndex = 0;
+    
+    const a = audioEl();
+    a.src = data.signedUrl;
+    a.play();
+    startStreamTimer(song.id);**/
+  
   window.playSong = async function(song, songQueue) {
     const { data, error } = await window.sb.functions.invoke('get-stream-url', {
       body: { song_id: song.id }
@@ -277,6 +291,7 @@
     a.src = data.url;
     a.play();
     startStreamTimer(song.id, data.sessionId);
+    // ...rest of the function (title/cover/mini-player setup) stays exactly the same
     
     const displayArtist = song.feature ? `${song.artist_name} ft. ${song.feature}` : song.artist_name;
     
@@ -301,6 +316,23 @@
   let streamSeconds = 0;
   let streamCounted = false;
   
+  /**function startStreamTimer(songId) {
+    clearStreamTimer();
+    streamSeconds = 0;
+    streamCounted = false;
+    streamTimer = setInterval(() => {
+      const a = audioEl();
+      if (a.paused) return;
+      streamSeconds += 1;
+      if (streamSeconds >= 30 && !streamCounted) {
+        streamCounted = true;
+        window.sb.rpc('increment_play_count', { p_song_id: songId }).then(({ error }) => {
+          if (error) console.error('Stream count failed:', error.message);
+        });
+      }
+    }, 1000);
+  }**/
+  
   function startStreamTimer(songId, sessionId) {
     clearStreamTimer();
     streamSeconds = 0;
@@ -322,4 +354,53 @@
     if (streamTimer) clearInterval(streamTimer);
     streamTimer = null;
   }
+  
+  
+  const STORAGE_KEY = 'neime_playback_state';
+  
+  function saveState() {
+    if (!currentSong) return;
+    const a = audioEl();
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        song: currentSong,
+        queue,
+        queueIndex,
+        currentTime: a.currentTime
+      }));
+    } catch (_) {}
+  }
+  
+  async function restoreState() {
+    let saved;
+    try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch (_) { return; }
+    if (!saved?.song) return;
+    
+    const { data, error } = await window.sb.functions.invoke('get-stream-url', { body: { song_id: saved.song.id } });
+    if (error || !data?.url) return;
+    
+    currentSong = saved.song;
+    queue = saved.queue || [saved.song];
+    queueIndex = saved.queueIndex || 0;
+    
+    const a = audioEl();
+    a.src = data.url;
+    a.currentTime = saved.currentTime || 0;
+    
+    const displayArtist = currentSong.feature ? `${currentSong.artist_name} ft. ${currentSong.feature}` : currentSong.artist_name;
+    document.getElementById('np-cover').src = currentSong.cover_url || '';
+    document.getElementById('np-bg-cover').src = currentSong.cover_url || '';
+    document.getElementById('np-title').textContent = currentSong.title;
+    document.getElementById('np-artist').textContent = displayArtist;
+    document.getElementById('np-mini-cover').src = currentSong.cover_url || '';
+    document.getElementById('np-mini-title').textContent = currentSong.title;
+    document.getElementById('np-mini-artist').textContent = displayArtist;
+    
+    document.getElementById('np-mini-player').classList.remove('hidden');
+    setPlayIcon(false);
+    loadArtistCard(currentSong);
+  }
+  
+  window.addEventListener('pagehide', saveState);
+  document.addEventListener('DOMContentLoaded', restoreState);
 })();
