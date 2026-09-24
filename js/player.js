@@ -182,6 +182,12 @@
     
     document.getElementById('np-follow-btn').addEventListener('click', toggleFollow);
   }
+
+  audioEl().addEventListener('error', () => {
+  const err = audioEl().error;
+  const reasons = { 1: 'Aborted', 2: 'Network error', 3: 'Decode error', 4: 'Source not supported' };
+  console.error('Audio error:', reasons[err?.code] || 'Unknown', '| src:', audioEl().src);
+});
   
   function skip(direction) {
     if (!queue.length) return;
