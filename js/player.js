@@ -295,7 +295,8 @@
     
     const a = audioEl();
     a.src = data.url;
-    a.play();
+    //a.play();
+    a.play().catch(err => console.error('play() rejected:', err.name, err.message));
     startStreamTimer(song.id, data.sessionId);
     // ...rest of the function (title/cover/mini-player setup) stays exactly the same
     
