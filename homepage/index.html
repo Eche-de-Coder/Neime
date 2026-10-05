@@ -265,9 +265,134 @@
   </header>-->
   
   
+  <!-- Slide-over Drawer Backdrop & Panel -->
+  <div class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out" id="drawer-backdrop" onclick="toggleDrawer(false)"></div>
+  <aside class="fixed top-0 left-0 bottom-0 z-50 w-full sm:w-80 md:w-96 bg-surface-container-low/95 backdrop-blur-2xl border-r border-white/10 shadow-2xl flex flex-col justify-between -translate-x-full transition-transform duration-300 ease-out" id="side-drawer">
+    <!-- Drawer Header -->
+    <div class="px-6 py-5 border-b border-white/10 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <span class="w-3 h-3 rounded-full bg-primary-container shadow-[0_0_10px_#ff5c00]"></span>
+        <span class="font-display-xl text-2xl font-extrabold text-primary tracking-tight">Neime</span>
+      </div>
+      <button aria-label="Close Drawer" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:text-white hover:bg-surface-container active:scale-95 transition-all" onclick="toggleDrawer(false)">
+        <span class="material-symbols-outlined text-xl">close</span>
+      </button>
+    </div>
+    <!-- Drawer Body Navigation Links -->
+    <div class="flex-1 overflow-y-auto px-6 py-5 flex flex-col gap-6 hide-scrollbar">
+      <!-- Primary Links -->
+      <div class="flex flex-col gap-1">
+        <span class="font-label-sm text-[11px] uppercase tracking-wider text-outline mb-2 px-3">Navigation</span>
+        <a class="flex items-center gap-3.5 px-3 py-2.5 rounded-lg text-white font-headline-md text-base hover:bg-surface-container transition-colors group" href="#">
+          <span class="material-symbols-outlined text-primary text-xl group-hover:scale-110 transition-transform">home</span>
+          <span>Home</span>
+        </a>
+        <a class="flex items-center gap-3.5 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container transition-colors group" href="../search">
+          <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary text-xl transition-colors">search</span>
+          <span>Search</span>
+        </a>
+        <a class="flex items-center gap-3.5 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container transition-colors group" href="../library">
+          <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary text-xl transition-colors">library_music</span>
+          <span>My Music</span>
+        </a>
+        <a class="flex items-center gap-3.5 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container transition-colors group" href="../account">
+          <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary text-xl transition-colors">artist</span>
+          <span>Artists</span>
+        </a>
+        <a class="flex items-center gap-3.5 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container transition-colors group" href="../contact">
+          <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary text-xl transition-colors">info</span>
+          <span>About Us</span>
+        </a>
+      </div>
+      <!-- Legal & Info -->
+      <div class="flex flex-col gap-1 pt-2 border-t border-white/5">
+        <span class="font-label-sm text-[11px] uppercase tracking-wider text-outline mb-2 px-3">Legal &amp; Policy</span>
+        <a class="flex items-center gap-3.5 px-3 py-2 rounded-lg text-sm text-on-surface-variant hover:text-white hover:bg-surface-container transition-colors" href="#">
+          <span class="material-symbols-outlined text-base">description</span>
+          <span>Terms of Service</span>
+        </a>
+        <a class="flex items-center gap-3.5 px-3 py-2 rounded-lg text-sm text-on-surface-variant hover:text-white hover:bg-surface-container transition-colors" href="#">
+          <span class="material-symbols-outlined text-base">privacy_tip</span>
+          <span>Privacy Policy</span>
+        </a>
+      </div>
+      <!-- Contact Us Interactive Accordion -->
+      <div class="pt-2 border-t border-white/5">
+        <button class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-white hover:bg-surface-container transition-colors text-left group" onclick="toggleContactAccordion()">
+          <span class="flex items-center gap-3.5">
+            <span class="material-symbols-outlined text-xl text-primary-container">support_agent</span>
+            <span class="text-sm font-semibold text-white">Contact Us</span>
+          </span>
+          <span class="material-symbols-outlined text-lg transition-transform duration-300" id="contact-arrow">expand_more</span>
+        </button>
+        <!-- Submenu items -->
+        <div class="mt-2 pl-3 flex flex-col gap-2 overflow-hidden transition-all duration-300" id="contact-submenu">
+          <a class="flex items-center gap-3 p-2 rounded-md bg-surface-container/60 hover:bg-surface-container border border-white/5 text-xs text-on-surface transition-colors" href="https://x.com/Neimestore" target="_blank">
+            <span class="font-label-sm font-bold text-secondary-fixed text-sm">𝕏</span>
+            <div class="truncate">
+              <div class="text-[10px] text-on-surface-variant uppercase tracking-wider">Twitter / X</div>
+              <div class="font-label-sm text-white">@Neimestore</div>
+            </div>
+          </a>
+          <a class="flex items-center gap-3 p-2 rounded-md bg-surface-container/60 hover:bg-surface-container border border-white/5 text-xs text-on-surface transition-colors" href="mailto:neime.com.ng@gmail.com">
+            <span class="material-symbols-outlined text-primary text-base">mail</span>
+            <div class="truncate">
+              <div class="text-[10px] text-on-surface-variant uppercase tracking-wider">Email</div>
+              <div class="font-label-sm text-white">neime.com.ng@gmail.com</div>
+            </div>
+          </a>
+          <a class="flex items-center gap-3 p-2 rounded-md bg-surface-container/60 hover:bg-surface-container border border-white/5 text-xs text-on-surface transition-colors" href="tel:+2348119712087">
+            <span class="material-symbols-outlined text-secondary-fixed text-base">call</span>
+            <div class="truncate">
+              <div class="text-[10px] text-on-surface-variant uppercase tracking-wider">Phone</div>
+              <div class="font-label-sm text-white">+234 811 971 2087</div>
+            </div>
+          </a>
+          <a class="flex items-center gap-3 p-2 rounded-md bg-surface-container/60 hover:bg-surface-container border border-white/5 text-xs text-on-surface transition-colors" href="https://wa.me/2348119712087" target="_blank">
+            <span class="material-symbols-outlined text-[#25D366] text-base">chat</span>
+            <div class="truncate">
+              <div class="text-[10px] text-on-surface-variant uppercase tracking-wider">WhatsApp</div>
+              <div class="font-label-sm text-white">+234 811 971 2087</div>
+            </div>
+          </a>
+          <!--<div class="flex items-start gap-3 p-2 rounded-md bg-surface-container/60 border border-white/5 text-xs text-on-surface">
+            <span class="material-symbols-outlined text-primary-container text-base mt-0.5">location_on</span>
+            <div>
+              <div class="text-[10px] text-on-surface-variant uppercase tracking-wider">Lagos Office / HQ</div>
+              <div class="text-white text-xs leading-tight mt-0.5">Lekki Phase 1, Victoria Island, Lagos</div>
+            </div>
+          </div>-->
+        </div>
+      </div>
+    </div>
+    <!-- Drawer Footer -->
+    <div class="mb-20 px-6 py-4 border-t border-white/10 bg-surface-container-lowest/80 flex flex-col gap-3">
+      <div class="flex items-center justify-between text-on-surface-variant">
+        <span class="text-xs font-label-sm uppercase tracking-wider text-outline">Connect</span>
+        <div class="flex items-center gap-3">
+          <a class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:text-primary transition-colors" href="https://x.com/Neimestore">
+            <span class="font-label-sm text-xs font-bold">𝕏</span>
+          </a>
+          <a class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:text-primary transition-colors" href="#">
+            <span class="material-symbols-outlined text-base">podcasts</span>
+          </a>
+          <a class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:text-primary transition-colors" href="#">
+            <span class="material-symbols-outlined text-base">music_note</span>
+          </a>
+        </div>
+      </div>
+      <div class="text-[11px] text-on-surface-variant/60 font-label-sm flex justify-between items-center pt-1 border-t border-white/5">
+        <span>© 2026 Neime Music Ltd.</span>
+        <span class="text-primary-container">Nigeria</span>
+      </div>
+    </div>
+  </aside>
+  
+  
   <!-- Main Content Canvas -->
   <main class="pt-6 pb-player-safe px-container-padding-mobile md:px-container-padding-desktop max-w-7xl mx-auto flex flex-col gap-section-gap">
     <!-- Vibe Bar -->
+    <!--
     <section class="w-full -mx-container-padding-mobile px-container-padding-mobile md:mx-0 md:px-0">
       <div class="flex gap-3 overflow-x-auto hide-scrollbar pb-2">
         <button class="px-6 py-2 rounded-full bg-primary-container text-white font-label-sm text-label-sm whitespace-nowrap active:scale-95 transition-transform drop-shadow-[0_0_8px_rgba(255,92,0,0.4)]">All Vibes</button>
@@ -276,6 +401,11 @@
         <button class="px-6 py-2 rounded-full bg-surface-container-low border border-white/5 text-on-background font-label-sm text-label-sm whitespace-nowrap active:scale-95 transition-transform hover:bg-surface-container">Highlife</button>
         <button class="px-6 py-2 rounded-full bg-surface-container-low border border-white/5 text-on-background font-label-sm text-label-sm whitespace-nowrap active:scale-95 transition-transform hover:bg-surface-container">Cruisin'</button>
         <button class="px-6 py-2 rounded-full bg-surface-container-low border border-white/5 text-on-background font-label-sm text-label-sm whitespace-nowrap active:scale-95 transition-transform hover:bg-surface-container">Late Night</button>
+      </div>
+    </section>-->
+    <section class="w-full -mx-container-padding-mobile px-container-padding-mobile md:mx-0 md:px-0">
+      <div class="flex items-center gap-3 w-full pb-2"><button aria-label="Open Categories Menu" class="flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-full bg-surface-container-low border border-white/5 text-on-surface-variant hover:text-white hover:bg-surface-container active:scale-95 transition-all" onclick="toggleDrawer(true)"><span class="material-symbols-outlined text-2xl">menu</span></button>
+        <div class="flex-1 flex gap-3 overflow-x-auto hide-scrollbar"><button class="px-6 py-2 rounded-full bg-primary-container text-white font-label-sm text-label-sm whitespace-nowrap active:scale-95 transition-transform drop-shadow-[0_0_8px_rgba(255,92,0,0.4)] flex-shrink-0">All Vibes</button><button class="px-6 py-2 rounded-full bg-surface-container-low border border-white/5 text-on-background font-label-sm text-label-sm whitespace-nowrap active:scale-95 transition-transform hover:bg-surface-container flex-shrink-0">Afrobeat</button><button class="px-6 py-2 rounded-full bg-surface-container-low border border-white/5 text-on-background font-label-sm text-label-sm whitespace-nowrap active:scale-95 transition-transform hover:bg-surface-container flex-shrink-0">Amapiano</button><button class="px-6 py-2 rounded-full bg-surface-container-low border border-white/5 text-on-background font-label-sm text-label-sm whitespace-nowrap active:scale-95 transition-transform hover:bg-surface-container flex-shrink-0">Highlife</button><button class="px-6 py-2 rounded-full bg-surface-container-low border border-white/5 text-on-background font-label-sm text-label-sm whitespace-nowrap active:scale-95 transition-transform hover:bg-surface-container flex-shrink-0">Cruisin'</button><button class="px-6 py-2 rounded-full bg-surface-container-low border border-white/5 text-on-background font-label-sm text-label-sm whitespace-nowrap active:scale-95 transition-transform hover:bg-surface-container flex-shrink-0">Late Night</button></div>
       </div>
     </section>
     <!-- Featured Hero -->
@@ -413,6 +543,37 @@
         });
         container.appendChild(node);
       });
+    }
+    
+    
+    function toggleDrawer(open) {
+      const backdrop = document.getElementById('drawer-backdrop');
+      const drawer = document.getElementById('side-drawer');
+      if (open) {
+        backdrop.classList.remove('opacity-0', 'pointer-events-none');
+        backdrop.classList.add('opacity-100', 'pointer-events-auto');
+        drawer.classList.remove('-translate-x-full');
+        drawer.classList.add('translate-x-0');
+        document.body.style.overflow = 'hidden';
+      } else {
+        backdrop.classList.add('opacity-0', 'pointer-events-none');
+        backdrop.classList.remove('opacity-100', 'pointer-events-auto');
+        drawer.classList.add('-translate-x-full');
+        drawer.classList.remove('translate-x-0');
+        document.body.style.overflow = '';
+      }
+    }
+    
+    function toggleContactAccordion() {
+      const submenu = document.getElementById('contact-submenu');
+      const arrow = document.getElementById('contact-arrow');
+      if (submenu.classList.contains('hidden')) {
+        submenu.classList.remove('hidden');
+        arrow.classList.add('rotate-180');
+      } else {
+        submenu.classList.add('hidden');
+        arrow.classList.remove('rotate-180');
+      }
     }
   </script>
 </body>
