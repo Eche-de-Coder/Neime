@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Contact Us | Neime - Empowering Nigerian Sound</title>
+  <!-- Material Symbols Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <!-- Brand Typography: Plus Jakarta Sans, Hanken Grotesk, JetBrains Mono -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <!-- Tailwind Configuration matching Visual Tokens -->
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-fixed": "#370e00",
+            "error-container": "#93000a",
+            "primary-container": "#ff5c00",
+            "error": "#ffb4ab",
+            "surface-container-low": "#1b1b1e",
+            "inverse-on-surface": "#303033",
+            "on-tertiary-fixed": "#23005b",
+            "surface-container-high": "#2a2a2d",
+            "on-secondary-fixed": "#002021",
+            "on-primary": "#5a1b00",
+            "surface-container-lowest": "#0e0e11",
+            "secondary-fixed-dim": "#00dce5",
+            "outline-variant": "#5b4137",
+            "surface-bright": "#39393c",
+            "on-tertiary": "#3c0090",
+            "primary-fixed-dim": "#ffb59a",
+            "surface-dim": "#131316",
+            "on-background": "#e4e1e6",
+            "tertiary": "#d1bcff",
+            "secondary": "#e6feff",
+            "on-error-container": "#ffdad6",
+            "primary-fixed": "#ffdbce",
+            "outline": "#ab897d",
+            "surface-container-highest": "#353438",
+            "surface-container": "#1f1f22",
+            "surface-variant": "#353438",
+            "surface-tint": "#ffb59a",
+            "on-secondary-container": "#006c71",
+            "secondary-container": "#00f4fe",
+            "inverse-surface": "#e4e1e6",
+            "on-primary-container": "#521800",
+            "surface": "#131316",
+            "on-tertiary-fixed-variant": "#5700c9",
+            "on-tertiary-container": "#360083",
+            "tertiary-fixed": "#e9ddff",
+            "background": "#131316",
+            "tertiary-fixed-dim": "#d1bcff",
+            "on-secondary": "#003739",
+            "on-surface-variant": "#e4beb1",
+            "on-error": "#690005",
+            "on-secondary-fixed-variant": "#004f53",
+            "inverse-primary": "#a73a00",
+            "on-surface": "#e4e1e6",
+            "primary": "#ffb59a",
+            "on-primary-fixed-variant": "#802a00",
+            "secondary-fixed": "#63f7ff",
+            "tertiary-container": "#a27aff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "unit": "8px",
+            "gutter": "24px",
+            "section-gap": "48px",
+            "container-padding-mobile": "16px",
+            "container-padding-desktop": "40px"
+          },
+          "fontFamily": {
+            "display-xl": ["Plus Jakarta Sans"],
+            "price-display": ["Hanken Grotesk"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Hanken Grotesk"],
+            "body-md": ["Hanken Grotesk"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "label-sm": ["JetBrains Mono"],
+            "headline-lg": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "display-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "price-display": ["20px", { "lineHeight": "24px", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+
+<body class="bg-background text-on-surface antialiased selection:bg-primary-container selection:text-white min-h-screen relative overflow-x-hidden">
+  <!-- Atmospheric Cultural Lighting Effect & Stage Gradients -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div class="absolute -top-[15%] left-[20%] w-[650px] h-[650px] rounded-full bg-primary-container/10 blur-[140px]"></div>
+    <div class="absolute top-[35%] -right-[10%] w-[500px] h-[500px] rounded-full bg-secondary-container/5 blur-[120px]"></div>
+    <div class="absolute bottom-[5%] left-[10%] w-[550px] h-[550px] rounded-full bg-tertiary-container/5 blur-[150px]"></div>
+  </div>
+  
+  <!-- 
+  <header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-sm transition-all duration-300">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-4 py-3 md:px-8">
+
+      <a class="flex items-center gap-3 group active:scale-95 transition-transform" href="#">
+        <div class="w-10 h-10 rounded-xl overflow-hidden ring-1 ring-white/20 bg-surface-container flex items-center justify-center shadow-lg group-hover:ring-primary-container transition-all">
+          <img alt="Neime Nigerian Music Platform Logo Icon" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1UybaWcu3LcX1ZikePrEmGpiT_bxMdhexAiVJuaUxzYJY8-wEZRgrau94bX8LK11SvO6cV7SoMqTAOD_bDGqkl2qnIUZ9f265dYb4T3ccn_bSgZbyejO-1Mv0GgGnuE_JFOOb9Q2CyUVv-RrtSsrNKmWfMtSLMeqdqzlAZ6a8rwmKGvYCi9ig2XUGSk-AeAbNSdAISumTq-440V58wvqCNp33ya7mibpVbkqCXI9b69-7JBI7Q3l6lOzpwHXRkdWNVdzsEAOQVeIg" />
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display-xl text-headline-md font-extrabold text-primary-container tracking-tight">Neime</span>
+          <span class="font-label-sm text-label-sm text-on-surface-variant tracking-wider -mt-1 hidden sm:inline">SOUND OF NAIJA</span>
+        </div>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-7">
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-container transition-colors" href="#">Home</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-container transition-colors" href="#">Search</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-container transition-colors" href="#">My Music</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-container transition-colors" href="#">Artists</a>
+        <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-container transition-colors" href="#">About Us</a>
+        <a class="font-body-md text-body-md text-primary-container font-semibold relative after:content-[''] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-0.5 after:bg-primary-container" href="#">Contact Us</a>
+      </nav>
+      
+      <div class="flex items-center gap-3">
+        <button aria-label="Notifications" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary-container hover:bg-surface-container active:scale-95 transition-all">
+          <span class="material-symbols-outlined text-[22px]">notifications</span>
+        </button>
+        <button aria-label="Wallet &amp; Payments" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary-container hover:bg-surface-container active:scale-95 transition-all">
+          <span class="material-symbols-outlined text-[22px]">payments</span>
+        </button>
+        <div class="h-6 w-px bg-white/10 mx-1 hidden sm:block"></div>
+        <a class="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-full border border-primary-container/40 text-on-surface font-body-md text-body-md hover:bg-primary-container/10 active:scale-95 transition-all" href="#">
+          Artist Sign In
+        </a>
+        <a class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-primary-container text-white font-body-md text-body-md font-bold hover:opacity-90 active:scale-95 transition-all shadow-[0_0_16px_rgba(255,92,0,0.35)]" href="#">
+          Join Neime
+        </a>
+      </div>
+    </div>
+  </header>-->
+  
+  <!-- Main Content Container with player-safe spacing -->
+  <main class="relative z-10 pt-8 pb-8 max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+    <!-- Hero / Introduction Section -->
+    <section class="text-center max-w-3xl mx-auto mb-16 pt-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-high border border-white/10 mb-6">
+        <span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+        <span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">PORT HARCOURT HQ SUPPORT DESK</span>
+      </div>
+      <h1 class="font-display-xl text-display-xl text-on-surface font-extrabold tracking-tight mb-4">
+        Get in Touch with <span class="text-transparent bg-clip-text bg-primary-container">Neime</span>
+      </h1>
+      <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+        Have questions about uploading your music, artist payouts, licensing, or need listener support? Reach out to our Lagos-based team. We are built for the pulse of Naija creators.
+      </p>
+    </section>
+    <!-- Bento Grid of Contact Channels -->
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+      <!-- Card 1: X (formerly Twitter) -->
+      <div class="group bg-surface-container-low/90 backdrop-blur-xl border border-white/10 rounded-xl p-6 flex flex-col justify-between hover:border-primary-container/60 hover:shadow-[0_4px_24px_rgba(255,92,0,0.15)] transition-all duration-300">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-12 h-12 rounded-xl bg-surface-container-high border border-white/5 flex items-center justify-center text-primary-container group-hover:scale-105 transition-transform">
+              <span class="material-symbols-outlined text-[26px]">tag</span>
+            </div>
+            <span class="font-label-sm text-label-sm text-secondary-fixed-dim bg-surface-container px-2 py-1 rounded">24/7 DMs</span>
+          </div>
+          <h3 class="font-headline-md text-headline-md text-on-surface mb-1">X (Twitter)</h3>
+          <p class="font-label-sm text-label-sm text-primary font-bold mb-3">@Neimestore</p>
+          <p class="font-body-md text-body-md text-on-surface-variant mb-6">
+            Real-time updates, artist highlights, and quick support DMs right from the timeline.
+          </p>
+        </div>
+        <a class="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-surface-container border border-white/10 text-on-surface font-body-md text-body-md hover:bg-white/5 active:scale-95 transition-all" href="https://x.com/Neimestore" rel="noopener noreferrer">
+          <span>Follow &amp; DM on X</span>
+          <span class="material-symbols-outlined text-sm">open_in_new</span>
+        </a>
+      </div>
+      <!-- Card 2: Facebook -->
+      <!--
+      <div class="group bg-surface-container-low/90 backdrop-blur-xl border border-white/10 rounded-xl p-6 flex flex-col justify-between hover:border-primary-container/60 hover:shadow-[0_4px_24px_rgba(255,92,0,0.15)] transition-all duration-300">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-12 h-12 rounded-xl bg-surface-container-high border border-white/5 flex items-center justify-center text-primary-container group-hover:scale-105 transition-transform">
+              <span class="material-symbols-outlined text-[26px]">groups</span>
+            </div>
+            <span class="font-label-sm text-label-sm text-secondary-container bg-surface-container px-2 py-1 rounded">Community</span>
+          </div>
+          <h3 class="font-headline-md text-headline-md text-on-surface mb-1">Facebook</h3>
+          <p class="font-label-sm text-label-sm text-primary font-bold mb-3">NeimeMusicNG</p>
+          <p class="font-body-md text-body-md text-on-surface-variant mb-6">
+            Join our vibrant community of Nigerian music lovers, producers, and indie recording artists.
+          </p>
+        </div>
+        <a class="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-surface-container border border-white/10 text-on-surface font-body-md text-body-md hover:bg-white/5 active:scale-95 transition-all" href="https://facebook.com" rel="noopener noreferrer" target="_blank">
+          <span>Connect on Facebook</span>
+          <span class="material-symbols-outlined text-sm">open_in_new</span>
+        </a>
+      </div>
+      -->
+      <!-- Card 3: Email Support -->
+      <div class="group bg-surface-container-low/90 backdrop-blur-xl border border-white/10 rounded-xl p-6 flex flex-col justify-between hover:border-primary-container/60 hover:shadow-[0_4px_24px_rgba(255,92,0,0.15)] transition-all duration-300">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-12 h-12 rounded-xl bg-surface-container-high border border-white/5 flex items-center justify-center text-primary-container group-hover:scale-105 transition-transform">
+              <span class="material-symbols-outlined text-[26px]">alternate_email</span>
+            </div>
+            <span class="font-label-sm text-label-sm text-primary bg-surface-container px-2 py-1 rounded">2-4 Hrs Resp</span>
+          </div>
+          <h3 class="font-headline-md text-headline-md text-on-surface mb-1">Email Support</h3>
+          <!--<p class="font-label-sm text-label-sm text-on-surface font-semibold mb-1">support@neime.ng</p>-->
+          <p class="font-label-sm text-label-sm text-primary font-bold mb-3">neime.com.ng@gmail.com</p>
+          <p class="font-body-md text-body-md text-on-surface-variant mb-6">
+            Dedicated inbox for creator inquiries, direct track licensing, and user account help.
+          </p>
+        </div>
+        <a class="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-surface-container border border-white/10 text-on-surface font-body-md text-body-md hover:bg-white/5 active:scale-95 transition-all" href="mailto:neime.com.ng@gmail.com">
+          <span>Send Email</span>
+          <span class="material-symbols-outlined text-sm">mail</span>
+        </a>
+      </div>
+      <!-- Card 4: Phone & WhatsApp -->
+      <div class="group bg-surface-container-low/90 backdrop-blur-xl border border-white/10 rounded-xl p-6 flex flex-col justify-between hover:border-primary-container/60 hover:shadow-[0_4px_24px_rgba(255,92,0,0.15)] transition-all duration-300">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-12 h-12 rounded-xl bg-surface-container-high border border-white/5 flex items-center justify-center text-primary-container group-hover:scale-105 transition-transform">
+              <span class="material-symbols-outlined text-[26px]">support_agent</span>
+            </div>
+            <span class="font-label-sm text-label-sm text-secondary-fixed-dim bg-surface-container px-2 py-1 rounded">9am - 6pm WAT</span>
+          </div>
+          <h3 class="font-headline-md text-headline-md text-on-surface mb-1">Direct Hotline</h3>
+          <p class="font-label-sm text-label-sm text-primary font-bold mb-1">+234 811 971 2087</p>
+          <!--<p class="font-label-sm text-label-sm text-on-surface font-semibold mb-3">+234 812 345 6789</p>-->
+          <p class="font-body-md text-body-md text-on-surface-variant mb-6">
+            Lagos Office hotline &amp; WhatsApp Creator Help Desk (Mon - Fri, West Africa Time).
+          </p>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <a class="inline-flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-lg bg-surface-container border border-white/10 text-on-surface font-body-md text-body-md hover:bg-white/5 active:scale-95 transition-all text-xs" href="tel:+2348119712087">
+            <span class="material-symbols-outlined text-sm">call</span>
+            <span>Call</span>
+          </a>
+          <a class="inline-flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-lg bg-primary-container/20 border border-primary-container/40 text-primary-fixed font-body-md text-body-md hover:bg-primary-container/30 active:scale-95 transition-all text-xs" href="https://wa.me/2348119712087" target="_blank">
+            <span class="material-symbols-outlined text-sm">chat</span>
+            <span>WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Main Section: Form + Physical Office / Details -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-20">
+      <!-- Interactive Contact Form (7 Cols) -->
+      <section class="lg:col-span-7 bg-surface-container-low/95 backdrop-blur-2xl border border-white/10 rounded-2xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+        <div class="absolute -top-24 -right-24 w-48 h-48 bg-primary-container/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="mb-8">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="material-symbols-outlined text-primary-container">send</span>
+            <span class="font-label-sm text-label-sm text-primary tracking-wider uppercase font-semibold">Message Dispatch</span>
+          </div>
+          <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">Send us a direct message</h2>
+          <p class="font-body-md text-body-md text-on-surface-variant mt-1">Our sound team will review your ticket and reply to your provided email address.</p>
+        </div>
+        <form class="space-y-6" id="contact-form" onsubmit="event.preventDefault(); document.getElementById('success-banner').classList.remove('hidden'); this.reset();">
+          <!-- Name & Email Row -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="full_name">FULL NAME *</label>
+              <input class="w-full px-4 py-3 rounded-xl bg-surface-container border border-white/10 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:border-secondary-container focus:ring-1 focus:ring-secondary-container transition-all" id="full_name" placeholder="e.g. Femi Adebayo" required="" type="text" />
+            </div>
+            <div>
+              <label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="email_address">EMAIL ADDRESS *</label>
+              <input class="w-full px-4 py-3 rounded-xl bg-surface-container border border-white/10 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:border-secondary-container focus:ring-1 focus:ring-secondary-container transition-all" id="email_address" placeholder="femi@example.com" required="" type="email" />
+            </div>
+          </div>
+          <!-- Subject Line -->
+          <div>
+            <label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="form_subject">SUBJECT *</label>
+            <input class="w-full px-4 py-3 rounded-xl bg-surface-container border border-white/10 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:border-secondary-container focus:ring-1 focus:ring-secondary-container transition-all" id="form_subject" placeholder="Regarding track distribution / payment processing" required="" type="text" />
+          </div>
+          <!-- Message Textarea -->
+          <div>
+            <label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="form_message">YOUR MESSAGE *</label>
+            <textarea class="w-full px-4 py-3 rounded-xl bg-surface-container border border-white/10 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:border-secondary-container focus:ring-1 focus:ring-secondary-container transition-all resize-y" id="form_message" placeholder="Tell us how we can assist you. Include any track titles, ISRC codes, or account phone numbers if applicable..." required="" rows="5"></textarea>
+          </div>
+          <!-- Success Notification Banner (Initially Hidden) -->
+          <div class="hidden p-4 rounded-xl bg-surface-container-high border border-primary-container/60 flex items-start gap-3" id="success-banner">
+            <span class="material-symbols-outlined text-primary-container mt-0.5">check_circle</span>
+            <div>
+              <p class="font-headline-md text-body-lg font-bold text-on-surface">Message Received!</p>
+              <p class="font-body-md text-body-md text-on-surface-variant">E se! Your ticket has been logged with our Lagos sound crew. We'll reply within 2-4 hours.</p>
+            </div>
+          </div>
+          <!-- Submit Button -->
+          <button class="w-full py-4 px-6 rounded-xl bg-primary-container text-white font-headline-md text-body-lg font-bold flex items-center justify-center gap-2 hover:opacity-95 active:scale-98 transition-all shadow-[0_4px_24px_rgba(255,92,0,0.4)]" type="submit">
+            <span class="material-symbols-outlined text-xl">send</span>
+            <span>Send Message</span>
+          </button>
+        </form>
+      </section>
+      
+      <!-- Cultural Banner Note -->
+      <div class="lg:col-span-5 rounded-2xl p-6 sm:p-8 bg-gradient-to-r from-surface-container-high via-surface-container-low to-surface-container-high border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-4">
+          <div class="w-14 h-14 rounded-2xl bg-primary-container/20 border border-primary-container/40 flex items-center justify-center text-primary-container shrink-0">
+            <span class="material-symbols-outlined text-3xl">mic</span>
+          </div>
+          <div>
+            <h4 class="font-headline-md text-headline-md text-on-surface font-bold">Are you an upcoming Nigerian music artist?</h4>
+            <p class="font-body-md text-body-md text-on-surface-variant">Get early access to our fast payout engine, fan subscriptions in Naira, and playlist placements.</p>
+          </div>
+        </div>
+        <a class="shrink-0 px-6 py-3 rounded-full bg-primary-container text-white font-headline-md text-body-md font-bold hover:opacity-90 active:scale-95 transition-all shadow-[0_0_18px_rgba(255,92,0,0.3)]" href="../signup">
+          Register as Creator
+        </a>
+      </div>
+      
+      <!-- Physical Office / Location & Info (5 Cols) -->
+      <!--
+      <section class="lg:col-span-5 space-y-6">
+        
+        <div class="bg-surface-container-low/95 backdrop-blur-xl border border-white/10 rounded-2xl p-6 sm:p-8">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary-container">location_on</span>
+              <span class="font-label-sm text-label-sm text-primary tracking-wider uppercase">LAGOS HQ</span>
+            </div>
+            <span class="px-2.5 py-1 rounded-full bg-surface-container-high border border-white/10 font-label-sm text-label-sm text-secondary-fixed">Nigeria</span>
+          </div>
+          <h3 class="font-headline-lg text-headline-lg text-on-surface font-bold mb-2">Victoria Island &amp; Lekki</h3>
+          <p class="font-body-md text-body-md text-on-surface-variant mb-5">
+            Plot 14B, Admiralty Way, Lekki Phase 1 / Victoria Island Creative Hub, Lagos, Nigeria.
+          </p>
+          <div class="space-y-3.5 pt-4 border-t border-white/10">
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-on-surface-variant text-[20px] mt-0.5">schedule</span>
+              <div>
+                <p class="font-label-sm text-label-sm text-on-surface font-semibold">Office Operating Hours</p>
+                <p class="font-body-md text-body-md text-on-surface-variant">Monday – Friday: 9:00 AM – 6:00 PM (WAT)</p>
+                <p class="font-label-sm text-label-sm text-on-surface-variant/70">Saturday Creator Studios: By appointment</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-on-surface-variant text-[20px] mt-0.5">hub</span>
+              <div>
+                <p class="font-label-sm text-label-sm text-on-surface font-semibold">Studio Visits &amp; In-Person Consultations</p>
+                <p class="font-body-md text-body-md text-on-surface-variant">Book a session with our A&amp;R engineering reps in Lagos for sound mastering &amp; verification.</p>
+              </div>
+            </div>
+          </div>
+        </div>-->
+      
+      
+      <!-- FAQ Mini-Strip for Instant Answers -->
+      <!--
+        <div class="bg-surface-container-low/95 backdrop-blur-xl border border-white/10 rounded-2xl p-6 sm:p-8">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="material-symbols-outlined text-secondary-container">bolt</span>
+            <span class="font-label-sm text-label-sm text-secondary-container tracking-wider uppercase font-semibold">INSTANT ANSWERS</span>
+          </div>
+          <h4 class="font-headline-md text-headline-md text-on-surface mb-3">Frequently Asked Creator Questions</h4>
+          <div class="space-y-3">
+            <div class="p-3.5 rounded-xl bg-surface-container border border-white/5 hover:border-white/15 transition-colors">
+              <p class="font-headline-md text-body-md text-on-surface font-semibold mb-1 flex items-center justify-between">
+                <span>When are artist payouts processed?</span>
+                <span class="material-symbols-outlined text-primary-container text-sm">payments</span>
+              </p>
+              <p class="font-body-md text-body-md text-on-surface-variant">Naira payouts are disbursed every Tuesday directly to any registered Nigerian bank or fintech wallet.</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-surface-container border border-white/5 hover:border-white/15 transition-colors">
+              <p class="font-headline-md text-body-md text-on-surface font-semibold mb-1 flex items-center justify-between">
+                <span>What are the WAV upload specifications?</span>
+                <span class="material-symbols-outlined text-secondary-container text-sm">graphic_eq</span>
+              </p>
+              <p class="font-body-md text-body-md text-on-surface-variant">Lossless 16-bit or 24-bit 44.1kHz Stereo WAV files ensure optimal streaming fidelity across all networks.</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-surface-container border border-white/5 hover:border-white/15 transition-colors">
+              <p class="font-headline-md text-body-md text-on-surface font-semibold mb-1 flex items-center justify-between">
+                <span>How does copyright protection work?</span>
+                <span class="material-symbols-outlined text-tertiary text-sm">verified_user</span>
+              </p>
+              <p class="font-body-md text-body-md text-on-surface-variant">Neime automatically fingerprints your track with audio-ID technology and registers an internal timestamp.</p>
+            </div>
+          </div>
+        </div>
+      </section>-->
+    </div>
+    
+    
+    <!-- Cultural Banner Note -->
+    <!--
+    <div class="rounded-2xl p-6 sm:p-8 bg-gradient-to-r from-surface-container-high via-surface-container-low to-surface-container-high border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-2xl bg-primary-container/20 border border-primary-container/40 flex items-center justify-center text-primary-container shrink-0">
+          <span class="material-symbols-outlined text-3xl">mic</span>
+        </div>
+        <div>
+          <h4 class="font-headline-md text-headline-md text-on-surface font-bold">Are you an upcoming Nigerian music artist?</h4>
+          <p class="font-body-md text-body-md text-on-surface-variant">Get early access to our fast payout engine, fan subscriptions in Naira, and playlist placements.</p>
+        </div>
+      </div>
+      <a class="shrink-0 px-6 py-3 rounded-full bg-primary-container text-white font-headline-md text-body-md font-bold hover:opacity-90 active:scale-95 transition-all shadow-[0_0_18px_rgba(255,92,0,0.3)]" href="../signup">
+        Register as Creator
+      </a>
+    </div>
+  </main>-->
+  
+  <!--
+  <footer class="bg-surface-container-lowest border-t border-white/10 pt-16 pb-20 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
+        
+        <div class="lg:col-span-2 space-y-4">
+          <a class="flex items-center gap-3" href="#">
+            <div class="w-9 h-9 rounded-lg overflow-hidden ring-1 ring-white/20 bg-surface-container flex items-center justify-center">
+              <img alt="Neime Music Logo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1UybaWcu3LcX1ZikePrEmGpiT_bxMdhexAiVJuaUxzYJY8-wEZRgrau94bX8LK11SvO6cV7SoMqTAOD_bDGqkl2qnIUZ9f265dYb4T3ccn_bSgZbyejO-1Mv0GgGnuE_JFOOb9Q2CyUVv-RrtSsrNKmWfMtSLMeqdqzlAZ6a8rwmKGvYCi9ig2XUGSk-AeAbNSdAISumTq-440V58wvqCNp33ya7mibpVbkqCXI9b69-7JBI7Q3l6lOzpwHXRkdWNVdzsEAOQVeIg" />
+            </div>
+            <span class="font-display-xl text-headline-md font-extrabold text-primary-container tracking-tight">Neime</span>
+          </a>
+          <p class="font-body-md text-body-md text-on-surface-variant max-w-sm">
+            Neime is the stage for the next wave of Afrobeats, Street-hop, Highlife, and Nigerian alté. Directly connecting indie soundmakers with avid listeners worldwide.
+          </p>
+          <div class="flex items-center gap-3 pt-2">
+            
+            <a aria-label="X Twitter" class="w-9 h-9 rounded-full bg-surface-container border border-white/10 flex items-center justify-center text-on-surface hover:text-primary-container hover:border-primary-container transition-colors" href="https://x.com">
+              <span class="material-symbols-outlined text-lg">tag</span>
+            </a>
+            <a aria-label="Facebook" class="w-9 h-9 rounded-full bg-surface-container border border-white/10 flex items-center justify-center text-on-surface hover:text-primary-container hover:border-primary-container transition-colors" href="https://facebook.com">
+              <span class="material-symbols-outlined text-lg">groups</span>
+            </a>
+            <a aria-label="Instagram" class="w-9 h-9 rounded-full bg-surface-container border border-white/10 flex items-center justify-center text-on-surface hover:text-primary-container hover:border-primary-container transition-colors" href="https://instagram.com">
+              <span class="material-symbols-outlined text-lg">photo_camera</span>
+            </a>
+            <a aria-label="YouTube" class="w-9 h-9 rounded-full bg-surface-container border border-white/10 flex items-center justify-center text-on-surface hover:text-primary-container hover:border-primary-container transition-colors" href="https://youtube.com">
+              <span class="material-symbols-outlined text-lg">play_circle</span>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h5 class="font-label-sm text-label-sm text-primary uppercase tracking-wider mb-4 font-bold">Platform</h5>
+          <ul class="space-y-2.5">
+            <li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-container transition-colors" href="#">Discover Naija</a></li>
+            <li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-container transition-colors" href="#">Charts &amp; Vibes</a></li>
+            <li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-container transition-colors" href="#">Creator Upload</a></li>
+            <li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-container transition-colors" href="#">Direct Payouts</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h5 class="font-label-sm text-label-sm text-primary uppercase tracking-wider mb-4 font-bold">Contact &amp; Help</h5>
+          <ul class="space-y-2.5">
+            <li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-container transition-colors" href="#">Contact Us</a></li>
+            <li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-container transition-colors" href="#">Support Desk</a></li>
+            <li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-container transition-colors" href="#">Licensing &amp; PR</a></li>
+            <li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-container transition-colors" href="#">Office Location</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h5 class="font-label-sm text-label-sm text-primary uppercase tracking-wider mb-4 font-bold">Policies</h5>
+          <ul class="space-y-2.5">
+            <li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-container transition-colors" href="#">Terms of Service</a></li>
+            <li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-container transition-colors" href="#">Privacy Policy</a></li>
+            <li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-container transition-colors" href="#">Artist Terms</a></li>
+            <li><a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-container transition-colors" href="#">Community Guidelines</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <p class="font-label-sm text-label-sm text-on-surface-variant/60">
+          © 2025 Neime Music Technologies Ltd. Victoria Island &amp; Lekki, Lagos, Nigeria. All rights reserved.
+        </p>
+        <p class="font-label-sm text-label-sm text-on-surface-variant/60 flex items-center justify-center gap-1">
+          <span>Engineered with rhythmic energy in Lagos</span>
+          <span class="text-primary-container">♥</span>
+        </p>
+      </div>
+    </div>
+  </footer>-->
+</body>
+
+</html>
