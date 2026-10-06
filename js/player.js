@@ -140,7 +140,7 @@
   
   function setupControls() {
     const a = audioEl();
-
+    
     a.addEventListener('error', () => {
       const err = a.error;
       const reasons = { 1: 'Aborted', 2: 'Network error', 3: 'Decode error', 4: 'Source not supported' };
@@ -320,11 +320,11 @@
     loadArtistCard(song);
   };
   
-  /**let streamTimer = null;
+  let streamTimer = null;
   let streamSeconds = 0;
-  let streamCounted = false;**/
+  let streamCounted = false;
   
-  /**function startStreamTimer(songId) {
+  function startStreamTimer(songId) {
     clearStreamTimer();
     streamSeconds = 0;
     streamCounted = false;
@@ -339,9 +339,9 @@
         });
       }
     }, 1000);
-  }**/
+  }
   
-  /**function startStreamTimer(songId, sessionId) {
+  function startStreamTimer(songId, sessionId) {
     clearStreamTimer();
     streamSeconds = 0;
     streamCounted = false;
@@ -410,14 +410,14 @@
   }
   
   window.addEventListener('pagehide', saveState);
-  document.addEventListener('DOMContentLoaded', restoreState);**/
+  document.addEventListener('DOMContentLoaded', restoreState);
+  
+})();
 
 
 
 
-
-
- let streamTimer = null;
+/** let streamTimer = null;
   let streamSeconds = 0;
   let streamCounted = false;
 
@@ -491,3 +491,4 @@
   window.addEventListener('pagehide', saveState);
   document.addEventListener('DOMContentLoaded', restoreState);
 })();
+**/
