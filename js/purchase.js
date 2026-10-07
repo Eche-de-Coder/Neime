@@ -8,7 +8,7 @@
         <p class="font-body-md text-body-md text-on-surface-variant mb-6" id="buy-modal-artist">Artist</p>
         <p class="font-price-display text-price-display text-primary mb-6" id="buy-modal-price">₦0</p>
         <button class="w-full bg-primary-container text-white font-headline-md text-headline-md !text-[16px] py-3 rounded-full hover:opacity-90 active:scale-95 transition-all mb-3" id="buy-modal-pay-btn" type="button">
-          Pay with Paystack
+          Pay with Flutterwave
         </button>
         <button class="w-full text-on-surface-variant font-body-md text-body-md py-2" id="buy-modal-cancel-btn" type="button">
           Cancel
@@ -83,7 +83,7 @@
     owned ? window.playSong(song) : openBuyModal(song);
   }
   
-  async function payForSong() {
+  /**async function payForSong() {
     const { data: { session } } = await window.sb.auth.getSession();
     if (!session) {
       window.location.href = `login.html?redirect=${encodeURIComponent(window.location.href)}`;
@@ -117,6 +117,45 @@
     closeBuyModal();
     window.playSong(song);
   }
-  
+  **/
   window.Purchase = { handlePlayClick, hasPurchased, openBuyModal };
+  
+  
+  async function payForSong() {
+    const { data: { session } } = await window.sb.auth.getSession();
+    if (!session) {
+      window.location.href = `../login?redirect=${encodeURIComponent(window.location.href)}`;
+      return;
+    }
+    
+    const song = songBeingBought;
+    const txRef = `neime_${song.id}_${Date.now()}`;
+    
+    FlutterwaveCheckout({
+      public_key: window.FLW_PUBLIC_KEY,
+      tx_ref: txRef,
+      amount: song.price,
+      currency: 'NGN',
+      payment_options: 'card,ussd,banktransfer',
+      customer: { email: session.user.email },
+      customizations: { title: 'Neime', description: song.title },
+      callback: (response) => verifyAndUnlock(response.transaction_id, txRef, song, session.user.id),
+      onclose: () => {}
+    });
+  }
+  
+  async function verifyAndUnlock(transactionId, txRef, song, buyerId) {
+    const { data, error } = await window.sb.functions.invoke('verify-payment', {
+      body: { transaction_id: transactionId, tx_ref: txRef, song_id: song.id, buyer_id: buyerId }
+    });
+    
+    if (error || !data?.success) {
+      const message = await extractErrorMessage(error, data);
+      alert('Payment verification failed: ' + message);
+      return;
+    }
+    
+    closeBuyModal();
+    window.playSong(song);
+  }
 })();
