@@ -201,16 +201,19 @@
     const total = unowned.reduce((sum, s) => sum + Number(s.price), 0);
     const btn = document.getElementById('col-buy-btn');
     btn.disabled = true;
+    const txRef = `neime_album_${activeCollection.id}_${Date.now()}`;
     
-    const handler = PaystackPop.setup({
-      key: window.PAYSTACK_PUBLIC_KEY,
-      email: session.user.email,
-      amount: Math.round(total * 100),
+    FlutterwaveCheckout({
+      public_key: window.FLW_PUBLIC_KEY,
+      tx_ref: txRef,
+      amount: total,
       currency: 'NGN',
-      ref: `neime_album_${activeCollection.id}_${Date.now()}`,
+      payment_options: 'card,ussd,banktransfer',
+      customer: { email: session.user.email },
+      customizations: { title: 'Neime', description: activeCollection.title },
       callback: async (response) => {
-        const { data, error } = await window.sb.functions.invoke('verify-paystack', {
-          body: { reference: response.reference, album_id: activeCollection.id, buyer_id: session.user.id }
+        const { data, error } = await window.sb.functions.invoke('verify-payment', {
+          body: { transaction_id: response.transaction_id, tx_ref: txRef, album_id: activeCollection.id, buyer_id: session.user.id }
         });
         btn.disabled = false;
         if (error || !data?.success) {
@@ -219,9 +222,8 @@
         }
         openModal(activeCollection.id);
       },
-      onClose: () => { btn.disabled = false; }
+      onclose: () => { btn.disabled = false; }
     });
-    handler.openIframe();
   }
   
   window.Collections = { renderInto };
