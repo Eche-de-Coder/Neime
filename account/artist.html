@@ -1583,7 +1583,7 @@
     
     
     
-    const NEIME_BANKS = [
+    const NEIME_BANKS = [ // Note: this isnt being used anymore
       { name: "Access Bank", code: "044" },
       { name: "Ecobank Nigeria", code: "050" },
       { name: "Fidelity Bank", code: "070" },
@@ -1605,18 +1605,27 @@
       { name: "Zenith Bank", code: "057" }
     ];
     
+    (async function loadBanks() {
+      const { data, error } = await window.sb.functions.invoke('list-banks');
+      if (error || !data?.banks) {
+        console.warn('Could not load bank list');
+        return;
+      }
+      data.banks
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .forEach(bank => {
+          const opt = document.createElement('option');
+          opt.value = bank.code;
+          opt.textContent = bank.name;
+          withdrawBankSelect.appendChild(opt);
+        });
+    })();
+    
     const withdrawModal = document.getElementById('withdraw-modal');
     const withdrawBankSelect = document.getElementById('withdraw-bank');
     const withdrawAccountNumberInput = document.getElementById('withdraw-account-number');
     const withdrawAccountNameInput = document.getElementById('withdraw-account-name');
     const withdrawAccountVerifiedIcon = document.getElementById('withdraw-account-verified');
-    
-    NEIME_BANKS.forEach(bank => {
-      const opt = document.createElement('option');
-      opt.value = bank.code;
-      opt.textContent = bank.name;
-      withdrawBankSelect.appendChild(opt);
-    });
     
     function showWithdrawStatus(message, isError) {
       const banner = document.getElementById('withdraw-status-banner');
@@ -1639,7 +1648,6 @@
     document.getElementById('withdraw-modal-close').addEventListener('click', () => withdrawModal.classList.add('hidden'));
     document.getElementById('withdraw-modal-backdrop').addEventListener('click', () => withdrawModal.classList.add('hidden'));
     
-    // Debounced lookup — fires once a bank is picked and the account number hits 10 digits
     let resolveTimeout;
     
     function maybeResolveAccount() {
