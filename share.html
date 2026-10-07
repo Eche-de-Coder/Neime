@@ -7,15 +7,13 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <meta name="color-scheme" content="dark" />
   
-  
-  
   <link href="https://fonts.googleapis.com" rel="preconnect" />
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="https://js.paystack.co/v1/inline.js"></script>
+  <script src="https://checkout.flutterwave.com/v3.js"></script>
   <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
@@ -102,7 +100,7 @@
     }
     
     @keyframes bar-pulse {
-
+      
       0%,
       100% {
         transform: scaleY(0.4);
@@ -384,26 +382,28 @@
     // ── Buy / Play ──
     document.getElementById('action-btn').addEventListener('click', async () => {
       if (!currentUser) {
-        window.location.href = `../account/non.html?redirect=${encodeURIComponent(window.location.href)}`;
+        window.location.href = `../login?redirect=${encodeURIComponent(window.location.href)}`;
         return;
       }
       if (owned) { window.playSong(song); return; }
       
-      const handler = PaystackPop.setup({
-        key: window.PAYSTACK_PUBLIC_KEY,
-        email: currentUser.email,
-        amount: Math.round(song.price * 100),
+      const txRef = `neime_${song.id}_${Date.now()}`;
+      FlutterwaveCheckout({
+        public_key: window.FLW_PUBLIC_KEY,
+        tx_ref: txRef,
+        amount: song.price,
         currency: 'NGN',
-        ref: `neime_${song.id}_${Date.now()}`,
-        callback: (response) => verifyAndUnlock(response.reference),
-        onClose: () => {}
+        payment_options: 'card,ussd,banktransfer',
+        customer: { email: currentUser.email },
+        customizations: { title: 'Neime', description: song.title },
+        callback: (response) => verifyAndUnlock(response.transaction_id, txRef),
+        onclose: () => {}
       });
-      handler.openIframe();
     });
     
-    async function verifyAndUnlock(reference) {
-      const { data, error } = await window.sb.functions.invoke('verify-paystack', {
-        body: { reference, song_id: song.id, buyer_id: currentUser.id }
+    async function verifyAndUnlock(transactionId, txRef) {
+      const { data, error } = await window.sb.functions.invoke('verify-payment', {
+        body: { transaction_id: transactionId, tx_ref: txRef, song_id: song.id, buyer_id: currentUser.id }
       });
       if (error || !data?.success) {
         showStatus('Payment verification failed.', true);
