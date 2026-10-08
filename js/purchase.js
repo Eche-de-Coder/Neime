@@ -72,7 +72,7 @@
   async function handlePlayClick(song) {
     const { data: { session } } = await window.sb.auth.getSession();
     if (!session) {
-      window.location.href = `login.html?redirect=${encodeURIComponent(window.location.href)}`;
+      window.location.href = `../login?redirect=${encodeURIComponent(window.location.href)}`;
       return;
     }
     if (session.user.id === song.artist_id) {
