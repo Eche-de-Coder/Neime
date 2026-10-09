@@ -699,6 +699,10 @@
           <p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Price</p>
           <p class="font-body-md text-body-md text-on-surface song-price"></p>
         </div>
+        <div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Streams</p>
+          <p class="font-body-md text-body-md text-on-surface song-streams"></p>
+        </div>
       </div>
     </div>
   </template>
@@ -1422,6 +1426,7 @@
         node.querySelector('.song-feat').textContent = song.feature ? `feat. ${song.feature}` : song.artist_name;
         node.querySelector('.song-date').textContent = new Date(song.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
         node.querySelector('.song-price').textContent = `₦${song.price}`;
+        node.querySelector('.song-streams').textContent = (song.play_count || 0).toLocaleString();
         
         node.querySelector('.song-share-btn').addEventListener('click', () => copyShareLink(song));
         node.querySelector('.song-play-btn').addEventListener('click', () => window.Purchase.handlePlayClick(song));
@@ -1475,7 +1480,7 @@
       return idx === -1 ? null : decodeURIComponent(publicUrl.slice(idx + marker.length));
     }
     
-    document.getElementById('edit-song-form').addEventListener('submit', async (e) => {
+    /**document.getElementById('edit-song-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = document.getElementById('edit-song-save-btn');
       const label = document.getElementById('edit-song-save-label');
@@ -1536,6 +1541,7 @@
         if (newCoverFile && song.cover_url) {
           const oldPath = extractStoragePath(song.cover_url, 'covers');
           if (oldPath) await window.sb.storage.from('covers').remove([oldPath]);
+          //await window.sb.storage.from('covers').remove([song.cover_url]);
         }
         if (newSongFile && song.audio_path) {
           await window.sb.storage.from('songs').remove([song.audio_path]);
@@ -1543,12 +1549,106 @@
         if (newSongFile && song.preview_url) {
           const oldPreviewPath = extractStoragePath(song.preview_url, 'previews');
           if (oldPreviewPath) await window.sb.storage.from('previews').remove([oldPreviewPath]);
+          //await window.sb.storage.from('previews').remove([song.preview_url]);
         }
         
         editModal.classList.add('hidden');
         banner.classList.add('hidden');
         loadSongs();
         loadCollections();
+      } catch (err) {
+        banner.textContent = err.message;
+        banner.classList.remove('hidden');
+        banner.classList.add('bg-error-container', 'text-on-error-container');
+      } finally {
+        btn.disabled = false;
+        label.textContent = 'Save Changes';
+      }
+    });**/
+    
+    
+    document.getElementById('edit-song-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('edit-song-save-btn');
+      const label = document.getElementById('edit-song-save-label');
+      const banner = document.getElementById('edit-song-status');
+      const id = document.getElementById('edit-song-id').value;
+      const price = parseFloat(document.getElementById('edit-song-price').value);
+      const collectionId = document.getElementById('edit-song-collection').value || null;
+      const newCoverFile = document.getElementById('edit-song-cover').files[0];
+      const newSongFile = document.getElementById('edit-song-file').files[0];
+      const song = editModal._currentSong;
+      
+      if (price > 150) {
+        banner.textContent = 'Price cannot exceed ₦150.';
+        banner.classList.remove('hidden');
+        banner.classList.add('bg-error-container', 'text-on-error-container');
+        return;
+      }
+      
+      btn.disabled = true;
+      label.textContent = 'Saving…';
+      
+      try {
+        const updates = {
+          title: document.getElementById('edit-song-title').value.trim(),
+          price,
+          feature: document.getElementById('edit-song-feat').value.trim() || null,
+          collection_id: collectionId
+        };
+        
+        if (newCoverFile) {
+          const coverPath = `${song.artist_id}/${Date.now()}-${newCoverFile.name}`;
+          const { error: coverErr } = await window.sb.storage.from('covers').upload(coverPath, newCoverFile);
+          if (coverErr) throw coverErr;
+          updates.cover_url = window.sb.storage.from('covers').getPublicUrl(coverPath).data.publicUrl;
+        }
+        
+        if (newSongFile) {
+          const audioPath = `${song.artist_id}/${Date.now()}-${newSongFile.name}`;
+          const { error: songErr } = await window.sb.storage.from('songs').upload(audioPath, newSongFile);
+          if (songErr) throw songErr;
+          updates.audio_path = audioPath;
+          
+          try {
+            const previewBlob = await generatePreviewClip(newSongFile, 30);
+            const previewPath = `${song.artist_id}/${Date.now()}-preview.wav`;
+            const { error: previewErr } = await window.sb.storage.from('previews').upload(previewPath, previewBlob);
+            if (!previewErr) updates.preview_url = window.sb.storage.from('previews').getPublicUrl(previewPath).data.publicUrl;
+          } catch (previewGenErr) {
+            console.warn('Preview regeneration failed:', previewGenErr);
+          }
+        }
+        
+        const { error } = await window.sb.from('songs').update(updates).eq('id', id);
+        if (error) throw error;
+        
+        // Clean up the replaced files using the OLD urls/paths captured on the
+        // song object before this edit — only after the update succeeds.
+        if (newCoverFile && song.cover_url) {
+          const oldCoverPath = extractStoragePath(song.cover_url, 'covers');
+          if (oldCoverPath) {
+            const { error: delErr } = await window.sb.storage.from('covers').remove([oldCoverPath]);
+            if (delErr) console.warn('Could not delete old cover:', delErr.message);
+          }
+        }
+        if (newSongFile) {
+          if (song.audio_path) {
+            const { error: delErr } = await window.sb.storage.from('songs').remove([song.audio_path]);
+            if (delErr) console.warn('Could not delete old audio file:', delErr.message);
+          }
+          if (song.preview_url) {
+            const oldPreviewPath = extractStoragePath(song.preview_url, 'previews');
+            if (oldPreviewPath) {
+              const { error: delErr } = await window.sb.storage.from('previews').remove([oldPreviewPath]);
+              if (delErr) console.warn('Could not delete old preview:', delErr.message);
+            }
+          }
+        }
+        
+        editModal.classList.add('hidden');
+        banner.classList.add('hidden');
+        loadSongs();
       } catch (err) {
         banner.textContent = err.message;
         banner.classList.remove('hidden');
