@@ -186,6 +186,11 @@
         </p>
       </div>
       <div class="flex items-center gap-3 self-start md:self-auto">
+        <select class="px-4 py-2.5 rounded-xl bg-surface-container-high border border-white/10 text-on-surface font-label-sm text-label-sm focus:outline-none" id="kpi-window-select">
+          <option value="24">Last 24 Hours</option>
+          <option selected value="168">Last 7 Days</option>
+          <option value="720">Last 1 Month</option>
+        </select>
         <div class="flex sm:hidden items-center bg-surface-container-low p-1 rounded-full border border-white/5" id="window-pills-mobile"></div>
         <button class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary-container text-white font-headline-md text-[14px] font-bold shadow-[0_0_16px_rgba(255,92,0,0.3)] hover:opacity-90 transition-opacity active:scale-95 transition-transform" id="export-btn">
           <span class="material-symbols-outlined text-[18px]">download</span>
@@ -358,7 +363,7 @@
         <span class="font-label-sm text-label-sm mt-1">My Music</span>
       </a>
       <a class="flex flex-col items-center justify-center text-primary-container font-bold drop-shadow-[0_0_8px_rgba(255,92,0,0.3)] hover:text-primary transition-colors active:scale-90 duration-200" href="../account">
-        <span class="material-symbols-outlined text-[24px] style="font-variation-settings: 'FILL' 1;"">person</span>
+        <span class="material-symbols-outlined text-[24px] style=" font-variation-settings: 'FILL' 1;"">person</span>
         <span class="font-label-sm text-label-sm mt-1">Account</span>
       </a>
     </div>
@@ -391,8 +396,10 @@
       setupMetricSwitch();
       document.getElementById('export-btn').addEventListener('click', exportCsv);
       document.getElementById('album-filter').addEventListener('change', renderTracksTable);
+      document.getElementById('kpi-window-select').addEventListener('change', loadKpiCards);
       
       loadAnalytics();
+      loadKpiCards();
     })();
     
     function setupWindowPills() {
@@ -451,7 +458,7 @@
     }
     
     async function loadAnalytics() {
-      const { start, end, prevStart, prevEnd } = getDateRange();
+      const { start, end } = getDateRange();
       
       const { data: daily } = await window.sb.rpc('get_artist_daily_stats', { p_start: start.toISOString(), p_end: end.toISOString() });
       latestDailyStats = daily || [];
@@ -459,31 +466,6 @@
       const { data: tracks } = await window.sb.rpc('get_artist_track_stats', { p_start: start.toISOString(), p_end: end.toISOString() });
       latestTrackStats = tracks || [];
       
-      const totalStreams = latestDailyStats.reduce((s, d) => s + Number(d.streams), 0);
-      const totalRevenue = latestDailyStats.reduce((s, d) => s + Number(d.revenue), 0);
-      
-      document.getElementById('kpi-streams').textContent = totalStreams.toLocaleString();
-      document.getElementById('kpi-streams').classList.remove('skeleton');
-      document.getElementById('kpi-revenue').textContent = `₦${totalRevenue.toLocaleString()}`;
-      document.getElementById('kpi-revenue').classList.remove('skeleton');
-      document.getElementById('kpi-streams-sub').textContent = currentWindowDays === null ? 'All time' : `Last ${currentWindowDays} days`;
-      document.getElementById('kpi-revenue-sub').textContent = currentWindowDays === null ? 'All time' : `Last ${currentWindowDays} days`;
-      
-      drawSparkline('kpi-streams-spark', latestDailyStats.map(d => Number(d.streams)));
-      drawSparkline('kpi-revenue-spark', latestDailyStats.map(d => Number(d.revenue)));
-      
-      if (prevStart) {
-        const { data: prevDaily } = await window.sb.rpc('get_artist_daily_stats', { p_start: prevStart.toISOString(), p_end: prevEnd.toISOString() });
-        const prevStreams = (prevDaily || []).reduce((s, d) => s + Number(d.streams), 0);
-        const prevRevenue = (prevDaily || []).reduce((s, d) => s + Number(d.revenue), 0);
-        showDelta('kpi-streams-delta', totalStreams, prevStreams, 'text-secondary-fixed bg-secondary-fixed/10');
-        showDelta('kpi-revenue-delta', totalRevenue, prevRevenue, 'text-primary bg-primary/10');
-      } else {
-        document.getElementById('kpi-streams-delta').classList.add('hidden');
-        document.getElementById('kpi-revenue-delta').classList.add('hidden');
-      }
-      
-      await loadFollowerStats(start, end, prevStart, prevEnd);
       populateAlbumFilter();
       renderTracksTable();
       renderChart();
@@ -498,28 +480,63 @@
       el.innerHTML = `<span class="material-symbols-outlined text-[14px]">${up ? 'trending_up' : 'trending_down'}</span><span>${up ? '+' : ''}${pct.toFixed(1)}%</span>`;
     }
     
-    async function loadFollowerStats(start, end, prevStart, prevEnd) {
+    
+    async function loadKpiCards() {
+      const hours = parseInt(document.getElementById('kpi-window-select').value, 10);
+      const end = new Date();
+      const start = new Date(end.getTime() - hours * 60 * 60 * 1000);
+      const rpcName = hours <= 24 ? 'get_artist_hourly_stats' : 'get_artist_daily_stats';
+      
+      const { data: current } = await window.sb.rpc(rpcName, { p_start: start.toISOString(), p_end: end.toISOString() });
+      const buckets = (current || []).map(d => ({ streams: Number(d.streams), revenue: Number(d.revenue) }));
+      
+      const totalStreams = buckets.reduce((s, b) => s + b.streams, 0);
+      const totalRevenue = buckets.reduce((s, b) => s + b.revenue, 0);
+      
+      document.getElementById('kpi-streams').textContent = totalStreams.toLocaleString();
+      document.getElementById('kpi-streams').classList.remove('skeleton');
+      document.getElementById('kpi-revenue').textContent = `₦${totalRevenue.toLocaleString()}`;
+      document.getElementById('kpi-revenue').classList.remove('skeleton');
+      
+      const subLabel = hours === 24 ? 'Last 24 hours' : hours === 168 ? 'Last 7 days' : 'Last 30 days';
+      document.getElementById('kpi-streams-sub').textContent = subLabel;
+      document.getElementById('kpi-revenue-sub').textContent = subLabel;
+      
+      drawSparkline('kpi-streams-spark', buckets.map(b => b.streams));
+      drawSparkline('kpi-revenue-spark', buckets.map(b => b.revenue));
+      
+      const prevEnd = new Date(start);
+      const prevStart = new Date(prevEnd.getTime() - hours * 60 * 60 * 1000);
+      const { data: previous } = await window.sb.rpc(rpcName, { p_start: prevStart.toISOString(), p_end: prevEnd.toISOString() });
+      const prevStreams = (previous || []).reduce((s, b) => s + Number(b.streams), 0);
+      const prevRevenue = (previous || []).reduce((s, b) => s + Number(b.revenue), 0);
+      showDelta('kpi-streams-delta', totalStreams, prevStreams, 'text-secondary-fixed bg-secondary-fixed/10');
+      showDelta('kpi-revenue-delta', totalRevenue, prevRevenue, 'text-primary bg-primary/10');
+      
+      await loadFollowerStatsForWindow(start, end, prevStart, prevEnd, buckets.length || 1);
+    }
+    
+    async function loadFollowerStatsForWindow(start, end, prevStart, prevEnd, bucketCount) {
       const { data: counts } = await window.sb.rpc('get_follow_counts', { p_artist_id: currentArtistId });
-      const totalFollowers = counts?.[0]?.followers || 0;
-      document.getElementById('kpi-followers').textContent = totalFollowers.toLocaleString();
+      document.getElementById('kpi-followers').textContent = (counts?.[0]?.followers || 0).toLocaleString();
       document.getElementById('kpi-followers').classList.remove('skeleton');
       
       const { data: recentFollows } = await window.sb.from('follows').select('created_at').eq('artist_id', currentArtistId).gte('created_at', start.toISOString()).lt('created_at', end.toISOString());
       const gained = (recentFollows || []).length;
-      document.getElementById('kpi-followers-sub').textContent = currentWindowDays === null ? 'Total followers' : `+${gained} in period`;
+      document.getElementById('kpi-followers-sub').textContent = `+${gained} in period`;
       
-      const dayBuckets = latestDailyStats.map(d => d.day);
-      const followerSparkValues = dayBuckets.map(day => (recentFollows || []).filter(f => f.created_at.slice(0, 10) === day).length);
-      drawSparkline('kpi-followers-spark', followerSparkValues);
+      const values = new Array(bucketCount).fill(0);
+      const spanMs = end - start;
+      (recentFollows || []).forEach(f => {
+        const idx = Math.min(bucketCount - 1, Math.max(0, Math.floor(((new Date(f.created_at) - start) / spanMs) * bucketCount)));
+        values[idx]++;
+      });
+      drawSparkline('kpi-followers-spark', values);
       
-      if (prevStart) {
-        const { data: prevFollows } = await window.sb.from('follows').select('id', { count: 'exact', head: true }).eq('artist_id', currentArtistId).gte('created_at', prevStart.toISOString()).lt('created_at', prevEnd.toISOString());
-        const prevGained = prevFollows?.length || 0;
-        showDelta('kpi-followers-delta', gained, prevGained, 'text-tertiary bg-tertiary/10');
-      } else {
-        document.getElementById('kpi-followers-delta').classList.add('hidden');
-      }
+      const { count: prevGained } = await window.sb.from('follows').select('id', { count: 'exact', head: true }).eq('artist_id', currentArtistId).gte('created_at', prevStart.toISOString()).lt('created_at', prevEnd.toISOString());
+      showDelta('kpi-followers-delta', gained, prevGained || 0, 'text-tertiary bg-tertiary/10');
     }
+    
     
     function buildPath(values, maxValue, width, height) {
       if (!values.length) return { line: '', fill: '' };
