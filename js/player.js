@@ -280,33 +280,11 @@
     startStreamTimer(song.id);**/
   
   window.playSong = async function(song, songQueue) {
-    /**const { data, error } = await window.sb.functions.invoke('get-stream-url', {
-      body: { song_id: song.id }
-    });
-    if (error || !data?.url) {
-      alert('Could not load audio: ' + (error?.message || data?.error || 'Unknown error'));
-      return;
-    }**/
-
     const { data, error } = await window.sb.functions.invoke('get-stream-url', {
       body: { song_id: song.id }
     });
     if (error || !data?.url) {
-      let message = data?.error || error?.message || 'Unknown error';
-      if (error?.context) {
-        try {
-          const text = await error.context.text();
-          if (text) {
-            try {
-              const body = JSON.parse(text);
-              if (body?.error) message = body.error;
-            } catch (_) {
-              message = text;
-            }
-          }
-        } catch (_) {}
-      }
-      alert('Could not load audio: ' + message);
+      alert('Could not load audio: ' + (error?.message || data?.error || 'Unknown error'));
       return;
     }
     
