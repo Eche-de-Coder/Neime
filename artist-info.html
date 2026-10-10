@@ -5,68 +5,69 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <meta name="color-scheme" content="dark" />
-  <title>Neime - Artist Dashboard</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <title>Artist Profile | Neime</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com" rel="preconnect" />
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700&amp;family=JetBrains+Mono:wght@500&amp;family=Plus+Jakarta+Sans:wght@600;700;800&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS with plugins -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
       theme: {
         extend: {
           "colors": {
-            "on-surface-variant": "#e4beb1",
-            "on-primary-fixed": "#370e00",
-            "on-background": "#e4e1e6",
-            "on-secondary-fixed": "#002021",
-            "surface-container-lowest": "#0e0e11",
-            "secondary-fixed": "#63f7ff",
-            "outline-variant": "#5b4137",
-            "primary-container": "#ff5c00",
-            "tertiary-container": "#a27aff",
-            "on-secondary-fixed-variant": "#004f53",
-            "secondary": "#e6feff",
-            "inverse-surface": "#e4e1e6",
-            "surface-dim": "#131316",
-            "on-tertiary-fixed-variant": "#5700c9",
-            "surface-container-highest": "#353438",
-            "primary-fixed-dim": "#ffb59a",
-            "on-secondary-container": "#006c71",
-            "surface-container-low": "#1b1b1e",
-            "on-error": "#690005",
-            "on-tertiary-fixed": "#23005b",
-            "tertiary-fixed-dim": "#d1bcff",
-            "tertiary": "#d1bcff",
-            "error": "#ffb4ab",
-            "on-error-container": "#ffdad6",
-            "surface-container": "#1f1f22",
-            "secondary-container": "#00f4fe",
-            "on-secondary": "#003739",
-            "on-primary": "#5a1b00",
-            "outline": "#ab897d",
             "surface-variant": "#353438",
-            "on-primary-container": "#521800",
-            "primary-fixed": "#ffdbce",
-            "on-tertiary": "#3c0090",
             "on-primary-fixed-variant": "#802a00",
-            "tertiary-fixed": "#e9ddff",
-            "inverse-primary": "#a73a00",
+            "tertiary": "#d1bcff",
+            "primary-fixed-dim": "#ffb59a",
+            "on-error": "#690005",
+            "error-container": "#93000a",
+            "inverse-surface": "#e4e1e6",
             "surface-container-high": "#2a2a2d",
             "secondary-fixed-dim": "#00dce5",
-            "surface": "#131316",
-            "on-surface": "#e4e1e6",
-            "error-container": "#93000a",
-            "surface-tint": "#ffb59a",
-            "on-tertiary-container": "#360083",
-            "surface-bright": "#39393c",
-            "primary": "#ffb59a",
             "inverse-on-surface": "#303033",
-            "background": "#131316"
+            "on-primary-fixed": "#370e00",
+            "error": "#ffb4ab",
+            "secondary": "#e6feff",
+            "outline-variant": "#5b4137",
+            "on-primary-container": "#521800",
+            "on-tertiary-container": "#360083",
+            "tertiary-fixed": "#e9ddff",
+            "background": "#131316",
+            "on-secondary-fixed": "#002021",
+            "on-tertiary-fixed-variant": "#5700c9",
+            "on-secondary-container": "#006c71",
+            "primary-container": "#ff5c00",
+            "on-error-container": "#ffdad6",
+            "on-secondary-fixed-variant": "#004f53",
+            "surface-tint": "#ffb59a",
+            "primary-fixed": "#ffdbce",
+            "on-tertiary-fixed": "#23005b",
+            "surface-container": "#1f1f22",
+            "on-surface-variant": "#e4beb1",
+            "on-surface": "#e4e1e6",
+            "surface-container-low": "#1b1b1e",
+            "surface-dim": "#131316",
+            "secondary-container": "#00f4fe",
+            "tertiary-fixed-dim": "#d1bcff",
+            "on-background": "#e4e1e6",
+            "primary": "#ffb59a",
+            "surface-container-lowest": "#0e0e11",
+            "header-fade": "#0e0e11",
+            "surface": "#131316",
+            "surface-container-highest": "#353438",
+            "surface-bright": "#39393c",
+            "on-secondary": "#003739",
+            "on-tertiary": "#3c0090",
+            "tertiary-container": "#a27aff",
+            "outline": "#ab897d",
+            "secondary-fixed": "#63f7ff",
+            "on-primary": "#5a1b00",
+            "inverse-primary": "#a73a00"
           },
           "borderRadius": {
             "DEFAULT": "0.25rem",
@@ -75,1909 +76,393 @@
             "full": "9999px"
           },
           "spacing": {
+            "gutter": "24px",
             "container-padding-desktop": "40px",
             "section-gap": "48px",
             "container-padding-mobile": "16px",
-            "gutter": "24px",
             "unit": "8px"
           },
           "fontFamily": {
-            "price-display": ["Hanken Grotesk"],
-            "headline-lg-mobile": ["Plus Jakarta Sans"],
             "headline-md": ["Plus Jakarta Sans"],
-            "body-md": ["Hanken Grotesk"],
             "body-lg": ["Hanken Grotesk"],
-            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "price-display": ["Hanken Grotesk"],
             "label-sm": ["JetBrains Mono"],
-            "display-xl": ["Plus Jakarta Sans"]
+            "display-xl": ["Plus Jakarta Sans"],
+            "body-md": ["Hanken Grotesk"],
+            "headline-lg": ["Plus Jakarta Sans"]
           },
           "fontSize": {
-            "price-display": ["20px", { "lineHeight": "24px", "fontWeight": "700" }],
-            "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
             "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
-            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
             "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
-            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+            "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+            "price-display": ["20px", { "lineHeight": "24px", "fontWeight": "700" }],
             "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
-            "display-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+            "display-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }]
           }
-        }
-      }
+        },
+      },
     }
   </script>
   <style>
-    html,
-    body {
-      background-color: #131316;
-    }
-    
-    html {
-      scroll-behavior: smooth;
-    }
-    
-    body {
-      font-family: 'Hanken Grotesk', sans-serif;
-    }
-    
-    .glass-panel {
-      background: rgba(26, 26, 30, 0.6);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .pattern-overlay {
-      background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-      background-size: 20px 20px;
-    }
-    
-    .skeleton {
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0.06) 25%, rgba(255, 255, 255, 0.12) 37%, rgba(255, 255, 255, 0.06) 63%);
-      background-size: 400% 100%;
-      animation: skeleton-loading 1.4s ease infinite;
-      border-radius: 6px;
-      color: transparent !important;
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
       display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
     }
     
-    @keyframes skeleton-loading {
-      0% {
-        background-position: 100% 50%;
-      }
-      
-      100% {
-        background-position: 0 50%;
-      }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #131316;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #2a2a2d;
+      border-radius: 9999px;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #353438;
     }
   </style>
 </head>
 
-<body class="bg-background text-on-background min-h-screen flex flex-col relative overflow-x-hidden selection:bg-primary-container selection:text-white">
-  <!----------
-      MODALS
-  ----------->
+<body class="bg-surface-container-lowest text-on-surface font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen pb-32">
   
-  <!-- Withdraw Funds Modal -->
-  <div class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4" id="withdraw-modal">
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="withdraw-modal-backdrop"></div>
-    <div class="relative w-full max-w-md bg-surface-container-low border border-white/10 rounded-xl p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
-      <div class="flex items-center justify-between mb-6">
-        <h3 class="font-headline-md text-headline-md text-on-surface">Withdraw Funds</h3>
-        <button class="text-on-surface-variant hover:text-on-surface transition-colors" id="withdraw-modal-close" type="button">
-          <span class="material-symbols-outlined">close</span>
-        </button>
+  <div class="hidden fixed inset-0 z-[70] flex items-center justify-center p-4" id="buy-modal">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="buy-modal-backdrop"></div>
+    <div class="relative w-full max-w-sm bg-surface-container-low border border-white/10 rounded-xl p-6 shadow-2xl text-center">
+      <img class="w-24 h-24 rounded-lg object-cover mx-auto mb-4" id="buy-modal-cover" src="" />
+      <h3 class="font-headline-md text-headline-md text-on-surface mb-1" id="buy-modal-title">Song Title</h3>
+      <p class="font-body-md text-body-md text-on-surface-variant mb-6" id="buy-modal-artist">Artist</p>
+      <p class="font-price-display text-price-display text-primary mb-6" id="buy-modal-price">₦0</p>
+      <button class="w-full bg-primary-container text-white font-headline-md text-headline-md !text-[16px] py-3 rounded-full hover:opacity-90 active:scale-95 transition-all mb-3" id="buy-modal-pay-btn" type="button">
+        Pay with Paystack
+      </button>
+      <button class="w-full text-on-surface-variant font-body-md text-body-md py-2" id="buy-modal-cancel-btn" type="button">
+        Cancel
+      </button>
+    </div>
+  </div>
+  
+  <!-- MAIN ARTIST PROFILE CANVAS -->
+  <main class="w-full">
+    <!-- 1. HERO HEADER BANNER -->
+    <div class="relative w-full min-h-[400px] md:min-h-[520px] flex items-end overflow-hidden">
+      <!-- Hero Background Image with Atmospheric Multi-Layer Gradient Overlays -->
+      <img id="artist-avatar-img" class="absolute inset-0 w-full h-full object-cover object-top scale-105 transform filter brightness-90" alt="" />
+      
+      <div class="absolute inset-0 bg-gradient-to-t from-header-fade via-header-fade-lowest/80 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-header-fade-lowest/90 via-transparent to-transparent"></div>
+      <!-- Subtle Nigerian Textile Pattern Glow Accent in Background -->
+      <div class="absolute top-1/4 right-10 w-96 h-96 rounded-full bg-primary-container/10 blur-3xl pointer-events-none"></div>
+      <!-- Hero Artist Content -->
+      <div class="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 pb-4 pt-28 flex flex-col justify-end">
+        <div class="flex items-center gap-2 mb-2"><span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container/80 backdrop-blur-md border border-white/10 text-xs font-label-sm font-semibold tracking-wider text-secondary-container"><span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>VERIFIED ARTIST</span><span class="text-xs font-label-sm text-on-surface-variant"></span></div>
+        <h1 class="font-display-xl text-4xl sm:text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-none drop-shadow-lg mb-4" id="artist-display-name">Loading...</h1>
+        <div class="flex items-center gap-4 text-on-surface-variant font-body-md text-sm md:text-base mb-4">
+          <div class="flex items-center gap-1.5"><strong class="text-white font-semibold" id="stat-monthly-listeners">0</strong> monthly listeners</div><span class="opacity-30">•</span>
+          <div><span id="stat-followers">0</span> followers</div>
+        </div>
+        <div class="flex items-center gap-4 pt-1">
+          <button aria-label="Play Top Track" class="w-14 h-14 rounded-full bg-primary-container hover:bg-orange-500 text-on-primary-container flex items-center justify-center shadow-[0_0_24px_rgba(255,92,0,0.55)] hover:scale-105 active:scale-95 transition-all duration-200"><span class="material-symbols-outlined text-3xl ml-1 text-surface-container-lowest" style="font-variation-settings: 'FILL' 1;">play_arrow</span></button>
+          <button id="follow-btn" class="px-6 py-2.5 rounded-full border border-white/20 bg-surface-container-low/60 hover:bg-surface-container-high text-white font-headline-md font-semibold text-sm tracking-wide backdrop-blur-md hover:border-primary transition-all active:scale-95">Follow</button>
+          <button class="px-5 py-2.5 rounded-full bg-surface-container-lowest border border-primary-container text-primary font-price-display text-sm tracking-wider hover:bg-primary-container/10 flex items-center gap-1.5 shadow-[0_0_14px_rgba(255,92,0,0.2)] transition-all"><span class="font-bold">₦</span><span class="font-headline-md text-xs uppercase tracking-wider text-white">Support</span></button>
+          <button aria-label="More options" class="w-10 h-10 rounded-full text-on-surface-variant hover:text-white transition-colors flex items-center justify-center hover:bg-surface-container-high ml-2" title="More options"><span class="material-symbols-outlined text-2xl">more_horiz</span></button>
+        </div>
+      </div>
+    </div>
+    <!-- MAIN TWO-COLUMN BODY LAYOUT -->
+    <div class="max-w-7xl mx-auto px-4 md:px-8 mt-10 grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div class="lg:col-span-8 flex flex-col gap-10">
+        <section class="bg-surface-container-low/40 rounded-2xl p-4 md:p-6 border border-white/5 backdrop-blur-md">
+          <div class="flex items-center justify-between mb-5">
+            <div class="flex items-center gap-2">
+              <h2 class="font-headline-lg text-2xl font-bold text-white tracking-tight">Popular Tracks</h2>
+            </div><span class="font-label-sm text-xs text-on-surface-variant uppercase tracking-wider">Monthly Streams</span>
+          </div>
+          <div class="flex flex-col space-y-1" id="popular-tracks-list"></div>
+        </section>
+        <section class="flex flex-col gap-5">
+          <h2 class="font-headline-lg text-2xl font-bold text-white tracking-tight">Discography</h2>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="artist-collections-list"></div>
+          <p class="hidden font-body-md text-sm text-on-surface-variant text-center py-6" id="artist-collections-empty">No albums or EPs yet.</p>
+        </section>
       </div>
       
-      <div class="hidden mb-4 rounded-lg px-4 py-3 font-body-md text-body-md" id="withdraw-status-banner" role="alert"></div>
+      <div class="lg:col-span-4 flex flex-col gap-6">
+        <div class="bg-surface-container-low rounded-2xl p-6 border border-white/5 relative overflow-hidden">
+          <div class="h-44 w-full rounded-xl bg-cover bg-center mb-4 relative overflow-hidden border border-white/10" id="artist-about-img" style="background-image: url('')">
+            <div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent"></div>
+            <div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full flex items-center gap-1 text-xs font-label-sm text-secondary-container"><span class="material-symbols-outlined text-sm">emoji_events</span><span>#14 in Nigeria</span></div>
+          </div>
+          <h3 class="font-headline-md text-lg font-bold text-white" id="artist-about-name">About</h3>
+          <p class="font-body-md text-sm text-on-surface-variant mt-2 leading-relaxed whitespace-pre-line" id="artist-bio">This artist hasn't added a bio yet.</p>
+          <div class="flex items-center gap-3 mt-5 pt-4 border-t border-white/5"><a aria-label="Instagram" class="w-9 h-9 rounded-full bg-surface-container-high hover:bg-primary-container hover:text-white text-on-surface-variant flex items-center justify-center transition-colors" href="#"><span class="material-symbols-outlined text-lg">photo_camera</span></a><a aria-label="Twitter" class="w-9 h-9 rounded-full bg-surface-container-high hover:bg-primary-container hover:text-white text-on-surface-variant flex items-center justify-center transition-colors" href="#"><span class="material-symbols-outlined text-lg">tag</span></a><a aria-label="YouTube" class="w-9 h-9 rounded-full bg-surface-container-high hover:bg-primary-container hover:text-white text-on-surface-variant flex items-center justify-center transition-colors" href="#"><span class="material-symbols-outlined text-lg">smart_display</span></a><a aria-label="Official Website" class="w-9 h-9 rounded-full bg-surface-container-high hover:bg-primary-container hover:text-white text-on-surface-variant flex items-center justify-center transition-colors" href="#"><span class="material-symbols-outlined text-lg">language</span></a></div>
+        </div>
+      </div>
       
-      <div class="rounded-xl border border-primary-container/30 bg-primary-container/10 p-4 flex items-center justify-between mb-6">
+      <!--<div class="lg:col-span-4 flex flex-col gap-6">
+        <section class="rounded-3xl bg-surface-container-high/60 backdrop-blur-xl border border-white/10 overflow-hidden shadow-2xl relative" data-purpose="about-artist-card">
+          <div class="relative w-full h-48 overflow-hidden group">
+            <img alt="Adeola Artist Banner" class="w-full h-full object-cover object-top filter brightness-75 transition-transform duration-500 group-hover:scale-105" id="artist-about-img" src="" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1b1b1e] via-[#1b1b1e]/10 to-transparent"></div>
+            <span class="absolute top-4 left-5 text-[11px] font-mono uppercase tracking-wider text-white/70">About the artist</span>
+          </div>
+          <div class="px-6 pb-6 pt-1 bg-[#1b1b1e]/90">
+            <p class="text-xs text-white/50 my-1 font-bold italic tracking-wide">#23 on Neime</p>
+            <div class="flex items-center justify-between gap-4">
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="text-2xl font-bold text-white tracking-tight" id="artist-about-name"></h3>
+                  <span class="inline-flex items-center justify-center w-4 h-4 rounded-full bg-white/20 text-white" title="Verified Artist">
+                    <svg class="w-2.5 h-2.5 stroke-current" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </span>
+                </div>
+                <p class="text-xs text-white/50 mt-1 font-mono tracking-wide">23.1M monthly listeners</p>
+              </div>
+              <button class="px-5 py-1.5 rounded-full border border-white/20 text-white text-xs font-semibold hover:border-white active:scale-95 transition-all flex-shrink-0">
+                Follow
+              </button>
+            </div>
+            <p class="text-xs text-white/70 leading-relaxed mt-4 font-sans font-normal" id="artist-bio"></p>
+          </div>
+        </section>
+      </div>-->
+      
+    </div>
+    
+    <!-- 6. FANS ALSO LIKE / SIMILAR ARTISTS SECTION -->
+    <section class="max-w-7xl mx-auto px-4 md:px-8 mt-14 mb-8">
+      <div class="flex items-center justify-between mb-6">
         <div>
-          <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Available Balance</p>
-          <p class="font-display-xl text-[28px] font-extrabold text-primary" id="withdraw-balance">₦0.00</p>
+          <h2 class="font-headline-lg text-2xl font-bold text-white tracking-tight">Fans Also Like</h2>
+          <p class="font-body-md text-xs text-on-surface-variant mt-0.5">Artists pushing the new frontier of African sound</p>
         </div>
-        <div class="w-12 h-12 rounded-xl bg-primary-container/20 border border-primary-container/30 flex items-center justify-center text-primary">
-          <span class="material-symbols-outlined">account_balance_wallet</span>
-        </div>
-      </div>
-      
-      <form class="space-y-4" id="withdraw-form">
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="withdraw-amount">Amount (₦) <span class="text-primary-container">*</span></label>
-          <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="withdraw-amount" min="1000" placeholder="₦50,000" required type="number" />
-        </div>
-        
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="withdraw-bank">Bank Name <span class="text-primary-container">*</span></label>
-          <select class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="withdraw-bank" required>
-            <option disabled selected value="">Select your bank</option>
-          </select>
-        </div>
-        
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="withdraw-account-number">Account Number <span class="text-primary-container">*</span></label>
-          <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="withdraw-account-number" inputmode="numeric" maxlength="10" placeholder="10-digit account number" required type="text" />
-        </div>
-        
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="withdraw-account-name">Account Name</label>
-          <div class="relative">
-            <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 pr-10 text-on-surface font-body-md" disabled id="withdraw-account-name" placeholder="Auto-filled after account lookup" type="text" />
-            <span class="material-symbols-outlined hidden absolute right-3 top-1/2 -translate-y-1/2 text-[#00f4fe]" id="withdraw-account-verified">check_circle</span>
-          </div>
-        </div>
-        
-        <div class="rounded-xl border border-primary-container/30 bg-primary-container/10 p-4 flex gap-3">
-          <span class="material-symbols-outlined text-primary shrink-0">schedule</span>
-          <p class="font-body-md text-[14px] text-on-surface-variant">
-            Withdrawals are processed manually within <strong class="text-primary">24–48 hours</strong>. You'll receive a notification when it's sent.
-          </p>
-        </div>
-        
-        <div class="flex gap-3 pt-2">
-          <button class="flex-1 py-3 rounded-full border border-white/10 text-on-surface-variant font-headline-md text-headline-md !text-[15px] hover:bg-surface-container-high transition-colors" id="withdraw-cancel-btn" type="button">
-            Cancel
-          </button>
-          <button class="flex-1 py-3 rounded-full bg-primary-container text-white font-headline-md text-headline-md !text-[15px] hover:opacity-90 active:scale-95 transition-all disabled:opacity-60 flex items-center justify-center gap-2" id="withdraw-submit-btn" type="submit">
-            <span id="withdraw-submit-label">Request Withdrawal</span>
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-  
-  <!-- withdraw history modal -->
-  <div class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4" id="withdrawal-history-modal">
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="withdrawal-history-backdrop"></div>
-    <div class="relative w-full max-w-md bg-surface-container-low border border-white/10 rounded-xl p-6 shadow-2xl max-h-[85vh] overflow-y-auto">
-      <div class="flex items-center justify-between mb-2">
-        <h3 class="font-headline-md text-headline-md text-on-surface">Withdrawal History</h3>
-        <button class="text-on-surface-variant hover:text-on-surface transition-colors" id="withdrawal-history-close" type="button">
-          <span class="material-symbols-outlined">close</span>
+        <button class="text-xs font-headline-md font-bold text-on-surface-variant hover:text-primary uppercase tracking-wider transition-colors">
+          See All
         </button>
       </div>
-      <p class="font-label-sm text-label-sm text-on-surface-variant mb-6">Total Withdrawn: <strong class="text-primary" id="stat-total-withdrawn">₦0</strong></p>
-      <div class="flex flex-col gap-3.5" id="withdrawal-history-modal-list"></div>
-      <p class="hidden font-body-md text-body-md text-on-surface-variant text-center py-8" id="withdrawal-history-empty">No withdrawals yet.</p>
-    </div>
-  </div>
-  
-  <!-- sales history modal -->
-  <div class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4" id="sales-history-modal">
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="sales-history-backdrop"></div>
-    <div class="relative w-full max-w-md bg-surface-container-low border border-white/10 rounded-xl p-6 shadow-2xl max-h-[85vh] overflow-y-auto">
-      <div class="flex items-center justify-between mb-6">
-        <h3 class="font-headline-md text-headline-md text-on-surface">Sales History</h3>
-        <button class="text-on-surface-variant hover:text-on-surface transition-colors" id="sales-history-close" type="button">
-          <span class="material-symbols-outlined">close</span>
-        </button>
-      </div>
-      <div class="flex flex-col gap-3.5" id="sales-history-modal-list"></div>
-      <p class="hidden font-body-md text-body-md text-on-surface-variant text-center py-8" id="sales-history-empty">No sales yet.</p>
-    </div>
-  </div>
-  
-  <!-- Add Album/EP Modal -->
-  <div class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4" id="collection-modal">
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="collection-modal-backdrop"></div>
-    <div class="relative w-full max-w-md bg-surface-container-low border border-white/10 rounded-xl p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
-      <div class="flex items-center justify-between mb-6">
-        <h3 id="collection-modal-heading" class="font-headline-md text-headline-md text-on-surface">New Album / EP</h3>
-        <button class="text-on-surface-variant hover:text-on-surface transition-colors" id="collection-modal-close" type="button">
-          <span class="material-symbols-outlined">close</span>
-        </button>
-      </div>
-      <div class="hidden mb-4 rounded-lg px-4 py-3 font-body-md text-body-md" id="collection-status-banner" role="alert"></div>
-      <form class="space-y-4" id="collection-form">
-        <input id="collection-id" type="hidden" />
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="collection-title">Title</label>
-          <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="collection-title" required type="text" />
-        </div>
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="collection-type">Type</label>
-          <select class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="collection-type" required>
-            <option value="album">Album (up to 20 tracks)</option>
-            <option value="ep">EP (up to 10 tracks)</option>
-          </select>
-        </div>
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="collection-cover">Cover Image</label>
-          <img class="hidden mb-2 w-20 h-20 rounded-lg object-cover border border-white/10" id="collection-current-cover" />
-          <input accept="image/*" class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:bg-primary-container file:text-on-primary-container file:text-[13px]" id="collection-cover" type="file" />
-          <img class="hidden mt-2 w-24 h-24 rounded-lg object-cover border border-white/10" id="collection-cover-preview" />
-        </div>
-        <button class="w-full bg-primary-container text-on-primary-container font-headline-md text-headline-md !text-[16px] py-3 rounded-full hover:opacity-90 active:scale-95 transition-all disabled:opacity-60" id="collection-save-btn" type="submit">
-          <span id="collection-save-label">Create</span>
-        </button>
-      </form>
-    </div>
-  </div>
-  
-  <!-- Manage collection modal -->
-  <div class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4" id="manage-collection-modal">
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="manage-collection-backdrop"></div>
-    <div class="relative w-full max-w-md bg-surface-container-low border border-white/10 rounded-xl p-6 shadow-2xl max-h-[85vh] overflow-y-auto">
-      <div class="flex items-center justify-between mb-4">
-        <div class="flex items-center gap-3 min-w-0">
-          <img class="w-14 h-14 rounded-lg object-cover shrink-0" id="manage-collection-cover" src="" />
-          <div class="min-w-0">
-            <h3 class="font-headline-md text-headline-md text-on-surface truncate" id="manage-collection-title">Title</h3>
-            <p class="font-label-sm text-label-sm text-on-surface-variant uppercase" id="manage-collection-type">Album</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-1 shrink-0">
-          <button class="text-on-surface-variant hover:text-primary transition-colors p-2" id="manage-collection-edit-btn" type="button">
-            <span class="material-symbols-outlined text-[20px]">edit</span>
-          </button>
-          <button class="text-on-surface-variant hover:text-on-surface transition-colors p-2" id="manage-collection-close" type="button">
-            <span class="material-symbols-outlined">close</span>
-          </button>
-        </div>
-      </div>
-      <div class="flex flex-col gap-1" id="manage-collection-song-list"></div>
-      <p class="hidden font-body-md text-body-md text-on-surface-variant text-center py-6" id="manage-collection-empty">No tracks in this collection yet.</p>
-    </div>
-  </div>
-  
-  <!-- Upload Music Modal -->
-  <div class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4" id="upload-modal">
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="upload-modal-backdrop"></div>
-    <div class="relative w-full max-w-md bg-surface-container-low border border-white/10 rounded-xl p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
-      <div class="flex items-center justify-between mb-6">
-        <h3 class="font-headline-md text-headline-md text-on-surface">Upload Music</h3>
-        <button class="text-on-surface-variant hover:text-on-surface transition-colors" id="upload-modal-close" type="button">
-          <span class="material-symbols-outlined">close</span>
-        </button>
-      </div>
-      
-      <div class="hidden mb-4 rounded-lg px-4 py-3 font-body-md text-body-md" id="upload-status-banner" role="alert"></div>
-      
-      <form class="space-y-4" id="upload-form">
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="song-title">Song Name</label>
-          <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="song-title" required type="text" />
-        </div>
-        
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="song-price">Price (₦, max 150)</label>
-          <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="song-price" max="150" min="0" required step="0.01" type="number" />
-        </div>
-        
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="song-artist">Artist</label>
-          <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="song-artist" required type="text" />
-        </div>
-        
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="song-collection">Album / EP (optional)</label>
-          <select class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="song-collection">
-            <option value="">Single (no album/EP)</option>
-          </select>
-        </div>
-        
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="song-feat">Feat. (optional)</label>
-          <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="song-feat" placeholder="e.g. Wizkid" type="text" />
-        </div>
-        
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="song-cover">Cover Image</label>
-          <input accept="image/*" class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:bg-primary-container file:text-on-primary-container file:text-[13px]" id="song-cover" required type="file" />
-        </div>
-        <img class="hidden mt-2 w-24 h-24 rounded-lg object-cover border border-white/10" id="song-cover-preview" />
-        
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="song-file">Song File</label>
-          <input accept="audio/*" class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:bg-primary-container file:text-on-primary-container file:text-[13px]" id="song-file" required type="file" />
-        </div>
-        <audio class="hidden w-full mt-2" controls id="song-file-preview"></audio>
-        
-        <div class="hidden mt-2" id="upload-progress-wrap">
-          <div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
-            <div class="h-full bg-primary-container transition-all duration-300" id="upload-progress-bar" style="width:0%"></div>
-          </div>
-          <p class="font-label-sm text-label-sm text-on-surface-variant mt-1 text-center" id="upload-progress-label">Starting…</p>
-        </div>
-        <button class="w-full bg-primary-container text-on-primary-container font-headline-md text-headline-md !text-[16px] py-3 rounded-full hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed" id="upload-submit-btn" type="submit">
-          <span id="upload-submit-label">Upload Song</span>
-        </button>
-      </form>
-    </div>
-  </div>
-  
-  <!-- Edit music modal -->
-  <div class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4" id="edit-song-modal">
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="edit-song-backdrop"></div>
-    <div class="relative w-full max-w-md bg-surface-container-low border border-white/10 rounded-xl p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
-      <div class="flex items-center justify-between mb-6">
-        <h3 class="font-headline-md text-headline-md text-on-surface">Edit Song</h3>
-        <button class="text-on-surface-variant hover:text-on-surface transition-colors" id="edit-song-close" type="button">
-          <span class="material-symbols-outlined">close</span>
-        </button>
-      </div>
-      <div class="hidden mb-4 rounded-lg px-4 py-3 font-body-md text-body-md" id="edit-song-status" role="alert"></div>
-      <form class="space-y-4" id="edit-song-form">
-        <input id="edit-song-id" type="hidden" />
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="edit-song-title">Song Name</label>
-          <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="edit-song-title" required type="text" />
-        </div>
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="edit-song-price">Price (₦, max 150)</label>
-          <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="edit-song-price" max="150" min="0" required step="0.01" type="number" />
-        </div>
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="edit-song-feat">Feat. (optional)</label>
-          <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="edit-song-feat" type="text" />
-        </div>
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="edit-song-collection">Album / EP</label>
-          <select class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="edit-song-collection">
-            <option value="">Single (no album/EP)</option>
-          </select>
-        </div>
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block">Current Cover</label>
-          <img class="w-20 h-20 rounded-lg object-cover border border-white/10" id="edit-song-current-cover" />
-        </div>
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="edit-song-cover">Replace Cover Image (optional)</label>
-          <input accept="image/*" class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:bg-primary-container file:text-on-primary-container file:text-[13px]" id="edit-song-cover" type="file" />
-          <img class="hidden mt-2 w-24 h-24 rounded-lg object-cover border border-white/10" id="edit-song-cover-preview" />
-        </div>
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="edit-song-file">Replace Song File (optional)</label>
-          <input accept="audio/*" class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md file:mr-3 file:py-1 file:px-3 file:rounded-full file:border-0 file:bg-primary-container file:text-on-primary-container file:text-[13px]" id="edit-song-file" type="file" />
-          <audio class="hidden w-full mt-2" controls id="edit-song-file-preview"></audio>
-        </div>
-        <button class="w-full bg-primary-container text-on-primary-container font-headline-md text-headline-md !text-[16px] py-3 rounded-full hover:opacity-90 active:scale-95 transition-all disabled:opacity-60" id="edit-song-save-btn" type="submit">
-          <span id="edit-song-save-label">Save Changes</span>
-        </button>
-      </form>
-    </div>
-  </div>
-  
-  
-  <!----------
-      MAIN
-  ----------->
-  <!-- TopNavBar (Desktop Shell) -->
-  <nav class="hidden md:flex bg-surface/80 backdrop-blur-xl fixed top-0 w-full z-50 border-b border-white/10 shadow-sm flex justify-between items-center px-4 py-3 w-full">
-    <div class="font-display-xl text-headline-md font-extrabold text-primary tracking-tight cursor-pointer hover:opacity-80 transition-opacity">Neime</div>
-    <div class="flex items-center gap-6">
-      <button class="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 transition-transform flex items-center justify-center">
-        <span class="material-symbols-outlined text-headline-md">notifications</span>
-      </button>
-      <button class="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 transition-transform flex items-center justify-center">
-        <span class="material-symbols-outlined text-headline-md">payments</span>
-      </button>
-      <button class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" id="logout-btn-desktop">
-        Log Out
-      </button>
-      <div class="w-10 h-10 rounded-full border-2 border-primary-container/30 overflow-hidden cursor-pointer hover:border-primary transition-colors">
-        <img class="w-full h-full object-cover" data-alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8qVDvwPS7LIDa487jczrUoXwJ7N40KUeqzW4J2WKKl0DvWUPRi88I-prM2eW8xawsYPFLBxpckE9aQZcz7zR325Q_ZRHkhIKYThs7bnSV4g2ZTp3jmG2mAGsEpbgkqzpcwn7E25YYgQgkea9Mz2Niw4vt3HeDK0I9nbgoUVaVLla4f3DQ4IdL-OWA98YoqWb8Ubug9UY5Pz40zVjw9Sjt_7gYXF2Lm7lND2j-tZNvvr5c0DgYN7S-" />
-      </div>
-    </div>
-  </nav>
-  <!-- Main Content Canvas -->
-  <main class="flex-grow pt-8 md:pt-28 pb-[104px] px-container-padding-mobile md:px-container-padding-desktop flex flex-col gap-section-gap max-w-7xl mx-auto w-full relative z-10">
-    <!-- Header Section -->
-    <header class="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between w-full">
-      <div class="flex items-center gap-6">
-        <!--<div class="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-surface-container-high shadow-[0_0_30px_rgba(255,92,0,0.15)] relative group">
-          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" id="artist-avatar-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwZPZNTO-RZYn0ahU6hmI0n06hvv_zq2oyTWBrdR8yk87wfX_-9R_tvuhTBZBoEwoePD1VydQyA9Nrk2x0M0dBhaRP8IzhnLTZEU0_Oi0uYse1Y5L6u-x7FtCWgXpUILm1eVOuXn5_KWQ50OGOEPfH1J4qnIq4ec_-tqaYwsSWysehtPw0QVq_7gNJdFWUVK45B4rBnkwZC7z5ibtS6xdMuZQb5WrbBYRpjk__vr3TyOhZwI-q0sBS" />
-          <label class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer" for="avatar-upload-input">
-            <span class="material-symbols-outlined text-white text-headline-lg">edit</span>
-          </label>
-          <input accept="image/*" class="hidden" id="avatar-upload-input" type="file" />
-          <button aria-label="Edite picture" class="absolute top-0 right-0 w-8 h-8 md:w-9 md:h-9 bg-primary-container text-on-primary-container border-2 border-surface rounded-full flex items-center justify-center shadow-md cursor-pointer hover:opacity-90 active:scale-95 transition-all z-50" title="Edit profile picture" type="button">
-            <span class="material-symbols-outlined text-[16px] md:text-[18px] text-white">edit</span>
-          </button>
-        </div>-->
-        <div class="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-surface-container-high shadow-[0_0_30px_rgba(255,92,0,0.15)] relative group">
-          <div class="w-full h-full rounded-full overflow-hidden">
-            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" id="artist-avatar-img" src="" />
-          </div>
-          <input accept="image/*" class="hidden" id="avatar-upload-input" type="file" />
-          <label class="absolute -bottom-2 -right-2 w-9 h-9 md:w-10 md:h-10 bg-primary-container border-2 border-surface rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:opacity-90 active:scale-95 transition-all z-50" for="avatar-upload-input">
-            <span class="material-symbols-outlined text-[17px] md:text-[19px] text-white">
-              edit
-            </span>
-          </label>
-        </div>
-        <div class="flex flex-col gap-2">
-          <div class="flex items-center gap-3">
-            <h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background m-0 skeleton" id="artist-name">Loading name</h1>
-            <span class="bg-primary-container text-on-primary-container font-label-sm text-label-sm px-2 py-1 rounded-full uppercase tracking-wider font-bold">Artist</span>
-          </div>
-          <p class="font-body-lg text-body-lg text-on-surface-variant m-0 skeleton" id="artist-meta">Loading account details</p>
-          <p class="font-body-md text-body-md text-on-surface-variant m-0 flex items-center gap-1.5">
-            <span class="material-symbols-outlined text-[16px]">mail</span>
-            <span class="skeleton" id="artist-email">loading@example.com</span>
-          </p>
-          <div class="flex items-center gap-4 mt-1 font-body-md text-[14px]">
-            <span class="flex items-center gap-1.5 text-on-surface-variant"><strong class="font-bold text-on-background" id="artist-followers">-</strong> Followers</span>
-            <span class="text-on-surface-variant/40">•</span>
-            <span class="flex items-center gap-1.5 text-on-surface-variant"><strong class="font-bold text-on-background" id="artist-following">-</strong> Following</span>
-          </div>
-        </div>
-      </div>
-      <div class="flex flex-row gap-3 w-full md:w-auto">
-        <!--<button id="upload-music-btn" class="flex-1 md:flex-none flex items-center justify-center gap-2 bg-primary text-on-primary font-headline-md text-headline-md !text-[16px] px-6 py-3 rounded-full hover:opacity-90 active:scale-95 transition-all shadow-[0_0_15px_rgba(255,181,154,0.3)]">
-          <span class="material-symbols-outlined">analytics</span>
-          Analytics
-        </button>-->
-        <a href="artist-analytics.html" class="flex-1 md:flex-none flex items-center justify-center gap-2 bg-primary text-on-primary font-headline-md text-headline-md !text-[16px] px-6 py-3 rounded-full hover:opacity-90 active:scale-95 transition-all shadow-[0_0_15px_rgba(255,181,154,0.3)]">
-          <span class="material-symbols-outlined">insights</span>
-          Analytics
-        </a>
-        <button class="flex-1 md:flex-none flex items-center justify-center gap-2 bg-surface border border-primary-container text-primary-fixed font-headline-md text-headline-md !text-[16px] px-6 py-3 rounded-full hover:bg-surface-container-low active:scale-95 transition-all shadow-sm" id="logout-btn-mobile">
-          <span class="material-symbols-outlined text-[20px]">logout</span>
-          Logout
-        </button>
-      </div>
-    </header>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6" id="similar-artists-list"></div>
+    </section>
     
-    <!-- Bento Grid Dashboard -->
-    <section class="grid grid-cols-1 md:grid-cols-12 gap-gutter w-full">
-      <!-- Revenue Card (Hero Bento) -->
-      <div class="glass-panel rounded-xl p-6 md:col-span-8 flex flex-col justify-between relative overflow-hidden group">
-        <div class="absolute -right-20 -top-20 w-64 h-64 bg-primary-container/10 rounded-full blur-3xl group-hover:bg-primary-container/20 transition-colors duration-700 pointer-events-none"></div>
-        <div class="flex flex-col justify-between h-full relative z-10 gap-8">
-          <div class="flex justify-between items-start">
-            <div class="flex flex-col gap-1"><span class="font-label-sm text-label-sm text-on-surface-variant/80 tracking-wide">Current balance</span>
-              <h2 class="font-display-xl text-display-xl text-primary mt-2 skeleton" id="wallet-balance">₦0</h2>
+    <nav class="md:hidden bg-surface-dim/90 backdrop-blur-2xl fixed bottom-0 w-full z-50 pb-safe bg-surface-container-highest/50 border-t border-white/5 shadow-[0_-4px_24px_rgba(0,0,0,0.4)] flex justify-around items-center h-20 px-2">
+      <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../homepage">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">home</span>
+        <span class="font-label-sm text-label-sm mt-1">Home</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../search">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">search</span>
+        <span class="font-label-sm text-label-sm mt-1">Search</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../library">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">library_music</span>
+        <span class="font-label-sm text-label-sm mt-1">My Music</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../account">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">person</span>
+        <span class="font-label-sm text-label-sm mt-1">Account</span>
+      </a>
+    </nav>
+    
+    <!-- Templates -->
+    
+    <template id="artist-track-template">
+      <div class="group flex items-center justify-between p-1.5 md:px-3 rounded-xl hover:bg-surface-container-high/60 transition-colors cursor-pointer track-row">
+        <div class="flex items-center gap-2.5 min-w-0 flex-1">
+          <span class="w-5 text-center text-sm font-label-sm text-on-surface-variant/70 group-hover:text-primary font-bold track-rank">1</span>
+          <div class="relative w-11 h-11 rounded-lg overflow-hidden flex-shrink-0">
+            <img alt="Cover" class="w-full h-full object-cover track-cover" src="" />
+            <div class="absolute inset-0 bg-black/40 items-center justify-center hidden group-hover:flex text-primary">
+              <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
             </div>
-            <div class="w-14 h-14 rounded-2xl bg-primary-container/15 border border-primary-container/30 flex items-center justify-center text-primary shadow-[0_0_15px_rgba(255,92,0,0.25)] flex-shrink-0"><span class="material-symbols-outlined text-[28px]">account_balance_wallet</span></div>
           </div>
-          <div class="grid grid-cols-3 border-t border-white/10 pt-6 gap-2">
-            <div class="flex flex-col pr-4"><span class="font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant/70 mb-1">TOTAL EARNED</span><span class="font-headline text-headline font-bold text-on-background" id="stat-total-earned">₦0</span></div>
-            <div class="flex flex-col px-4 border-l border-white/10"><span class="font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant/70 mb-1">TOTAL STREAMS</span><span class="font-headline text-headline font-bold text-on-background" id="stat-total-streams-hero"></span></div>
-            <div class="flex flex-col pl-4 border-l border-white/10"><span class="font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant/70 mb-1">THIS MONTH</span><span class="font-headline text-headline font-bold text-primary" id="stat-this-month">₦0</span></div>
+          <div class="truncate pr-2">
+            <div class="font-headline-md text-base font-semibold text-white truncate group-hover:text-primary transition-colors track-title">Title</div>
+            <div class="font-body-md text-xs text-on-surface-variant truncate track-artist">Artist</div>
           </div>
         </div>
-      </div>
-      <div id="withdrawals-hitory" class="flex flex-col">
-      </div>
-      <!-- Stats Stack -->
-      <div class="md:col-span-4 flex flex-col gap-gutter">
-        <div class="bg-surface-container-low rounded-xl p-6 border border-white/5 flex flex-col justify-between hover:border-white/10 transition-colors shadow-sm">
-          <div class="flex flex-col mb-5">
-            <h3 class="font-headline-md text-[18px] font-bold text-on-background mb-1">Withdraw Funds</h3><span class="font-body-md text-[13px] text-on-surface-variant">Minimum withdrawal: <strong class="text-primary font-medium">₦1,000</strong></span>
-          </div>
-          <div class="flex flex-col gap-2.5">
-            <button class="open-withdraw-btn w-full flex items-center justify-center gap-2 bg-primary text-on-primary font-headline-md text-[15px] font-bold py-3 px-4 rounded-full hover:opacity-90 active:scale-95 transition-all shadow-[0_0_15px_rgba(255,181,154,0.3)]"><span class="material-symbols-outlined text-[20px]">payments</span> Withdraw</button>
-            <button id="open-withdrawal-history-btn" class="w-full flex items-center justify-center gap-2 bg-surface border border-white/10 text-on-surface-variant hover:text-on-background font-body-md text-[14px] py-2.5 px-4 rounded-full hover:bg-surface-container-high active:scale-95 transition-all"><span class="material-symbols-outlined text-[18px]">history</span> History</button>
-          </div>
-        </div>
-        <div class="bg-surface-container-low rounded-xl p-5 border border-white/5 flex items-center justify-between hover:border-white/10 transition-colors">
-          <div class="flex flex-col">
-            <span class="font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant mb-0.5">TOTAL STREAMS</span>
-            <span class="font-headline-md text-headline-md font-bold text-on-background" id="stat-total-streams-stack">
-              <span class="font-body-md text-[13px] text-on-surface-variant font-normal">plays</span>
-            </span>
-          </div>
-          <div class="flex flex-col text-right border-l border-white/10 pl-5">
-            <span class="font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant mb-0.5">CATALOG SIZE</span>
-            <span class="font-headline-md text-headline-md font-bold text-on-background" id="catalog-size">0</span>
-            <span class="font-body-md text-[13px] text-on-surface-variant font-normal">tracks</span>
-          </div>
+        <div class="flex items-center gap-2 md:gap-4 flex-shrink-0">
+          <span class="px-2.5 py-1 rounded-full bg-surface-container border border-white/10 text-on-surface-variant text-xs font-label-sm track-price">₦0</span>
+          <div class="sm:block font-label-sm text-xs text-on-surface-variant w-20 text-right track-streams">0</div>
         </div>
       </div>
-    </section>
+    </template>
     
-    
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-gutter w-full">
-      <div class="glass-panel rounded-xl p-6 flex flex-col justify-between hover:border-white/20 transition-all shadow-sm">
-        <div class="flex items-center justify-between pb-4 border-b border-white/10">
-          <div class="flex items-center gap-2.5">
-            <div class="w-9 h-9 rounded-lg bg-primary-container/15 border border-primary-container/30 flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[20px]">trending_up</span></div>
-            <div>
-              <h3 class="font-headline-md text-[18px] font-bold text-on-background m-0">Sales History</h3>
-              <span class="font-label-sm text-[11px] text-on-surface-variant/70">30 Days: <strong class="text-primary font-medium" id="stat-earning-30d">₦0</strong> • <span id="stat-sales-30d">0</span> Sales</span>
-            </div>
-          </div><button id="sales-view-all-btn" class="font-label-sm text-label-sm text-primary hover:text-on-background flex items-center gap-1 transition-colors">View All <span class="material-symbols-outlined text-[16px]">chevron_right</span></button>
+    <template id="similar-artist-template">
+      <a class="group flex flex-col items-center text-center p-3 rounded-2xl hover:bg-surface-container-low transition-colors similar-artist-link" href="#">
+        <div class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden mb-3 border-2 border-transparent group-hover:border-primary-container transition-all shadow-md bg-surface-container-high flex items-center justify-center">
+          <span class="material-symbols-outlined text-4xl text-on-surface-variant sa-icon">mic</span>
+          <img alt="" class="hidden w-full h-full object-cover absolute inset-0 similar-artist-avatar" src="" />
         </div>
-        <div class="flex flex-col gap-3.5 py-4" id="sales-history-list"></div>
-      </div>
-    </section>
-    
-    <!-- Manage Collection -->
-    <section class="w-full">
-      <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-6">
-        <h3 class="font-headline-md text-headline-md text-on-surface">Albums &amp; EPs</h3>
-        <button id="new-collection-btn" class="flex items-center gap-1.5 bg-surface-container-high border border-primary-container text-primary-fixed font-label-sm text-label-sm px-4 py-2.5 rounded-full hover:bg-surface-variant transition-colors whitespace-nowrap" type="button">
-          <span class="material-symbols-outlined text-[18px]">add_circle</span>
-          NEW COLLECTION
-        </button>
-      </div>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="collections-list"></div>
-      <p class="hidden font-body-md text-body-md text-on-surface-variant text-center py-8" id="collections-empty-state">
-        No albums or EPs yet.
-      </p>
-    </section>
-    
-    <!-- Manage Songs -->
-    <section class="w-full">
-      <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between mb-6">
-        <h3 class="font-headline-md text-headline-md text-on-surface">Manage Songs</h3>
-        <div class="flex gap-3 w-full sm:w-auto">
-          <div class="relative flex-1 sm:w-64">
-            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
-            <input class="w-full bg-surface-container-high border border-white/10 rounded-full py-2.5 pl-10 pr-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="catalog-search" placeholder="Search tracks..." type="text" />
-          </div>
-          <button class="flex items-center gap-1.5 bg-surface-container-high border border-primary-container text-primary-fixed font-label-sm text-label-sm px-4 py-2.5 rounded-full hover:bg-surface-variant transition-colors whitespace-nowrap" id="upload-music-btn" type="button">
-            <span class="material-symbols-outlined text-[18px]">add_circle</span>
-            ADD SONG
-          </button>
-        </div>
-      </div>
-      <div class="flex flex-col gap-4" id="songs-list">
-        
-      </div>
-      <p class="hidden font-body-md text-body-md text-on-surface-variant text-center py-8" id="songs-empty-state">
-        No tracks yet. Upload your first song to get started.
-      </p>
-    </section>
-    
-    <!-- Artist Details -->
-    <section class="glass-panel rounded-xl p-6 w-full">
-      <h3 class="font-headline-md text-headline-md text-on-surface mb-6">Artist Details</h3>
-      <div class="hidden mb-4 rounded-lg px-4 py-3 font-body-md text-body-md" id="details-status-banner" role="alert"></div>
-      <form class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="details-form">
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="edit-first-name">First Name</label>
-          <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="edit-first-name" type="text" />
-        </div>
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="edit-last-name">Last Name</label>
-          <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="edit-last-name" type="text" />
-        </div>
-        <div class="space-y-1 sm:col-span-2">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="edit-artist-name">Artist / Stage Name</label>
-          <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="edit-artist-name" type="text" />
-        </div>
-        <div class="space-y-1 sm:col-span-2">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="edit-bio">Bio</label>
-          <textarea class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="edit-bio" rows="3"></textarea>
-        </div>
-        <div class="sm:col-span-2">
-          <button class="bg-primary text-on-primary font-headline-md text-headline-md !text-[16px] px-6 py-3 rounded-full hover:opacity-90 active:scale-95 transition-all disabled:opacity-60" id="save-details-btn" type="submit">
-            <span id="save-details-label">Save Changes</span>
-          </button>
-          <a class="bg-primary text-on-primary font-headline-md text-headline-md !text-[16px] px-6 py-4 rounded-full hover:opacity-90 active:scale-95 transition-all disabled:opacity-60" id="view-public-profile-btn">
-            <span>View profile</span>
-          </a>
-        </div>
-      </form>
-    </section>
+        <h3 class="font-headline-md text-sm font-bold text-white group-hover:text-primary truncate w-full sa-name">Name</h3>
+        <span class="mt-2 text-[11px] font-label-sm px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant border border-white/5">Artist</span>
+      </a>
+    </template>
   </main>
-  
-  
-  <nav class="md:hidden bg-surface-dim/90 backdrop-blur-2xl fixed bottom-0 w-full z-50 pb-safe bg-surface-container-highest/50 border-t border-white/5 shadow-[0_-4px_24px_rgba(0,0,0,0.4)] flex justify-around items-center h-20 px-2">
-    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../homepage">
-      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">home</span>
-      <span class="font-label-sm text-label-sm mt-1">Home</span>
-    </a>
-    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../search">
-      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">search</span>
-      <span class="font-label-sm text-label-sm mt-1">Search</span>
-    </a>
-    <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../library">
-      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">library_music</span>
-      <span class="font-label-sm text-label-sm mt-1">My Music</span>
-    </a>
-    <a class="flex flex-col items-center justify-center text-primary-container font-bold drop-shadow-[0_0_8px_rgba(255,92,0,0.3)] hover:text-primary transition-colors active:scale-90 duration-200" href="../account">
-      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
-      <span class="font-label-sm text-label-sm mt-1">Account</span>
-    </a>
-  </nav>
-  
-  <template id="song-card-template">
-    <div class="glass-panel rounded-xl p-5 flex flex-col gap-4" data-song-id="">
-      <div class="flex gap-4">
-        <div class="relative w-16 h-16 shrink-0">
-          <img alt="Cover art" class="w-16 h-16 rounded-lg object-cover border border-white/10 song-cover" src="" />
-          <button class="absolute inset-0 flex items-center justify-center bg-black/40 rounded-lg opacity-0 hover:opacity-100 transition-opacity song-play-btn" type="button">
-            <span class="material-symbols-outlined text-white text-[22px]">play_arrow</span>
-          </button>
-        </div>
-        <div class="flex justify-between w-full">
-          <div class="flex-1 min-w-0">
-            <h4 class="font-body-lg text-body-lg text-on-surface truncate song-title">Title</h4>
-            <p class="font-label-sm text-label-sm text-on-surface-variant song-feat"></p>
-          </div>
-          <div>
-            <button class="text-on-surface-variant hover:text-primary transition-colors p-2 song-share-btn" type="button">
-              <span class="material-symbols-outlined text-[20px]">share</span>
-            </button>
-            <button class="text-on-surface-variant hover:text-primary transition-colors p-2 song-edit-btn" type="button">
-              <span class="material-symbols-outlined text-[20px]">edit</span>
-            </button>
-            <button class="text-on-surface-variant hover:text-error transition-colors p-2 song-delete-btn" type="button">
-              <span class="material-symbols-outlined text-[20px]">delete</span>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="flex gap-8">
-        <div>
-          <p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Release Date</p>
-          <p class="font-body-md text-body-md text-on-surface song-date"></p>
-        </div>
-        <div>
-          <p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Price</p>
-          <p class="font-body-md text-body-md text-on-surface song-price"></p>
-        </div>
-        <div>
-          <p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-1">Streams</p>
-          <p class="font-body-md text-body-md text-on-surface song-streams"></p>
-        </div>
-      </div>
-    </div>
-  </template>
-  
-  <template id="withdrawal-history-row-template">
-    <div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low/60 border border-white/5 hover:border-white/10 transition-colors">
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
-          <span class="material-symbols-outlined text-[18px] wh-icon">account_balance</span>
-        </div>
-        <div class="flex flex-col">
-          <span class="font-headline-md text-[14px] font-bold text-on-background wh-bank">Bank</span>
-          <span class="font-label-sm text-[11px] text-on-surface-variant/70 wh-date">Date</span>
-        </div>
-      </div>
-      <div class="flex flex-col items-end gap-1">
-        <span class="font-price-display text-[15px] font-bold text-on-background wh-amount">₦0</span>
-        <span class="font-label-sm text-[10px] px-2 py-0.5 rounded-full font-medium tracking-wide uppercase border wh-status">pending</span>
-      </div>
-    </div>
-  </template>
-  
-  <template id="sales-history-row-template">
-    <div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low/60 border border-white/5 hover:border-white/10 transition-colors">
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
-          <span class="material-symbols-outlined text-[18px]">music_note</span>
-        </div>
-        <div class="flex flex-col">
-          <span class="font-headline-md text-[14px] font-bold text-on-background sh-title">Title</span>
-          <span class="font-label-sm text-[11px] text-on-surface-variant/70 sh-meta">Buyer</span>
-        </div>
-      </div>
-      <div class="flex flex-col items-end gap-1">
-        <span class="font-price-display text-[15px] font-bold text-primary sh-earned">₦0</span>
-        <span class="font-label-sm text-[11px] text-on-surface-variant/70 line-through sh-original">₦0</span>
-      </div>
-    </div>
-  </template>
-  
-  <template id="collection-card-template">
-    <div class="glass-panel rounded-xl p-3 flex flex-col gap-2 collection-card">
-      <div class="relative aspect-square rounded-lg overflow-hidden bg-surface-container-high">
-        <img alt="Collection cover" class="w-full h-full object-cover collection-cover" src="" />
-        <span class="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-black/60 text-[10px] font-label-sm uppercase tracking-wider text-white collection-type-badge">Album</span>
-      </div>
-      <div class="flex items-start justify-between gap-2">
-        <div class="min-w-0">
-          <h4 class="font-body-lg text-body-lg text-on-surface truncate collection-title">Title</h4>
-          <p class="font-label-sm text-label-sm text-on-surface-variant collection-count">0/20 tracks</p>
-        </div>
-        <button class="text-on-surface-variant hover:text-error transition-colors p-1 collection-delete-btn" type="button">
-          <span class="material-symbols-outlined text-[18px]">delete</span>
-        </button>
-      </div>
-    </div>
-  </template>
-  
-  <template id="manage-collection-song-row-template">
-    <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-surface-container-high/50 transition-colors">
-      <button class="manage-song-play-btn text-primary" type="button">
-        <span class="material-symbols-outlined text-[24px]">play_circle</span>
-      </button>
-      <div class="flex-1 min-w-0">
-        <p class="font-body-md text-body-md text-on-surface truncate manage-song-title">Title</p>
-      </div>
-      <span class="font-label-sm text-label-sm text-on-surface-variant manage-song-price">₦0</span>
-      <button class="manage-song-remove-btn text-on-surface-variant hover:text-error transition-colors p-1" title="Remove from album" type="button">
-        <span class="material-symbols-outlined text-[18px]">playlist_remove</span>
-      </button>
-    </div>
-  </template>
   
   <script src="../js/config.js"></script>
   <script src="../js/player.js"></script>
   <script src="../js/purchase.js"></script>
+  <script src="../js/collections.js"></script>
   <script>
-    let currentArtistId = null;
-    let allSongs = [];
-    let currentWalletBalance = 0;
+    let profileArtistId = null;
+    let currentUser = null;
+    let songBeingBought = null;
     
-    function formatJoinDate(isoString) {
-      const date = new Date(isoString);
-      return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-    }
-    
-    function clearSkeleton(el, text) {
-      el.textContent = text;
-      el.classList.remove('skeleton');
-    }
-    
-    (async function loadArtist() {
+    (async function initArtistInfo() {
       const { data: { session } } = await window.sb.auth.getSession();
+      if (!session) { window.location.href = 'login.html'; return; }
+      currentUser = session.user;
       
-      if (!session) {
-        window.location.replace('non.html');
-        return;
-      }
+      profileArtistId = new URLSearchParams(window.location.search).get('artist');
+      if (!profileArtistId) { document.body.innerHTML = '<p class="text-white p-8">No artist specified.</p>'; return; }
       
-      const user = session.user;
-      
-      if (user.user_metadata?.role === 'user') {
-        window.location.replace('user.html');
-        return;
-      }
-      
+      await loadArtistProfile();
+      await loadPopularTracks();
+      await loadFollowState();
+      await loadSimilarArtists();
+    })();
+    
+    async function loadArtistProfile() {
       const { data: artist, error } = await window.sb
         .from('artists')
-        .select('id, first_name, last_name, artist_name, bio, avatar_url, created_at')
-        .eq('id', user.id)
+        .select('artist_name, first_name, last_name, bio, avatar_url')
+        .eq('id', profileArtistId)
         .single();
       
-      prefillDetailsForm(artist);
-      loadCollections();
-      loadSongs();
-      loadWallet();
-      loadEarningsStats();
-      loadSalesHistory(user.id);
+      if (error || !artist) { console.warn(error?.message); return; }
       
-      const displayName = artist?.artist_name || [artist?.first_name, artist?.last_name].filter(Boolean).join(' ') ||
-        user.user_metadata?.artist_name ||
-        'Your Stage Name';
-      
-      const joinedSource = artist?.created_at || user.created_at;
-      document.getElementById('view-public-profile-btn').href = `../artist-info.html?artist=${user.id}`;
-      
-      clearSkeleton(document.getElementById('artist-name'), displayName);
-      clearSkeleton(document.getElementById('artist-meta'), `Joined ${formatJoinDate(joinedSource)}`);
-      clearSkeleton(document.getElementById('artist-email'), user.email);
+      const displayName = artist.artist_name || [artist.first_name, artist.last_name].filter(Boolean).join(' ');
+      document.getElementById('artist-display-name').textContent = displayName;
+      document.getElementById('artist-about-name').textContent = `About ${displayName}`;
+      document.getElementById('artist-about-img').style.backgroundImage = `url("${artist.avatar_url}")`;
       if (artist?.avatar_url) {
         document.getElementById('artist-avatar-img').src = artist.avatar_url;
       }
+      document.getElementById('artist-bio').textContent = artist.bio || "This artist hasn't added a bio yet.";
       
-      const { data: counts } = await window.sb.rpc('get_follow_counts', { p_artist_id: user.id });
-      document.getElementById('artist-followers').textContent = (counts?.[0]?.followers || 0).toLocaleString();
-      document.getElementById('artist-following').textContent = (counts?.[0]?.following || 0).toLocaleString();
+      const { data: counts } = await window.sb.rpc('get_follow_counts', { p_artist_id: profileArtistId });
+      document.getElementById('stat-followers').textContent = (counts?.[0]?.followers || 0).toLocaleString();
       
-      if (error) {
-        console.warn('Could not load artist profile row:', error.message);
-      }
-    })();
-    
-    async function logout() {
-      await window.sb.auth.signOut();
-      window.location.href = '../login';
-    }
-    document.getElementById('logout-btn-desktop').addEventListener('click', logout);
-    document.getElementById('logout-btn-mobile').addEventListener('click', logout);
-    
-    
-    
-    function prefillDetailsForm(artist) {
-      document.getElementById('edit-first-name').value = artist?.first_name || '';
-      document.getElementById('edit-last-name').value = artist?.last_name || '';
-      document.getElementById('edit-artist-name').value = artist?.artist_name || '';
-      document.getElementById('song-artist').value = artist?.artist_name || '';
-      document.getElementById('edit-bio').value = artist?.bio || '';
+      const cols = await window.Collections.renderInto('artist-collections-list', { artistId: profileArtistId });
+      document.getElementById('artist-collections-empty').classList.toggle('hidden', cols.length > 0);
     }
     
-    document.getElementById('details-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById('save-details-btn');
-      const label = document.getElementById('save-details-label');
-      const banner = document.getElementById('details-status-banner');
-      
-      const { data: { session } } = await window.sb.auth.getSession();
-      if (!session) return;
-      
-      btn.disabled = true;
-      label.textContent = 'Saving…';
-      
-      const { error } = await window.sb.from('artists').update({
-        first_name: document.getElementById('edit-first-name').value.trim(),
-        last_name: document.getElementById('edit-last-name').value.trim(),
-        artist_name: document.getElementById('edit-artist-name').value.trim(),
-        bio: document.getElementById('edit-bio').value.trim()
-      }).eq('id', session.user.id);
-      
-      btn.disabled = false;
-      label.textContent = 'Save Changes';
-      
-      banner.textContent = error ? error.message : 'Details updated.';
-      banner.classList.remove('hidden', 'bg-error-container', 'text-on-error-container', 'bg-secondary-container/20', 'text-secondary');
-      banner.classList.add(error ? 'bg-error-container' : 'bg-secondary-container/20', error ? 'text-on-error-container' : 'text-secondary');
-      
-      if (!error) {
-        // Keep the displayed name + header in sync
-        document.getElementById('artist-name').textContent = document.getElementById('edit-artist-name').value.trim();
-        document.getElementById('song-artist').value = document.getElementById('edit-artist-name').value.trim();
-      }
-    });
-    
-    
-    document.getElementById('avatar-upload-input').addEventListener('change', async (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      
-      const { data: { session } } = await window.sb.auth.getSession();
-      if (!session) return;
-      const userId = session.user.id;
-      
-      const avatarImg = document.getElementById('artist-avatar-img');
-      const previousSrc = avatarImg.src;
-      avatarImg.style.opacity = '0.5';
-      
-      try {
-        const path = `${userId}/${Date.now()}-${file.name}`;
-        const { error: uploadErr } = await window.sb.storage.from('avatars').upload(path, file, { upsert: true });
-        if (uploadErr) throw uploadErr;
-        
-        const { data: urlData } = window.sb.storage.from('avatars').getPublicUrl(path);
-        
-        const { error: updateErr } = await window.sb.from('artists').update({ avatar_url: urlData.publicUrl }).eq('id', userId);
-        if (updateErr) throw updateErr;
-        
-        avatarImg.src = urlData.publicUrl;
-      } catch (err) {
-        alert('Could not update photo: ' + err.message);
-        avatarImg.src = previousSrc;
-      } finally {
-        avatarImg.style.opacity = '1';
-      }
-    });
-    
-    
-    
-    
-    
-    // Collections Logic
-    let allCollections = [];
-    
-    async function loadCollections() {
-      const { data: { session } } = await window.sb.auth.getSession();
-      if (!session) return;
-      
-      const { data: collections, error } = await window.sb
-        .from('collections')
-        .select('*, songs(count)')
-        .eq('artist_id', session.user.id)
-        .order('created_at', { ascending: false });
-      
-      if (error) { console.warn(error.message); return; }
-      
-      allCollections = collections || [];
-      renderCollections(allCollections);
-      populateCollectionSelects(allCollections);
-    }
-    
-    function renderCollections(collections) {
-      const list = document.getElementById('collections-list');
-      const empty = document.getElementById('collections-empty-state');
-      const template = document.getElementById('collection-card-template');
-      
-      list.innerHTML = '';
-      empty.classList.toggle('hidden', collections.length > 0);
-      
-      collections.forEach(col => {
-        const node = template.content.cloneNode(true);
-        const count = col.songs?.[0]?.count || 0;
-        const limit = col.type === 'album' ? 20 : 10;
-        node.querySelector('.collection-cover').src = col.cover_url || '';
-        node.querySelector('.collection-type-badge').textContent = col.type;
-        node.querySelector('.collection-title').textContent = col.title;
-        node.querySelector('.collection-count').textContent = `${count}/${limit} tracks`;
-        node.querySelector('.collection-delete-btn').addEventListener('click', () => deleteCollection(col));
-        list.appendChild(node);
-      });
-    }
-    
-    function renderCollections(collections) {
-      const list = document.getElementById('collections-list');
-      const empty = document.getElementById('collections-empty-state');
-      const template = document.getElementById('collection-card-template');
-      list.innerHTML = '';
-      empty.classList.toggle('hidden', collections.length > 0);
-      
-      collections.forEach(col => {
-        const node = template.content.cloneNode(true);
-        const count = col.songs?.[0]?.count || 0;
-        const limit = col.type === 'album' ? 20 : 10;
-        const card = node.querySelector('.collection-card');
-        node.querySelector('.collection-cover').src = col.cover_url || '';
-        node.querySelector('.collection-type-badge').textContent = col.type;
-        node.querySelector('.collection-title').textContent = col.title;
-        node.querySelector('.collection-count').textContent = `${count}/${limit} tracks`;
-        node.querySelector('.collection-delete-btn').addEventListener('click', (e) => {
-          e.stopPropagation();
-          deleteCollection(col);
-        });
-        card.classList.add('cursor-pointer');
-        card.addEventListener('click', () => openManageCollectionModal(col.id));
-        list.appendChild(node);
-      });
-    }
-    
-    
-    function populateCollectionSelects(collections) {
-      [document.getElementById('song-collection'), document.getElementById('edit-song-collection')].forEach(select => {
-        const currentValue = select.value;
-        select.innerHTML = '<option value="">Single (no album/EP)</option>';
-        collections.forEach(col => {
-          const count = col.songs?.[0]?.count || 0;
-          const limit = col.type === 'album' ? 20 : 10;
-          const full = count >= limit;
-          const opt = document.createElement('option');
-          opt.value = col.id;
-          opt.textContent = `${col.title} (${col.type.toUpperCase()}) — ${count}/${limit}${full ? ' FULL' : ''}`;
-          if (full) opt.disabled = true;
-          select.appendChild(opt);
-        });
-        select.value = currentValue;
-      });
-    }
-    
-    /**document.getElementById('new-collection-btn').addEventListener('click', () => {
-      document.getElementById('collection-form').reset();
-      document.getElementById('collection-cover-preview').classList.add('hidden');
-      document.getElementById('collection-status-banner').classList.add('hidden');
-      document.getElementById('collection-modal').classList.remove('hidden');
-    });
-    document.getElementById('collection-modal-close').addEventListener('click', () => document.getElementById('collection-modal').classList.add('hidden'));
-    document.getElementById('collection-modal-backdrop').addEventListener('click', () => document.getElementById('collection-modal').classList.add('hidden'));
-    
-    document.getElementById('collection-cover').addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      const preview = document.getElementById('collection-cover-preview');
-      if (!file) { preview.classList.add('hidden'); return; }
-      preview.src = URL.createObjectURL(file);
-      preview.classList.remove('hidden');
-    });
-    
-    document.getElementById('collection-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById('collection-save-btn');
-      const label = document.getElementById('collection-save-label');
-      const banner = document.getElementById('collection-status-banner');
-      
-      const { data: { session } } = await window.sb.auth.getSession();
-      if (!session) return;
-      
-      const title = document.getElementById('collection-title').value.trim();
-      const type = document.getElementById('collection-type').value;
-      const coverFile = document.getElementById('collection-cover').files[0];
-      
-      btn.disabled = true;
-      label.textContent = 'Creating…';
-      
-      try {
-        const coverPath = `${session.user.id}/${Date.now()}-${coverFile.name}`;
-        const { error: coverErr } = await window.sb.storage.from('covers').upload(coverPath, coverFile);
-        if (coverErr) throw coverErr;
-        const coverUrl = window.sb.storage.from('covers').getPublicUrl(coverPath).data.publicUrl;
-        
-        const { error: insertErr } = await window.sb.from('collections').insert({
-          artist_id: session.user.id,
-          title,
-          type,
-          cover_url: coverUrl
-        });
-        if (insertErr) throw insertErr;
-        
-        document.getElementById('collection-modal').classList.add('hidden');
-        loadCollections();
-      } catch (err) {
-        banner.textContent = err.message;
-        banner.classList.remove('hidden');
-        banner.classList.add('bg-error-container', 'text-on-error-container');
-      } finally {
-        btn.disabled = false;
-        label.textContent = 'Create';
-      }
-    });**/
-    
-    
-    function openCollectionModal(existingCollection) {
-      document.getElementById('collection-form').reset();
-      document.getElementById('collection-cover-preview').classList.add('hidden');
-      document.getElementById('collection-status-banner').classList.add('hidden');
-      document.getElementById('collection-modal-close').addEventListener('click', () => document.getElementById('collection-modal').classList.add('hidden'));
-      document.getElementById('collection-modal-backdrop').addEventListener('click', () => document.getElementById('collection-modal').classList.add('hidden'));
-      
-      if (existingCollection) {
-        document.getElementById('collection-modal-heading').textContent = 'Edit Album / EP';
-        document.getElementById('collection-id').value = existingCollection.id;
-        document.getElementById('collection-title').value = existingCollection.title;
-        document.getElementById('collection-type').value = existingCollection.type;
-        document.getElementById('collection-current-cover').src = existingCollection.cover_url || '';
-        document.getElementById('collection-current-cover').classList.remove('hidden');
-        document.getElementById('collection-save-label').textContent = 'Save Changes';
-      } else {
-        document.getElementById('collection-modal-heading').textContent = 'New Album / EP';
-        document.getElementById('collection-id').value = '';
-        document.getElementById('collection-current-cover').classList.add('hidden');
-        document.getElementById('collection-save-label').textContent = 'Create';
-      }
-      document.getElementById('collection-modal').classList.remove('hidden');
-    }
-    document.getElementById('new-collection-btn').addEventListener('click', () => openCollectionModal(null));
-    document.getElementById('collection-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById('collection-save-btn');
-      const label = document.getElementById('collection-save-label');
-      const banner = document.getElementById('collection-status-banner');
-      
-      const { data: { session } } = await window.sb.auth.getSession();
-      if (!session) return;
-      const existingId = document.getElementById('collection-id').value || null;
-      const title = document.getElementById('collection-title').value.trim();
-      const type = document.getElementById('collection-type').value;
-      const coverFile = document.getElementById('collection-cover').files[0];
-      
-      btn.disabled = true;
-      label.textContent = existingId ? 'Saving…' : 'Creating…';
-      
-      try {
-        let coverUrl = null;
-        if (coverFile) {
-          const coverPath = `${session.user.id}/${Date.now()}-${coverFile.name}`;
-          const { error: coverErr } = await window.sb.storage.from('covers').upload(coverPath, coverFile);
-          if (coverErr) throw coverErr;
-          coverUrl = window.sb.storage.from('covers').getPublicUrl(coverPath).data.publicUrl;
-        }
-        if (existingId) {
-          const updates = { title, type };
-          if (coverUrl) updates.cover_url = coverUrl;
-          const { error } = await window.sb.from('collections').update(updates).eq('id', existingId);
-          if (error) throw error;
-        } else {
-          const { error } = await window.sb.from('collections').insert({ artist_id: session.user.id, title, type, cover_url: coverUrl });
-          if (error) throw error;
-        }
-        
-        document.getElementById('collection-modal').classList.add('hidden');
-        document.getElementById('manage-collection-modal').classList.add('hidden');
-        loadCollections();
-      } catch (err) {
-        banner.textContent = err.message;
-        banner.classList.remove('hidden');
-        banner.classList.add('bg-error-container', 'text-on-error-container');
-      } finally {
-        btn.disabled = false;
-        label.textContent = existingId ? 'Save Changes' : 'Create';
-      }
-    });
-    
-    
-    async function openManageCollectionModal(collectionId) {
-      const { data: collection } = await window.sb.from('collections').select('*').eq('id', collectionId).single();
-      if (!collection) return;
-      document.getElementById('manage-collection-cover').src = collection.cover_url || '';
-      document.getElementById('manage-collection-title').textContent = collection.title;
-      document.getElementById('manage-collection-type').textContent = collection.type;
-      const { data: songs } = await window.sb.from('songs').select('*').eq('collection_id', collectionId).order('created_at', { ascending: true });
-      renderManageCollectionSongs(songs || [], collection);
-      document.getElementById('manage-collection-edit-btn').onclick = () => openCollectionModal(collection);
-      document.getElementById('manage-collection-modal').classList.remove('hidden');
-    }
-    
-    function renderManageCollectionSongs(songs, collection) {
-      const list = document.getElementById('manage-collection-song-list');
-      const empty = document.getElementById('manage-collection-empty');
-      const template = document.getElementById('manage-collection-song-row-template');
-      list.innerHTML = '';
-      empty.classList.toggle('hidden', songs.length > 0);
-      
-      songs.forEach(song => {
-        const node = template.content.cloneNode(true);
-        node.querySelector('.manage-song-title').textContent = song.title;
-        node.querySelector('.manage-song-price').textContent = `₦${song.price}`;
-        node.querySelector('.manage-song-play-btn').addEventListener('click', () => window.Purchase.handlePlayClick(song));
-        node.querySelector('.manage-song-remove-btn').addEventListener('click', async () => {
-          if (!confirm(`Remove "${song.title}" from "${collection.title}"?`)) return;
-          const { error } = await window.sb.from('songs').update({ collection_id: null }).eq('id', song.id);
-          if (error) { alert(error.message); return; }
-          openManageCollectionModal(collection.id);
-          loadCollections();
-        });
-        list.appendChild(node);
-      });
-    }
-    document.getElementById('manage-collection-close').addEventListener('click', () => document.getElementById('manage-collection-modal').classList.add('hidden'));
-    document.getElementById('manage-collection-backdrop').addEventListener('click', () => document.getElementById('manage-collection-modal').classList.add('hidden'));
-    
-    async function deleteCollection(col) {
-      if (!confirm(`Delete "${col.title}"? Its songs will become singles, not deleted.`)) return;
-      const { error } = await window.sb.from('collections').delete().eq('id', col.id);
-      if (error) { alert(error.message); return; }
-      loadCollections();
-      loadSongs();
-    }
-    
-    
-    
-    
-    
-    /**
-     * ── UPLOAD MUSIC LOGIC──
-     */
-    const uploadModal = document.getElementById('upload-modal');
-    document.getElementById('upload-music-btn').addEventListener('click', () => uploadModal.classList.remove('hidden'));
-    document.getElementById('upload-modal-close').addEventListener('click', () => uploadModal.classList.add('hidden'));
-    document.getElementById('upload-modal-backdrop').addEventListener('click', () => uploadModal.classList.add('hidden'));
-    
-    function showUploadStatus(message, isError) {
-      const banner = document.getElementById('upload-status-banner');
-      banner.textContent = message;
-      banner.classList.remove('hidden', 'bg-error-container', 'text-on-error-container', 'bg-secondary-container/20', 'text-secondary');
-      banner.classList.add(isError ? 'bg-error-container' : 'bg-secondary-container/20', isError ? 'text-on-error-container' : 'text-secondary');
-    }
-    
-    document.getElementById('song-cover').addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      const preview = document.getElementById('song-cover-preview');
-      if (!file) { preview.classList.add('hidden'); return; }
-      preview.src = URL.createObjectURL(file);
-      preview.classList.remove('hidden');
-    });
-    document.getElementById('song-file').addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      const preview = document.getElementById('song-file-preview');
-      if (!file) { preview.classList.add('hidden'); return; }
-      preview.src = URL.createObjectURL(file);
-      preview.classList.remove('hidden');
-    });
-    document.getElementById('edit-song-cover').addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      const preview = document.getElementById('edit-song-cover-preview');
-      if (!file) { preview.classList.add('hidden'); return; }
-      preview.src = URL.createObjectURL(file);
-      preview.classList.remove('hidden');
-    });
-    document.getElementById('edit-song-file').addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      const preview = document.getElementById('edit-song-file-preview');
-      if (!file) { preview.classList.add('hidden'); return; }
-      preview.src = URL.createObjectURL(file);
-      preview.classList.remove('hidden');
-    });
-    
-    
-    document.getElementById('upload-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById('upload-submit-btn');
-      const label = document.getElementById('upload-submit-label');
-      
-      const { data: { session } } = await window.sb.auth.getSession();
-      if (!session) { window.location.href = '../login'; return; }
-      const userId = session.user.id;
-      
-      const title = document.getElementById('song-title').value.trim();
-      const price = parseFloat(document.getElementById('song-price').value);
-      const artistName = document.getElementById('song-artist').value.trim();
-      const feature = document.getElementById('song-feat').value.trim();
-      const collectionId = document.getElementById('song-collection').value || null;
-      const coverFile = document.getElementById('song-cover').files[0];
-      const songFile = document.getElementById('song-file').files[0];
-      
-      if (price > 150) {
-        showUploadStatus('Price cannot exceed ₦150.', true);
-        return;
-      }
-      
-      btn.disabled = true;
-      label.textContent = 'Uploading…';
-      showUploadProgress(5, 'Starting upload…');
-      
-      try {
-        // 1. Upload cover image 
-        showUploadProgress(10, 'Uploading cover image…');
-        const coverPath = `${userId}/${Date.now()}-${coverFile.name}`;
-        const { error: coverErr } = await window.sb.storage.from('covers').upload(coverPath, coverFile);
-        if (coverErr) throw coverErr;
-        const coverUrl = window.sb.storage.from('covers').getPublicUrl(coverPath).data.publicUrl;
-        showUploadProgress(35, 'Cover uploaded');
-        
-        // 2. Upload song file → private "songs" bucket
-        showUploadProgress(40, 'Uploading song file…');
-        const audioPath = `${userId}/${Date.now()}-${songFile.name}`;
-        const { error: songErr } = await window.sb.storage.from('songs').upload(audioPath, songFile);
-        if (songErr) throw songErr;
-        showUploadProgress(70, 'Song uploaded');
-        
-        // 2.5 Create preview 
-        let previewUrl = null;
-        showUploadProgress(75, 'Generating preview clip…');
-        try {
-          const previewBlob = await generatePreviewClip(songFile, 30);
-          const previewPath = `${userId}/${Date.now()}-preview.wav`;
-          const { error: previewErr } = await window.sb.storage.from('previews').upload(previewPath, previewBlob);
-          if (!previewErr) previewUrl = window.sb.storage.from('previews').getPublicUrl(previewPath).data.publicUrl;
-        } catch (previewGenErr) {
-          console.warn('Preview generation failed, uploading without one:', previewGenErr);
-        }
-        
-        // 3. Insert the song row
-        showUploadProgress(90, 'Saving track details…');
-        const { error: insertErr } = await window.sb.from('songs').insert({
-          artist_id: userId,
-          title,
-          artist_name: artistName,
-          feature: feature || null,
-          price,
-          collection_id: collectionId,
-          cover_url: coverUrl,
-          audio_path: audioPath,
-          preview_url: previewUrl
-        });
-        if (insertErr) throw insertErr;
-        
-        showUploadProgress(100, 'Done!');
-        showUploadStatus('Song uploaded!', false);
-        loadSongs();
-        loadCollections();
-        document.getElementById('upload-form').reset();
-        document.getElementById('song-artist').value = artistName;
-        document.getElementById('song-cover-preview').classList.add('hidden');
-        document.getElementById('song-file-preview').classList.add('hidden');
-        setTimeout(() => { uploadModal.classList.add('hidden');
-          hideUploadProgress(); }, 900);
-      } catch (err) {
-        showUploadStatus(err.message, true);
-        hideUploadProgress();
-      } finally {
-        btn.disabled = false;
-        label.textContent = 'Upload Song';
-      }
-    });
-    
-    // progress bar
-    function showUploadProgress(pct, text) {
-      document.getElementById('upload-progress-wrap').classList.remove('hidden');
-      document.getElementById('upload-progress-bar').style.width = `${pct}%`;
-      document.getElementById('upload-progress-label').textContent = text;
-    }
-    function hideUploadProgress() {
-      document.getElementById('upload-progress-wrap').classList.add('hidden');
-      document.getElementById('upload-progress-bar').style.width = '0%';
-    }
-    
-    
-    /**
-     * Preview clip generation
-     */
-    generatePreviewClip = async function(file, seconds = 30) {
-      const arrayBuffer = await file.arrayBuffer();
-      const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
-      const decoded = await audioCtx.decodeAudioData(arrayBuffer);
-      
-      const frameCount = Math.min(decoded.length, seconds * decoded.sampleRate);
-      const previewBuffer = audioCtx.createBuffer(decoded.numberOfChannels, frameCount, decoded.sampleRate);
-      
-      for (let ch = 0; ch < decoded.numberOfChannels; ch++) {
-        previewBuffer.copyToChannel(decoded.getChannelData(ch).slice(0, frameCount), ch);
-      }
-      
-      audioCtx.close();
-      return audioBufferToWav(previewBuffer);
-    };
-    
-    function audioBufferToWav(buffer) {
-      const numChannels = buffer.numberOfChannels;
-      const sampleRate = buffer.sampleRate;
-      const bytesPerSample = 2;
-      const blockAlign = numChannels * bytesPerSample;
-      const result = numChannels === 2 ?
-        interleave(buffer.getChannelData(0), buffer.getChannelData(1)) :
-        buffer.getChannelData(0);
-      const dataLength = result.length * bytesPerSample;
-      const arrayBuffer = new ArrayBuffer(44 + dataLength);
-      const view = new DataView(arrayBuffer);
-      
-      writeString(view, 0, 'RIFF');
-      view.setUint32(4, 36 + dataLength, true);
-      writeString(view, 8, 'WAVE');
-      writeString(view, 12, 'fmt ');
-      view.setUint32(16, 16, true);
-      view.setUint16(20, 1, true);
-      view.setUint16(22, numChannels, true);
-      view.setUint32(24, sampleRate, true);
-      view.setUint32(28, sampleRate * blockAlign, true);
-      view.setUint16(32, blockAlign, true);
-      view.setUint16(34, 16, true);
-      writeString(view, 36, 'data');
-      view.setUint32(40, dataLength, true);
-      
-      let offset = 44;
-      for (let i = 0; i < result.length; i++, offset += 2) {
-        const s = Math.max(-1, Math.min(1, result[i]));
-        view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7fff, true);
-      }
-      
-      return new Blob([arrayBuffer], { type: 'audio/wav' });
-    }
-    
-    function interleave(left, right) {
-      const result = new Float32Array(left.length + right.length);
-      let idx = 0;
-      for (let i = 0; i < left.length; i++) {
-        result[idx++] = left[i];
-        result[idx++] = right[i];
-      }
-      return result;
-    }
-    
-    function writeString(view, offset, str) {
-      for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i));
-    }
-    
-    
-    
-    
-    
-    async function loadSongs() {
-      const { data: { session } } = await window.sb.auth.getSession();
-      if (!session) return;
-      currentArtistId = session.user.id;
-      
+    async function loadPopularTracks() {
       const { data: songs, error } = await window.sb
         .from('songs')
         .select('*')
-        .eq('artist_id', currentArtistId)
-        .order('created_at', { ascending: false });
+        .eq('artist_id', profileArtistId)
+        .order('play_count', { ascending: false })
+        .limit(10);
       
       if (error) { console.warn(error.message); return; }
       
-      allSongs = songs || [];
-      document.getElementById('catalog-size').textContent = allSongs.length;
-      renderSongs(allSongs);
+      const totalStreams = (songs || []).reduce((sum, s) => sum + (s.play_count || 0), 0);
+      document.getElementById('stat-monthly-listeners').textContent = totalStreams.toLocaleString();
+      
+      const list = document.getElementById('popular-tracks-list');
+      const template = document.getElementById('artist-track-template');
+      list.innerHTML = '';
+      
+      (songs || []).forEach((song, i) => {
+        const node = template.content.cloneNode(true);
+        node.querySelector('.track-rank').textContent = i + 1;
+        node.querySelector('.track-cover').src = song.cover_url || '';
+        node.querySelector('.track-title').textContent = song.feature ? `${song.title} (feat. ${song.feature})` : song.title;
+        node.querySelector('.track-artist').textContent = song.artist_name;
+        node.querySelector('.track-price').textContent = `₦${song.price}`;
+        node.querySelector('.track-streams').textContent = (song.play_count || 0).toLocaleString();
+        node.querySelector('.track-row').addEventListener('click', () => 
+          window.Purchase.handlePlayClick(song)
+        );
+        list.appendChild(node);
+      });
     }
     
-    function renderSongs(songs) {
-      const list = document.getElementById('songs-list');
-      const empty = document.getElementById('songs-empty-state');
-      const template = document.getElementById('song-card-template');
+    async function loadFollowState() {
+      const followBtn = document.getElementById('follow-btn');
       
-      list.innerHTML = '';
-      empty.classList.toggle('hidden', songs.length > 0);
+      if (currentUser.id === profileArtistId) {
+        followBtn.classList.add('hidden'); // can't follow yourself
+        return;
+      }
       
-      songs.forEach(song => {
-        const node = template.content.cloneNode(true);
-        const card = node.querySelector('[data-song-id]');
-        card.dataset.songId = song.id;
-        node.querySelector('.song-cover').src = song.cover_url || '';
-        node.querySelector('.song-title').textContent = song.title;
-        node.querySelector('.song-feat').textContent = song.feature ? `feat. ${song.feature}` : song.artist_name;
-        node.querySelector('.song-date').textContent = new Date(song.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        node.querySelector('.song-price').textContent = `₦${song.price}`;
-        node.querySelector('.song-streams').textContent = (song.play_count || 0).toLocaleString();
+      const { data: existing } = await window.sb
+        .from('follows')
+        .select('follower_id')
+        .eq('follower_id', currentUser.id)
+        .eq('artist_id', profileArtistId)
+        .maybeSingle();
+      
+      setFollowButtonState(!!existing);
+      
+      followBtn.addEventListener('click', async () => {
+        const isFollowing = followBtn.dataset.following === 'true';
+        followBtn.disabled = true;
         
-        node.querySelector('.song-share-btn').addEventListener('click', () => copyShareLink(song));
-        node.querySelector('.song-play-btn').addEventListener('click', () => window.Purchase.handlePlayClick(song));
-        node.querySelector('.song-edit-btn').addEventListener('click', () => openEditModal(song));
-        node.querySelector('.song-delete-btn').addEventListener('click', () => deleteSong(song));
+        if (isFollowing) {
+          await window.sb.from('follows').delete().eq('follower_id', currentUser.id).eq('artist_id', profileArtistId);
+        } else {
+          await window.sb.from('follows').insert({ follower_id: currentUser.id, artist_id: profileArtistId });
+        }
+        
+        followBtn.disabled = false;
+        setFollowButtonState(!isFollowing);
+        
+        const { data: counts } = await window.sb.rpc('get_follow_counts', { p_artist_id: profileArtistId });
+        document.getElementById('stat-followers').textContent = (counts?.[0]?.followers || 0).toLocaleString();
+      });
+    }
+    
+    function setFollowButtonState(isFollowing) {
+      const btn = document.getElementById('follow-btn');
+      btn.dataset.following = isFollowing;
+      btn.textContent = isFollowing ? 'Following' : 'Follow';
+      btn.classList.toggle('bg-primary-container', isFollowing);
+      btn.classList.toggle('text-white', isFollowing);
+    }
+    
+    
+    async function loadSimilarArtists() {
+      const { data: artists, error } = await window.sb
+        .from('artists')
+        .select('id, artist_name, first_name, last_name, avatar_url')
+        .neq('id', profileArtistId)
+        .limit(5);
+      
+      if (error) { console.warn(error.message); return; }
+      
+      const list = document.getElementById('similar-artists-list');
+      const template = document.getElementById('similar-artist-template');
+      list.innerHTML = '';
+      
+      (artists || []).forEach(a => {
+        const node = template.content.cloneNode(true);
+        const name = a.artist_name || [a.first_name, a.last_name].filter(Boolean).join(' ');
+        node.querySelector('.sa-name').textContent = name;
+        node.querySelector('.similar-artist-link').href = `artist-info.html?artist=${a.id}`;
+        
+        if (a.avatar_url) {
+          const img = node.querySelector('.similar-artist-avatar');
+          const icon = node.querySelector('.sa-icon');
+          img.src = a.avatar_url;
+          img.classList.remove('hidden');
+          icon.classList.add('hidden');
+        }
         
         list.appendChild(node);
       });
-      updateStreamStats()
-    }
-    
-    function copyShareLink(song) {
-      navigator.clipboard.writeText(`https://neime.com.ng/${song.share_code}`);
-    }
-    
-    // Search filter (client-side, over the already-loaded list)
-    document.getElementById('catalog-search').addEventListener('input', (e) => {
-      const q = e.target.value.trim().toLowerCase();
-      renderSongs(allSongs.filter(s => s.title.toLowerCase().includes(q)));
-    });
-    
-    // "ADD Song" reuses the existing upload modal
-    document.getElementById('upload-music-btn').addEventListener('click', () => {
-      document.getElementById('upload-modal').classList.remove('hidden');
-    });
-    
-    
-    
-    /** 
-     * ── EDIT SONG ──
-     */
-    const editModal = document.getElementById('edit-song-modal');
-    document.getElementById('edit-song-close').addEventListener('click', () => editModal.classList.add('hidden'));
-    
-    function openEditModal(song) {
-      document.getElementById('edit-song-id').value = song.id;
-      document.getElementById('edit-song-title').value = song.title;
-      document.getElementById('edit-song-price').value = song.price;
-      document.getElementById('edit-song-feat').value = song.feature || '';
-      document.getElementById('edit-song-collection').value = song.collection_id || '';
-      document.getElementById('edit-song-current-cover').src = song.cover_url || '';
-      document.getElementById('edit-song-cover').value = '';
-      document.getElementById('edit-song-cover-preview').classList.add('hidden');
-      document.getElementById('edit-song-file').value = '';
-      document.getElementById('edit-song-file-preview').classList.add('hidden');
-      editModal._currentSong = song;
-      editModal.classList.remove('hidden');
-    }
-    
-    function extractStoragePath(publicUrl, bucket) {
-      const marker = `/object/public/${bucket}/`;
-      const idx = publicUrl.indexOf(marker);
-      return idx === -1 ? null : decodeURIComponent(publicUrl.slice(idx + marker.length));
-    }
-    
-    document.getElementById('edit-song-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById('edit-song-save-btn');
-      const label = document.getElementById('edit-song-save-label');
-      const banner = document.getElementById('edit-song-status');
-      const id = document.getElementById('edit-song-id').value;
-      const price = parseFloat(document.getElementById('edit-song-price').value);
-      const collectionId = document.getElementById('edit-song-collection').value || null;
-      const newCoverFile = document.getElementById('edit-song-cover').files[0];
-      const newSongFile = document.getElementById('edit-song-file').files[0];
-      const song = editModal._currentSong;
-      
-      if (price > 150) {
-        banner.textContent = 'Price cannot exceed ₦150.';
-        banner.classList.remove('hidden');
-        banner.classList.add('bg-error-container', 'text-on-error-container');
-        return;
-      }
-      
-      btn.disabled = true;
-      label.textContent = 'Saving…';
-      
-      try {
-        const updates = {
-          title: document.getElementById('edit-song-title').value.trim(),
-          price,
-          feature: document.getElementById('edit-song-feat').value.trim() || null,
-          collection_id: collectionId
-        };
-        
-        if (newCoverFile) {
-          const coverPath = `${song.artist_id}/${Date.now()}-${newCoverFile.name}`;
-          const { error: coverErr } = await window.sb.storage.from('covers').upload(coverPath, newCoverFile);
-          if (coverErr) throw coverErr;
-          updates.cover_url = window.sb.storage.from('covers').getPublicUrl(coverPath).data.publicUrl;
-        }
-        
-        if (newSongFile) {
-          const audioPath = `${song.artist_id}/${Date.now()}-${newSongFile.name}`;
-          const { error: songErr } = await window.sb.storage.from('songs').upload(audioPath, newSongFile);
-          if (songErr) throw songErr;
-          updates.audio_path = audioPath;
-          
-          try {
-            const previewBlob = await generatePreviewClip(newSongFile, 30);
-            const previewPath = `${song.artist_id}/${Date.now()}-preview.wav`;
-            const { error: previewErr } = await window.sb.storage.from('previews').upload(previewPath, previewBlob);
-            if (!previewErr) updates.preview_url = window.sb.storage.from('previews').getPublicUrl(previewPath).data.publicUrl;
-          } catch (previewGenErr) {
-            console.warn('Preview regeneration failed:', previewGenErr);
-          }
-        }
-        
-        const { error } = await window.sb.from('songs').update(updates).eq('id', id);
-        if (error) throw error;
-        
-        // Clean up the replaced files using the OLD urls/paths captured on the
-        // song object before this edit — only after the update succeeds.
-        if (newCoverFile && song.cover_url) {
-          const oldCoverPath = extractStoragePath(song.cover_url, 'covers');
-          if (oldCoverPath) {
-            const { error: delErr } = await window.sb.storage.from('covers').remove([oldCoverPath]);
-            if (delErr) console.warn('Could not delete old cover:', delErr.message);
-          }
-        }
-        if (newSongFile) {
-          if (song.audio_path) {
-            const { error: delErr } = await window.sb.storage.from('songs').remove([song.audio_path]);
-            if (delErr) console.warn('Could not delete old audio file:', delErr.message);
-          }
-          if (song.preview_url) {
-            const oldPreviewPath = extractStoragePath(song.preview_url, 'previews');
-            if (oldPreviewPath) {
-              const { error: delErr } = await window.sb.storage.from('previews').remove([oldPreviewPath]);
-              if (delErr) console.warn('Could not delete old preview:', delErr.message);
-            }
-          }
-        }
-        
-        editModal.classList.add('hidden');
-        banner.classList.add('hidden');
-        loadSongs();
-      } catch (err) {
-        banner.textContent = err.message;
-        banner.classList.remove('hidden');
-        banner.classList.add('bg-error-container', 'text-on-error-container');
-      } finally {
-        btn.disabled = false;
-        label.textContent = 'Save Changes';
-      }
-    });
-    
-    
-    // ── Delete song ──
-    async function deleteSong(song) {
-      if (!confirm(`Delete "${song.title}"? This can't be undone.`)) return;
-      
-      const { error } = await window.sb.from('songs').delete().eq('id', song.id);
-      if (error) { alert(error.message); return; }
-      
-      // Best-effort cleanup of the audio file in storage
-      await window.sb.storage.from('songs').remove([song.audio_path]);
-      
-      loadCollections();
-      loadSongs();
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    const NEIME_BANKS = [ // Note: this isnt being used anymore
-      { name: "Access Bank", code: "044" },
-      { name: "Ecobank Nigeria", code: "050" },
-      { name: "Fidelity Bank", code: "070" },
-      { name: "First Bank of Nigeria", code: "011" },
-      { name: "First City Monument Bank", code: "214" },
-      { name: "Guaranty Trust Bank", code: "058" },
-      { name: "Keystone Bank", code: "082" },
-      { name: "Kuda Bank", code: "50211" },
-      { name: "Moniepoint MFB", code: "50515" },
-      { name: "Opay", code: "999992" },
-      { name: "PalmPay", code: "999991" },
-      { name: "Polaris Bank", code: "076" },
-      { name: "Stanbic IBTC Bank", code: "221" },
-      { name: "Sterling Bank", code: "232" },
-      { name: "Union Bank of Nigeria", code: "032" },
-      { name: "United Bank For Africa", code: "033" },
-      { name: "Unity Bank", code: "215" },
-      { name: "Wema Bank", code: "035" },
-      { name: "Zenith Bank", code: "057" }
-    ];
-    
-    (async function loadBanks() {
-      const { data, error } = await window.sb.functions.invoke('list-banks');
-      if (error || !data?.banks) {
-        console.warn('Could not load bank list');
-        return;
-      }
-      data.banks
-        .sort((a, b) => a.name.localeCompare(b.name))
-        .forEach(bank => {
-          const opt = document.createElement('option');
-          opt.value = bank.code;
-          opt.textContent = bank.name;
-          withdrawBankSelect.appendChild(opt);
-        });
-    })();
-    
-    const withdrawModal = document.getElementById('withdraw-modal');
-    const withdrawBankSelect = document.getElementById('withdraw-bank');
-    const withdrawAccountNumberInput = document.getElementById('withdraw-account-number');
-    const withdrawAccountNameInput = document.getElementById('withdraw-account-name');
-    const withdrawAccountVerifiedIcon = document.getElementById('withdraw-account-verified');
-    
-    function showWithdrawStatus(message, isError) {
-      const banner = document.getElementById('withdraw-status-banner');
-      banner.textContent = message;
-      banner.classList.remove('hidden', 'bg-error-container', 'text-on-error-container', 'bg-secondary-container/20', 'text-secondary');
-      banner.classList.add(isError ? 'bg-error-container' : 'bg-secondary-container/20', isError ? 'text-on-error-container' : 'text-secondary');
-    }
-    
-    function openWithdrawModal() {
-      document.getElementById('withdraw-balance').textContent = `₦${currentWalletBalance.toLocaleString()}.00`;
-      document.getElementById('withdraw-form').reset();
-      withdrawAccountNameInput.value = '';
-      withdrawAccountVerifiedIcon.classList.add('hidden');
-      document.getElementById('withdraw-status-banner').classList.add('hidden');
-      withdrawModal.classList.remove('hidden');
-    }
-    
-    document.querySelectorAll('.open-withdraw-btn').forEach(btn => btn.addEventListener('click', openWithdrawModal));
-    document.getElementById('withdraw-cancel-btn').addEventListener('click', () => withdrawModal.classList.add('hidden'));
-    document.getElementById('withdraw-modal-close').addEventListener('click', () => withdrawModal.classList.add('hidden'));
-    document.getElementById('withdraw-modal-backdrop').addEventListener('click', () => withdrawModal.classList.add('hidden'));
-    
-    let resolveTimeout;
-    
-    function maybeResolveAccount() {
-      clearTimeout(resolveTimeout);
-      const bankCode = withdrawBankSelect.value;
-      const accountNumber = withdrawAccountNumberInput.value.trim();
-      
-      withdrawAccountNameInput.value = '';
-      withdrawAccountVerifiedIcon.classList.add('hidden');
-      
-      if (!bankCode || accountNumber.length !== 10) return;
-      
-      resolveTimeout = setTimeout(async () => {
-        withdrawAccountNameInput.value = 'Looking up account…';
-        const { data, error } = await window.sb.functions.invoke('resolve-account', {
-          body: { account_number: accountNumber, bank_code: bankCode }
-        });
-        
-        if (error || data?.error) {
-          withdrawAccountNameInput.value = '';
-          showWithdrawStatus(data?.error || 'Could not verify account number.', true);
-          return;
-        }
-        
-        withdrawAccountNameInput.value = data.account_name;
-        withdrawAccountVerifiedIcon.classList.remove('hidden');
-      }, 500);
-    }
-    
-    withdrawBankSelect.addEventListener('change', maybeResolveAccount);
-    withdrawAccountNumberInput.addEventListener('input', maybeResolveAccount);
-    
-    document.getElementById('withdraw-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById('withdraw-submit-btn');
-      const label = document.getElementById('withdraw-submit-label');
-      
-      const { data: { session } } = await window.sb.auth.getSession();
-      if (!session) return;
-      
-      if (!withdrawAccountNameInput.value || withdrawAccountVerifiedIcon.classList.contains('hidden')) {
-        showWithdrawStatus('Please enter a valid account number to verify your account.', true);
-        return;
-      }
-      
-      const amount = parseFloat(document.getElementById('withdraw-amount').value);
-      if (amount < 1000) {
-        showWithdrawStatus('Minimum withdrawal is ₦1,000.', true);
-        return;
-      }
-      if (amount > currentWalletBalance) {
-        showWithdrawStatus('Amount exceeds your available balance.', true);
-        return;
-      }
-      
-      const bankOption = withdrawBankSelect.options[withdrawBankSelect.selectedIndex];
-      
-      btn.disabled = true;
-      label.textContent = 'Sending…';
-      
-      /**const { error } = await window.sb.from('withdrawals').insert({
-        artist_id: session.user.id,
-        amount,
-        bank_name: bankOption.textContent,
-        bank_code: bankOption.value,
-        account_number: withdrawAccountNumberInput.value.trim(),
-        account_name: withdrawAccountNameInput.value
-      });
-      
-      btn.disabled = false;
-      
-      if (error) {
-        label.textContent = 'Request Withdrawal';
-        showWithdrawStatus(error.message, true);
-        return;
-      }
-      
-      label.innerHTML = '<span class="material-symbols-outlined text-[18px]">check_circle</span> Sent!';
-      setTimeout(() => {
-        withdrawModal.classList.add('hidden');
-        label.textContent = 'Request Withdrawal';
-      }, 1500);**/
-      const { error } = await window.sb.rpc('request_withdrawal', {
-        p_amount: amount,
-        p_bank_name: bankOption.textContent,
-        p_bank_code: bankOption.value,
-        p_account_number: withdrawAccountNumberInput.value.trim(),
-        p_account_name: withdrawAccountNameInput.value
-      });
-      
-      btn.disabled = false;
-      
-      if (error) {
-        label.textContent = 'Request Withdrawal';
-        showWithdrawStatus(error.message, true);
-        return;
-      }
-      
-      currentWalletBalance -= amount;
-      document.getElementById('wallet-balance').textContent = `₦${currentWalletBalance.toLocaleString()}`;
-      
-      label.innerHTML = '<span class="material-symbols-outlined text-[18px]">check_circle</span> Sent!';
-      setTimeout(() => {
-        withdrawModal.classList.add('hidden');
-        label.textContent = 'Request Withdrawal';
-        loadWithdrawalHistory(currentArtistId);
-      }, 1500);
-    });
-    
-    
-    
-    
-    async function loadWallet() {
-      const { data: { session } } = await window.sb.auth.getSession();
-      if (!session) return;
-      
-      const { data: wallet, error } = await window.sb
-        .from('wallets')
-        .select('balance, total_earned')
-        .eq('artist_id', session.user.id)
-        .single();
-      
-      if (error) { console.warn(error.message); return; }
-      
-      currentWalletBalance = Number(wallet.balance);
-      
-      const balanceEl = document.getElementById('wallet-balance');
-      balanceEl.textContent = `₦${Number(wallet.balance).toLocaleString()}`;
-      balanceEl.classList.remove('skeleton');
-      
-      loadWithdrawalHistory(session.user.id);
-    }
-    
-    
-    
-    async function loadWithdrawalHistory(artistId) {
-      const { data: withdrawals } = await window.sb
-        .from('withdrawals')
-        .select('*')
-        .eq('artist_id', artistId)
-        .order('created_at', { ascending: false });
-      
-      const totalWithdrawn = (withdrawals || [])
-        .filter(w => w.status === 'completed')
-        .reduce((sum, w) => sum + Number(w.amount), 0);
-      document.getElementById('stat-total-withdrawn').textContent = `₦${totalWithdrawn.toLocaleString()}`;
-      
-      renderWithdrawalRows(withdrawals || [], document.getElementById('withdrawal-history-modal-list'));
-      document.getElementById('withdrawal-history-empty').classList.toggle('hidden', (withdrawals || []).length > 0);
-    }
-    
-    function renderWithdrawalRows(withdrawals, container) {
-      const template = document.getElementById('withdrawal-history-row-template');
-      container.innerHTML = '';
-      const statusStyles = {
-        pending: { icon: 'schedule', badge: 'bg-primary-container/20 text-primary-fixed border-primary-container/40' },
-        completed: { icon: 'account_balance', badge: 'bg-secondary-container/15 text-secondary-container border-secondary-container/30' },
-        rejected: { icon: 'cancel', badge: 'bg-error-container text-on-error-container border-error' }
-      };
-      withdrawals.forEach(w => {
-        const node = template.content.cloneNode(true);
-        const masked = w.account_number ? `•••${w.account_number.slice(-4)}` : '';
-        node.querySelector('.wh-bank').textContent = `${w.bank_name || 'Bank'} (${masked})`;
-        node.querySelector('.wh-date').textContent = formatDateTime(w.created_at);
-        node.querySelector('.wh-amount').textContent = `₦${Number(w.amount).toLocaleString()}`;
-        const statusEl = node.querySelector('.wh-status');
-        statusEl.textContent = w.status;
-        const style = statusStyles[w.status] || statusStyles.pending;
-        node.querySelector('.wh-icon').textContent = style.icon;
-        statusEl.className += ' ' + style.badge;
-        container.appendChild(node);
-      });
-    }
-    
-    document.getElementById('open-withdrawal-history-btn').addEventListener('click', () => {
-      document.getElementById('withdrawal-history-modal').classList.remove('hidden');
-    });
-    document.getElementById('withdrawal-history-close').addEventListener('click', () => {
-      document.getElementById('withdrawal-history-modal').classList.add('hidden');
-    });
-    document.getElementById('withdrawal-history-backdrop').addEventListener('click', () => {
-      document.getElementById('withdrawal-history-modal').classList.add('hidden');
-    });
-    
-    
-    async function loadSalesHistory(artistId) {
-      const { data: purchases, error } = await window.sb
-        .from('purchases')
-        .select('id, amount, artist_earnings, created_at, songs!inner(title, feature, artist_id)')
-        .eq('songs.artist_id', artistId)
-        .order('created_at', { ascending: false })
-        .limit(3);
-      if (error) { console.warn(error.message); return; }
-      renderSalesRows(purchases || [], document.getElementById('sales-history-list'));
-      const startOfWindow = new Date();
-      startOfWindow.setDate(startOfWindow.getDate() - 30);
-      
-      const { data: recentPurchases } = await window.sb
-        .from('purchases')
-        .select('artist_earnings, songs!inner(artist_id)')
-        .eq('songs.artist_id', artistId)
-        .gte('created_at', startOfWindow.toISOString());
-      const total30d = (recentPurchases || []).reduce((sum, p) => sum + Number(p.artist_earnings || 0), 0);
-      document.getElementById('stat-earning-30d').textContent = `₦${total30d.toLocaleString()}`;
-      document.getElementById('stat-sales-30d').textContent = (recentPurchases || []).length.toLocaleString();
-    }
-    
-    function renderSalesRows(purchases, container) {
-      const template = document.getElementById('sales-history-row-template');
-      container.innerHTML = '';
-      purchases.forEach(p => {
-        const node = template.content.cloneNode(true);
-        const song = p.songs;
-        node.querySelector('.sh-title').textContent = song.feature ? `${song.title} feat. ${song.feature}` : song.title;
-        node.querySelector('.sh-meta').textContent = formatDateTime(p.created_at);
-        node.querySelector('.sh-earned').textContent = `₦${Number(p.artist_earnings).toLocaleString()}`;
-        node.querySelector('.sh-original').textContent = `₦${Number(p.amount).toLocaleString()}`;
-        container.appendChild(node);
-      });
-    }
-    
-    async function openSalesHistoryModal() {
-      const { data: { session } } = await window.sb.auth.getSession();
-      if (!session) return;
-      const { data: purchases, error } = await window.sb
-        .from('purchases')
-        .select('id, amount, artist_earnings, created_at, songs!inner(title, feature, artist_id)')
-        .eq('songs.artist_id', session.user.id)
-        .order('created_at', { ascending: false });
-      if (error) { console.warn(error.message); return; }
-      renderSalesRows(purchases || [], document.getElementById('sales-history-modal-list'));
-      document.getElementById('sales-history-empty').classList.toggle('hidden', (purchases || []).length > 0);
-      document.getElementById('sales-history-modal').classList.remove('hidden');
-    }
-    
-    document.getElementById('sales-view-all-btn').addEventListener('click', openSalesHistoryModal);
-    document.getElementById('sales-history-close').addEventListener('click', () => {
-      document.getElementById('sales-history-modal').classList.add('hidden');
-    });
-    document.getElementById('sales-history-backdrop').addEventListener('click', () => {
-      document.getElementById('sales-history-modal').classList.add('hidden');
-    });
-    
-    function formatDateTime(isoString) {
-      const date = new Date(isoString);
-      const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-      const timeStr = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-      return `${dateStr} • ${timeStr}`;
-    }
-    
-    
-    
-    
-    
-    async function loadEarningsStats() {
-      const { data: { session } } = await window.sb.auth.getSession();
-      if (!session) return;
-      
-      const { data: wallet } = await window.sb.from('wallets').select('total_earned').eq('artist_id', session.user.id).single();
-      document.getElementById('stat-total-earned').textContent = `₦${Number(wallet?.total_earned || 0).toLocaleString()}`;
-      
-      const startOfMonth = new Date();
-      startOfMonth.setDate(1);
-      startOfMonth.setHours(0, 0, 0, 0);
-      
-      const { data: monthPurchases } = await window.sb
-        .from('purchases')
-        .select('artist_earnings, songs!inner(artist_id)')
-        .eq('songs.artist_id', session.user.id)
-        .gte('created_at', startOfMonth.toISOString());
-      
-      const thisMonth = (monthPurchases || []).reduce((sum, p) => sum + Number(p.artist_earnings || 0), 0);
-      document.getElementById('stat-this-month').textContent = `₦${thisMonth.toLocaleString()}`;
-    }
-    
-    function updateStreamStats() {
-      const totalStreams = allSongs.reduce((sum, s) => sum + (s.play_count || 0), 0);
-      document.getElementById('stat-total-streams-hero').textContent = totalStreams.toLocaleString();
-      document.getElementById('stat-total-streams-stack').textContent = totalStreams >= 1000 ?
-        `${(totalStreams / 1000).toFixed(1)}K` :
-        totalStreams.toLocaleString();
     }
   </script>
 </body>
