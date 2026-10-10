@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta name="color-scheme" content="dark" />
+  <title>Neime - Artist Analytics &amp; Insights</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-surface-variant": "#e4beb1",
+            "surface-variant": "#353438",
+            "surface-container-high": "#2a2a2d",
+            "error": "#ffb4ab",
+            "background": "#131316",
+            "tertiary-fixed-dim": "#d1bcff",
+            "surface-container-lowest": "#0e0e11",
+            "inverse-primary": "#a73a00",
+            "surface-container-highest": "#353438",
+            "primary-fixed-dim": "#ffb59a",
+            "on-error": "#690005",
+            "on-secondary-fixed-variant": "#004f53",
+            "primary-fixed": "#ffdbce",
+            "tertiary-container": "#a27aff",
+            "surface": "#131316",
+            "on-primary-fixed-variant": "#802a00",
+            "primary-container": "#ff5c00",
+            "on-secondary-fixed": "#002021",
+            "secondary-fixed": "#63f7ff",
+            "on-background": "#e4e1e6",
+            "on-primary-fixed": "#370e00",
+            "on-secondary-container": "#006c71",
+            "error-container": "#93000a",
+            "on-tertiary": "#3c0090",
+            "outline-variant": "#5b4137",
+            "outline": "#ab897d",
+            "primary": "#ffb59a",
+            "on-tertiary-fixed": "#23005b",
+            "surface-bright": "#39393c",
+            "on-primary-container": "#521800",
+            "secondary-container": "#00f4fe",
+            "surface-container": "#1f1f22",
+            "inverse-surface": "#e4e1e6",
+            "on-tertiary-fixed-variant": "#5700c9",
+            "tertiary": "#d1bcff",
+            "surface-tint": "#ffb59a",
+            "on-primary": "#5a1b00",
+            "on-secondary": "#003739",
+            "surface-container-low": "#1b1b1e",
+            "on-error-container": "#ffdad6",
+            "secondary-fixed-dim": "#00dce5",
+            "tertiary-fixed": "#e9ddff",
+            "on-surface": "#e4e1e6",
+            "inverse-on-surface": "#303033",
+            "surface-dim": "#131316",
+            "on-tertiary-container": "#360083",
+            "secondary": "#e6feff"
+          },
+          borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+          spacing: { "unit": "8px", "container-padding-desktop": "40px", "gutter": "24px", "section-gap": "48px", "container-padding-mobile": "16px" },
+          fontFamily: {
+            "price-display": ["Hanken Grotesk"],
+            "display-xl": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "body-md": ["Hanken Grotesk"],
+            "label-sm": ["JetBrains Mono"],
+            "body-lg": ["Hanken Grotesk"],
+            "headline-lg": ["Plus Jakarta Sans"]
+          },
+          fontSize: {
+            "price-display": ["20px", { lineHeight: "24px", fontWeight: "700" }],
+            "display-xl": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "800" }],
+            "headline-lg-mobile": ["28px", { lineHeight: "36px", fontWeight: "700" }],
+            "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+            "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+            "label-sm": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "500" }],
+            "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+            "headline-lg": ["32px", { lineHeight: "40px", fontWeight: "700" }]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html,
+    body {
+      background-color: #131316;
+    }
+    
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    
+    .adire-grid-subtle {
+      background-image: radial-gradient(rgba(255, 92, 0, 0.08) 1px, transparent 1px), radial-gradient(rgba(0, 244, 254, 0.05) 1px, transparent 1px);
+      background-size: 32px 32px;
+      background-position: 0 0, 16px 16px;
+    }
+    
+    .skeleton {
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.06) 25%, rgba(255, 255, 255, 0.12) 37%, rgba(255, 255, 255, 0.06) 63%);
+      background-size: 400% 100%;
+      animation: skeleton-loading 1.4s ease infinite;
+      border-radius: 6px;
+      color: transparent !important;
+      display: inline-block;
+    }
+    
+    @keyframes skeleton-loading {
+      0% {
+        background-position: 100% 50%;
+      }
+      
+      100% {
+        background-position: 0 50%;
+      }
+    }
+    
+    .window-pill.active {
+      background: #ff5c00;
+      color: white;
+      font-weight: 700;
+      box-shadow: 0 0 12px rgba(255, 92, 0, 0.35);
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-surface antialiased min-h-screen selection:bg-primary-container selection:text-white flex flex-col font-body-md text-body-md">
+  <header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-sm border-b border-white/10">
+    <div class="flex justify-between items-center px-4 py-3 w-full max-w-7xl mx-auto">
+      <div class="flex items-center space-x-6">
+        <a class="font-display-xl text-headline-md font-extrabold text-primary tracking-tight flex items-center space-x-2" href="artist.html">
+          <span class="text-primary-container material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">graphic_eq</span>
+          <span>Neime</span>
+        </a>
+        <div class="hidden md:flex items-center space-x-2 font-label-sm text-label-sm text-on-surface-variant">
+          <span class="opacity-40">/</span>
+          <a class="hover:opacity-80 transition-opacity" href="artist.html">Artist Dashboard</a>
+          <span class="opacity-40">/</span>
+          <span class="text-primary font-bold">Analytics</span>
+        </div>
+      </div>
+      <div class="hidden sm:flex items-center bg-surface-container-low p-1 rounded-full border border-white/5" id="window-pills">
+        <button class="window-pill px-3.5 py-1 rounded-full text-on-surface-variant font-label-sm text-label-sm hover:opacity-80 transition-opacity" data-days="7">7 Days</button>
+        <button class="window-pill active px-3.5 py-1 rounded-full text-on-surface-variant font-label-sm text-label-sm hover:opacity-80 transition-opacity" data-days="28">28 Days</button>
+        <button class="window-pill px-3.5 py-1 rounded-full text-on-surface-variant font-label-sm text-label-sm hover:opacity-80 transition-opacity" data-days="90">90 Days</button>
+        <button class="window-pill px-3.5 py-1 rounded-full text-on-surface-variant font-label-sm text-label-sm hover:opacity-80 transition-opacity" data-days="all">All Time</button>
+      </div>
+      <div class="flex items-center space-x-3">
+        <div class="flex items-center space-x-2 pl-2 border-l border-white/10">
+          <div class="hidden lg:flex flex-col text-right">
+            <span class="font-headline-md text-[14px] font-bold text-on-surface leading-tight skeleton" id="header-artist-name">Loading</span>
+            <span class="hidden font-label-sm text-[10px] text-primary-container tracking-wider" id="header-verified-badge">VERIFIED ARTIST</span>
+          </div>
+          <div class="relative w-9 h-9 rounded-full ring-2 ring-primary-container/40 overflow-hidden flex-shrink-0 bg-surface-container">
+            <img alt="Artist Profile" class="w-full h-full object-cover" id="header-avatar" src="" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <main class="flex-1 w-full max-w-7xl mx-auto pt-24 pb-32 px-4 sm:px-6 lg:px-8 adire-grid-subtle">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+      <div>
+        <h1 class="font-headline-lg text-headline-lg md:font-display-xl md:text-display-xl font-extrabold text-on-surface tracking-tight">
+          Artist Analytics &amp; Insights
+        </h1>
+        <p class="font-body-lg text-body-lg text-on-surface-variant mt-1 max-w-2xl">
+          Track your streaming growth, revenue, and follower trends.
+        </p>
+      </div>
+      <div class="flex items-center gap-3 self-start md:self-auto">
+        <div class="flex sm:hidden items-center bg-surface-container-low p-1 rounded-full border border-white/5" id="window-pills-mobile"></div>
+        <button class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary-container text-white font-headline-md text-[14px] font-bold shadow-[0_0_16px_rgba(255,92,0,0.3)] hover:opacity-90 transition-opacity active:scale-95 transition-transform" id="export-btn">
+          <span class="material-symbols-outlined text-[18px]">download</span>
+          <span>Export CSV</span>
+        </button>
+      </div>
+    </div>
+    
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+      <div class="bg-surface-container-low/90 backdrop-blur-md rounded-xl p-5 border border-white/5 relative overflow-hidden group hover:border-primary-container/30 transition-all duration-300">
+        <div class="flex items-center justify-between mb-3">
+          <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Total Streams</span>
+          <div class="w-8 h-8 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary-container">
+            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+          </div>
+        </div>
+        <div class="flex items-baseline justify-between mb-2">
+          <div class="font-display-xl text-[36px] font-extrabold text-on-surface skeleton" id="kpi-streams">0</div>
+          <div class="hidden items-center gap-0.5 text-label-sm font-label-sm font-bold px-2 py-0.5 rounded-full" id="kpi-streams-delta"></div>
+        </div>
+        <div class="flex items-center justify-between text-xs text-on-surface-variant">
+          <span id="kpi-streams-sub">—</span>
+          <svg class="w-20 h-6 stroke-primary-container fill-none" id="kpi-streams-spark" viewBox="0 0 80 24">
+            <path stroke-linecap="round" stroke-width="2"></path>
+          </svg>
+        </div>
+      </div>
+      
+      <div class="bg-surface-container-low/90 backdrop-blur-md rounded-xl p-5 border border-white/5 relative overflow-hidden group hover:border-primary/30 transition-all duration-300">
+        <div class="flex items-center justify-between mb-3">
+          <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Revenue</span>
+          <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>
+          </div>
+        </div>
+        <div class="flex items-baseline justify-between mb-2">
+          <div class="font-display-xl text-[32px] font-extrabold text-primary font-price-display skeleton" id="kpi-revenue">₦0</div>
+          <div class="hidden items-center gap-0.5 text-label-sm font-label-sm font-bold px-2 py-0.5 rounded-full" id="kpi-revenue-delta"></div>
+        </div>
+        <div class="flex items-center justify-between text-xs text-on-surface-variant">
+          <span id="kpi-revenue-sub">—</span>
+          <svg class="w-20 h-6 stroke-primary fill-none" id="kpi-revenue-spark" viewBox="0 0 80 24">
+            <path stroke-linecap="round" stroke-width="2"></path>
+          </svg>
+        </div>
+      </div>
+      
+      <div class="bg-surface-container-low/90 backdrop-blur-md rounded-xl p-5 border border-white/5 relative overflow-hidden group hover:border-tertiary-container/30 transition-all duration-300">
+        <div class="flex items-center justify-between mb-3">
+          <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Follower Growth</span>
+          <div class="w-8 h-8 rounded-lg bg-tertiary-container/10 flex items-center justify-center text-tertiary">
+            <span class="material-symbols-outlined text-[18px]">person_add</span>
+          </div>
+        </div>
+        <div class="flex items-baseline justify-between mb-2">
+          <div class="font-display-xl text-[36px] font-extrabold text-on-surface skeleton" id="kpi-followers">0</div>
+          <div class="hidden items-center gap-0.5 text-tertiary text-label-sm font-label-sm font-bold bg-tertiary/10 px-2 py-0.5 rounded-full" id="kpi-followers-delta"></div>
+        </div>
+        <div class="flex items-center justify-between text-xs text-on-surface-variant">
+          <span id="kpi-followers-sub">—</span>
+          <svg class="w-20 h-6 stroke-tertiary fill-none" id="kpi-followers-spark" viewBox="0 0 80 24">
+            <path stroke-linecap="round" stroke-width="2"></path>
+          </svg>
+        </div>
+      </div>
+    </section>
+    
+    <section class="bg-surface-container-low/95 backdrop-blur-xl rounded-2xl p-6 border border-white/5 mb-8 shadow-[0_8px_32px_rgba(0,0,0,0.36)]">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-white/5">
+        <div>
+          <h2 class="font-headline-md text-headline-md text-on-surface">Streaming Velocity</h2>
+          <p class="font-body-md text-sm text-on-surface-variant mt-0.5">Daily play progression over the selected period</p>
+        </div>
+        <div class="inline-flex bg-surface-container p-1 rounded-xl border border-white/5" id="metric-switch">
+          <button class="metric-btn px-4 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" data-metric="streams">Streams</button>
+          <button class="metric-btn px-4 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" data-metric="listeners">Listeners</button>
+          <button class="metric-btn px-4 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm transition-colors" data-metric="revenue">Revenue (₦)</button>
+        </div>
+      </div>
+      
+      <div class="hidden items-center gap-3 p-3 rounded-xl bg-surface-container/60 border border-primary-container/20 mb-6" id="peak-callout">
+        <div class="w-8 h-8 rounded-full bg-primary-container/20 flex items-center justify-center text-primary-container flex-shrink-0">
+          <span class="material-symbols-outlined text-[18px]">local_fire_department</span>
+        </div>
+        <div class="text-sm">
+          <span class="font-bold text-primary font-headline-md text-[14px]" id="peak-callout-text"></span>
+        </div>
+      </div>
+      
+      <div class="w-full relative h-72 md:h-80 pt-2">
+        <svg class="w-full h-full overflow-visible" id="chart-svg" preserveAspectRatio="none" viewBox="0 0 1000 300">
+          <defs>
+            <linearGradient id="primaryGlow" x1="0%" x2="0%" y1="0%" y2="100%">
+              <stop offset="0%" stop-color="#ff5c00" stop-opacity="0.45"></stop>
+              <stop offset="100%" stop-color="#ff5c00" stop-opacity="0.0"></stop>
+            </linearGradient>
+            <linearGradient id="cyanGlow" x1="0%" x2="0%" y1="0%" y2="100%">
+              <stop offset="0%" stop-color="#00f4fe" stop-opacity="0.25"></stop>
+              <stop offset="100%" stop-color="#00f4fe" stop-opacity="0.0"></stop>
+            </linearGradient>
+          </defs>
+          <g stroke="rgba(255,255,255,0.06)" stroke-dasharray="4 4" stroke-width="1">
+            <line x1="0" x2="1000" y1="75" y2="75"></line>
+            <line x1="0" x2="1000" y1="150" y2="150"></line>
+            <line x1="0" x2="1000" y1="225" y2="225"></line>
+          </g>
+          <path fill="url(#cyanGlow)" id="chart-secondary-fill"></path>
+          <path fill="none" id="chart-secondary-line" opacity="0.8" stroke="#00f4fe" stroke-width="2.5"></path>
+          <path fill="url(#primaryGlow)" id="chart-primary-fill"></path>
+          <path fill="none" id="chart-primary-line" stroke="#ff5c00" stroke-width="3.5"></path>
+        </svg>
+        <div class="absolute left-0 top-0 bottom-8 flex flex-col justify-between pointer-events-none text-[11px] font-label-sm text-on-surface-variant opacity-60" id="chart-y-labels">
+          <span>—</span><span>—</span><span>—</span><span>—</span><span>0</span>
+        </div>
+      </div>
+      <div class="flex justify-between items-center pt-3 text-[11px] font-label-sm text-on-surface-variant border-t border-white/5" id="chart-x-labels"></div>
+      <div class="flex items-center justify-end gap-6 mt-4 pt-3 border-t border-white/5 text-xs text-on-surface-variant" id="chart-legend">
+        <div class="flex items-center gap-2">
+          <div class="w-3 h-3 rounded-full bg-primary-container shadow-[0_0_8px_rgba(255,92,0,0.5)]"></div><span id="chart-legend-primary">Total Plays (Streams)</span>
+        </div>
+        <div class="flex items-center gap-2" id="chart-legend-secondary-wrap">
+          <div class="w-3 h-3 rounded-full bg-secondary-fixed shadow-[0_0_8px_rgba(0,244,254,0.5)]"></div><span>Unique Listeners</span>
+        </div>
+      </div>
+    </section>
+    
+    <section class="bg-surface-container-low/95 backdrop-blur-xl rounded-2xl p-6 border border-white/5 shadow-sm">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h2 class="font-headline-md text-headline-md text-on-surface">Top Performing Tracks</h2>
+          <p class="font-body-md text-sm text-on-surface-variant">Streams and royalties for the selected period</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <select class="px-3.5 py-1.5 rounded-xl bg-surface-container text-on-surface font-label-sm text-label-sm border border-white/10 hover:border-white/20 transition-all" id="album-filter">
+            <option value="">All Tracks</option>
+          </select>
+          <span class="px-3.5 py-1.5 rounded-xl bg-surface-container text-primary-container font-label-sm text-label-sm border border-white/10" id="track-count-label">0 Songs</span>
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="border-b border-white/10 text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+              <th class="py-3 px-3 w-12 text-center">#</th>
+              <th class="py-3 px-4">Track</th>
+              <th class="py-3 px-4 text-right">Streams</th>
+              <th class="py-3 px-4 text-right">Royalties (₦)</th>
+              <th class="py-3 px-3 text-center">Play</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/5 text-sm" id="tracks-tbody"></tbody>
+        </table>
+        <p class="hidden font-body-md text-body-md text-on-surface-variant text-center py-8" id="tracks-empty">No tracks in this period.</p>
+      </div>
+    </section>
+  </main>
+  
+  <nav class="md:hidden fixed bottom-0 w-full z-50 pb-safe bg-surface-dim/90 backdrop-blur-2xl shadow-[0_-4px_24px_rgba(0,0,0,0.4)]">
+    <div class="flex justify-around items-center h-20 w-full px-2">
+      <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../homepage">
+        <span class="material-symbols-outlined text-[24px]">home</span>
+        <span class="font-label-sm text-label-sm mt-1">Home</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../search">
+        <span class="material-symbols-outlined text-[24px]">search</span>
+        <span class="font-label-sm text-label-sm mt-1">Search</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="artist.html">
+        <span class="material-symbols-outlined text-[24px]">library_music</span>
+        <span class="font-label-sm text-label-sm mt-1">My Music</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-primary-container font-bold drop-shadow-[0_0_8px_rgba(255,92,0,0.3)] hover:text-primary transition-colors active:scale-90 duration-200" href="../account">
+        <span class="material-symbols-outlined text-[24px] style="font-variation-settings: 'FILL' 1;"">person</span>
+        <span class="font-label-sm text-label-sm mt-1">Account</span>
+      </a>
+    </div>
+  </nav>
+  
+  <script src="../js/config.js"></script>
+  <script src="../js/player.js"></script>
+  <script src="../js/purchase.js"></script>
+  <script>
+    let currentArtistId = null;
+    let currentWindowDays = 28;
+    let currentMetric = 'streams';
+    let latestDailyStats = [];
+    let latestTrackStats = [];
+    
+    (async function init() {
+      const { data: { session } } = await window.sb.auth.getSession();
+      if (!session) { window.location.replace('../account/non.html'); return; }
+      if (session.user.user_metadata?.role === 'user') { window.location.replace('user.html'); return; }
+      currentArtistId = session.user.id;
+      
+      const { data: artist } = await window.sb.from('artists').select('artist_name, avatar_url, is_verified').eq('id', currentArtistId).single();
+      const name = artist?.artist_name || 'Your Stage Name';
+      document.getElementById('header-artist-name').textContent = name;
+      document.getElementById('header-artist-name').classList.remove('skeleton');
+      document.getElementById('header-avatar').src = artist?.avatar_url || '';
+      if (artist?.is_verified) document.getElementById('header-verified-badge').classList.remove('hidden');
+      
+      setupWindowPills();
+      setupMetricSwitch();
+      document.getElementById('export-btn').addEventListener('click', exportCsv);
+      document.getElementById('album-filter').addEventListener('change', renderTracksTable);
+      
+      loadAnalytics();
+    })();
+    
+    function setupWindowPills() {
+      const pills = document.querySelectorAll('.window-pill');
+      pills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          pills.forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          currentWindowDays = pill.dataset.days === 'all' ? null : parseInt(pill.dataset.days, 10);
+          loadAnalytics();
+        });
+      });
+    }
+    
+    function setupMetricSwitch() {
+      const buttons = document.querySelectorAll('.metric-btn');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          buttons.forEach(b => b.classList.remove('px-4', 'py-1.5', 'rounded-lg', 'bg-primary-container', 'text-white', 'font-bold', 'shadow-[0_0_12px_rgba(255,92,0,0.3)]'));
+          currentMetric = btn.dataset.metric;
+          updateMetricButtons();
+          renderChart();
+        });
+      });
+      updateMetricButtons();
+    }
+    
+    function updateMetricButtons() {
+      document.querySelectorAll('.metric-btn').forEach(btn => {
+        const active = btn.dataset.metric === currentMetric;
+        btn.classList.toggle('bg-primary-container', active);
+        btn.classList.toggle('text-white', active);
+        btn.classList.toggle('font-bold', active);
+        btn.classList.toggle('shadow-[0_0_12px_rgba(255,92,0,0.3)]', active);
+        btn.classList.toggle('text-on-surface-variant', !active);
+      });
+    }
+    
+    function getDateRange() {
+      const end = new Date();
+      let start;
+      if (currentWindowDays === null) {
+        start = new Date('2020-01-01');
+      } else {
+        start = new Date();
+        start.setDate(start.getDate() - currentWindowDays);
+      }
+      let prevStart = null,
+        prevEnd = null;
+      if (currentWindowDays !== null) {
+        prevEnd = new Date(start);
+        prevStart = new Date(start);
+        prevStart.setDate(prevStart.getDate() - currentWindowDays);
+      }
+      return { start, end, prevStart, prevEnd };
+    }
+    
+    async function loadAnalytics() {
+      const { start, end, prevStart, prevEnd } = getDateRange();
+      
+      const { data: daily } = await window.sb.rpc('get_artist_daily_stats', { p_start: start.toISOString(), p_end: end.toISOString() });
+      latestDailyStats = daily || [];
+      
+      const { data: tracks } = await window.sb.rpc('get_artist_track_stats', { p_start: start.toISOString(), p_end: end.toISOString() });
+      latestTrackStats = tracks || [];
+      
+      const totalStreams = latestDailyStats.reduce((s, d) => s + Number(d.streams), 0);
+      const totalRevenue = latestDailyStats.reduce((s, d) => s + Number(d.revenue), 0);
+      
+      document.getElementById('kpi-streams').textContent = totalStreams.toLocaleString();
+      document.getElementById('kpi-streams').classList.remove('skeleton');
+      document.getElementById('kpi-revenue').textContent = `₦${totalRevenue.toLocaleString()}`;
+      document.getElementById('kpi-revenue').classList.remove('skeleton');
+      document.getElementById('kpi-streams-sub').textContent = currentWindowDays === null ? 'All time' : `Last ${currentWindowDays} days`;
+      document.getElementById('kpi-revenue-sub').textContent = currentWindowDays === null ? 'All time' : `Last ${currentWindowDays} days`;
+      
+      drawSparkline('kpi-streams-spark', latestDailyStats.map(d => Number(d.streams)));
+      drawSparkline('kpi-revenue-spark', latestDailyStats.map(d => Number(d.revenue)));
+      
+      if (prevStart) {
+        const { data: prevDaily } = await window.sb.rpc('get_artist_daily_stats', { p_start: prevStart.toISOString(), p_end: prevEnd.toISOString() });
+        const prevStreams = (prevDaily || []).reduce((s, d) => s + Number(d.streams), 0);
+        const prevRevenue = (prevDaily || []).reduce((s, d) => s + Number(d.revenue), 0);
+        showDelta('kpi-streams-delta', totalStreams, prevStreams, 'text-secondary-fixed bg-secondary-fixed/10');
+        showDelta('kpi-revenue-delta', totalRevenue, prevRevenue, 'text-primary bg-primary/10');
+      } else {
+        document.getElementById('kpi-streams-delta').classList.add('hidden');
+        document.getElementById('kpi-revenue-delta').classList.add('hidden');
+      }
+      
+      await loadFollowerStats(start, end, prevStart, prevEnd);
+      populateAlbumFilter();
+      renderTracksTable();
+      renderChart();
+    }
+    
+    function showDelta(elId, current, previous, colorClasses) {
+      const el = document.getElementById(elId);
+      if (previous === 0 && current === 0) { el.classList.add('hidden'); return; }
+      const pct = previous === 0 ? 100 : ((current - previous) / previous) * 100;
+      const up = pct >= 0;
+      el.className = `inline-flex items-center gap-0.5 text-label-sm font-label-sm font-bold px-2 py-0.5 rounded-full ${colorClasses}`;
+      el.innerHTML = `<span class="material-symbols-outlined text-[14px]">${up ? 'trending_up' : 'trending_down'}</span><span>${up ? '+' : ''}${pct.toFixed(1)}%</span>`;
+    }
+    
+    async function loadFollowerStats(start, end, prevStart, prevEnd) {
+      const { data: counts } = await window.sb.rpc('get_follow_counts', { p_artist_id: currentArtistId });
+      const totalFollowers = counts?.[0]?.followers || 0;
+      document.getElementById('kpi-followers').textContent = totalFollowers.toLocaleString();
+      document.getElementById('kpi-followers').classList.remove('skeleton');
+      
+      const { data: recentFollows } = await window.sb.from('follows').select('created_at').eq('artist_id', currentArtistId).gte('created_at', start.toISOString()).lt('created_at', end.toISOString());
+      const gained = (recentFollows || []).length;
+      document.getElementById('kpi-followers-sub').textContent = currentWindowDays === null ? 'Total followers' : `+${gained} in period`;
+      
+      const dayBuckets = latestDailyStats.map(d => d.day);
+      const followerSparkValues = dayBuckets.map(day => (recentFollows || []).filter(f => f.created_at.slice(0, 10) === day).length);
+      drawSparkline('kpi-followers-spark', followerSparkValues);
+      
+      if (prevStart) {
+        const { data: prevFollows } = await window.sb.from('follows').select('id', { count: 'exact', head: true }).eq('artist_id', currentArtistId).gte('created_at', prevStart.toISOString()).lt('created_at', prevEnd.toISOString());
+        const prevGained = prevFollows?.length || 0;
+        showDelta('kpi-followers-delta', gained, prevGained, 'text-tertiary bg-tertiary/10');
+      } else {
+        document.getElementById('kpi-followers-delta').classList.add('hidden');
+      }
+    }
+    
+    function buildPath(values, maxValue, width, height) {
+      if (!values.length) return { line: '', fill: '' };
+      const stepX = values.length > 1 ? width / (values.length - 1) : width;
+      const points = values.map((v, i) => [i * stepX, height - (maxValue ? (v / maxValue) * height : 0)]);
+      let line = `M ${points[0][0]},${points[0][1]}`;
+      for (let i = 1; i < points.length; i++) {
+        const [x0, y0] = points[i - 1];
+        const [x1, y1] = points[i];
+        line += ` Q ${x0},${y0} ${(x0 + x1) / 2},${(y0 + y1) / 2}`;
+      }
+      line += ` L ${points[points.length - 1][0]},${points[points.length - 1][1]}`;
+      const fill = `${line} L ${width},${height} L 0,${height} Z`;
+      return { line, fill };
+    }
+    
+    function drawSparkline(svgId, values) {
+      const svg = document.getElementById(svgId);
+      const path = svg.querySelector('path');
+      const max = Math.max(...values, 1);
+      const { line } = buildPath(values, max, 80, 20);
+      path.setAttribute('d', line);
+    }
+    
+    function renderChart() {
+      const width = 1000,
+        height = 280;
+      const metricMap = { streams: 'streams', listeners: 'unique_listeners', revenue: 'revenue' };
+      const primaryValues = latestDailyStats.map(d => Number(d[metricMap[currentMetric]]));
+      const secondaryValues = currentMetric === 'streams' ? latestDailyStats.map(d => Number(d.unique_listeners)) : null;
+      
+      const maxVal = Math.max(...primaryValues, ...(secondaryValues || []), 1);
+      const primary = buildPath(primaryValues, maxVal, width, height);
+      document.getElementById('chart-primary-line').setAttribute('d', primary.line);
+      document.getElementById('chart-primary-fill').setAttribute('d', primary.fill);
+      
+      const secondaryWrap = document.getElementById('chart-legend-secondary-wrap');
+      if (secondaryValues) {
+        const secondary = buildPath(secondaryValues, maxVal, width, height);
+        document.getElementById('chart-secondary-line').setAttribute('d', secondary.line);
+        document.getElementById('chart-secondary-fill').setAttribute('d', secondary.fill);
+        secondaryWrap.classList.remove('hidden');
+      } else {
+        document.getElementById('chart-secondary-line').setAttribute('d', '');
+        document.getElementById('chart-secondary-fill').setAttribute('d', '');
+        secondaryWrap.classList.add('hidden');
+      }
+      
+      document.getElementById('chart-legend-primary').textContent =
+        currentMetric === 'streams' ? 'Total Plays (Streams)' : currentMetric === 'listeners' ? 'Unique Listeners' : 'Revenue (₦)';
+      
+      const yLabels = document.getElementById('chart-y-labels').children;
+      for (let i = 0; i < 5; i++) {
+        const val = Math.round((maxVal * (4 - i)) / 4);
+        yLabels[i].textContent = currentMetric === 'revenue' ? `₦${val.toLocaleString()}` : val.toLocaleString();
+      }
+      
+      const xLabelsEl = document.getElementById('chart-x-labels');
+      xLabelsEl.innerHTML = '';
+      const labelCount = Math.min(8, latestDailyStats.length);
+      if (labelCount > 0) {
+        const step = Math.max(1, Math.floor(latestDailyStats.length / labelCount));
+        latestDailyStats.forEach((d, i) => {
+          if (i % step === 0 || i === latestDailyStats.length - 1) {
+            const span = document.createElement('span');
+            span.textContent = new Date(d.day).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            xLabelsEl.appendChild(span);
+          }
+        });
+      }
+      
+      if (primaryValues.length && Math.max(...primaryValues) > 0) {
+        const peakIdx = primaryValues.indexOf(Math.max(...primaryValues));
+        const peakDay = latestDailyStats[peakIdx];
+        const peakLabel = currentMetric === 'revenue' ?
+          `₦${Number(peakDay.revenue).toLocaleString()}` :
+          `${primaryValues[peakIdx].toLocaleString()} ${currentMetric === 'streams' ? 'streams' : 'listeners'}`;
+        document.getElementById('peak-callout-text').textContent =
+          `Peak: ${peakLabel} on ${new Date(peakDay.day).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+        document.getElementById('peak-callout').classList.remove('hidden');
+        document.getElementById('peak-callout').classList.add('flex');
+      } else {
+        document.getElementById('peak-callout').classList.add('hidden');
+      }
+    }
+    
+    function populateAlbumFilter() {
+      const select = document.getElementById('album-filter');
+      const current = select.value;
+      const titles = [...new Set(latestTrackStats.map(t => t.collection_title).filter(Boolean))];
+      select.innerHTML = '<option value="">All Tracks</option><option value="__singles__">Singles Only</option>';
+      titles.forEach(title => {
+        const opt = document.createElement('option');
+        opt.value = title;
+        opt.textContent = title;
+        select.appendChild(opt);
+      });
+      select.value = current || '';
+    }
+    
+    function renderTracksTable() {
+      const filter = document.getElementById('album-filter').value;
+      let rows = latestTrackStats;
+      if (filter === '__singles__') rows = rows.filter(t => !t.collection_title);
+      else if (filter) rows = rows.filter(t => t.collection_title === filter);
+      
+      document.getElementById('track-count-label').textContent = `${latestTrackStats.length} Song${latestTrackStats.length === 1 ? '' : 's'}`;
+      
+      const tbody = document.getElementById('tracks-tbody');
+      const empty = document.getElementById('tracks-empty');
+      tbody.innerHTML = '';
+      empty.classList.toggle('hidden', rows.length > 0);
+      
+      rows.forEach((t, i) => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-white/[0.02] transition-colors group';
+        tr.innerHTML = `
+          <td class="py-4 px-3 text-center font-label-sm ${i === 0 ? 'text-primary' : 'text-on-surface-variant'} font-bold">${String(i + 1).padStart(2, '0')}</td>
+          <td class="py-4 px-4">
+            <div class="flex items-center space-x-3">
+              <div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden flex-shrink-0">
+                <img alt="${t.title}" class="w-full h-full object-cover" src="${t.cover_url || ''}" />
+              </div>
+              <div>
+                <div class="font-headline-md text-[15px] font-bold text-on-surface">${t.title}</div>
+                <div class="text-xs text-on-surface-variant">${t.feature ? `ft. ${t.feature} • ` : ''}${t.collection_title || 'Single'}</div>
+              </div>
+            </div>
+          </td>
+          <td class="py-4 px-4 text-right font-headline-md text-on-surface font-semibold">${Number(t.streams).toLocaleString()}</td>
+          <td class="py-4 px-4 text-right font-price-display text-primary font-bold text-[15px]">₦${Number(t.royalties).toLocaleString()}</td>
+          <td class="py-4 px-3 text-center">
+            <button class="track-play-btn p-1.5 rounded-lg text-on-surface-variant hover:text-primary-container hover:bg-surface-container transition-colors" title="Play Track">
+              <span class="material-symbols-outlined text-[18px]">play_circle</span>
+            </button>
+          </td>
+        `;
+        tr.querySelector('.track-play-btn').addEventListener('click', () => {
+          window.Purchase.handlePlayClick({ ...t, id: t.song_id, artist_id: currentArtistId, artist_name: document.getElementById('header-artist-name').textContent });
+        });
+        tbody.appendChild(tr);
+      });
+    }
+    
+    function exportCsv() {
+      const rows = [
+        ['Track', 'Streams', 'Royalties (NGN)']
+      ];
+      latestTrackStats.forEach(t => rows.push([t.title, t.streams, t.royalties]));
+      const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `neime-analytics-${currentWindowDays || 'all'}d.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+
+</html>
