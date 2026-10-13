@@ -1,11 +1,174 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Neime</title>  
+  <title>Loading - Neime</title>
+  
+  <!-- Mobile Responsiveness -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Page Title -->
+  <title>Neime — Discover Music, Artists & New Releases</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Discover new music, explore emerging artists, and experience melody on Neime. Your destination for discovering fresh sounds, finding new favorites, and connecting with music.">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Neime">
+  <meta name="theme-color" content="#0B0B0B">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://neime.com.ng/">
+  
+  <!-- Open Graph: Facebook, WhatsApp, LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Neime">
+  <meta property="og:title" content="Neime — Discover Your Next Favorite Sound">
+  <meta property="og:description" content="Discover new music, explore emerging artists, and experience melody on Neime. Your destination for discovering fresh sounds, finding new favorites, and connecting with music.">
+  <meta property="og:url" content="https://neime.com.ng/">
+  <meta property="og:image" content="https://neime.com.ng/images/neime-preview.jpg">
+  <meta property="og:image:alt" content="Neime music discovery platform">
+  <meta property="og:locale" content="en_NG">
+  
+  <!-- X (Twitter) Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Neime — Discover Your Next Favorite Sound">
+  <meta name="twitter:description" content="Discover new music, explore emerging artists, and experience melody on Neime. Your destination for discovering fresh sounds, finding new favorites, and connecting with music.">
+  <meta name="twitter:image" content="https://neime.com.ng/images/neime-preview.jpg">
+  
+  <!-- Browser Appearance -->
+  <meta name="color-scheme" content="dark light">
+  
+  <link rel="icon" href="../images/icon.png">
+  <link rel="apple-touch-icon" href="../images/icon.png">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #0b0b0e;
+    }
+    
+    @keyframes spin-slow {
+      0% {
+        transform: rotate(0deg);
+      }
+      
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    
+    @keyframes pulse-glow {
+      
+      0%,
+      100% {
+        opacity: 0.35;
+        transform: scale(0.96);
+      }
+      
+      50% {
+        opacity: 0.85;
+        transform: scale(1.04);
+      }
+    }
+    
+    @keyframes audio-bounce {
+      
+      0%,
+      100% {
+        height: 6px;
+      }
+      
+      50% {
+        height: 26px;
+      }
+    }
+    
+    .animate-spin-slow {
+      animation: spin-slow 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    
+    .animate-pulse-glow {
+      animation: pulse-glow 3s ease-in-out infinite;
+    }
+    
+    .bar-1 {
+      animation: audio-bounce 1s ease-in-out infinite 0.1s;
+    }
+    
+    .bar-2 {
+      animation: audio-bounce 1s ease-in-out infinite 0.3s;
+    }
+    
+    .bar-3 {
+      animation: audio-bounce 1s ease-in-out infinite 0.5s;
+    }
+    
+    .bar-4 {
+      animation: audio-bounce 1s ease-in-out infinite 0.2s;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-[#09090b] text-white flex flex-col items-center justify-center relative overflow-hidden select-none">
+  
+  <!-- Ambient radial backdrop glow -->
+  <div class="absolute w-[500px] h-[500px] bg-[#ff5c00]/10 rounded-full blur-[140px] pointer-events-none -translate-y-6 animate-pulse-glow"></div>
+  
+  <!-- Central Loader Content -->
+  <div class="relative z-10 flex flex-col items-center text-center px-6">
+    
+    <!-- Loader Container -->
+    <div class="relative flex items-center justify-center w-28 h-28 mb-8">
+      
+      <!-- Outer Track Glow Ring -->
+      <div class="absolute inset-0 rounded-full border-[2.5px] border-white/[0.04]"></div>
+      
+      <!-- Rotating Gradient Accent Spinner -->
+      <svg class="w-full h-full animate-spin-slow" viewBox="0 0 100 100" fill="none">
+        <defs>
+          <linearGradient id="neimeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ff5c00" stop-opacity="1" />
+            <stop offset="60%" stop-color="#ff7a29" stop-opacity="0.4" />
+            <stop offset="100%" stop-color="#ff5c00" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="44" stroke="url(#neimeGradient)" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="80 180" />
+      </svg>
+      
+      <!-- Center Audio Wave Pulse / Neime Symbol -->
+      <div class="absolute flex items-center justify-center gap-1.5 h-8">
+        <div class="w-1 bg-[#ff5c00] rounded-full bar-1"></div>
+        <div class="w-1 bg-[#ff7a29] rounded-full bar-2"></div>
+        <div class="w-1 bg-white rounded-full bar-3"></div>
+        <div class="w-1 bg-[#ff5c00] rounded-full bar-4"></div>
+      </div>
+    </div>
+    
+    <!-- Brand Typography & Subtitle -->
+    <div class="space-y-2">
+      <h1 class="text-2xl font-bold tracking-tight text-white flex items-center justify-center gap-2">
+        <span>Neime</span>
+      </h1>
+      <p class="text-sm font-medium text-neutral-400 tracking-wide">
+        Tuning your sound...
+      </p>
+    </div>
+    
+  </div>
+  
+  <!-- Discreet Bottom Indicator -->
+  <div class="absolute bottom-8 text-[11px] font-mono tracking-widest text-neutral-600 uppercase">
+    Connecting to audio node
+  </div>
   <script>
     window.location.replace("../homepage");
-  </script></head>
-<body>
+  </script>
 </body>
+
 </html>
