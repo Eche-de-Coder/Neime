@@ -20,7 +20,7 @@
           </div>
         </div>
       </div>
-
+  
       <div class="hidden w-full px-4 py-3 rounded-2xl bg-surface-container-high/60 border border-white/5 mb-5 flex items-center gap-3" id="buy-modal-preview-wrap">
         <button class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-white shrink-0 shadow-sm active:scale-95 transition-transform hover:brightness-110" id="buy-modal-preview-btn" type="button">
           <span class="material-symbols-outlined text-lg leading-none" id="buy-modal-preview-icon" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
