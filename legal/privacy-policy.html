@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Privacy Policy — Neime</title>
+  <!-- Google Fonts & Material Symbols -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS with custom theme config -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-secondary": "#003739",
+            "on-secondary-container": "#006c71",
+            "on-secondary-fixed": "#002021",
+            "on-error-container": "#ffdad6",
+            "inverse-primary": "#a73a00",
+            "surface-dim": "#131316",
+            "secondary-fixed-dim": "#00dce5",
+            "on-secondary-fixed-variant": "#004f53",
+            "inverse-surface": "#e4e1e6",
+            "primary-container": "#ff5c00",
+            "primary-fixed": "#ffdbce",
+            "surface-variant": "#353438",
+            "on-surface-variant": "#e4beb1",
+            "on-tertiary-fixed-variant": "#5700c9",
+            "surface-container-high": "#2a2a2d",
+            "tertiary-fixed": "#e9ddff",
+            "secondary": "#e6feff",
+            "tertiary-fixed-dim": "#d1bcff",
+            "surface-container-lowest": "#0e0e11",
+            "on-tertiary-fixed": "#23005b",
+            "background": "#131316",
+            "inverse-on-surface": "#303033",
+            "primary-fixed-dim": "#ffb59a",
+            "on-primary": "#5a1b00",
+            "tertiary": "#d1bcff",
+            "on-primary-fixed": "#370e00",
+            "error": "#ffb4ab",
+            "outline-variant": "#5b4137",
+            "on-primary-fixed-variant": "#802a00",
+            "surface": "#131316",
+            "secondary-container": "#00f4fe",
+            "on-surface": "#e4e1e6",
+            "tertiary-container": "#a27aff",
+            "on-tertiary": "#3c0090",
+            "on-error": "#690005",
+            "surface-container": "#1f1f22",
+            "primary": "#ffb59a",
+            "on-background": "#e4e1e6",
+            "error-container": "#93000a",
+            "secondary-fixed": "#63f7ff",
+            "surface-bright": "#39393c",
+            "surface-container-highest": "#353438",
+            "surface-tint": "#ffb59a",
+            "on-primary-container": "#521800",
+            "outline": "#ab897d",
+            "on-tertiary-container": "#360083",
+            "surface-container-low": "#1b1b1e"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "container-padding-mobile": "16px",
+            "unit": "8px",
+            "section-gap": "48px",
+            "container-padding-desktop": "40px",
+            "gutter": "24px"
+          },
+          "fontFamily": {
+            "headline-md": ["Plus Jakarta Sans"],
+            "price-display": ["Hanken Grotesk"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "body-lg": ["Hanken Grotesk"],
+            "body-md": ["Hanken Grotesk"],
+            "display-xl": ["Plus Jakarta Sans"],
+            "label-sm": ["JetBrains Mono"]
+          },
+          "fontSize": {
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "price-display": ["20px", { "lineHeight": "24px", "fontWeight": "700" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+            "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #131316;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #353438;
+      border-radius: 4px;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #ff5c00;
+    }
+  </style>
+</head>
+
+<body class="bg-background text-on-background font-body-md antialiased selection:bg-primary-container selection:text-white min-h-screen flex flex-col">
+  
+  <!-- MAIN DOCUMENT HERO -->
+  <section class="pt-8 pb-12 px-4 sm:px-6 lg:px-8 border-b border-white/5 relative overflow-hidden bg-gradient-to-b from-surface-container-low to-background">
+    <!-- Subtle Ambient Stage Glow -->
+    <div class="absolute -top-32 right-1/4 w-96 h-96 bg-primary-container/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-10 left-10 w-72 h-72 bg-secondary-container/5 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6">
+        <div>
+          <!-- Tag / Badge -->
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container/10 border border-primary-container/30 mb-4">
+            <span class="material-symbols-outlined text-primary-container text-[16px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+            <span class="font-label-sm text-label-sm text-primary tracking-wider font-semibold">PRIVACY & DATA PROTECTION</span>
+          </div>
+          <!-- Document Heading -->
+          <h1 class="font-display-xl text-display-xl text-on-background tracking-tight font-extrabold mb-2">
+            Privacy Policy
+          </h1>
+          <p class="font-body-md text-on-surface-variant flex items-center gap-2 flex-wrap">
+            <span>Effective Date: October 2026</span>
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-white/30"></span>
+            <span>Last Updated: October 2026</span>
+            <span class="inline-block w-1.5 h-1.5 rounded-full bg-white/30"></span>
+          </p>
+        </div>
+        <!-- Quick Switcher and Document Utilities -->
+        <div class="flex flex-wrap items-center gap-3">
+          <div class="p-1 rounded-lg bg-surface-container-low border border-white/10 flex items-center">
+            <a class="px-4 py-2 rounded-md font-label-sm text-label-sm bg-primary-container text-white font-bold shadow-[0_0_12px_rgba(255,92,0,0.4)]" href="#">
+              Privacy Policy
+            </a>
+            <a class="px-4 py-2 rounded-md font-label-sm text-label-sm text-on-surface-variant hover:text-white transition-colors" href="../legal/terms-and-conditions.html">
+              Terms & Conditions
+            </a>
+          </div>
+          <button class="px-4 py-2.5 rounded-lg bg-surface-container hover:bg-surface-container-high border border-white/10 text-on-surface font-label-sm text-label-sm flex items-center gap-2 transition-all active:scale-95" onclick="window.print()">
+            <span class="material-symbols-outlined text-[18px]">print</span>
+            <span>Print</span>
+          </button>
+          <button class="px-4 py-2.5 rounded-lg bg-surface-container hover:bg-surface-container-high border border-white/10 text-on-surface font-label-sm text-label-sm flex items-center gap-2 transition-all active:scale-95">
+            <span class="material-symbols-outlined text-[18px]">download</span>
+            <span>Download PDF</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Quick Filter / Clause Search Bar -->
+      <div class="mt-4 relative max-w-2xl">
+        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-on-surface-variant">
+          <span class="material-symbols-outlined text-[20px]">search</span>
+        </div>
+        <input class="w-full pl-11 pr-4 py-3 rounded-xl bg-surface-container-low border border-white/10 text-on-surface placeholder:text-on-surface-variant/60 font-body-md focus:outline-none focus:border-secondary-container focus:ring-1 focus:ring-secondary-container transition-all" id="clauseSearch" placeholder="Filter privacy clauses (e.g., 'NDPA', 'payouts', 'bank account', 'cookies', 'deletion')..." type="text" />
+      </div>
+    </div>
+  </section>
+  
+  <!-- BODY CONTENT AREA (SIDEBAR + MAIN TEXT) -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full flex-1">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      <!-- STICKY SIDEBAR: TABLE OF CONTENTS (18 SECTIONS) -->
+      <aside class="hidden lg:block lg:col-span-4 sticky top-24 self-start">
+        <div class="bg-surface-container-low border border-white/10 rounded-2xl p-5 backdrop-blur-xl max-h-[calc(100vh-120px)] flex flex-col shadow-xl">
+          <div class="flex items-center justify-between pb-3 border-b border-white/10 mb-3">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-[20px]">list_alt</span>
+              <h2 class="font-headline-md text-[18px] text-on-surface font-bold">Contents</h2>
+            </div>
+            <span class="font-label-sm text-label-sm text-on-surface-variant">18 Sections</span>
+          </div>
+          <nav class="space-y-1 overflow-y-auto pr-2 custom-scrollbar text-sm" id="toc-nav">
+            <a class="toc-item flex items-center gap-2 px-3 py-2 rounded-lg text-primary bg-primary-container/10 font-semibold border-l-2 border-primary-container transition-all" href="#section-1">
+              <span class="font-label-sm text-label-sm opacity-60">01</span>
+              <span class="truncate">Introduction & NDPA Compliance</span>
+            </a>
+            <a class="toc-item flex items-center gap-2 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#section-2">
+              <span class="font-label-sm text-label-sm opacity-60">02</span>
+              <span class="truncate">Information We Collect</span>
+            </a>
+            <a class="toc-item flex items-center gap-2 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#section-3">
+              <span class="font-label-sm text-label-sm opacity-60">03</span>
+              <span class="truncate">How We Use Personal Information</span>
+            </a>
+            <a class="toc-item flex items-center gap-2 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#section-4">
+              <span class="font-label-sm text-label-sm opacity-60">04</span>
+              <span class="truncate">Legal Bases for Processing</span>
+            </a>
+            <a class="toc-item flex items-center gap-2 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#section-5">
+              <span class="font-label-sm text-label-sm opacity-60">05</span>
+              <span class="truncate">Music, Profiles & Public Info</span>
+            </a>
+            <a class="toc-item flex items-center gap-2 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#section-6">
+              <span class="font-label-sm text-label-sm opacity-60">06</span>
+              <span class="truncate">How We Share Personal Information</span>
+            </a>
+            <a class="toc-item flex items-center gap-2 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#section-7">
+              <span class="font-label-sm text-label-sm opacity-60">07</span>
+              <span class="truncate">Marketing & Communications</span>
+            </a>
+            <a class="toc-item flex items-center gap-2 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#section-8">
+              <span class="font-label-sm text-label-sm opacity-60">08</span>
+              <span class="truncate">Cookies & Similar Technologies</span>
+            </a>
+            <a class="toc-item flex items-center gap-2 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#section-9">
+              <span class="font-label-sm text-label-sm opacity-60">09</span>
+              <span class="truncate">Data Security Measures</span>
+            </a>
+            <a class="toc-item flex items-center gap-2 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#section-10">
+              <span class="font-label-sm text-label-sm opacity-60">10</span>
+              <span class="truncate">Data Retention Policies</span>
+            </a>
+            <a class="toc-item flex items-center gap-2 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#section-11">
+              <span class="font-label-sm text-label-sm opacity-60">11</span>
+              <span class="truncate">International Data Transfers</span>
+            </a>
+            <a class="toc-item flex items-center gap-2 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#section-12">
+              <span class="font-label-sm text-label-sm opacity-60">12</span>
+              <span class="truncate">Your 12 Privacy Rights</span>
+            </a>
+            <a class="toc-item flex items-center gap-2 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#section-13">
+              <span class="font-label-sm text-label-sm opacity-60">13</span>
+              <span class="truncate">How to Exercise Your Rights</span>
+            </a>
+            <a class="toc-item flex items-center gap-2 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#section-14">
+              <span class="font-label-sm text-label-sm opacity-60">14</span>
+              <span class="truncate">Children & Young Users</span>
+            </a>
+            <a class="toc-item flex items-center gap-2 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#section-15">
+              <span class="font-label-sm text-label-sm opacity-60">15</span>
+              <span class="truncate">Third-Party Websites</span>
+            </a>
+            <a class="toc-item flex items-center gap-2 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#section-16">
+              <span class="font-label-sm text-label-sm opacity-60">16</span>
+              <span class="truncate">Automated Processing & AI</span>
+            </a>
+            <a class="toc-item flex items-center gap-2 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#section-17">
+              <span class="font-label-sm text-label-sm opacity-60">17</span>
+              <span class="truncate">Changes to this Privacy Policy</span>
+            </a>
+            <a class="toc-item flex items-center gap-2 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" href="#section-18">
+              <span class="font-label-sm text-label-sm opacity-60">18</span>
+              <span class="truncate">Contact DPO & Inquiries</span>
+            </a>
+          </nav>
+          <div class="mt-4 pt-4 border-t border-white/10 bg-surface-container/50 -mx-5 -mb-5 p-4 rounded-b-2xl">
+            <div class="flex items-center gap-2 text-xs text-on-surface-variant">
+              <span class="material-symbols-outlined text-secondary-fixed-dim text-[16px]">gavel</span>
+              <span>Governed by Nigeria Data Protection Act 2023</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <!-- MAIN CONTENT LEGAL CLAUSES -->
+      <main class="lg:col-span-8 space-y-12 leading-relaxed">
+        <!-- CALLOUT: NDPA 2023 COMPLIANCE BADGE BANNER -->
+        <div class="p-6 rounded-2xl bg-surface-container-low border border-primary-container/30 relative overflow-hidden shadow-lg backdrop-blur-xl">
+          <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-primary-container/10 rounded-full blur-2xl pointer-events-none"></div>
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 relative z-10">
+            <div class="w-14 h-14 rounded-xl bg-primary-container/20 border border-primary-container/40 flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-primary-container text-[30px]" style="font-variation-settings: 'FILL' 1;">security</span>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-label-sm text-label-sm text-primary font-bold">STATUTORY ACCREDITATION</span>
+                <span class="px-2 py-0.5 rounded bg-surface-container-high text-[11px] font-label-sm text-secondary-fixed-dim font-bold">NDPA 2023</span>
+              </div>
+              <h3 class="font-headline-md text-headline-md text-on-surface mt-1">
+                Nigeria Data Protection Act (NDPA 2023) Compliant
+              </h3>
+              <p class="font-body-md text-on-surface-variant mt-1 text-sm">
+                Neime is registered and functions strictly within the parameters established by the Nigeria Data Protection Act of 2023 and the Nigeria Data Protection Commission (NDPC). We uphold stringent data privacy benchmarks tailored to Africa's creator economy.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- SECTION 1 -->
+        <article class="scroll-mt-28 space-y-4" id="section-1">
+          <div class="flex items-center gap-3">
+            <span class="font-label-sm text-label-sm text-primary font-bold px-2 py-0.5 rounded bg-primary-container/15">01</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">1. Introduction</h2>
+          </div>
+          <p class="text-on-surface-variant">
+            Welcome to <strong class="text-on-surface">Neime</strong> ("we", "us", "our"), the digital stage empowering artists, listeners, and creators across Nigeria and globally. Neime operates as an independent music streaming, direct fan monetization, and copyright distribution platform. We respect the autonomy, creativity, and privacy of every listener and creator on our stage.
+          </p>
+          <p class="text-on-surface-variant">
+            This Privacy Policy governs your use of the Neime mobile applications, desktop experience, application programming interfaces (APIs), and related digital services (collectively, the "Platform"). It clarifies what personal data we collect, why we collect it, how your Naira-denominated transactions and audio streaming interactions are handled, and the measures we employ under the <strong class="text-on-surface">Nigeria Data Protection Act (NDPA 2023)</strong> and international best practices to ensure absolute confidentiality and control.
+          </p>
+        </article>
+        
+        <!-- SECTION 2 -->
+        <article class="scroll-mt-28 space-y-6" id="section-2">
+          <div class="flex items-center gap-3">
+            <span class="font-label-sm text-label-sm text-primary font-bold px-2 py-0.5 rounded bg-primary-container/15">02</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">2. Information We Collect</h2>
+          </div>
+          <p class="text-on-surface-variant">
+            In operating our rhythmic ecosystem, we systematically gather specific classifications of data to provide audio playback, process royalty distributions, and secure intellectual property:
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- 2.1 -->
+            <div class="p-4 rounded-xl bg-surface-container-low border border-white/5 space-y-2">
+              <div class="flex items-center gap-2 text-primary font-semibold">
+                <span class="material-symbols-outlined text-[18px]">badge</span>
+                <h4>2.1 Account & Profile Data</h4>
+              </div>
+              <p class="text-sm text-on-surface-variant">
+                Full legal name, stage name/pseudonym, email address, phone number, encrypted password, profile biography, display avatar, and user category (e.g., Listener, Verified Artist, Producer).
+              </p>
+            </div>
+            <!-- 2.2 -->
+            <div class="p-4 rounded-xl bg-surface-container-low border border-white/5 space-y-2">
+              <div class="flex items-center gap-2 text-primary font-semibold">
+                <span class="material-symbols-outlined text-[18px]">mic</span>
+                <h4>2.2 Artist & Catalog Data</h4>
+              </div>
+              <p class="text-sm text-on-surface-variant">
+                Audio recordings, ISRC and ISWC metadata codes, songwriting credits, release artworks, performance rights organization (PRO) affiliations, and verified government identification for copyright claim verification.
+              </p>
+            </div>
+            <!-- 2.3 -->
+            <div class="p-4 rounded-xl bg-surface-container-low border border-white/5 space-y-2">
+              <div class="flex items-center gap-2 text-primary font-semibold">
+                <span class="material-symbols-outlined text-[18px]">shopping_cart</span>
+                <h4>2.3 Purchase & Subscription Data</h4>
+              </div>
+              <p class="text-sm text-on-surface-variant">
+                Transaction history, track purchases, premium streaming subscription tier, crowdfunding pledge histories, timestamps, billing addresses, and tokenized payment gateway tokens.
+              </p>
+            </div>
+            <!-- 2.4 -->
+            <div class="p-4 rounded-xl bg-surface-container-low border border-white/5 space-y-2">
+              <div class="flex items-center gap-2 text-primary font-semibold">
+                <span class="material-symbols-outlined text-[18px]">account_balance</span>
+                <h4>2.4 Payout & Banking Details</h4>
+              </div>
+              <p class="text-sm text-on-surface-variant">
+                For monetizing creators: Nigerian commercial bank account numbers (NUBAN), routing information, Bank Verification Numbers (BVN) validated strictly via NDPC-licensed identity partners, and Tax Identification Numbers (TIN).
+              </p>
+            </div>
+            <!-- 2.5 -->
+            <div class="p-4 rounded-xl bg-surface-container-low border border-white/5 space-y-2">
+              <div class="flex items-center gap-2 text-primary font-semibold">
+                <span class="material-symbols-outlined text-[18px]">devices</span>
+                <h4>2.5 Technical & Stream Analytics</h4>
+              </div>
+              <p class="text-sm text-on-surface-variant">
+                IP addresses, hardware identifier, operating system version, browser classification, listen count, skip rates, repeat frequency, offline cache status, and mobile network telemetrics.
+              </p>
+            </div>
+            <!-- 2.6 & 2.7 -->
+            <div class="p-4 rounded-xl bg-surface-container-low border border-white/5 space-y-2">
+              <div class="flex items-center gap-2 text-primary font-semibold">
+                <span class="material-symbols-outlined text-[18px]">hub</span>
+                <h4>2.6 & 2.7 Communications & Third Parties</h4>
+              </div>
+              <p class="text-sm text-on-surface-variant">
+                Support correspondence, fan direct messages, feedback notes, and integrated single-sign-on (SSO) profile insights derived from platforms such as Apple, Google, or Spotify.
+              </p>
+            </div>
+          </div>
+        </article>
+        
+        <!-- SECTION 3 -->
+        <article class="scroll-mt-28 space-y-4" id="section-3">
+          <div class="flex items-center gap-3">
+            <span class="font-label-sm text-label-sm text-primary font-bold px-2 py-0.5 rounded bg-primary-container/15">03</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">3. How We Use Personal Information</h2>
+          </div>
+          <p class="text-on-surface-variant">
+            Neime uses the collected information strictly for designated purposes that sustain the platform and protect our artistic collective:
+          </p>
+          <ul class="space-y-3 pl-2">
+            <li class="flex items-start gap-3 text-on-surface-variant">
+              <span class="material-symbols-outlined text-secondary-fixed-dim text-[20px] mt-0.5">check_circle</span>
+              <span><strong class="text-on-surface">Curated Audio Delivery:</strong> Powering algorithmic vibe feeds, queue generation, high-fidelity caching, and custom playlists tailored to individual tastes.</span>
+            </li>
+            <li class="flex items-start gap-3 text-on-surface-variant">
+              <span class="material-symbols-outlined text-secondary-fixed-dim text-[20px] mt-0.5">check_circle</span>
+              <span><strong class="text-on-surface">Financial Payouts & Direct Support:</strong> Calculating accurate stream revenue shares, routing Naira payments to artist NUBAN accounts, and printing digital transaction receipts.</span>
+            </li>
+            <li class="flex items-start gap-3 text-on-surface-variant">
+              <span class="material-symbols-outlined text-secondary-fixed-dim text-[20px] mt-0.5">check_circle</span>
+              <span><strong class="text-on-surface">Copyright Integrity & Watermarking:</strong> Protecting original African masters from unlawful duplication and executing anti-fraud stream inflation diagnostics.</span>
+            </li>
+            <li class="flex items-start gap-3 text-on-surface-variant">
+              <span class="material-symbols-outlined text-secondary-fixed-dim text-[20px] mt-0.5">check_circle</span>
+              <span><strong class="text-on-surface">Customer Support & Safety:</strong> Investigating reported tracks, resolving account compromise claims, and maintaining community standards.</span>
+            </li>
+          </ul>
+        </article>
+        
+        <!-- SECTION 4 -->
+        <article class="scroll-mt-28 space-y-4" id="section-4">
+          <div class="flex items-center gap-3">
+            <span class="font-label-sm text-label-sm text-primary font-bold px-2 py-0.5 rounded bg-primary-container/15">04</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">4. Legal Bases for Processing</h2>
+          </div>
+          <p class="text-on-surface-variant">
+            Under Section 25 of the Nigeria Data Protection Act 2023, every operation performed on your personal data is backed by one of the following recognized legal foundations:
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <div class="p-4 rounded-xl bg-surface-container border border-white/5">
+              <span class="font-label-sm text-label-sm text-primary font-bold">BASE 1</span>
+              <h4 class="font-bold text-on-surface mt-1">Contractual Necessity</h4>
+              <p class="text-xs text-on-surface-variant mt-1">Processing required to perform our terms of service, maintain account sessions, and remit royalties to artists.</p>
+            </div>
+            <div class="p-4 rounded-xl bg-surface-container border border-white/5">
+              <span class="font-label-sm text-label-sm text-primary font-bold">BASE 2</span>
+              <h4 class="font-bold text-on-surface mt-1">Legal Obligation</h4>
+              <p class="text-xs text-on-surface-variant mt-1">Mandatory financial record-keeping under Federal Inland Revenue Service (FIRS) and anti-money laundering (AML) laws.</p>
+            </div>
+            <div class="p-4 rounded-xl bg-surface-container border border-white/5">
+              <span class="font-label-sm text-label-sm text-primary font-bold">BASE 3</span>
+              <h4 class="font-bold text-on-surface mt-1">Legitimate Interests</h4>
+              <p class="text-xs text-on-surface-variant mt-1">Protecting our systems from automated streaming bots, identity theft, and improving overall app telemetry.</p>
+            </div>
+            <div class="p-4 rounded-xl bg-surface-container border border-white/5">
+              <span class="font-label-sm text-label-sm text-primary font-bold">BASE 4</span>
+              <h4 class="font-bold text-on-surface mt-1">Consent</h4>
+              <p class="text-xs text-on-surface-variant mt-1">Explicit, unbundled permission requested before delivering push campaigns or executing optional location features.</p>
+            </div>
+          </div>
+        </article>
+        
+        <!-- SECTION 5 -->
+        <article class="scroll-mt-28 space-y-4" id="section-5">
+          <div class="flex items-center gap-3">
+            <span class="font-label-sm text-label-sm text-primary font-bold px-2 py-0.5 rounded bg-primary-container/15">05</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">5. Music, Profiles, and Public Information</h2>
+          </div>
+          <p class="text-on-surface-variant">
+            Neime is a communal sound experience. By default, certain information you submit is made accessible to all listeners across the digital stage:
+          </p>
+          <div class="p-5 rounded-xl bg-surface-container-low border border-white/5 space-y-3">
+            <p class="text-sm text-on-surface-variant">
+              • <strong class="text-on-surface">Public Artist Profiles:</strong> Artist stage names, cover art, track catalogs, public bios, social handles, and verification badges.
+            </p>
+            <p class="text-sm text-on-surface-variant">
+              • <strong class="text-on-surface">Community Activity:</strong> Public playlist names, collaborator track credits, and comments left on live premiere releases.
+            </p>
+            <p class="text-sm text-on-surface-variant">
+              • <strong class="text-on-surface">Privacy Controls:</strong> Listeners may toggle their streaming activity, recently played records, and follower counts to "Private" directly inside Account Preferences.
+            </p>
+          </div>
+        </article>
+        
+        <!-- SECTION 6 -->
+        <article class="scroll-mt-28 space-y-4" id="section-6">
+          <div class="flex items-center gap-3">
+            <span class="font-label-sm text-label-sm text-primary font-bold px-2 py-0.5 rounded bg-primary-container/15">06</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">6. How We Share Personal Information</h2>
+          </div>
+          <p class="text-on-surface-variant">
+            We never sell user personal data. We disclose information only under strict confidentiality and encryption protocols to:
+          </p>
+          <div class="space-y-3">
+            <div class="p-3.5 rounded-lg bg-surface-container border border-white/5">
+              <h4 class="font-bold text-sm text-on-surface">Licensed Payment Processors</h4>
+              <p class="text-xs text-on-surface-variant mt-0.5">Central Bank of Nigeria (CBN)-licensed payment switches (e.g., Paystack, Flutterwave) for safe debit/credit card and direct bank transfer checkouts.</p>
+            </div>
+            <div class="p-3.5 rounded-lg bg-surface-container border border-white/5">
+              <h4 class="font-bold text-sm text-on-surface">Cloud & Content Delivery Partners</h4>
+              <p class="text-xs text-on-surface-variant mt-0.5">High-speed Edge audio distribution networks and secure ISO-certified server infrastructure.</p>
+            </div>
+            <div class="p-3.5 rounded-lg bg-surface-container border border-white/5">
+              <h4 class="font-bold text-sm text-on-surface">Copyright & Royalty Collective Societies</h4>
+              <p class="text-xs text-on-surface-variant mt-0.5">Statutory licensing boards and collective management organizations (CMOs) for statutory rights reconciliation.</p>
+            </div>
+            <div class="p-3.5 rounded-lg bg-surface-container border border-white/5">
+              <h4 class="font-bold text-sm text-on-surface">Law Enforcement & Legal Precepts</h4>
+              <p class="text-xs text-on-surface-variant mt-0.5">When formally compelled by valid Nigerian court orders or enforceable regulatory summonses.</p>
+            </div>
+          </div>
+        </article>
+        
+        <!-- SECTION 7 & 8 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <article class="scroll-mt-28 space-y-3 p-5 rounded-2xl bg-surface-container-low border border-white/5" id="section-7">
+            <div class="flex items-center gap-2">
+              <span class="font-label-sm text-label-sm text-primary font-bold px-1.5 py-0.5 rounded bg-primary-container/15">07</span>
+              <h3 class="font-headline-md text-[18px] text-on-surface font-bold">Marketing & Comms</h3>
+            </div>
+            <p class="text-sm text-on-surface-variant">
+              We send updates on new drops, exclusive listening rooms, and platform changes. You can revoke newsletter and marketing notification consents at any point via the 1-click unsubscribe link or push notification settings.
+            </p>
+          </article>
+          <article class="scroll-mt-28 space-y-3 p-5 rounded-2xl bg-surface-container-low border border-white/5" id="section-8">
+            <div class="flex items-center gap-2">
+              <span class="font-label-sm text-label-sm text-primary font-bold px-1.5 py-0.5 rounded bg-primary-container/15">08</span>
+              <h3 class="font-headline-md text-[18px] text-on-surface font-bold">Cookies & Local Storage</h3>
+            </div>
+            <p class="text-sm text-on-surface-variant">
+              We utilize essential session tokens, browser cookies, and local database storage to remember audio volume, offline encrypted playback files, and secure authentication tokens without tracking you across third-party websites.
+            </p>
+          </article>
+        </div>
+        
+        <!-- SECTION 9 & 10 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <article class="scroll-mt-28 space-y-3 p-5 rounded-2xl bg-surface-container-low border border-white/5" id="section-9">
+            <div class="flex items-center gap-2">
+              <span class="font-label-sm text-label-sm text-primary font-bold px-1.5 py-0.5 rounded bg-primary-container/15">09</span>
+              <h3 class="font-headline-md text-[18px] text-on-surface font-bold">Data Security</h3>
+            </div>
+            <p class="text-sm text-on-surface-variant">
+              All data transmissions are guarded by TLS 1.3 encryption. Banking details are tokenized and stored in PCI-DSS Tier 1 certified vaults with continuous vulnerability evaluations and strict multi-factor role privileges.
+            </p>
+          </article>
+          <article class="scroll-mt-28 space-y-3 p-5 rounded-2xl bg-surface-container-low border border-white/5" id="section-10">
+            <div class="flex items-center gap-2">
+              <span class="font-label-sm text-label-sm text-primary font-bold px-1.5 py-0.5 rounded bg-primary-container/15">10</span>
+              <h3 class="font-headline-md text-[18px] text-on-surface font-bold">Data Retention</h3>
+            </div>
+            <p class="text-sm text-on-surface-variant">
+              Account data is maintained while your account remains open. Upon closure, personal identifiers are purged or anonymized within 90 days, except financial logs held up to 7 years to fulfill Nigerian statutory taxation rules.
+            </p>
+          </article>
+        </div>
+        <!-- SECTION 11 -->
+        <article class="scroll-mt-28 space-y-4" id="section-11">
+          <div class="flex items-center gap-3">
+            <span class="font-label-sm text-label-sm text-primary font-bold px-2 py-0.5 rounded bg-primary-container/15">11</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">11. International Data Transfers</h2>
+          </div>
+          <p class="text-on-surface-variant">
+            While Neime originates in Nigeria, our audio delivery infrastructure spans a global audience. Whenever personal data is transferred across national boundaries, we enforce Standard Contractual Clauses (SCCs) and verify that the destination jurisdiction guarantees adequate protections as mandated by Section 41–43 of the NDPA 2023.
+          </p>
+        </article>
+        
+        <!-- SECTION 12: VISUAL SUMMARY CARD OF THE 12 PRIVACY RIGHTS -->
+        <article class="scroll-mt-28 space-y-6" id="section-12">
+          <div class="flex items-center gap-3">
+            <span class="font-label-sm text-label-sm text-primary font-bold px-2 py-0.5 rounded bg-primary-container/15">12</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">12. Your Privacy Rights</h2>
+          </div>
+          <p class="text-on-surface-variant">
+            Under the NDPA 2023 and modern data charters, you retain irrevocable autonomy over your information. Here is the visual breakdown of your 12 fundamental user rights:
+          </p>
+          <!-- 12 Rights Bento Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            <!-- Right 1 -->
+            <div class="p-3.5 rounded-xl bg-surface-container border border-white/5 hover:border-primary-container/40 transition-colors">
+              <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                <span class="material-symbols-outlined text-[18px]">visibility</span>
+                <h4>1. Right to Access</h4>
+              </div>
+              <p class="text-xs text-on-surface-variant mt-1">Obtain full confirmation and copies of personal data held about you.</p>
+            </div>
+            <!-- Right 2 -->
+            <div class="p-3.5 rounded-xl bg-surface-container border border-white/5 hover:border-primary-container/40 transition-colors">
+              <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                <span class="material-symbols-outlined text-[18px]">edit_note</span>
+                <h4>2. Right to Rectify</h4>
+              </div>
+              <p class="text-xs text-on-surface-variant mt-1">Correct outdated, inaccurate, or incomplete information promptly.</p>
+            </div>
+            <!-- Right 3 -->
+            <div class="p-3.5 rounded-xl bg-surface-container border border-white/5 hover:border-primary-container/40 transition-colors">
+              <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                <span class="material-symbols-outlined text-[18px]">delete_forever</span>
+                <h4>3. Right to Erasure</h4>
+              </div>
+              <p class="text-xs text-on-surface-variant mt-1">Request total deletion of your profile and data footprint ("Right to be Forgotten").</p>
+            </div>
+            <!-- Right 4 -->
+            <div class="p-3.5 rounded-xl bg-surface-container border border-white/5 hover:border-primary-container/40 transition-colors">
+              <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                <span class="material-symbols-outlined text-[18px]">block</span>
+                <h4>4. Right to Restrict</h4>
+              </div>
+              <p class="text-xs text-on-surface-variant mt-1">Limit processing during ongoing disputes regarding accuracy or validity.</p>
+            </div>
+            <!-- Right 5 -->
+            <div class="p-3.5 rounded-xl bg-surface-container border border-white/5 hover:border-primary-container/40 transition-colors">
+              <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                <span class="material-symbols-outlined text-[18px]">drive_file_move</span>
+                <h4>5. Data Portability</h4>
+              </div>
+              <p class="text-xs text-on-surface-variant mt-1">Receive playlists, track catalogs, and stats in a structured JSON/CSV format.</p>
+            </div>
+            <!-- Right 6 -->
+            <div class="p-3.5 rounded-xl bg-surface-container border border-white/5 hover:border-primary-container/40 transition-colors">
+              <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                <span class="material-symbols-outlined text-[18px]">do_not_disturb_on</span>
+                <h4>6. Right to Object</h4>
+              </div>
+              <p class="text-xs text-on-surface-variant mt-1">Halt processing based on legitimate interests or direct advertising.</p>
+            </div>
+            <!-- Right 7 -->
+            <div class="p-3.5 rounded-xl bg-surface-container border border-white/5 hover:border-primary-container/40 transition-colors">
+              <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                <span class="material-symbols-outlined text-[18px]">smart_toy</span>
+                <h4>7. Automated Decisions</h4>
+              </div>
+              <p class="text-xs text-on-surface-variant mt-1">Demand human review on algorithmic decisions impacting account state.</p>
+            </div>
+            <!-- Right 8 -->
+            <div class="p-3.5 rounded-xl bg-surface-container border border-white/5 hover:border-primary-container/40 transition-colors">
+              <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                <span class="material-symbols-outlined text-[18px]">cancel</span>
+                <h4>8. Withdraw Consent</h4>
+              </div>
+              <p class="text-xs text-on-surface-variant mt-1">Revoke any previously granted consent freely with instantaneous effect.</p>
+            </div>
+            <!-- Right 9 -->
+            <div class="p-3.5 rounded-xl bg-surface-container border border-white/5 hover:border-primary-container/40 transition-colors">
+              <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                <span class="material-symbols-outlined text-[18px]">notifications_active</span>
+                <h4>9. Breach Notification</h4>
+              </div>
+              <p class="text-xs text-on-surface-variant mt-1">Receive notification within 72 hours in the event of an impactful breach.</p>
+            </div>
+            <!-- Right 10 -->
+            <div class="p-3.5 rounded-xl bg-surface-container border border-white/5 hover:border-primary-container/40 transition-colors">
+              <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                <span class="material-symbols-outlined text-[18px]">gavel</span>
+                <h4>10. Lodge Complaints</h4>
+              </div>
+              <p class="text-xs text-on-surface-variant mt-1">Lodge complaints directly with the Nigeria Data Protection Commission (NDPC).</p>
+            </div>
+            <!-- Right 11 -->
+            <div class="p-3.5 rounded-xl bg-surface-container border border-white/5 hover:border-primary-container/40 transition-colors">
+              <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                <span class="material-symbols-outlined text-[18px]">info</span>
+                <h4>11. Be Informed</h4>
+              </div>
+              <p class="text-xs text-on-surface-variant mt-1">Clear, transparent notice on data handling prior to data collection.</p>
+            </div>
+            <!-- Right 12 -->
+            <div class="p-3.5 rounded-xl bg-surface-container border border-white/5 hover:border-primary-container/40 transition-colors">
+              <div class="flex items-center gap-2 text-primary font-bold text-sm">
+                <span class="material-symbols-outlined text-[18px]">payments</span>
+                <h4>12. Fair Compensation</h4>
+              </div>
+              <p class="text-xs text-on-surface-variant mt-1">Pursue statutory legal compensation for harm resulting from NDPA breaches.</p>
+            </div>
+          </div>
+        </article>
+        
+        <!-- SECTION 13 -->
+        <article class="scroll-mt-28 space-y-4" id="section-13">
+          <div class="flex items-center gap-3">
+            <span class="font-label-sm text-label-sm text-primary font-bold px-2 py-0.5 rounded bg-primary-container/15">13</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">13. How to Exercise Your Rights</h2>
+          </div>
+          <p class="text-on-surface-variant">
+            Exercising your privacy rights on Neime is frictionless. You may initiate an automated export or deletion through your <strong class="text-on-surface">Account Settings > Privacy Center</strong> or by sending a written directive to our designated compliance desk at <a class="text-primary hover:underline font-mono" href="mailto:dpo@neime.io">dpo@neime.io</a>.
+          </p>
+          <div class="p-4 rounded-xl bg-surface-container-low border border-white/5 flex items-center justify-between flex-wrap gap-4">
+            <div>
+              <p class="text-sm font-bold text-on-surface">Turnaround Guarantee</p>
+              <p class="text-xs text-on-surface-variant">All formal NDPA data requests are acknowledged within 48 hours and fulfilled within 30 days without charge.</p>
+            </div>
+            <a class="px-4 py-2 rounded-lg bg-primary-container text-white text-xs font-bold font-label-sm tracking-wider uppercase hover:opacity-90" href="mailto:dpo@neime.io">
+              Submit Request
+            </a>
+          </div>
+        </article>
+        
+        <!-- SECTION 14, 15, 16, 17 -->
+        <div class="space-y-8">
+          <!-- 14 -->
+          <article class="scroll-mt-28 space-y-3" id="section-14">
+            <div class="flex items-center gap-2">
+              <span class="font-label-sm text-label-sm text-primary font-bold px-1.5 py-0.5 rounded bg-primary-container/15">14</span>
+              <h3 class="font-headline-md text-headline-md text-on-surface font-bold">14. Children & Young Users</h3>
+            </div>
+            <p class="text-sm text-on-surface-variant">
+              Neime is not directed toward individuals under the age of 13. Users between 13 and 17 must possess parental or guardian authorization to activate monetization payouts or make track purchases. We promptly remove records linked to unauthorized minors upon detection.
+            </p>
+          </article>
+          <!-- 15 -->
+          <article class="scroll-mt-28 space-y-3" id="section-15">
+            <div class="flex items-center gap-2">
+              <span class="font-label-sm text-label-sm text-primary font-bold px-1.5 py-0.5 rounded bg-primary-container/15">15</span>
+              <h3 class="font-headline-md text-headline-md text-on-surface font-bold">15. Third-Party Websites & Services</h3>
+            </div>
+            <p class="text-sm text-on-surface-variant">
+              The Platform may host external hyperlinks to partner ticketing platforms, merchandising stores, or social networks. Neime exercises no command over the governance or security protocols of outside parties; please review their independent policies before submitting credentials.
+            </p>
+          </article>
+          <!-- 16 -->
+          <article class="scroll-mt-28 space-y-3" id="section-16">
+            <div class="flex items-center gap-2">
+              <span class="font-label-sm text-label-sm text-primary font-bold px-1.5 py-0.5 rounded bg-primary-container/15">16</span>
+              <h3 class="font-headline-md text-headline-md text-on-surface font-bold">16. Automated Processing & AI Recommendation</h3>
+            </div>
+            <p class="text-sm text-on-surface-variant">
+              We leverage machine learning models to recommend music matching your unique tempo and cultural sonic preference. These models operate using behavioral listening signals and do not generate discriminatory legal or financial outcomes for listeners or creators.
+            </p>
+          </article>
+          <!-- 17 -->
+          <article class="scroll-mt-28 space-y-3" id="section-17">
+            <div class="flex items-center gap-2">
+              <span class="font-label-sm text-label-sm text-primary font-bold px-1.5 py-0.5 rounded bg-primary-container/15">17</span>
+              <h3 class="font-headline-md text-headline-md text-on-surface font-bold">17. Changes to this Privacy Policy</h3>
+            </div>
+            <p class="text-sm text-on-surface-variant">
+              As we add new rhythmic features, payout methods, and artist tools, this policy will adapt. When material revisions occur, we will post an in-app notice, alert you via email, and update the "Effective Date" at the pinnacle of this document. Continued engagement after notification constitutes agreement.
+            </p>
+          </article>
+        </div>
+        
+        <!-- SECTION 18: DEDICATED CONTACT BOX FOR DATA PROTECTION & PRIVACY OFFICER -->
+        <article class="scroll-mt-28 pt-4" id="section-18">
+          <div class="p-6 md:p-8 rounded-2xl bg-surface-container-low border border-primary-container/30 relative overflow-hidden shadow-2xl">
+            <div class="absolute -right-20 -top-20 w-60 h-60 bg-primary-container/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="flex items-center gap-3 mb-4">
+              <span class="font-label-sm text-label-sm text-primary font-bold px-2 py-0.5 rounded bg-primary-container/15">18</span>
+              <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">18. Contact Us & DPO Inquiries</h2>
+            </div>
+            <p class="text-on-surface-variant text-sm mb-6">
+              If you have inquiries regarding this document, wish to challenge a copyright processing matter, or require regulatory clarification, contact our designated Data Protection Officer:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 rounded-xl bg-surface-container border border-white/5 space-y-1.5">
+                <span class="text-xs font-label-sm text-secondary-fixed-dim uppercase tracking-wider font-semibold">Data Protection Officer (DPO)</span>
+                <p class="font-bold text-on-surface">Neime Media Technologies Limited</p>
+                <p class="text-xs text-on-surface-variant font-mono">Attn: Office of the Data Privacy Director</p>
+                <div class="pt-2 flex items-center gap-2 text-primary font-mono text-sm">
+                  <span class="material-symbols-outlined text-[18px]">mail</span>
+                  <a class="hover:underline" href="mailto:dpo@neime.io">dpo@neime.io</a>
+                </div>
+              </div>
+              <div class="p-4 rounded-xl bg-surface-container border border-white/5 space-y-1.5">
+                <span class="text-xs font-label-sm text-primary uppercase tracking-wider font-semibold">Headquarters & Physical Address</span>
+                <p class="font-bold text-on-surface">Neime Innovation Sound Hub</p>
+                <p class="text-xs text-on-surface-variant">Plot 14, Admiralty Way, Lekki Phase 1</p>
+                <p class="text-xs text-on-surface-variant">Lagos State, Federal Republic of Nigeria</p>
+                <div class="pt-2 flex items-center gap-2 text-on-surface-variant font-mono text-xs">
+                  <span class="material-symbols-outlined text-[16px]">call</span>
+                  <span>+234 (01) 888-NEIME</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+        
+        <!-- BRAND CLOSING NOTE -->
+        <div class="my-10 p-8 rounded-2xl bg-gradient-to-r from-surface-container-high via-surface-container to-surface-container-high border border-white/10 text-center relative overflow-hidden">
+          <div class="w-12 h-12 rounded-full bg-primary-container/20 text-primary-container mx-auto flex items-center justify-center mb-3">
+            <span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">graphic_eq</span>
+          </div>
+          <p class="font-headline-md text-headline-md text-on-surface tracking-tight font-extrabold mb-1">
+            "Your Music. Your Fans. Your Earnings."
+          </p>
+          <p class="text-primary font-bold font-body-md tracking-wider">
+            — Neime —
+          </p>
+          <p class="font-label-sm text-label-sm text-on-surface-variant mt-2 tracking-widest uppercase">
+            Respect Music. Protect Ownership.
+          </p>
+        </div>
+      </main>
+    </div>
+  </div>
+  
+  <footer class="mt-20 mb-20 border-t border-white/10 bg-surface-container-lowest py-12 px-4 md:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex items-center space-x-2">
+        <a class="font-display-xl text-headline-md font-extrabold text-primary tracking-tight" href="#">
+          Neime
+        </a>
+        <span class="text-xs font-label-sm text-on-surface-variant/60 ml-2">© 2026 Neime Digital Technologies Ltd. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- MOBILE BOTTOM NAVIGATION BAR -->
+  <nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-dim/90 backdrop-blur-2xl bg-surface-container-highest/50 shadow-[0_-4px_24px_rgba(0,0,0,0.4)]">
+    <div class="flex justify-around items-center h-20 w-full px-2">
+      <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../homepage">
+        <span class="material-symbols-outlined text-[24px]">home</span>
+        <span class="font-label-sm text-label-sm mt-1">Home</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../search">
+        <span class="material-symbols-outlined text-[24px]">search</span>
+        <span class="font-label-sm text-label-sm mt-1">Search</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../library">
+        <span class="material-symbols-outlined text-[24px]">library_music</span>
+        <span class="font-label-sm text-label-sm mt-1">My Music</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../account">
+        <span class="material-symbols-outlined text-[24px]">person</span>
+        <span class="font-label-sm text-label-sm mt-1">Account</span>
+      </a>
+    </div>
+  </nav>
+  <!-- MICRO-INTERACTIONS & SEARCH SCRIPT -->
+  <script>
+    // Real-time Clause Search Filter
+    const searchInput = document.getElementById('clauseSearch');
+    if (searchInput) {
+      searchInput.addEventListener('input', function(e) {
+        const query = e.target.value.toLowerCase().trim();
+        const articles = document.querySelectorAll('main article');
+        
+        articles.forEach(article => {
+          const text = article.innerText.toLowerCase();
+          if (!query || text.includes(query)) {
+            article.style.display = 'block';
+            article.style.opacity = '1';
+          } else {
+            article.style.display = 'none';
+            article.style.opacity = '0';
+          }
+        });
+      });
+    }
+    
+    // Dynamic Active Link Highlighting in Sticky Sidebar
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          document.querySelectorAll('.toc-item').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === `#${id}`) {
+              link.classList.add('text-primary', 'bg-primary-container/10', 'font-semibold', 'border-l-2', 'border-primary-container');
+              link.classList.remove('text-on-surface-variant');
+            } else {
+              link.classList.remove('text-primary', 'bg-primary-container/10', 'font-semibold', 'border-l-2', 'border-primary-container');
+              link.classList.add('text-on-surface-variant');
+            }
+          });
+        }
+      });
+    }, {
+      rootMargin: '-100px 0px -60% 0px',
+      threshold: 0
+    });
+    
+    document.querySelectorAll('main article[id]').forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+
+</html>
