@@ -441,24 +441,7 @@
   <!----------
       MAIN
   ----------->
-  <!-- TopNavBar (Desktop Shell) -->
-  <nav class="hidden md:flex bg-surface/80 backdrop-blur-xl fixed top-0 w-full z-50 border-b border-white/10 shadow-sm flex justify-between items-center px-4 py-3 w-full">
-    <div class="font-display-xl text-headline-md font-extrabold text-primary tracking-tight cursor-pointer hover:opacity-80 transition-opacity">Neime</div>
-    <div class="flex items-center gap-6">
-      <button class="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 transition-transform flex items-center justify-center">
-        <span class="material-symbols-outlined text-headline-md">notifications</span>
-      </button>
-      <button class="text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 transition-transform flex items-center justify-center">
-        <span class="material-symbols-outlined text-headline-md">payments</span>
-      </button>
-      <button class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" id="logout-btn-desktop">
-        Log Out
-      </button>
-      <div class="w-10 h-10 rounded-full border-2 border-primary-container/30 overflow-hidden cursor-pointer hover:border-primary transition-colors">
-        <img class="w-full h-full object-cover" data-alt="" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8qVDvwPS7LIDa487jczrUoXwJ7N40KUeqzW4J2WKKl0DvWUPRi88I-prM2eW8xawsYPFLBxpckE9aQZcz7zR325Q_ZRHkhIKYThs7bnSV4g2ZTp3jmG2mAGsEpbgkqzpcwn7E25YYgQgkea9Mz2Niw4vt3HeDK0I9nbgoUVaVLla4f3DQ4IdL-OWA98YoqWb8Ubug9UY5Pz40zVjw9Sjt_7gYXF2Lm7lND2j-tZNvvr5c0DgYN7S-" />
-      </div>
-    </div>
-  </nav>
+  
   <!-- Main Content Canvas -->
   <main class="flex-grow pt-8 md:pt-28 pb-[104px] px-container-padding-mobile md:px-container-padding-desktop flex flex-col gap-section-gap max-w-7xl mx-auto w-full relative z-10">
     <!-- Header Section -->
@@ -521,7 +504,7 @@
     <!-- Bento Grid Dashboard -->
     <section class="grid grid-cols-1 md:grid-cols-12 gap-gutter w-full">
       <!-- Revenue Card (Hero Bento) -->
-      <div class="glass-panel rounded-xl p-6 md:col-span-8 flex flex-col justify-between relative overflow-hidden group">
+      <div class="glass-panel rounded-xl p-6 md:col-span-7 flex flex-col justify-between relative overflow-hidden group">
         <div class="absolute -right-20 -top-20 w-64 h-64 bg-primary-container/10 rounded-full blur-3xl group-hover:bg-primary-container/20 transition-colors duration-700 pointer-events-none"></div>
         <div class="flex flex-col justify-between h-full relative z-10 gap-8">
           <div class="flex justify-between items-start">
@@ -539,7 +522,7 @@
       </div>
       <div id="withdrawals-hitory" class="flex flex-col">
       </div>
-      <!-- Stats Stack -->
+
       <div class="md:col-span-4 flex flex-col gap-gutter">
         <div class="bg-surface-container-low rounded-xl p-6 border border-white/5 flex flex-col justify-between hover:border-white/10 transition-colors shadow-sm">
           <div class="flex flex-col mb-5">
@@ -550,24 +533,25 @@
             <button id="open-withdrawal-history-btn" class="w-full flex items-center justify-center gap-2 bg-surface border border-white/10 text-on-surface-variant hover:text-on-background font-body-md text-[14px] py-2.5 px-4 rounded-full hover:bg-surface-container-high active:scale-95 transition-all"><span class="material-symbols-outlined text-[18px]">history</span> History</button>
           </div>
         </div>
-        <div class="bg-surface-container-low rounded-xl p-5 border border-white/5 flex items-center justify-between hover:border-white/10 transition-colors">
-          <div class="flex flex-col">
-            <span class="font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant mb-0.5">TOTAL STREAMS</span>
-            <span class="font-headline-md text-headline-md font-bold text-on-background" id="stat-total-streams-stack">
-              <span class="font-body-md text-[13px] text-on-surface-variant font-normal">plays</span>
-            </span>
-          </div>
-          <div class="flex flex-col text-right border-l border-white/10 pl-5">
-            <span class="font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant mb-0.5">CATALOG SIZE</span>
-            <span class="font-headline-md text-headline-md font-bold text-on-background" id="catalog-size">0</span>
-            <span class="font-body-md text-[13px] text-on-surface-variant font-normal">tracks</span>
-          </div>
-        </div>
       </div>
     </section>
     
     
     <section class="grid grid-cols-1 md:grid-cols-2 gap-gutter w-full">
+      <!-- Stats Stack -->
+      <div class="h-28 bg-surface-container-low rounded-xl p-5 border border-white/5 flex items-center justify-between hover:border-white/10 transition-colors">
+        <div class="flex flex-col">
+          <span class="font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant mb-0.5">TOTAL STREAMS</span>
+          <span class="font-headline-md text-headline-md font-bold text-on-background" id="stat-total-streams-stack">0</span>
+          <span class="font-body-md text-[13px] text-on-surface-variant font-normal">plays</span>
+        </div>
+        <div class="flex flex-col text-right border-l border-white/10 pl-5">
+          <span class="font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant mb-0.5">CATALOG SIZE</span>
+          <span class="font-headline-md text-headline-md font-bold text-on-background" id="catalog-size">0</span>
+          <span class="font-body-md text-[13px] text-on-surface-variant font-normal">tracks</span>
+        </div>
+      </div>
+      
       <div class="glass-panel rounded-xl p-6 flex flex-col justify-between hover:border-white/20 transition-all shadow-sm">
         <div class="flex items-center justify-between pb-4 border-b border-white/10">
           <div class="flex items-center gap-2.5">
@@ -654,7 +638,7 @@
   </main>
   
   
-  <nav class="md:hidden bg-surface-dim/90 backdrop-blur-2xl fixed bottom-0 w-full z-50 pb-safe bg-surface-container-highest/50 border-t border-white/5 shadow-[0_-4px_24px_rgba(0,0,0,0.4)] flex justify-around items-center h-20 px-2">
+  <nav class="bg-surface-dim/90 backdrop-blur-2xl fixed bottom-0 w-full z-50 pb-safe bg-surface-container-highest/50 border-t border-white/5 shadow-[0_-4px_24px_rgba(0,0,0,0.4)] flex justify-around items-center h-20 px-2">
     <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 duration-200" href="../homepage">
       <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">home</span>
       <span class="font-label-sm text-label-sm mt-1">Home</span>
@@ -859,7 +843,6 @@
       await window.sb.auth.signOut();
       window.location.href = '../login';
     }
-    document.getElementById('logout-btn-desktop').addEventListener('click', logout);
     document.getElementById('logout-btn-mobile').addEventListener('click', logout);
     
     
@@ -1330,8 +1313,10 @@
         document.getElementById('song-artist').value = artistName;
         document.getElementById('song-cover-preview').classList.add('hidden');
         document.getElementById('song-file-preview').classList.add('hidden');
-        setTimeout(() => { uploadModal.classList.add('hidden');
-          hideUploadProgress(); }, 900);
+        setTimeout(() => {
+          uploadModal.classList.add('hidden');
+          hideUploadProgress();
+        }, 900);
       } catch (err) {
         showUploadStatus(err.message, true);
         hideUploadProgress();
@@ -1347,6 +1332,7 @@
       document.getElementById('upload-progress-bar').style.width = `${pct}%`;
       document.getElementById('upload-progress-label').textContent = text;
     }
+    
     function hideUploadProgress() {
       document.getElementById('upload-progress-wrap').classList.add('hidden');
       document.getElementById('upload-progress-bar').style.width = '0%';
@@ -1606,7 +1592,10 @@
         btn.disabled = false;
         label.textContent = 'Save Changes';
       }
+      loadSongs();
+      loadCollections();
     });
+    
     
     
     // ── Delete song ──
@@ -1616,11 +1605,26 @@
       const { error } = await window.sb.from('songs').delete().eq('id', song.id);
       if (error) { alert(error.message); return; }
       
-      // Best-effort cleanup of the audio file in storage
-      await window.sb.storage.from('songs').remove([song.audio_path]);
-      
-      loadCollections();
+      if (song.audio_path) {
+        const { error: audioErr } = await window.sb.storage.from('songs').remove([song.audio_path]);
+        if (audioErr) console.warn('Could not delete audio file:', audioErr.message);
+      }
+      if (song.cover_url) {
+        const coverPath = extractStoragePath(song.cover_url, 'covers');
+        if (coverPath) {
+          const { error: coverErr } = await window.sb.storage.from('covers').remove([coverPath]);
+          if (coverErr) console.warn('Could not delete cover:', coverErr.message);
+        }
+      }
+      if (song.preview_url) {
+        const previewPath = extractStoragePath(song.preview_url, 'previews');
+        if (previewPath) {
+          const { error: previewErr } = await window.sb.storage.from('previews').remove([previewPath]);
+          if (previewErr) console.warn('Could not delete preview:', previewErr.message);
+        }
+      }
       loadSongs();
+      loadCollections();
     }
     
     
@@ -1757,28 +1761,6 @@
       btn.disabled = true;
       label.textContent = 'Sending…';
       
-      /**const { error } = await window.sb.from('withdrawals').insert({
-        artist_id: session.user.id,
-        amount,
-        bank_name: bankOption.textContent,
-        bank_code: bankOption.value,
-        account_number: withdrawAccountNumberInput.value.trim(),
-        account_name: withdrawAccountNameInput.value
-      });
-      
-      btn.disabled = false;
-      
-      if (error) {
-        label.textContent = 'Request Withdrawal';
-        showWithdrawStatus(error.message, true);
-        return;
-      }
-      
-      label.innerHTML = '<span class="material-symbols-outlined text-[18px]">check_circle</span> Sent!';
-      setTimeout(() => {
-        withdrawModal.classList.add('hidden');
-        label.textContent = 'Request Withdrawal';
-      }, 1500);**/
       const { error } = await window.sb.rpc('request_withdrawal', {
         p_amount: amount,
         p_bank_name: bankOption.textContent,
