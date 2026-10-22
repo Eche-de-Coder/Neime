@@ -7,10 +7,10 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title>Artist Profile | Neime</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://checkout.flutterwave.com/v3.js"></script>
   <link href="https://fonts.googleapis.com" rel="preconnect" />
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300..900;1,300..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
   <!-- Tailwind CSS with plugins -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -148,17 +148,27 @@
       <!-- Subtle Nigerian Textile Pattern Glow Accent in Background -->
       <div class="absolute top-1/4 right-10 w-96 h-96 rounded-full bg-primary-container/10 blur-3xl pointer-events-none"></div>
       <!-- Hero Artist Content -->
-      <div class="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 pb-4 pt-28 flex flex-col justify-end">
-        <div class="flex items-center gap-2 mb-2"><span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container/80 backdrop-blur-md border border-white/10 text-xs font-label-sm font-semibold tracking-wider text-secondary-container"><span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>VERIFIED ARTIST</span><span class="text-xs font-label-sm text-on-surface-variant"></span></div>
-        <h1 class="font-display-xl text-4xl sm:text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-none drop-shadow-lg mb-4" id="artist-display-name">Loading...</h1>
-        <div class="flex items-center gap-4 text-on-surface-variant font-body-md text-sm md:text-base mb-4">
+      <div class="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 pb-2 pt-28 flex flex-col justify-end">
+        <div class="flex items-center gap-2 mb-2">
+          <h1 class="font-display-xl text-4xl sm:text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-none drop-shadow-lg mb-2" id="artist-display-name">Loading...</h1>
+          <span class="hidden items-center gap-1.5 px-2 py-1 mb-2 rounded-full bg-surface-container/80 backdrop-blur-md border border-white/10 text-xs font-label-sm font-semibold tracking-wider text-secondary-container" id="verified-pill">
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+            VERIFIED ARTIST
+          </span>
+          <span class="text-xs font-label-sm text-on-surface-variant"></span>
+        </div>
+        
+        <div class="flex items-center gap-4 text-on-surface-variant font-body-md text-sm md:text-base mb-2">
           <div class="flex items-center gap-1.5"><strong class="text-white font-semibold" id="stat-monthly-listeners">0</strong> monthly listeners</div><span class="opacity-30">•</span>
           <div><span id="stat-followers">0</span> followers</div>
         </div>
         <div class="flex items-center gap-4 pt-1">
           <button aria-label="Play Top Track" class="w-14 h-14 rounded-full bg-primary-container hover:bg-orange-500 text-on-primary-container flex items-center justify-center shadow-[0_0_24px_rgba(255,92,0,0.55)] hover:scale-105 active:scale-95 transition-all duration-200"><span class="material-symbols-outlined text-3xl ml-1 text-surface-container-lowest" style="font-variation-settings: 'FILL' 1;">play_arrow</span></button>
           <button id="follow-btn" class="px-6 py-2.5 rounded-full border border-white/20 bg-surface-container-low/60 hover:bg-surface-container-high text-white font-headline-md font-semibold text-sm tracking-wide backdrop-blur-md hover:border-primary transition-all active:scale-95">Follow</button>
-          <button class="px-5 py-2.5 rounded-full bg-surface-container-lowest border border-primary-container text-primary font-price-display text-sm tracking-wider hover:bg-primary-container/10 flex items-center gap-1.5 shadow-[0_0_14px_rgba(255,92,0,0.2)] transition-all"><span class="font-bold">₦</span><span class="font-headline-md text-xs uppercase tracking-wider text-white">Support</span></button>
+          <button id="support-btn" class="px-5 py-2.5 rounded-full bg-surface-container-lowest border border-primary-container text-primary font-price-display text-sm tracking-wider hover:bg-primary-container/10 flex items-center gap-1.5 shadow-[0_0_14px_rgba(255,92,0,0.2)] transition-all">
+            <span class="font-bold">₦</span>
+            <span class="font-headline-md text-xs uppercase tracking-wider text-white">Support</span>
+          </button>
           <!--<button aria-label="More options" class="w-10 h-10 rounded-full text-on-surface-variant hover:text-white transition-colors flex items-center justify-center hover:bg-surface-container-high ml-2" title="More options"><span class="material-symbols-outlined text-2xl">more_horiz</span></button>-->
         </div>
       </div>
@@ -190,7 +200,10 @@
           </div>
           <h3 class="font-headline-md text-lg font-bold text-white" id="artist-about-name">About</h3>
           <p class="font-body-md text-sm text-on-surface-variant mt-2 leading-relaxed whitespace-pre-line" id="artist-bio">This artist hasn't added a bio yet.</p>
-          <div class="flex items-center gap-3 mt-5 pt-4 border-t border-white/5"><a aria-label="Instagram" class="w-9 h-9 rounded-full bg-surface-container-high hover:bg-primary-container hover:text-white text-on-surface-variant flex items-center justify-center transition-colors" href="#"><span class="material-symbols-outlined text-lg">photo_camera</span></a><a aria-label="Twitter" class="w-9 h-9 rounded-full bg-surface-container-high hover:bg-primary-container hover:text-white text-on-surface-variant flex items-center justify-center transition-colors" href="#"><span class="material-symbols-outlined text-lg">tag</span></a><a aria-label="YouTube" class="w-9 h-9 rounded-full bg-surface-container-high hover:bg-primary-container hover:text-white text-on-surface-variant flex items-center justify-center transition-colors" href="#"><span class="material-symbols-outlined text-lg">smart_display</span></a><a aria-label="Official Website" class="w-9 h-9 rounded-full bg-surface-container-high hover:bg-primary-container hover:text-white text-on-surface-variant flex items-center justify-center transition-colors" href="#"><span class="material-symbols-outlined text-lg">language</span></a></div>
+          <a id="owner-edit-link" href="artist.html" class="hidden mt-3 inline-flex items-center gap-1 text-primary font-label-sm text-label-sm hover:underline">
+            <span class="material-symbols-outlined text-[16px]">edit</span> Edit your profile
+          </a>
+          <div class="flex items-center gap-3 mt-5 pt-4 border-t border-white/5" id="artist-links-row"></div>
         </div>
       </div>
       
@@ -300,8 +313,10 @@
   <script src="../js/player.js"></script>
   <script src="../js/purchase.js"></script>
   <script src="../js/collections.js"></script>
+  <script src="../js/support.js"></script>
   <script>
     let profileArtistId = null;
+    let profileArtistName = '';
     let currentUser = null;
     let songBeingBought = null;
     
@@ -319,29 +334,61 @@
       await loadSimilarArtists();
     })();
     
+    
     async function loadArtistProfile() {
       const { data: artist, error } = await window.sb
         .from('artists')
-        .select('artist_name, first_name, last_name, bio, avatar_url')
+        .select('artist_name, first_name, last_name, bio, avatar_url, links, is_verified, verified_until')
         .eq('id', profileArtistId)
         .single();
       
       if (error || !artist) { console.warn(error?.message); return; }
       
       const displayName = artist.artist_name || [artist.first_name, artist.last_name].filter(Boolean).join(' ');
+      profileArtistName = displayName;
       document.getElementById('artist-display-name').textContent = displayName;
       document.getElementById('artist-about-name').textContent = `About ${displayName}`;
       document.getElementById('artist-about-img').style.backgroundImage = `url("${artist.avatar_url}")`;
-      if (artist?.avatar_url) {
-        document.getElementById('artist-avatar-img').src = artist.avatar_url;
-      }
+      if (artist?.avatar_url) document.getElementById('artist-avatar-img').src = artist.avatar_url;
       document.getElementById('artist-bio').textContent = artist.bio || "This artist hasn't added a bio yet.";
+      
+      const pill = document.getElementById('verified-pill');
+      const currentlyVerified = artist.is_verified && (!artist.verified_until || new Date(artist.verified_until) > new Date());
+      pill.classList.toggle('hidden', !currentlyVerified);
+      pill.classList.toggle('inline-flex', currentlyVerified);
+      
+      renderArtistLinks(artist.links || []);
+      
+      if (currentUser.id === profileArtistId) {
+        document.getElementById('owner-edit-link').classList.remove('hidden');
+      }
       
       const { data: counts } = await window.sb.rpc('get_follow_counts', { p_artist_id: profileArtistId });
       document.getElementById('stat-followers').textContent = (counts?.[0]?.followers || 0).toLocaleString();
       
       const cols = await window.Collections.renderInto('artist-collections-list', { artistId: profileArtistId });
       document.getElementById('artist-collections-empty').classList.toggle('hidden', cols.length > 0);
+    }
+    
+    
+    document.getElementById('support-btn').addEventListener('click', () => {
+      window.Support.open(profileArtistId, profileArtistName);
+    });
+    
+    
+    function renderArtistLinks(links) {
+      const container = document.getElementById('artist-links-row');
+      container.innerHTML = '';
+      const icons = { instagram: 'photo_camera', twitter: 'tag', youtube: 'smart_display', tiktok: 'music_note', facebook: 'groups', website: 'language' };
+      links.forEach(link => {
+        const a = document.createElement('a');
+        a.href = link.url;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.className = 'w-9 h-9 rounded-full bg-surface-container-high hover:bg-primary-container hover:text-white text-on-surface-variant flex items-center justify-center transition-colors';
+        a.innerHTML = `<span class="material-symbols-outlined text-lg">${icons[link.platform] || 'link'}</span>`;
+        container.appendChild(a);
+      });
     }
     
     async function loadPopularTracks() {
