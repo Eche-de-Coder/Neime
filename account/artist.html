@@ -437,6 +437,60 @@
     </div>
   </div>
   
+  <!-- Edit artist details modal -->
+  <div class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4" id="edit-profile-modal">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="edit-profile-backdrop"></div>
+    <div class="relative w-full max-w-md bg-surface-container-low border border-white/10 rounded-xl p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="font-headline-md text-headline-md text-on-surface">Edit Profile</h3>
+        <button class="text-on-surface-variant hover:text-on-surface transition-colors" id="edit-profile-close" type="button">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="hidden mb-4 rounded-lg px-4 py-3 font-body-md text-body-md" id="details-status-banner" role="alert"></div>
+      <form class="space-y-4" id="details-form">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="space-y-1">
+            <label class="font-label-sm text-label-sm text-on-surface-variant block" for="edit-first-name">First Name</label>
+            <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="edit-first-name" type="text" />
+          </div>
+          <div class="space-y-1">
+            <label class="font-label-sm text-label-sm text-on-surface-variant block" for="edit-last-name">Last Name</label>
+            <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="edit-last-name" type="text" />
+          </div>
+        </div>
+        <div class="space-y-1">
+          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="edit-artist-name">Stage Name</label>
+          <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="edit-artist-name" type="text" />
+        </div>
+        <div class="space-y-1">
+          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="edit-bio">Bio</label>
+          <textarea class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="edit-bio" rows="3"></textarea>
+        </div>
+        
+        <div class="space-y-2">
+          <label class="font-label-sm text-label-sm text-on-surface-variant block">Links</label>
+          <div class="flex flex-col gap-2" id="edit-links-list"></div>
+          <div class="flex gap-2">
+            <select class="bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-3 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="link-platform-select">
+              <option value="instagram">Instagram</option>
+              <option value="twitter">Twitter / X</option>
+              <option value="youtube">YouTube</option>
+              <option value="tiktok">TikTok</option>
+              <option value="facebook">Facebook</option>
+              <option value="website">Website</option>
+            </select>
+            <input class="flex-1 bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="link-url-input" placeholder="https://..." type="url" />
+            <button class="px-4 rounded-lg bg-surface-container-high border border-primary-container text-primary-fixed font-label-sm text-label-sm" id="add-link-btn" type="button">Add</button>
+          </div>
+        </div>
+        
+        <button class="w-full bg-primary text-on-primary font-headline-md text-headline-md !text-[16px] px-6 py-3 rounded-full hover:opacity-90 active:scale-95 transition-all disabled:opacity-60" id="save-details-btn" type="submit">
+          <span id="save-details-label">Save Changes</span>
+        </button>
+      </form>
+    </div>
+  </div>
   
   <!----------
       MAIN
@@ -470,8 +524,17 @@
         </div>
         <div class="flex flex-col gap-2">
           <div class="flex items-center gap-3">
-            <h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background m-0 skeleton" id="artist-name">Loading name</h1>
-            <span class="bg-primary-container text-on-primary-container font-label-sm text-label-sm px-2 py-1 rounded-full uppercase tracking-wider font-bold">Artist</span>
+            <!--<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background m-0 skeleton" id="artist-name">Loading name</h1>-->
+            <div class="flex items-center gap-3">
+              <div class="flex gap-1">
+                <h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background m-0 skeleton" id="artist-name">Loading name</h1>
+                <span class=" items-center gap-1 bg-secondary-container/20 text-secondary-container font-label-sm text-label-sm px-1 py-1 mb-2 rounded-full uppercase tracking-wider font-bold" id="verified-badge">
+                  <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                </span>
+              </div>
+              <span class="bg-primary-container text-on-primary-container font-label-sm text-label-sm px-2 py-1 rounded-full uppercase tracking-wider font-bold">Artist</span>
+            </div>
+            <!--<span class="bg-primary-container text-on-primary-container font-label-sm text-label-sm px-2 py-1 rounded-full uppercase tracking-wider font-bold">Artist</span>-->
           </div>
           <p class="font-body-lg text-body-lg text-on-surface-variant m-0 skeleton" id="artist-meta">Loading account details</p>
           <p class="font-body-md text-body-md text-on-surface-variant m-0 flex items-center gap-1.5">
@@ -504,7 +567,7 @@
     <!-- Bento Grid Dashboard -->
     <section class="grid grid-cols-1 md:grid-cols-12 gap-gutter w-full">
       <!-- Revenue Card (Hero Bento) -->
-      <div class="glass-panel rounded-xl p-6 md:col-span-7 flex flex-col justify-between relative overflow-hidden group">
+      <div class="glass-panel rounded-xl p-6 md:col-span-5 flex flex-col justify-between relative overflow-hidden group">
         <div class="absolute -right-20 -top-20 w-64 h-64 bg-primary-container/10 rounded-full blur-3xl group-hover:bg-primary-container/20 transition-colors duration-700 pointer-events-none"></div>
         <div class="flex flex-col justify-between h-full relative z-10 gap-8">
           <div class="flex justify-between items-start">
@@ -522,7 +585,7 @@
       </div>
       <div id="withdrawals-hitory" class="flex flex-col">
       </div>
-
+      
       <div class="md:col-span-4 flex flex-col gap-gutter">
         <div class="bg-surface-container-low rounded-xl p-6 border border-white/5 flex flex-col justify-between hover:border-white/10 transition-colors shadow-sm">
           <div class="flex flex-col mb-5">
@@ -604,37 +667,80 @@
       </p>
     </section>
     
-    <!-- Artist Details -->
+    <!-- Artist Details Summary -->
     <section class="glass-panel rounded-xl p-6 w-full">
-      <h3 class="font-headline-md text-headline-md text-on-surface mb-6">Artist Details</h3>
-      <div class="hidden mb-4 rounded-lg px-4 py-3 font-body-md text-body-md" id="details-status-banner" role="alert"></div>
-      <form class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="details-form">
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="edit-first-name">First Name</label>
-          <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="edit-first-name" type="text" />
+      <div class="flex items-start justify-between mb-4">
+        <h3 class="font-headline-md text-headline-md text-on-surface">Artist Details</h3>
+        <div class="flex gap-2">
+          <button id="open-edit-profile-btn" class="px-4 py-2 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-bold hover:opacity-90 transition-all" type="button">Edit</button>
+          <a id="view-public-profile-btn" class="px-4 py-2 rounded-full bg-surface border border-white/10 text-on-surface font-label-sm text-label-sm font-bold hover:bg-surface-container-high transition-all" href="#">View Profile</a>
         </div>
-        <div class="space-y-1">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="edit-last-name">Last Name</label>
-          <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="edit-last-name" type="text" />
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm mb-4">
+        <div class="flex gap-20">
+          <div><span class="text-on-surface-variant font-label-sm text-label-sm uppercase block mb-1">First Name</span><span id="summary-first-name" class="text-on-surface">—</span></div>
+          <div><span class="text-on-surface-variant font-label-sm text-label-sm uppercase block mb-1">Last Name</span><span id="summary-last-name" class="text-on-surface">—</span></div>
         </div>
-        <div class="space-y-1 sm:col-span-2">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="edit-artist-name">Artist / Stage Name</label>
-          <input class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="edit-artist-name" type="text" />
+        <div class="sm:col-span-2"><span class="text-on-surface-variant font-label-sm text-label-sm uppercase block mb-1">Stage Name</span><span id="summary-artist-name" class="text-on-surface">—</span></div>
+        <div class="sm:col-span-2"><span class="text-on-surface-variant font-label-sm text-label-sm uppercase block mb-1">Bio</span>
+          <p id="summary-bio" class="text-on-surface whitespace-pre-line">No bio added yet.</p>
         </div>
-        <div class="space-y-1 sm:col-span-2">
-          <label class="font-label-sm text-label-sm text-on-surface-variant block" for="edit-bio">Bio</label>
-          <textarea class="w-full bg-surface-container-high border border-white/10 rounded-lg py-2.5 px-4 text-on-surface font-body-md focus:outline-none focus:border-secondary-container transition-colors" id="edit-bio" rows="3"></textarea>
-        </div>
-        <div class="sm:col-span-2">
-          <button class="bg-primary text-on-primary font-headline-md text-headline-md !text-[16px] px-6 py-3 rounded-full hover:opacity-90 active:scale-95 transition-all disabled:opacity-60" id="save-details-btn" type="submit">
-            <span id="save-details-label">Save Changes</span>
-          </button>
-          <a class="bg-primary text-on-primary font-headline-md text-headline-md !text-[16px] px-6 py-4 rounded-full hover:opacity-90 active:scale-95 transition-all disabled:opacity-60" id="view-public-profile-btn">
-            <span>View profile</span>
-          </a>
-        </div>
-      </form>
+      </div>
+      <div class="flex items-center gap-3" id="summary-links-row"></div>
     </section>
+    
+    
+    <section class="glass-panel rounded-xl p-6 w-full" id="verification-section">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="font-headline-md text-headline-md text-on-surface">Verification</h3>
+        <span class="hidden items-center gap-1 bg-secondary-container/20 text-secondary-container font-label-sm text-label-sm px-3 py-1 rounded-full uppercase tracking-wider font-bold" id="verification-status-badge">
+          <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span> Verified
+        </span>
+      </div>
+      <p class="font-body-md text-body-md text-on-surface-variant mb-6" id="verification-expiry-note"></p>
+      
+      <div class="space-y-5" id="verification-progress-wrap">
+        <div>
+          <div class="flex justify-between text-sm mb-1.5">
+            <span class="text-on-surface-variant">Sales</span>
+            <span class="text-on-surface font-bold" id="progress-sales-label">0 / 0</span>
+          </div>
+          <div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+            <div class="h-full bg-primary-container transition-all duration-500" id="progress-sales-bar" style="width:0%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1.5">
+            <span class="text-on-surface-variant">Streams</span>
+            <span class="text-on-surface font-bold" id="progress-streams-label">0 / 0</span>
+          </div>
+          <div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+            <div class="h-full bg-secondary-container transition-all duration-500" id="progress-streams-bar" style="width:0%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1.5">
+            <span class="text-on-surface-variant">Followers</span>
+            <span class="text-on-surface font-bold" id="progress-followers-label">0 / 0</span>
+          </div>
+          <div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+            <div class="h-full bg-tertiary transition-all duration-500" id="progress-followers-bar" style="width:0%"></div>
+          </div>
+        </div>
+        <p class="font-label-sm text-label-sm text-on-surface-variant">Meeting any one of these unlocks free verification.</p>
+      </div>
+      
+      <div class="flex flex-col sm:flex-row gap-3 mt-6">
+        <button class="hidden flex-1 bg-primary text-on-primary font-headline-md text-headline-md !text-[15px] py-3 rounded-full hover:opacity-90 active:scale-95 transition-all" id="claim-verification-btn" type="button">
+          Claim Free Verification
+        </button>
+        <button class="flex-1 bg-surface border border-primary-container text-primary font-headline-md text-headline-md !text-[15px] py-3 rounded-full hover:bg-primary-container/10 active:scale-95 transition-all" id="pay-verification-btn" type="button">
+          Get Verified for <span id="verification-price-label">₦0</span>/month
+        </button>
+      </div>
+      <div class="hidden mt-4 rounded-lg px-4 py-3 font-body-md text-body-md" id="verification-status-banner" role="alert"></div>
+    </section>
+    
   </main>
   
   
@@ -788,6 +894,7 @@
       el.classList.remove('skeleton');
     }
     
+    // Load Artist
     (async function loadArtist() {
       const { data: { session } } = await window.sb.auth.getSession();
       
@@ -805,7 +912,7 @@
       
       const { data: artist, error } = await window.sb
         .from('artists')
-        .select('id, first_name, last_name, artist_name, bio, avatar_url, created_at')
+        .select('id, first_name, last_name, artist_name, bio, avatar_url, created_at, links, is_verified, verified_until')
         .eq('id', user.id)
         .single();
       
@@ -815,10 +922,17 @@
       loadWallet();
       loadEarningsStats();
       loadSalesHistory(user.id);
+      loadVerificationProgress();
       
       const displayName = artist?.artist_name || [artist?.first_name, artist?.last_name].filter(Boolean).join(' ') ||
         user.user_metadata?.artist_name ||
         'Your Stage Name';
+      
+      const currentlyVerified = artist?.is_verified && (!artist.verified_until || new Date(artist.verified_until) > new Date());
+      if (currentlyVerified) {
+        document.getElementById('verified-badge').classList.remove('hidden');
+        document.getElementById('verified-badge').classList.add('flex');
+      }
       
       const joinedSource = artist?.created_at || user.created_at;
       document.getElementById('view-public-profile-btn').href = `../artist-info.html?artist=${user.id}`;
@@ -846,13 +960,16 @@
     document.getElementById('logout-btn-mobile').addEventListener('click', logout);
     
     
-    
+    // artist details 
     function prefillDetailsForm(artist) {
       document.getElementById('edit-first-name').value = artist?.first_name || '';
       document.getElementById('edit-last-name').value = artist?.last_name || '';
       document.getElementById('edit-artist-name').value = artist?.artist_name || '';
       document.getElementById('song-artist').value = artist?.artist_name || '';
       document.getElementById('edit-bio').value = artist?.bio || '';
+      currentLinks = Array.isArray(artist?.links) ? [...artist.links] : [];
+      renderEditLinksList();
+      renderSummary(artist);
     }
     
     document.getElementById('details-form').addEventListener('submit', async (e) => {
@@ -867,12 +984,15 @@
       btn.disabled = true;
       label.textContent = 'Saving…';
       
-      const { error } = await window.sb.from('artists').update({
+      const updatedArtist = {
         first_name: document.getElementById('edit-first-name').value.trim(),
         last_name: document.getElementById('edit-last-name').value.trim(),
         artist_name: document.getElementById('edit-artist-name').value.trim(),
-        bio: document.getElementById('edit-bio').value.trim()
-      }).eq('id', session.user.id);
+        bio: document.getElementById('edit-bio').value.trim(),
+        links: currentLinks
+      };
+      
+      const { error } = await window.sb.from('artists').update(updatedArtist).eq('id', session.user.id);
       
       btn.disabled = false;
       label.textContent = 'Save Changes';
@@ -882,13 +1002,81 @@
       banner.classList.add(error ? 'bg-error-container' : 'bg-secondary-container/20', error ? 'text-on-error-container' : 'text-secondary');
       
       if (!error) {
-        // Keep the displayed name + header in sync
-        document.getElementById('artist-name').textContent = document.getElementById('edit-artist-name').value.trim();
-        document.getElementById('song-artist').value = document.getElementById('edit-artist-name').value.trim();
+        document.getElementById('artist-name').textContent = updatedArtist.artist_name;
+        document.getElementById('song-artist').value = updatedArtist.artist_name;
+        renderSummary(updatedArtist);
+        setTimeout(() => {
+          editProfileModal.classList.add('hidden');
+          banner.classList.add('hidden');
+        }, 800);
       }
     });
     
+    // esit artist details
+    let currentLinks = [];
     
+    const PLATFORM_ICONS = { instagram: 'photo_camera', twitter: 'tag', youtube: 'smart_display', tiktok: 'music_note', facebook: 'groups', website: 'language' };
+    const PLATFORM_LABELS = { instagram: 'Instagram', twitter: 'Twitter / X', youtube: 'YouTube', tiktok: 'TikTok', facebook: 'Facebook', website: 'Website' };
+    
+    function renderSummary(artist) {
+      document.getElementById('summary-first-name').textContent = artist?.first_name || '—';
+      document.getElementById('summary-last-name').textContent = artist?.last_name || '—';
+      document.getElementById('summary-artist-name').textContent = artist?.artist_name || '—';
+      document.getElementById('summary-bio').textContent = artist?.bio || 'No bio added yet.';
+      
+      const linksRow = document.getElementById('summary-links-row');
+      linksRow.innerHTML = '';
+      (artist?.links || []).forEach(link => {
+        const a = document.createElement('a');
+        a.href = link.url;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.className = 'w-9 h-9 rounded-full bg-surface-container-high hover:bg-primary-container hover:text-white text-on-surface-variant flex items-center justify-center transition-colors';
+        a.innerHTML = `<span class="material-symbols-outlined text-lg">${PLATFORM_ICONS[link.platform] || 'link'}</span>`;
+        linksRow.appendChild(a);
+      });
+    }
+    
+    function renderEditLinksList() {
+      const container = document.getElementById('edit-links-list');
+      container.innerHTML = '';
+      currentLinks.forEach((link, i) => {
+        const row = document.createElement('div');
+        row.className = 'flex items-center gap-2 bg-surface-container-high border border-white/10 rounded-lg px-3 py-2';
+        row.innerHTML = `
+      <span class="material-symbols-outlined text-[18px] text-primary">${PLATFORM_ICONS[link.platform] || 'link'}</span>
+      <span class="flex-1 text-sm text-on-surface truncate">${PLATFORM_LABELS[link.platform] || link.platform}: ${link.url}</span>
+      <button type="button" class="text-on-surface-variant hover:text-error remove-link-btn" data-idx="${i}">
+        <span class="material-symbols-outlined text-[18px]">close</span>
+      </button>
+    `;
+        container.appendChild(row);
+      });
+      container.querySelectorAll('.remove-link-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          currentLinks.splice(parseInt(btn.dataset.idx, 10), 1);
+          renderEditLinksList();
+        });
+      });
+    }
+    
+    document.getElementById('add-link-btn').addEventListener('click', () => {
+      const platform = document.getElementById('link-platform-select').value;
+      const url = document.getElementById('link-url-input').value.trim();
+      if (!url) return;
+      currentLinks.push({ platform, url });
+      document.getElementById('link-url-input').value = '';
+      renderEditLinksList();
+    });
+    
+    const editProfileModal = document.getElementById('edit-profile-modal');
+    document.getElementById('open-edit-profile-btn').addEventListener('click', () => editProfileModal.classList.remove('hidden'));
+    document.getElementById('edit-profile-close').addEventListener('click', () => editProfileModal.classList.add('hidden'));
+    document.getElementById('edit-profile-backdrop').addEventListener('click', () => editProfileModal.classList.add('hidden'));
+    
+    
+    
+    // avatar upload
     document.getElementById('avatar-upload-input').addEventListener('change', async (e) => {
       const file = e.target.files[0];
       if (!file) return;
@@ -1627,6 +1815,106 @@
       loadCollections();
     }
     
+    
+    
+    // -- Verification --
+    async function loadVerificationProgress() {
+      const { data: { session } } = await window.sb.auth.getSession();
+      if (!session) return;
+      
+      const { data: artist } = await window.sb.from('artists').select('is_verified, verified_until').eq('id', session.user.id).single();
+      const currentlyVerified = artist?.is_verified && (!artist.verified_until || new Date(artist.verified_until) > new Date());
+      
+      const badge = document.getElementById('verification-status-badge');
+      const expiryNote = document.getElementById('verification-expiry-note');
+      const progressWrap = document.getElementById('verification-progress-wrap');
+      const claimBtn = document.getElementById('claim-verification-btn');
+      const payWrap = document.getElementById('pay-verification-btn').parentElement;
+      
+      if (currentlyVerified) {
+        badge.classList.remove('hidden');
+        badge.classList.add('flex');
+        progressWrap.classList.add('hidden');
+        claimBtn.classList.add('hidden');
+        
+        if (artist.verified_until) {
+          expiryNote.textContent = `Verified until ${new Date(artist.verified_until).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}.`;
+          document.getElementById('pay-verification-btn').innerHTML = `Extend Verification — <span id="verification-price-label">₦${window.VERIFICATION_PRICE_NGN.toLocaleString()}</span>/month`;
+          payWrap.classList.remove('hidden');
+        } else {
+          expiryNote.textContent = 'You have permanent verification.';
+          payWrap.classList.add('hidden');
+        }
+        return;
+      }
+      
+      badge.classList.add('hidden');
+      expiryNote.textContent = '';
+      progressWrap.classList.remove('hidden');
+      payWrap.classList.remove('hidden');
+      
+      const { data: progress } = await window.sb.rpc('get_artist_verification_progress');
+      const p = progress?.[0] || { sales: 0, streams: 0, followers: 0, eligible: false };
+      
+      updateProgressBar('sales', p.sales, 1000);
+      updateProgressBar('streams', p.streams, 10000);
+      updateProgressBar('followers', p.followers, 1000);
+      
+      claimBtn.classList.toggle('hidden', !p.eligible);
+    }
+    
+    function updateProgressBar(key, value, threshold) {
+      const pct = Math.min(100, (value / threshold) * 100);
+      document.getElementById(`progress-${key}-label`).textContent = `${Number(value).toLocaleString()} / ${threshold.toLocaleString()}`;
+      document.getElementById(`progress-${key}-bar`).style.width = `${pct}%`;
+    }
+    
+    function showVerificationStatus(message, isError) {
+      const banner = document.getElementById('verification-status-banner');
+      banner.textContent = message;
+      banner.classList.remove('hidden', 'bg-error-container', 'text-on-error-container', 'bg-secondary-container/20', 'text-secondary');
+      banner.classList.add(isError ? 'bg-error-container' : 'bg-secondary-container/20', isError ? 'text-on-error-container' : 'text-secondary');
+    }
+    
+    document.getElementById('claim-verification-btn').addEventListener('click', async () => {
+      const btn = document.getElementById('claim-verification-btn');
+      btn.disabled = true;
+      const { error } = await window.sb.rpc('claim_organic_verification');
+      btn.disabled = false;
+      if (error) { showVerificationStatus(error.message, true); return; }
+      showVerificationStatus("Congratulations — you're verified!", false);
+      loadVerificationProgress();
+    });
+    
+    document.getElementById('verification-price-label').textContent = `₦${(window.VERIFICATION_PRICE_NGN || 0).toLocaleString()}`;
+    
+    document.getElementById('pay-verification-btn').addEventListener('click', async () => {
+      const { data: { session } } = await window.sb.auth.getSession();
+      if (!session) return;
+      
+      const txRef = `neime_verify_${session.user.id}_${Date.now()}`;
+      FlutterwaveCheckout({
+        public_key: window.FLW_PUBLIC_KEY,
+        tx_ref: txRef,
+        amount: window.VERIFICATION_PRICE_NGN,
+        currency: 'NGN',
+        payment_options: 'card,ussd,banktransfer',
+        customer: { email: session.user.email },
+        customizations: { title: 'Neime', description: 'Artist Verification (1 month)' },
+        callback: async (response) => {
+          const { data, error } = await window.sb.functions.invoke('purchase-verification', {
+            body: { transaction_id: response.transaction_id, tx_ref: txRef, artist_id: session.user.id }
+          });
+          if (error || !data?.success) {
+            showVerificationStatus('Payment verification failed: ' + (error?.message || data?.error || 'Unknown error'), true);
+            return;
+          }
+          showVerificationStatus('Verified! Active until ' + new Date(data.verified_until).toLocaleDateString(), false);
+          loadVerificationProgress();
+        },
+        onclose: () => {}
+      });
+    });
     
     
     
