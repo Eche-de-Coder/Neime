@@ -494,6 +494,7 @@
     let songBeingBought = null;
     
     (async function initHome() {
+      await window.configReady;
       const { data: { session } } = await window.sb.auth.getSession();
       //if (!session) { window.location.href = 'login.html'; return; }
       currentUser = session?.user || null;
