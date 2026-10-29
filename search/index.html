@@ -267,6 +267,7 @@
     let searchDebounce;
     
     (async function initSearch() {
+      await window.configReady;
       const { data: { session } } = await window.sb.auth.getSession();
       if (!session) { window.location.href = '../account/non.html'; return; }
       currentUser = session.user;
