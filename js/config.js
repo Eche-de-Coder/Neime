@@ -1,5 +1,5 @@
 window.configReady = (async () => {
-  const res = await fetch('/api/public-config');
+  const res = await fetch('../api/public-config.js');
   if (!res.ok) {
     console.error('Failed to load app configuration');
     return;
